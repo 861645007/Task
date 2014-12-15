@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  RootViewController.h
 //  Task
 //
 //  Created by wanghuanqiang on 14/12/15.
@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "REFrostedViewController.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface RootViewController :REFrostedViewController
 
 @end
-
