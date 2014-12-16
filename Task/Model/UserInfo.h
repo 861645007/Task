@@ -18,6 +18,9 @@
 - (BOOL)isCookie;
 
 //储存用户信息
+- (void)saveUserLogInName:(NSString *)userLogInName;
+- (void)saveUserLogInPwd:(NSString *)userLogInPwd;
+
 - (void)saveUserName:(NSString *)userName;
 - (void)saveUserEnterpriseId:(NSString *)enterpriseId;
 - (void)saveUserEnterpriseName:(NSString *)enterpriseName;
@@ -28,6 +31,9 @@
 
 
 //获取用户信息
+- (NSString *)gainUserLogInName;
+- (NSString *)gainUserLogInPwd;
+
 - (NSString *)gainUserName;
 - (NSString *)gainUserId;
 - (NSString *)gainUserEnterpriseId;
@@ -39,6 +45,9 @@
 - (NSString *)gainUserAddress;
 
 //删除用户信息
+- (void)removeUserLogInName;
+- (void)removeUserLogInPwd;
+
 - (void)removeUserName;
 - (void)removeUserId;
 - (void)removeUserEnterpriseId;

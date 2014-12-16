@@ -1,2 +1,0 @@
-使用说明：
-	[self.view.window showHUDWithText:@"卖力分享中..." Type:ShowLoading Enabled:YES];

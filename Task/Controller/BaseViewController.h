@@ -18,8 +18,11 @@
 #import "REFrostedViewController.h"
 #import "UIViewController+REFrostedViewController.h"
 #import "JHRefresh.h"
+#import "CusNavigationTitleView.h"
+#import "PopoverView.h"
 
-#define HttpURL @"http://vmvkje4b.zhy35065.zhihui.chinaccnet.cn"
+#define HttpURL @"http://vmr82ksj.zhy35065.zhihui.chinaccnet.cn/staff.action"
+#define LogInAction @"app_login.action"
 
 @interface BaseViewController : UIViewController{
     CGSize keyboardSize;

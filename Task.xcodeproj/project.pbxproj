@@ -60,7 +60,6 @@
 		E67FBC2E1A3EA83E00CE839C /* YzdHUDImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E67FBBF41A3EA83E00CE839C /* YzdHUDImageView.m */; };
 		E67FBC2F1A3EA83E00CE839C /* YzdHUDIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E67FBBF61A3EA83E00CE839C /* YzdHUDIndicator.m */; };
 		E67FBC301A3EA83E00CE839C /* YzdHUDLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E67FBBF81A3EA83E00CE839C /* YzdHUDLabel.m */; };
-		E67FBC311A3EA83E00CE839C /* 使用说明.txt in Resources */ = {isa = PBXBuildFile; fileRef = E67FBBF91A3EA83E00CE839C /* 使用说明.txt */; };
 		E67FBC391A3EA95400CE839C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67FBC381A3EA95400CE839C /* BaseViewController.m */; };
 		E67FBC401A3EA9FE00CE839C /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E67FBC3F1A3EA9FE00CE839C /* UserInfo.m */; };
 		E67FBC441A3EAADA00CE839C /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67FBC431A3EAADA00CE839C /* LeftMenuViewController.m */; };
@@ -68,6 +67,27 @@
 		E67FBC531A3EB05400CE839C /* LeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67FBC521A3EB05400CE839C /* LeaveViewController.m */; };
 		E67FBC561A3EB06100CE839C /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67FBC551A3EB06100CE839C /* TaskViewController.m */; };
 		E67FBCE31A3F0F4000CE839C /* BaseMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67FBCE21A3F0F4000CE839C /* BaseMenuViewController.m */; };
+		E68082FA1A400C45008FFA03 /* CusNavigationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E68082E41A400C45008FFA03 /* CusNavigationTitleView.m */; };
+		E68082FB1A400C45008FFA03 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = E68082E61A400C45008FFA03 /* PopoverView.m */; };
+		E68082FC1A400C45008FFA03 /* CalendarDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E68082E91A400C45008FFA03 /* CalendarDayCell.m */; };
+		E68082FD1A400C45008FFA03 /* CalendarDayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E68082EB1A400C45008FFA03 /* CalendarDayModel.m */; };
+		E68082FE1A400C45008FFA03 /* CalendarHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E68082ED1A400C45008FFA03 /* CalendarHomeViewController.m */; };
+		E68082FF1A400C45008FFA03 /* CalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = E68082EF1A400C45008FFA03 /* CalendarLogic.m */; };
+		E68083001A400C45008FFA03 /* CalendarMonthCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E68082F11A400C45008FFA03 /* CalendarMonthCollectionViewLayout.m */; };
+		E68083011A400C45008FFA03 /* CalendarMonthHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E68082F31A400C45008FFA03 /* CalendarMonthHeaderView.m */; };
+		E68083021A400C45008FFA03 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E68082F51A400C45008FFA03 /* CalendarViewController.m */; };
+		E68083031A400C45008FFA03 /* chack.png in Resources */ = {isa = PBXBuildFile; fileRef = E68082F61A400C45008FFA03 /* chack.png */; };
+		E68083041A400C45008FFA03 /* NSDate+WQCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = E68082F91A400C45008FFA03 /* NSDate+WQCalendarLogic.m */; };
+		E6886AF71A406BAD008D4E7F /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6886AF61A406BAD008D4E7F /* LogInViewController.m */; };
+		E6B312DA1A3FBD1300AEF923 /* left_information_background.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D21A3FBD1300AEF923 /* left_information_background.png */; };
+		E6B312DB1A3FBD1300AEF923 /* nav_menu_add.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D31A3FBD1300AEF923 /* nav_menu_add.png */; };
+		E6B312DC1A3FBD1300AEF923 /* nav_menu_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D41A3FBD1300AEF923 /* nav_menu_contact.png */; };
+		E6B312DD1A3FBD1300AEF923 /* nav_menu_date_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D51A3FBD1300AEF923 /* nav_menu_date_normal.png */; };
+		E6B312DE1A3FBD1300AEF923 /* tab_menu_bottomattend.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D61A3FBD1300AEF923 /* tab_menu_bottomattend.png */; };
+		E6B312DF1A3FBD1300AEF923 /* tab_menu_bottomdocument.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D71A3FBD1300AEF923 /* tab_menu_bottomdocument.png */; };
+		E6B312E01A3FBD1300AEF923 /* tab_menu_task.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D81A3FBD1300AEF923 /* tab_menu_task.png */; };
+		E6B312E11A3FBD1300AEF923 /* tab_menu_workcenter.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D91A3FBD1300AEF923 /* tab_menu_workcenter.png */; };
+		E6B312E51A3FC04F00AEF923 /* WorkHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B312E41A3FC04F00AEF923 /* WorkHomeViewController.m */; };
 		E6E0C7411A3F24750054F2C4 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C7361A3F24750054F2C4 /* RECommonFunctions.m */; };
 		E6E0C7421A3F24750054F2C4 /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C7381A3F24750054F2C4 /* REFrostedContainerViewController.m */; };
 		E6E0C7431A3F24750054F2C4 /* REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C73A1A3F24750054F2C4 /* REFrostedViewController.m */; };
@@ -200,7 +220,6 @@
 		E67FBBF61A3EA83E00CE839C /* YzdHUDIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YzdHUDIndicator.m; sourceTree = "<group>"; };
 		E67FBBF71A3EA83E00CE839C /* YzdHUDLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YzdHUDLabel.h; sourceTree = "<group>"; };
 		E67FBBF81A3EA83E00CE839C /* YzdHUDLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YzdHUDLabel.m; sourceTree = "<group>"; };
-		E67FBBF91A3EA83E00CE839C /* 使用说明.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "使用说明.txt"; sourceTree = "<group>"; };
 		E67FBC371A3EA95400CE839C /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = Controller/BaseViewController.h; sourceTree = "<group>"; };
 		E67FBC381A3EA95400CE839C /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Controller/BaseViewController.m; sourceTree = "<group>"; };
 		E67FBC3E1A3EA9FE00CE839C /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -215,6 +234,40 @@
 		E67FBC551A3EB06100CE839C /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskViewController.m; path = Controller/TaskViewController.m; sourceTree = "<group>"; };
 		E67FBCE11A3F0F4000CE839C /* BaseMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseMenuViewController.h; path = Controller/BaseMenuViewController.h; sourceTree = "<group>"; };
 		E67FBCE21A3F0F4000CE839C /* BaseMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseMenuViewController.m; path = Controller/BaseMenuViewController.m; sourceTree = "<group>"; };
+		E68082E31A400C45008FFA03 /* CusNavigationTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CusNavigationTitleView.h; sourceTree = "<group>"; };
+		E68082E41A400C45008FFA03 /* CusNavigationTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CusNavigationTitleView.m; sourceTree = "<group>"; };
+		E68082E51A400C45008FFA03 /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
+		E68082E61A400C45008FFA03 /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
+		E68082E81A400C45008FFA03 /* CalendarDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayCell.h; sourceTree = "<group>"; };
+		E68082E91A400C45008FFA03 /* CalendarDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayCell.m; sourceTree = "<group>"; };
+		E68082EA1A400C45008FFA03 /* CalendarDayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayModel.h; sourceTree = "<group>"; };
+		E68082EB1A400C45008FFA03 /* CalendarDayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayModel.m; sourceTree = "<group>"; };
+		E68082EC1A400C45008FFA03 /* CalendarHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarHomeViewController.h; sourceTree = "<group>"; };
+		E68082ED1A400C45008FFA03 /* CalendarHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarHomeViewController.m; sourceTree = "<group>"; };
+		E68082EE1A400C45008FFA03 /* CalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarLogic.h; sourceTree = "<group>"; };
+		E68082EF1A400C45008FFA03 /* CalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarLogic.m; sourceTree = "<group>"; };
+		E68082F01A400C45008FFA03 /* CalendarMonthCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMonthCollectionViewLayout.h; sourceTree = "<group>"; };
+		E68082F11A400C45008FFA03 /* CalendarMonthCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthCollectionViewLayout.m; sourceTree = "<group>"; };
+		E68082F21A400C45008FFA03 /* CalendarMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMonthHeaderView.h; sourceTree = "<group>"; };
+		E68082F31A400C45008FFA03 /* CalendarMonthHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthHeaderView.m; sourceTree = "<group>"; };
+		E68082F41A400C45008FFA03 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		E68082F51A400C45008FFA03 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		E68082F61A400C45008FFA03 /* chack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chack.png; sourceTree = "<group>"; };
+		E68082F71A400C45008FFA03 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		E68082F81A400C45008FFA03 /* NSDate+WQCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+WQCalendarLogic.h"; sourceTree = "<group>"; };
+		E68082F91A400C45008FFA03 /* NSDate+WQCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+WQCalendarLogic.m"; sourceTree = "<group>"; };
+		E6886AF51A406BAD008D4E7F /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogInViewController.h; path = Controller/LogInViewController.h; sourceTree = "<group>"; };
+		E6886AF61A406BAD008D4E7F /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogInViewController.m; path = Controller/LogInViewController.m; sourceTree = "<group>"; };
+		E6B312D21A3FBD1300AEF923 /* left_information_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = left_information_background.png; path = Image/left_information_background.png; sourceTree = "<group>"; };
+		E6B312D31A3FBD1300AEF923 /* nav_menu_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_menu_add.png; path = Image/nav_menu_add.png; sourceTree = "<group>"; };
+		E6B312D41A3FBD1300AEF923 /* nav_menu_contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_menu_contact.png; path = Image/nav_menu_contact.png; sourceTree = "<group>"; };
+		E6B312D51A3FBD1300AEF923 /* nav_menu_date_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_menu_date_normal.png; path = Image/nav_menu_date_normal.png; sourceTree = "<group>"; };
+		E6B312D61A3FBD1300AEF923 /* tab_menu_bottomattend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_menu_bottomattend.png; path = Image/tab_menu_bottomattend.png; sourceTree = "<group>"; };
+		E6B312D71A3FBD1300AEF923 /* tab_menu_bottomdocument.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_menu_bottomdocument.png; path = Image/tab_menu_bottomdocument.png; sourceTree = "<group>"; };
+		E6B312D81A3FBD1300AEF923 /* tab_menu_task.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_menu_task.png; path = Image/tab_menu_task.png; sourceTree = "<group>"; };
+		E6B312D91A3FBD1300AEF923 /* tab_menu_workcenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_menu_workcenter.png; path = Image/tab_menu_workcenter.png; sourceTree = "<group>"; };
+		E6B312E31A3FC04F00AEF923 /* WorkHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkHomeViewController.h; path = Controller/WorkHomeViewController.h; sourceTree = "<group>"; };
+		E6B312E41A3FC04F00AEF923 /* WorkHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkHomeViewController.m; path = Controller/WorkHomeViewController.m; sourceTree = "<group>"; };
 		E6E0C7351A3F24750054F2C4 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		E6E0C7361A3F24750054F2C4 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		E6E0C7371A3F24750054F2C4 /* REFrostedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedContainerViewController.h; sourceTree = "<group>"; };
@@ -300,6 +353,8 @@
 				E67FBC321A3EA89D00CE839C /* BeseViewController */,
 				E67FBC411A3EAA8900CE839C /* Menu */,
 				E67FBC3D1A3EA9FE00CE839C /* Model */,
+				E6886AF41A406B3C008D4E7F /* LogInViewController */,
+				E6B312E21A3FC01600AEF923 /* WorkHome */,
 				E67FBC361A3EA91800CE839C /* AttendanceViewController */,
 				E67FBC351A3EA90200CE839C /* LeaveViewController */,
 				E67FBC341A3EA8F000CE839C /* TaskViewController */,
@@ -346,6 +401,8 @@
 		E67FBB801A3EA5E700CE839C /* FunctionClass */ = {
 			isa = PBXGroup;
 			children = (
+				E68082E21A400C45008FFA03 /* NavigationPopView */,
+				E68082E71A400C45008FFA03 /* ZFCalendar */,
 				E6E0C74D1A3F345E0054F2C4 /* JHRefresh */,
 				E67FBCD71A3EFE2A00CE839C /* SlideMenu */,
 				E67FBB811A3EA83E00CE839C /* AFNetworking */,
@@ -549,7 +606,6 @@
 				E67FBBF61A3EA83E00CE839C /* YzdHUDIndicator.m */,
 				E67FBBF71A3EA83E00CE839C /* YzdHUDLabel.h */,
 				E67FBBF81A3EA83E00CE839C /* YzdHUDLabel.m */,
-				E67FBBF91A3EA83E00CE839C /* 使用说明.txt */,
 			);
 			name = YzdHUD;
 			path = FunctionClass/YzdHUD;
@@ -623,6 +679,14 @@
 		E67FBC491A3EAF2400CE839C /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				E6B312D21A3FBD1300AEF923 /* left_information_background.png */,
+				E6B312D31A3FBD1300AEF923 /* nav_menu_add.png */,
+				E6B312D41A3FBD1300AEF923 /* nav_menu_contact.png */,
+				E6B312D51A3FBD1300AEF923 /* nav_menu_date_normal.png */,
+				E6B312D61A3FBD1300AEF923 /* tab_menu_bottomattend.png */,
+				E6B312D71A3FBD1300AEF923 /* tab_menu_bottomdocument.png */,
+				E6B312D81A3FBD1300AEF923 /* tab_menu_task.png */,
+				E6B312D91A3FBD1300AEF923 /* tab_menu_workcenter.png */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -645,6 +709,62 @@
 			);
 			name = SlideMenu;
 			path = FunctionClass/SlideMenu;
+			sourceTree = "<group>";
+		};
+		E68082E21A400C45008FFA03 /* NavigationPopView */ = {
+			isa = PBXGroup;
+			children = (
+				E68082E31A400C45008FFA03 /* CusNavigationTitleView.h */,
+				E68082E41A400C45008FFA03 /* CusNavigationTitleView.m */,
+				E68082E51A400C45008FFA03 /* PopoverView.h */,
+				E68082E61A400C45008FFA03 /* PopoverView.m */,
+			);
+			name = NavigationPopView;
+			path = FunctionClass/NavigationPopView;
+			sourceTree = "<group>";
+		};
+		E68082E71A400C45008FFA03 /* ZFCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				E68082E81A400C45008FFA03 /* CalendarDayCell.h */,
+				E68082E91A400C45008FFA03 /* CalendarDayCell.m */,
+				E68082EA1A400C45008FFA03 /* CalendarDayModel.h */,
+				E68082EB1A400C45008FFA03 /* CalendarDayModel.m */,
+				E68082EC1A400C45008FFA03 /* CalendarHomeViewController.h */,
+				E68082ED1A400C45008FFA03 /* CalendarHomeViewController.m */,
+				E68082EE1A400C45008FFA03 /* CalendarLogic.h */,
+				E68082EF1A400C45008FFA03 /* CalendarLogic.m */,
+				E68082F01A400C45008FFA03 /* CalendarMonthCollectionViewLayout.h */,
+				E68082F11A400C45008FFA03 /* CalendarMonthCollectionViewLayout.m */,
+				E68082F21A400C45008FFA03 /* CalendarMonthHeaderView.h */,
+				E68082F31A400C45008FFA03 /* CalendarMonthHeaderView.m */,
+				E68082F41A400C45008FFA03 /* CalendarViewController.h */,
+				E68082F51A400C45008FFA03 /* CalendarViewController.m */,
+				E68082F61A400C45008FFA03 /* chack.png */,
+				E68082F71A400C45008FFA03 /* Color.h */,
+				E68082F81A400C45008FFA03 /* NSDate+WQCalendarLogic.h */,
+				E68082F91A400C45008FFA03 /* NSDate+WQCalendarLogic.m */,
+			);
+			name = ZFCalendar;
+			path = FunctionClass/ZFCalendar;
+			sourceTree = "<group>";
+		};
+		E6886AF41A406B3C008D4E7F /* LogInViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E6886AF51A406BAD008D4E7F /* LogInViewController.h */,
+				E6886AF61A406BAD008D4E7F /* LogInViewController.m */,
+			);
+			name = LogInViewController;
+			sourceTree = "<group>";
+		};
+		E6B312E21A3FC01600AEF923 /* WorkHome */ = {
+			isa = PBXGroup;
+			children = (
+				E6B312E31A3FC04F00AEF923 /* WorkHomeViewController.h */,
+				E6B312E41A3FC04F00AEF923 /* WorkHomeViewController.m */,
+			);
+			name = WorkHome;
 			sourceTree = "<group>";
 		};
 		E6E0C74D1A3F345E0054F2C4 /* JHRefresh */ = {
@@ -772,14 +892,22 @@
 				E67FBC141A3EA83E00CE839C /* HeaderImage.png in Resources */,
 				E67FBB661A3EA5DF00CE839C /* Main.storyboard in Resources */,
 				E67FBC291A3EA83E00CE839C /* HUD_NO@2x.png in Resources */,
-				E67FBC311A3EA83E00CE839C /* 使用说明.txt in Resources */,
+				E6B312E01A3FBD1300AEF923 /* tab_menu_task.png in Resources */,
+				E6B312DB1A3FBD1300AEF923 /* nav_menu_add.png in Resources */,
+				E6B312DE1A3FBD1300AEF923 /* tab_menu_bottomattend.png in Resources */,
 				E67FBC131A3EA83E00CE839C /* ForkImage.png in Resources */,
 				E67FBB6B1A3EA5DF00CE839C /* LaunchScreen.xib in Resources */,
+				E6B312E11A3FBD1300AEF923 /* tab_menu_workcenter.png in Resources */,
+				E68083031A400C45008FFA03 /* chack.png in Resources */,
+				E6B312DD1A3FBD1300AEF923 /* nav_menu_date_normal.png in Resources */,
 				E67FBC2A1A3EA83E00CE839C /* HUD_YES.png in Resources */,
 				E67FBB681A3EA5DF00CE839C /* Images.xcassets in Resources */,
+				E6B312DC1A3FBD1300AEF923 /* nav_menu_contact.png in Resources */,
 				E67FBC2B1A3EA83E00CE839C /* HUD_YES@2x.png in Resources */,
+				E6B312DA1A3FBD1300AEF923 /* left_information_background.png in Resources */,
 				E67FBC121A3EA83E00CE839C /* CheckMarkWhite.png in Resources */,
 				E67FBC151A3EA83E00CE839C /* Toronto, ON.jpg in Resources */,
+				E6B312DF1A3FBD1300AEF923 /* tab_menu_bottomdocument.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,6 +929,7 @@
 				E6E0C76E1A3F345E0054F2C4 /* JHRefreshHeaderView.m in Sources */,
 				E67FBC401A3EA9FE00CE839C /* UserInfo.m in Sources */,
 				E67FBBFA1A3EA83E00CE839C /* AFHTTPRequestOperation.m in Sources */,
+				E68082FB1A400C45008FFA03 /* PopoverView.m in Sources */,
 				E67FBC261A3EA83E00CE839C /* UIActionSheet+Blocks.m in Sources */,
 				E67FBC071A3EA83E00CE839C /* UIImageView+AFNetworking.m in Sources */,
 				E67FBC441A3EAADA00CE839C /* LeftMenuViewController.m in Sources */,
@@ -811,7 +940,10 @@
 				E67FBCE31A3F0F4000CE839C /* BaseMenuViewController.m in Sources */,
 				E67FBC2E1A3EA83E00CE839C /* YzdHUDImageView.m in Sources */,
 				E6E0C74C1A3F26320054F2C4 /* MenuViewController.m in Sources */,
+				E68082FD1A400C45008FFA03 /* CalendarDayModel.m in Sources */,
+				E68083021A400C45008FFA03 /* CalendarViewController.m in Sources */,
 				E67FBC0E1A3EA83E00CE839C /* NSData+ExtensionWithData.m in Sources */,
+				E68082FE1A400C45008FFA03 /* CalendarHomeViewController.m in Sources */,
 				E67FBC011A3EA83E00CE839C /* AFURLResponseSerialization.m in Sources */,
 				E67FBBFF1A3EA83E00CE839C /* AFURLConnectionOperation.m in Sources */,
 				E67FBC061A3EA83E00CE839C /* UIButton+AFNetworking.m in Sources */,
@@ -822,14 +954,20 @@
 				E67FBC1B1A3EA83E00CE839C /* UIViewController+MJPopupViewController.m in Sources */,
 				E67FBC271A3EA83E00CE839C /* UIAlertView+Blocks.m in Sources */,
 				E6E0C76F1A3F345E0054F2C4 /* UIScrollView+JHExtension.m in Sources */,
+				E68083011A400C45008FFA03 /* CalendarMonthHeaderView.m in Sources */,
+				E68082FC1A400C45008FFA03 /* CalendarDayCell.m in Sources */,
 				E67FBC561A3EB06100CE839C /* TaskViewController.m in Sources */,
+				E6886AF71A406BAD008D4E7F /* LogInViewController.m in Sources */,
 				E6E0C7441A3F24750054F2C4 /* UIImage+REFrostedViewController.m in Sources */,
+				E68082FA1A400C45008FFA03 /* CusNavigationTitleView.m in Sources */,
 				E67FBBFE1A3EA83E00CE839C /* AFSecurityPolicy.m in Sources */,
+				E68082FF1A400C45008FFA03 /* CalendarLogic.m in Sources */,
 				E6E0C76D1A3F345E0054F2C4 /* JHRefreshFooterView.m in Sources */,
 				E67FBC501A3EB04600CE839C /* AttendanceViewController.m in Sources */,
 				E67FBC091A3EA83E00CE839C /* UIRefreshControl+AFNetworking.m in Sources */,
 				E67FBC161A3EA83E00CE839C /* AMBlurView.m in Sources */,
 				E67FBC0A1A3EA83E00CE839C /* UIWebView+AFNetworking.m in Sources */,
+				E68083001A400C45008FFA03 /* CalendarMonthCollectionViewLayout.m in Sources */,
 				E67FBC531A3EB05400CE839C /* LeaveViewController.m in Sources */,
 				E67FBC0B1A3EA83E00CE839C /* CLLocation+YCLocation.m in Sources */,
 				E6E0C7461A3F24750054F2C4 /* UIViewController+REFrostedViewController.m in Sources */,
@@ -840,6 +978,7 @@
 				E67FBBFC1A3EA83E00CE839C /* AFHTTPSessionManager.m in Sources */,
 				E67FBC051A3EA83E00CE839C /* UIAlertView+AFNetworking.m in Sources */,
 				E6E0C7421A3F24750054F2C4 /* REFrostedContainerViewController.m in Sources */,
+				E6B312E51A3FC04F00AEF923 /* WorkHomeViewController.m in Sources */,
 				E67FBC241A3EA83E00CE839C /* BOAlertController.m in Sources */,
 				E67FBC001A3EA83E00CE839C /* AFURLRequestSerialization.m in Sources */,
 				E6E0C7431A3F24750054F2C4 /* REFrostedViewController.m in Sources */,
@@ -861,6 +1000,7 @@
 				E67FBB5D1A3EA5DF00CE839C /* main.m in Sources */,
 				E67FBC101A3EA83E00CE839C /* NSDictionary+ExtensionWithDictionary.m in Sources */,
 				E67FBC0C1A3EA83E00CE839C /* CustomToolClass.m in Sources */,
+				E68083041A400C45008FFA03 /* NSDate+WQCalendarLogic.m in Sources */,
 				E67FBC391A3EA95400CE839C /* BaseViewController.m in Sources */,
 				E67FBC111A3EA83E00CE839C /* NSString+ExtensionWithString.m in Sources */,
 			);

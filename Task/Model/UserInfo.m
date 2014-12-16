@@ -33,10 +33,20 @@ static UserInfo *instnce;
 }
 
 //储存用户信息
+
+// 登陆时的用户信息
+- (void)saveUserLogInName:(NSString *)userLogInName{
+    [[LogInToolClass shareInstance] saveUserInfo:userLogInName AndInfoType:@"userLogInName"];
+}
+
+- (void)saveUserLogInPwd:(NSString *)userLogInPwd {
+    [[LogInToolClass shareInstance] saveUserInfo:userLogInPwd AndInfoType:@"userLogInPwd"];
+}
+
+// 基本用户信息
 - (void)saveUserName:(NSString *)userName {
     [[LogInToolClass shareInstance] saveUserInfo:userName AndInfoType:@"personName"];
 }
-
 - (void)saveUserEnterpriseId:(NSString *)enterpriseId {
     [[LogInToolClass shareInstance] saveUserInfo:enterpriseId AndInfoType:@"personEnterpriseId"];
 }
@@ -64,6 +74,14 @@ static UserInfo *instnce;
 //}
 
 //获取用户信息
+- (NSString *)gainUserLogInName {
+    return [[LogInToolClass shareInstance] getUserInfo:@"userLogInName"];
+}
+- (NSString *)gainUserLogInPwd {
+    return [[LogInToolClass shareInstance] getUserInfo:@"userLogInPwd"];
+}
+
+
 - (NSString *)gainUserName {
     return [[LogInToolClass shareInstance] getUserInfo:@"personName"];
 }
@@ -97,6 +115,14 @@ static UserInfo *instnce;
 
 
 //删除用户信息
+- (void)removeUserLogInName {
+    [[LogInToolClass shareInstance] removeUserInfo:@"userLogInName"];
+}
+
+- (void)removeUserLogInPwd {
+    [[LogInToolClass shareInstance] removeUserInfo:@"userLogInPwd"];
+}
+
 - (void)removeUserName {
     [[LogInToolClass shareInstance] removeUserInfo:@"personName"];
 }
