@@ -19,7 +19,8 @@
     // Do any additional setup after loading the view.
     userInfo = [UserInfo shareInstance];
     
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:213/255.0 alpha:1.0]];
+    //设置NavigationBar背景颜色
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     

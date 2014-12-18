@@ -85,9 +85,13 @@
 //转到主界面
 - (void)gotoMainViewController {
     //视图转换 至 rootViewController  （原理：直接将根视图转换----只能在主线程生调用）
+    REFrostedViewController *frosted = [[REFrostedViewController alloc] initWithContentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"] menuViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LeftMenuViewController"]];
+    
     UIApplication *app =[UIApplication sharedApplication];
     AppDelegate *app2 = app.delegate;
-    app2.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
+    app2.window.rootViewController = frosted;
+    
+    
 }
 
 @end

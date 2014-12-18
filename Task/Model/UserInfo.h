@@ -22,9 +22,12 @@
 - (void)saveUserLogInPwd:(NSString *)userLogInPwd;
 
 - (void)saveUserName:(NSString *)userName;
+- (void)saveUserPinyinName:(NSString *)userPinyinName;
 - (void)saveUserEnterpriseId:(NSString *)enterpriseId;
 - (void)saveUserEnterpriseName:(NSString *)enterpriseName;
 - (void)saveUserId:(NSString *)userId;
+- (void)saveUserIconPath:(NSString *)userIconPath;
+- (void)saveUserAttendace:(NSString *)personAttendance;
 
 - (void)saveUserAddress:(NSString *)userAddress;
 - (void)saveUserSex:(NSString *)userSex;
@@ -35,11 +38,13 @@
 - (NSString *)gainUserLogInPwd;
 
 - (NSString *)gainUserName;
+- (NSString *)gainUserPinyinName;
 - (NSString *)gainUserId;
 - (NSString *)gainUserEnterpriseId;
 - (NSString *)gainUserEnterpriseName;
-
 - (NSString *)gainUserIconPath;
+- (NSString *)gainUserAttendance;
+
 - (NSString *)gainUserSex;
 - (NSString *)gainUserPhone;
 - (NSString *)gainUserAddress;
@@ -49,11 +54,12 @@
 - (void)removeUserLogInPwd;
 
 - (void)removeUserName;
+- (void)removeUserPinyinName;
 - (void)removeUserId;
 - (void)removeUserEnterpriseId;
 - (void)removeUserEnterpriseName;
 
-- (void)removeUserIcon;
+- (void)removeUserIconPath;
 - (void)removeUserSex;
 - (void)removeUserPhone;
 - (void)removeUserAddress;

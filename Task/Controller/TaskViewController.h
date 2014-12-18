@@ -7,8 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import "AddNewTaskViewController.h"
 
-@interface TaskViewController : BaseViewController
+@interface TaskViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *mainTableView;
+
 
 - (IBAction)showMenu:(id)sender;
 

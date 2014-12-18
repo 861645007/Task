@@ -19,10 +19,12 @@
 #import "UIViewController+REFrostedViewController.h"
 #import "JHRefresh.h"
 #import "CusNavigationTitleView.h"
-#import "PopoverView.h"
 
 #define HttpURL @"http://vmr82ksj.zhy35065.zhihui.chinaccnet.cn/staff.action"
 #define LogInAction @"app_login.action"
+#define HomeAction @"app_home.action"   // 获取用户的基本信息
+#define AttendanceAction @"app_attendance.action"
+#define AttendanceMonthAction @"app_attendanceMonth.action"  // 获取当月的用户考勤信息
 
 @interface BaseViewController : UIViewController{
     CGSize keyboardSize;

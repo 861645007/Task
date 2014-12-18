@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "DetectionNetworkStatus.h"
 
 @interface WorkHomeViewController : BaseViewController
 

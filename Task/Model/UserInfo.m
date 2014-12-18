@@ -47,6 +47,9 @@ static UserInfo *instnce;
 - (void)saveUserName:(NSString *)userName {
     [[LogInToolClass shareInstance] saveUserInfo:userName AndInfoType:@"personName"];
 }
+- (void)saveUserPinyinName:(NSString *)userPinyinName {
+    [[LogInToolClass shareInstance] saveUserInfo:userPinyinName AndInfoType:@"personPinyinName"];
+}
 - (void)saveUserEnterpriseId:(NSString *)enterpriseId {
     [[LogInToolClass shareInstance] saveUserInfo:enterpriseId AndInfoType:@"personEnterpriseId"];
 }
@@ -55,6 +58,9 @@ static UserInfo *instnce;
 }
 - (void)saveUserId:(NSString *)userId {
     [[LogInToolClass shareInstance] saveUserInfo:userId AndInfoType:@"personId"];
+}
+- (void)saveUserAttendace:(NSString *)personAttendance {
+    [[LogInToolClass shareInstance] saveUserInfo:personAttendance AndInfoType:@"personAttendance"];
 }
 
 - (void)saveUserAddress:(NSString *)userAddress {
@@ -66,12 +72,10 @@ static UserInfo *instnce;
 - (void)saveUserPhone:(NSString *)userPhone {
     [[LogInToolClass shareInstance] saveUserInfo:userPhone AndInfoType:@"personPhone"];
 }
-//- (void)saveUserIcon:(NSData *)userIcon {
-//    [[PhotoAndCameraClass shareInstance] saveImageToDocuments:userIcon AndImageName:@"userImageIcon.png"];
-//}
-//- (void)saveUserIconPath {
-//    [[LogInToolClass shareInstance] saveUserInfo:[[PhotoAndCameraClass shareInstance] getImageURLString:@"userImageIcon.png"] AndInfoType:@"personIcon"];
-//}
+- (void)saveUserIconPath:(NSString *)userIconPath {
+    [[LogInToolClass shareInstance] saveUserInfo:userIconPath AndInfoType:@"personIcon"];
+}
+
 
 //获取用户信息
 - (NSString *)gainUserLogInName {
@@ -85,7 +89,9 @@ static UserInfo *instnce;
 - (NSString *)gainUserName {
     return [[LogInToolClass shareInstance] getUserInfo:@"personName"];
 }
-
+-(NSString *)gainUserPinyinName {
+    return [[LogInToolClass shareInstance] getUserInfo:@"personPinyinName"];
+}
 - (NSString *)gainUserId {
     return [[LogInToolClass shareInstance] getUserInfo:@"personId"];
 }
@@ -95,14 +101,13 @@ static UserInfo *instnce;
 - (NSString *)gainUserEnterpriseName {
     return [[LogInToolClass shareInstance] getUserInfo:@"personEnterpriseName"];
 }
-
+- (NSString *)gainUserAttendance {
+    return [[LogInToolClass shareInstance] getUserInfo:@"personAttendance"];
+}
 
 - (NSString *)gainUserIconPath {
     return [[LogInToolClass shareInstance] getUserInfo:@"personIcon"];
 }
-//- (NSDictionary *)gainUserIcon {
-//    return [[PhotoAndCameraClass shareInstance] getImageWithImageName:@"userImageIcon"];
-//}
 - (NSString *)gainUserSex {
     return [[LogInToolClass shareInstance] getUserInfo:@"personSex"];
 }
@@ -126,7 +131,9 @@ static UserInfo *instnce;
 - (void)removeUserName {
     [[LogInToolClass shareInstance] removeUserInfo:@"personName"];
 }
-
+-(void)removeUserPinyinName {
+    [[LogInToolClass shareInstance] removeUserInfo:@"personPinyinName"];
+}
 - (void)removeUserId {
     [[LogInToolClass shareInstance] removeUserInfo:@"personId"];
 }
@@ -136,11 +143,10 @@ static UserInfo *instnce;
 - (void)removeUserEnterpriseName {
     [[LogInToolClass shareInstance] removeUserInfo:@"personEnterpriseName"];
 }
-
-
-- (void)removeUserIcon {
+- (void)removeUserIconPath {
     [[LogInToolClass shareInstance] removeUserInfo:@"personIcon"];
 }
+
 - (void)removeUserSex {
     [[LogInToolClass shareInstance] removeUserInfo:@"personPhone"];
 }

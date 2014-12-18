@@ -24,14 +24,17 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "PopoverView.h"
 
 @interface CusNavigationTitleView : UIView
 
 @property (nonatomic, copy) NSString *titleString;
 @property (nonatomic, copy) NSString *imageNameString;
-@property (nonatomic) UIButton *titleBtn;
+@property (nonatomic, copy) NSArray *titleStrArr;
+@property (nonatomic, copy) void (^selectRowAtIndex)(NSInteger index);
+@property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIImageView *titleImageView;
 
-- (id)initWithTitle:(NSString *)titleStr imageName:(NSString *)imageNameStr;
+- (id)initWithTitle:(NSString *)titleStr titleStrArr:(NSArray *)titleArr imageName:(NSString *)imageNameStr;
 
 @end

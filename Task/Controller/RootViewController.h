@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 #import "REFrostedViewController.h"
 
 @interface RootViewController :REFrostedViewController
