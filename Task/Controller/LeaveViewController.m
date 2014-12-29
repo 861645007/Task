@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setTableFooterView:mainTableView];
     tableViewArr = [NSMutableArray arrayWithArray:@[@{},@{},@{}]];
     sectionType = 0;
     leaveHomeSectionArr = @[@"处理中的请假", @"需要我审批的请假", @"新审批的请假"];
@@ -59,6 +60,15 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"GainToDetailInfo"]) {
+        EditLeaveViewController *editLeaveViewController = [segue destinationViewController];
+        editLeaveViewController.isAddNewLeave = 0;
+        editLeaveViewController.titleStr = @"新增请假";
+    }
 }
 
 #pragma mark - 获取数据
@@ -160,8 +170,16 @@
         titleLabel.text = key;
         [titleLabel sizeToFit];
         
+        UIImageView *pointToImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 36, 7, 30, 30)];
+        if ([[isShow objectAtIndex:btn.tag] intValue]) {
+            [pointToImageView setImage:[UIImage imageNamed:@"Pulldown"]];
+        }else {
+            [pointToImageView setImage:[UIImage imageNamed:@"pullback"]];
+        }
+        
         [sectionView addSubview:btn];
         [sectionView addSubview:titleLabel];
+        [sectionView addSubview:pointToImageView]; 
         
         return sectionView;
     }
@@ -207,11 +225,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-#pragma mark - 跳转到请假详情界面
-- (void)gainToLeaveDetailView {
     
+    NSDictionary *dic = nil;
+    if (sectionType == 0) {
+        NSString *sectionTitle = [leaveHomeSectionArr objectAtIndex:indexPath.section];
+        dic = [[[tableViewArr objectAtIndex:sectionType] objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+    }
+    
+    LeaveDetailViewController *leaveDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveDetailViewController"];
+    leaveDetailViewController.leaveId = [dic objectForKey:@"leaveId"];
+    if (sectionType == 0) {
+        if (indexPath.section == 0) {
+            leaveDetailViewController.leaveEditType = 1;
+        }else if (indexPath.section == 1) {
+            leaveDetailViewController.leaveEditType = 2;
+        }else {
+            leaveDetailViewController.leaveEditType = 0;
+        }
+    }else {
+        leaveDetailViewController.leaveEditType = 0;
+    }
+    
+    [self.navigationController pushViewController:leaveDetailViewController animated:YES];
 }
 
 #pragma mark - 新增请假操作

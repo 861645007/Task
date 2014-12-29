@@ -8,6 +8,8 @@
 
 #import "BaseViewController.h"
 #import "LeaveHomeTableViewCell.h"
+#import "EditLeaveViewController.h"
+#import "LeaveDetailViewController.h"
 
 @interface LeaveViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 

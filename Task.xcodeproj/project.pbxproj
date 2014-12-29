@@ -44,6 +44,13 @@
 		E60C94EF1A4AF50D0003B33B /* diaryBook_NoSelectedImage.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C94ED1A4AF50D0003B33B /* diaryBook_NoSelectedImage.png */; };
 		E60C94F01A4AF50D0003B33B /* diaryBook_SelectedImage.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C94EE1A4AF50D0003B33B /* diaryBook_SelectedImage.png */; };
 		E60C94F41A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C94F31A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m */; };
+		E62C793C1A50F9B60026EC5B /* select_item_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = E62C793A1A50F9B60026EC5B /* select_item_checked.png */; };
+		E62C793D1A50F9B60026EC5B /* select_item_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = E62C793B1A50F9B60026EC5B /* select_item_unchecked.png */; };
+		E62C79411A50FD650026EC5B /* EditLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E62C79401A50FD650026EC5B /* EditLeaveViewController.m */; };
+		E62C79451A5113A40026EC5B /* LeaveDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E62C79441A5113A40026EC5B /* LeaveDetailViewController.m */; };
+		E62C79491A511B1A0026EC5B /* LeaveApprovesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E62C79471A511B1A0026EC5B /* LeaveApprovesTableViewCell.m */; };
+		E62C794A1A511B1A0026EC5B /* LeaveApprovesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62C79481A511B1A0026EC5B /* LeaveApprovesTableViewCell.xib */; };
+		E62C794E1A515C4D0026EC5B /* ApprovesLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E62C794D1A515C4D0026EC5B /* ApprovesLeaveViewController.m */; };
 		E6319DA61A41A76D00982A46 /* tab_menu_workcenter_more.png in Resources */ = {isa = PBXBuildFile; fileRef = E6319DA51A41A76D00982A46 /* tab_menu_workcenter_more.png */; };
 		E6319DAD1A41A98000982A46 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6319DAC1A41A98000982A46 /* MoreViewController.m */; };
 		E637A0621A46B47D00E547AE /* pullback.png in Resources */ = {isa = PBXBuildFile; fileRef = E637A05E1A46B47D00E547AE /* pullback.png */; };
@@ -268,6 +275,17 @@
 		E60C94EE1A4AF50D0003B33B /* diaryBook_SelectedImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = diaryBook_SelectedImage.png; path = FunctionClass/GetPhoto/diaryBook_SelectedImage.png; sourceTree = "<group>"; };
 		E60C94F21A4B05B40003B33B /* SubmitTaskModifyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubmitTaskModifyInfoViewController.h; path = Controller/SubmitTaskModifyInfoViewController.h; sourceTree = "<group>"; };
 		E60C94F31A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubmitTaskModifyInfoViewController.m; path = Controller/SubmitTaskModifyInfoViewController.m; sourceTree = "<group>"; };
+		E62C793A1A50F9B60026EC5B /* select_item_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = select_item_checked.png; path = Image/select_item_checked.png; sourceTree = "<group>"; };
+		E62C793B1A50F9B60026EC5B /* select_item_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = select_item_unchecked.png; path = Image/select_item_unchecked.png; sourceTree = "<group>"; };
+		E62C793F1A50FD650026EC5B /* EditLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditLeaveViewController.h; path = Controller/EditLeaveViewController.h; sourceTree = "<group>"; };
+		E62C79401A50FD650026EC5B /* EditLeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditLeaveViewController.m; path = Controller/EditLeaveViewController.m; sourceTree = "<group>"; };
+		E62C79431A5113A40026EC5B /* LeaveDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeaveDetailViewController.h; path = Controller/LeaveDetailViewController.h; sourceTree = "<group>"; };
+		E62C79441A5113A40026EC5B /* LeaveDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeaveDetailViewController.m; path = Controller/LeaveDetailViewController.m; sourceTree = "<group>"; };
+		E62C79461A511B1A0026EC5B /* LeaveApprovesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeaveApprovesTableViewCell.h; path = Controller/LeaveApprovesTableViewCell.h; sourceTree = "<group>"; };
+		E62C79471A511B1A0026EC5B /* LeaveApprovesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeaveApprovesTableViewCell.m; path = Controller/LeaveApprovesTableViewCell.m; sourceTree = "<group>"; };
+		E62C79481A511B1A0026EC5B /* LeaveApprovesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeaveApprovesTableViewCell.xib; path = Controller/LeaveApprovesTableViewCell.xib; sourceTree = "<group>"; };
+		E62C794C1A515C4D0026EC5B /* ApprovesLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApprovesLeaveViewController.h; path = Controller/ApprovesLeaveViewController.h; sourceTree = "<group>"; };
+		E62C794D1A515C4D0026EC5B /* ApprovesLeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApprovesLeaveViewController.m; path = Controller/ApprovesLeaveViewController.m; sourceTree = "<group>"; };
 		E6319DA51A41A76D00982A46 /* tab_menu_workcenter_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_menu_workcenter_more.png; path = Image/tab_menu_workcenter_more.png; sourceTree = "<group>"; };
 		E6319DAB1A41A98000982A46 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoreViewController.h; path = Controller/MoreViewController.h; sourceTree = "<group>"; };
 		E6319DAC1A41A98000982A46 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoreViewController.m; path = Controller/MoreViewController.m; sourceTree = "<group>"; };
@@ -697,6 +715,33 @@
 				E60C94F31A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m */,
 			);
 			name = SubmitModifyInfo;
+			sourceTree = "<group>";
+		};
+		E62C793E1A50FD120026EC5B /* EditLeaveViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E62C793F1A50FD650026EC5B /* EditLeaveViewController.h */,
+				E62C79401A50FD650026EC5B /* EditLeaveViewController.m */,
+			);
+			name = EditLeaveViewController;
+			sourceTree = "<group>";
+		};
+		E62C79421A5113830026EC5B /* LeaveDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E62C79431A5113A40026EC5B /* LeaveDetailViewController.h */,
+				E62C79441A5113A40026EC5B /* LeaveDetailViewController.m */,
+			);
+			name = LeaveDetailViewController;
+			sourceTree = "<group>";
+		};
+		E62C794B1A515C220026EC5B /* ApprovesLeaveViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E62C794C1A515C4D0026EC5B /* ApprovesLeaveViewController.h */,
+				E62C794D1A515C4D0026EC5B /* ApprovesLeaveViewController.m */,
+			);
+			name = ApprovesLeaveViewController;
 			sourceTree = "<group>";
 		};
 		E6319DA71A41A90E00982A46 /* MoreViewController */ = {
@@ -1193,6 +1238,9 @@
 		E67FBC351A3EA90200CE839C /* LeaveViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E62C794B1A515C220026EC5B /* ApprovesLeaveViewController */,
+				E62C79421A5113830026EC5B /* LeaveDetailViewController */,
+				E62C793E1A50FD120026EC5B /* EditLeaveViewController */,
 				E6C9A6831A50E86F005E17FB /* Cell */,
 				E67FBC511A3EB05400CE839C /* LeaveViewController.h */,
 				E67FBC521A3EB05400CE839C /* LeaveViewController.m */,
@@ -1240,6 +1288,8 @@
 		E67FBC491A3EAF2400CE839C /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				E62C793A1A50F9B60026EC5B /* select_item_checked.png */,
+				E62C793B1A50F9B60026EC5B /* select_item_unchecked.png */,
 				E6753BC31A4FECD100AAD8DC /* document_add.png */,
 				E6753BBA1A4FE6DF00AAD8DC /* document_images.png */,
 				E6753BBB1A4FE6DF00AAD8DC /* menu_images_click.png */,
@@ -1356,6 +1406,9 @@
 				E6C9A6841A50E880005E17FB /* LeaveHomeTableViewCell.h */,
 				E6C9A6851A50E880005E17FB /* LeaveHomeTableViewCell.m */,
 				E6C9A6861A50E880005E17FB /* LeaveHomeTableViewCell.xib */,
+				E62C79461A511B1A0026EC5B /* LeaveApprovesTableViewCell.h */,
+				E62C79471A511B1A0026EC5B /* LeaveApprovesTableViewCell.m */,
+				E62C79481A511B1A0026EC5B /* LeaveApprovesTableViewCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -1546,6 +1599,7 @@
 				E6394F651A44520500706882 /* choose.png in Resources */,
 				E6006B661A4D1FC500E974DD /* Delete_nav.png in Resources */,
 				E6753BBE1A4FE6DF00AAD8DC /* menu_images_click.png in Resources */,
+				E62C794A1A511B1A0026EC5B /* LeaveApprovesTableViewCell.xib in Resources */,
 				E6B312DD1A3FBD1300AEF923 /* nav_menu_date_normal.png in Resources */,
 				E6C9A6881A50E880005E17FB /* LeaveHomeTableViewCell.xib in Resources */,
 				E67FBC2A1A3EA83E00CE839C /* HUD_YES.png in Resources */,
@@ -1559,6 +1613,7 @@
 				E6C9C7FA1A4CF3BB00FA0A5F /* preViewDelete@2x.png in Resources */,
 				E68C0FF31A480CEF00832CCF /* Nomal.png in Resources */,
 				E6394F631A44520500706882 /* Addchoice.png in Resources */,
+				E62C793C1A50F9B60026EC5B /* select_item_checked.png in Resources */,
 				E6B312DC1A3FBD1300AEF923 /* nav_menu_contact.png in Resources */,
 				E6006B731A4D1FC500E974DD /* Share_nav@2x.png in Resources */,
 				E67FBC2B1A3EA83E00CE839C /* HUD_YES@2x.png in Resources */,
@@ -1570,6 +1625,7 @@
 				E67FBC151A3EA83E00CE839C /* Toronto, ON.jpg in Resources */,
 				E6753BBF1A4FE6DF00AAD8DC /* photo.png in Resources */,
 				E6394F6A1A44551100706882 /* NoSingle60.png in Resources */,
+				E62C793D1A50F9B60026EC5B /* select_item_unchecked.png in Resources */,
 				E68C0FF51A480CEF00832CCF /* Urgent.png in Resources */,
 				E6B312DF1A3FBD1300AEF923 /* tab_menu_bottomdocument.png in Resources */,
 			);
@@ -1596,6 +1652,7 @@
 				E674AE771A46F99A00E10718 /* ModifyTaskTitleViewController.m in Sources */,
 				E68C0FFE1A480E2E00832CCF /* ModifyUrgentLevelViewController.m in Sources */,
 				E68082FB1A400C45008FFA03 /* PopoverView.m in Sources */,
+				E62C79491A511B1A0026EC5B /* LeaveApprovesTableViewCell.m in Sources */,
 				E67FBC261A3EA83E00CE839C /* UIActionSheet+Blocks.m in Sources */,
 				E60C94E91A4AEDFE0003B33B /* GetPhotoFromAlbumClass.m in Sources */,
 				E6394EBB1A43FB4300706882 /* ProclamationListCell.m in Sources */,
@@ -1623,6 +1680,7 @@
 				E67FBC2E1A3EA83E00CE839C /* YzdHUDImageView.m in Sources */,
 				E60C94E41A4AE5390003B33B /* PhotoCollectionViewCell.m in Sources */,
 				E6E0C74C1A3F26320054F2C4 /* MenuViewController.m in Sources */,
+				E62C79411A50FD650026EC5B /* EditLeaveViewController.m in Sources */,
 				E67FBC011A3EA83E00CE839C /* AFURLResponseSerialization.m in Sources */,
 				E67FBBFF1A3EA83E00CE839C /* AFURLConnectionOperation.m in Sources */,
 				E6394EBE1A44009B00706882 /* ProclamationCommentsViewController.m in Sources */,
@@ -1649,6 +1707,7 @@
 				E67C77B81A431A4D00C24054 /* AddNewProclamationViewController.m in Sources */,
 				E67FBC161A3EA83E00CE839C /* AMBlurView.m in Sources */,
 				E67FBC0A1A3EA83E00CE839C /* UIWebView+AFNetworking.m in Sources */,
+				E62C794E1A515C4D0026EC5B /* ApprovesLeaveViewController.m in Sources */,
 				E6394F7E1A445B7200706882 /* ChineseString.m in Sources */,
 				E6394F751A44565000706882 /* SelectHeaderTableViewCell.m in Sources */,
 				E67FBC531A3EB05400CE839C /* LeaveViewController.m in Sources */,
@@ -1680,6 +1739,7 @@
 				E67FBC1A1A3EA83E00CE839C /* MJPopupBackgroundView.m in Sources */,
 				E676539F1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.m in Sources */,
 				E676539C1A4D06DB000A13D9 /* UIColor+ExtensionWithUIColor.m in Sources */,
+				E62C79451A5113A40026EC5B /* LeaveDetailViewController.m in Sources */,
 				E670271D1A456F5F00C1B537 /* TaskDetailInfoTableViewCell.m in Sources */,
 				E6DB5EDE1A4E9E54002906F1 /* TaskLookDetailTableViewCell.m in Sources */,
 				E6E0C7711A3F345E0054F2C4 /* UIView+JHExtension.m in Sources */,
