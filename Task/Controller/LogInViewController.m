@@ -33,7 +33,7 @@
 
 - (IBAction)logIn:(id)sender {
     if ([self TextFieldIsFull:self->textFieldArr]) {
-        [self hidenKeyboard];
+        [self hidenKeyboardWithTextField];
         //进行网络操作
         [self logInWithNetService];
         [self.view.window showHUDWithText:@"正在登录..." Type:ShowLoading Enabled:true];
@@ -48,9 +48,9 @@
     //参数
     NSDictionary *parameters = @{@"username":personNameTextField.text, @"password": personPasswordTextField.text};
     
-    [self createAsynchronousRequest:LogInAction parmeters:parameters success:^(NSDictionary *dic){
+    [self createAsynchronousRequest:AttendanceMonthAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithNetManageResult: dic];
-    }];
+    } failure:^{}];
 }
 
 //处理网络操作结果

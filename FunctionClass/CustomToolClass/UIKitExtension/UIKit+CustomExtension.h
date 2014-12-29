@@ -10,11 +10,8 @@
 #ifndef Task_UIKit_CustomExtension_h
 #define Task_UIKit_CustomExtension_h
 
-#import "NSString+ExtensionWithString.h"
-#import "NSDate+ExtensionWithDate.h"
-#import "NSData+ExtensionWithData.h"
-#import "NSArray+ExtensionWithArray.h"
-#import "NSDictionary+ExtensionWithDictionary.h" 
+#import "UIColor+ExtensionWithUIColor.h"
+#import "UIButton+ExtensionWithUIButton.h"
 
 #endif
 

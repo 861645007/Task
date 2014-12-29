@@ -10,6 +10,7 @@
 
 @implementation NSDate (ExtensionWithDate)
 
+// date 转 String
 - (NSString *)dateToStringWithDateFormat:(NSString *)dateFormatStrring {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = dateFormatStrring;
@@ -18,5 +19,25 @@
     
     return dateString;
 }
+
+
+// 得到昨天的此时此刻
++ (NSDate *)gainYesterdayDate {
+    NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow:-3600 * 24];
+    return yesterday;
+}
+
+// 得到明天的此时此刻
++ (NSDate *)gainTomorrowDate {
+    NSDate *tomorrow = [NSDate dateWithTimeIntervalSinceNow:3600 * 24];
+    return tomorrow;
+}
+
+// 得到 X 天后的此时此刻
++ (NSDate *)gainXDayDate:(int)xDay {
+    NSDate *xDayDate = [NSDate dateWithTimeIntervalSinceNow:3600 * 24 * xDay];
+    return xDayDate;
+}
+
 
 @end

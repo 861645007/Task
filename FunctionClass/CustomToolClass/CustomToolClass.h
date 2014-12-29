@@ -69,6 +69,19 @@
  */
 -(BOOL)validateMobile:(NSString* )mobileNumber;
 
+#pragma mark -  UIColor 转 CGColorRef
+/**
+ *  UIColor 转 CGColorRef
+ *
+ *  @param red   red's double
+ *  @param green green double
+ *  @param blue  blue double
+ *  @param alpha alpha's double
+ *
+ *  @return CGColorRef类型数据
+ */
+- (CGColorRef)getColorFromRed:(int)red Green:(int)green Blue:(int)blue Alpha:(int)alpha;
+
 #pragma mark - 给我评分
 /*
  方法：传入本 app 的 appID ，使用户跳转到 APP 商店进行打分；

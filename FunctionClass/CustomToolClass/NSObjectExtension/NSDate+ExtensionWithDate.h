@@ -20,4 +20,28 @@
 */
 - (NSString *)dateToStringWithDateFormat:(NSString *)dateFormatStrring;
 
+/**
+ *  得到昨天的此时此刻
+ *
+ *  @return 返回昨天的日期数据
+ */
++ (NSDate *)gainYesterdayDate;
+
+
+/**
+ *  得到明天的此时此刻
+ *
+ *  @return 返回明天的日期数据
+ */
++ (NSDate *)gainTomorrowDate;
+
+/**
+ *  得到 X 天后的此时此刻
+ *
+ *  @param xDay 天数
+ *
+ *  @return 得到 X 天后的日期数据
+ */
++ (NSDate *)gainXDayDate:(int)xDay;
+
 @end

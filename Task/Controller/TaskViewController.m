@@ -13,6 +13,8 @@
     NSArray *sectionArr;
     NSMutableArray *isShow;
     NSMutableDictionary *tableVieDataDic;
+    
+    NSString *titleCMD;
 }
 
 @end
@@ -23,16 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    // 设置导航栏为可点击
-    navArr = @[@"item1", @"选项2", @"选项3", @"我的任务"];
-    CusNavigationTitleView *navView = [[CusNavigationTitleView alloc] initWithTitle:@"我的任务" titleStrArr:navArr imageName:@"Expansion"];
-    __block CusNavigationTitleView *copyNavView = navView; // 防止陷入“retain cycle” -- “形成怪圈”的错误
-    navView.selectRowAtIndex = ^(NSInteger index){
-        copyNavView.titleString = navArr[(long)index];
-    };
-    self.navigationItem.titleView = navView;
-    
     // 设置 tableView
     sectionArr = @[@"延期", @"今天", @"明天", @"即将", @"无日期"];
     isShow = [NSMutableArray array];
@@ -40,12 +32,28 @@
         [isShow addObject:@"0"];
     }
     tableVieDataDic = [NSMutableDictionary dictionary];
+    titleCMD = @"0";
     
+    // 设置导航栏为可点击1
+    navArr = @[@"我的任务", @"我创建的任务", @"我参与的任务", @"我负责的任务", @"未读的任务", @"我关注的任务", @"共享给我的任务", @"已完成的任务"];
+    CusNavigationTitleView *navView = [[CusNavigationTitleView alloc] initWithTitle:@"我的任务" titleStrArr:navArr imageName:@"Expansion"];
+    __block CusNavigationTitleView *copyNavView = navView; // 防止陷入“retain cycle” -- “形成怪圈”的错误
+    navView.selectRowAtIndex = ^(NSInteger index){
+        copyNavView.titleString = navArr[(long)index];
+        self.title = navArr[(long)index];
+        // 选择标题后刷新界面
+        titleCMD = [NSString stringWithFormat:@"%ld", (long)index];
+        [self gainAttendanceInfo];
+    };
+    self.navigationItem.titleView = navView;
+
     // 注册刷新控件
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self gainAttendanceInfo];
     }];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [self gainAttendanceInfo];
 }
 
@@ -57,16 +65,22 @@
 #pragma mark - 获取数据
 // 获取数据
 - (void)gainAttendanceInfo {
+    [self.view.window showHUDWithText:@"加载数据..." Type:ShowLoading Enabled:YES];
+    
     NSString *employeeId = [userInfo gainUserId];
     NSString *realName = [userInfo gainUserName];
     NSString *enterpriseId = [userInfo gainUserEnterpriseId];
     //参数
     NSDictionary *parameters = @{@"employeeId": employeeId,
                                  @"realName":realName,
-                                 @"enterpriseId": enterpriseId};
+                                 @"enterpriseId": enterpriseId,
+                                 @"cmd": titleCMD};
     
-    [self createAsynchronousRequest:AttendanceMonthAction parmeters:parameters success:^(NSDictionary *dic){
+    [self createAsynchronousRequest:TaskHomeAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithGainAttendanceInfoResult: dic];
+    } failure:^{
+        // 事情做完了, 结束刷新动画~~~
+        [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
     }];
 }
 
@@ -80,8 +94,10 @@
             break;
         }
         case 1: {
-            [self.view.window showHUDWithText:@"获取考勤成功" Type:ShowPhotoYes Enabled:YES];
+            [self.view.window showHUDWithText:@"获取数据成功" Type:ShowPhotoYes Enabled:YES];
 
+            [self setSectionTableVieDataDic:[dic objectForKey:@"classifyTask"]];
+            
             // 事情做完了, 结束刷新动画~~~
             [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
             break;
@@ -90,6 +106,14 @@
     if (![msg isEqualToString:@""]) {
         [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
     }
+}
+
+- (void)setSectionTableVieDataDic:(NSDictionary *)dic {
+    [tableVieDataDic setObject:[dic objectForKey:@"delayTasks"] forKey:@"延期"];
+    [tableVieDataDic setObject:[dic objectForKey:@"todyTasks"] forKey:@"今天"];
+    [tableVieDataDic setObject:[dic objectForKey:@"tomorrowTasks"] forKey:@"明天"];
+    [tableVieDataDic setObject:[dic objectForKey:@"futureTasks"] forKey:@"即将"];
+    [tableVieDataDic setObject:[dic objectForKey:@"noDateTasks"] forKey:@"无日期"];
 }
 
 
@@ -113,13 +137,11 @@
     return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 44;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 2;
 }
 
@@ -144,22 +166,20 @@
     [titleLabel sizeToFit];
     
     // 设置图标
-    UILabel *numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 15, 7, 30, 21)];
+    UILabel *numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 45, 7, 30, 21)];
     numberLabel.tag = 200;
     numberLabel.textColor = [UIColor colorWithRed:105/255.0 green:105/255.0 blue:105/255.0 alpha:1];
     numberLabel.textAlignment = NSTextAlignmentRight;
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 40, 9, 25, 25)];
-    imageView.tag = 201;
-    imageView.userInteractionEnabled = true;
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewTask)];
-    [imageView addGestureRecognizer:tapGestureRecognizer];
+    UIButton *gainToAddBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 40, 9, 25, 25)];
+    gainToAddBtn.tag = section;
+    [gainToAddBtn addTarget:self action:@selector(addNewTask:) forControlEvents:UIControlEventTouchUpInside];
     
-    if ([[tableVieDataDic objectForKey:key] count] != 0) {
-        numberLabel.text = [NSString stringWithFormat:@"%d", [[tableVieDataDic objectForKey:key] count]];
-        imageView.hidden = true;
+    if ([[isShow objectAtIndex:btn.tag] intValue]) {
+        numberLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[[tableVieDataDic objectForKey:key] count]];
+        gainToAddBtn.hidden = true;
     }else {
-        imageView.image = [UIImage imageNamed:@"Task_Add"];
+        [gainToAddBtn setImage:[UIImage imageNamed:@"Task_Add"] forState:UIControlStateNormal];
         numberLabel.text = [NSString stringWithFormat:@"%d", 0];
         numberLabel.hidden = true;
     }
@@ -167,13 +187,27 @@
     [sectionView addSubview:numberLabel];
     [sectionView addSubview:titleLabel];
     [sectionView addSubview:btn];
-    [sectionView addSubview:imageView];
+    if (section != 0) {
+        [sectionView addSubview:gainToAddBtn];
+    }
+    
     return sectionView;
 }
 
 // 添加新的任务
-- (void)addNewTask {
+- (void)addNewTask:(UIButton *)btn {
     AddNewTaskViewController *addNewTaskViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddNewTaskViewController"];
+    addNewTaskViewController.taskId = @"";
+    if (btn.tag == 1) {
+        addNewTaskViewController.taskEndTimeStr = [[NSDate date] dateToStringWithDateFormat:@"yyyy-MM-dd"];
+    }else if (btn.tag == 2) {
+        addNewTaskViewController.taskEndTimeStr = [[NSDate gainTomorrowDate] dateToStringWithDateFormat:@"yyyy-MM-dd"];
+    }else if (btn.tag == 3) {
+        addNewTaskViewController.taskEndTimeStr = [[NSDate gainXDayDate:7] dateToStringWithDateFormat:@"yyyy-MM-dd"];
+    }else {
+        addNewTaskViewController.taskEndTimeStr = @"";
+    }
+    
     [self.navigationController pushViewController:addNewTaskViewController animated:true];
 }
 
@@ -198,7 +232,6 @@
         isShow[btn.tag] = @"1";
         imageView.hidden = false;
         numberLabel.hidden = true;
-        
     }
     // 刷新点击的组标题，动画使用卡片
     [mainTableView reloadSections:[NSIndexSet indexSetWithIndex:btn.tag]
@@ -206,9 +239,23 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = @"LeaveRecordInfoCell";
+    NSString *cellIdentifier = @"TaskCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    NSString *sectionTitle = [sectionArr objectAtIndex:indexPath.section];
+    NSDictionary *dic = [[tableVieDataDic objectForKey:sectionTitle] objectAtIndex:indexPath.row];
 
+    cell.textLabel.text = [dic objectForKey:@"title"];
+    int taskType = [[dic objectForKey:@"type"] intValue];
+    if (taskType == 0) {
+        cell.textLabel.textColor = [UIColor blackColor];
+    } else if (taskType == 1) {
+        cell.textLabel.textColor = [UIColor orangeColor];
+    } else if (taskType == 2) {
+        cell.textLabel.textColor = [UIColor redColor];
+    }
+    
+    cell.detailTextLabel.text = [dic objectForKey:@"endDate"];
     
     return cell;
 }
@@ -221,6 +268,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
+    
+    NSString *sectionTitle = [sectionArr objectAtIndex:indexPath.section];
+    NSDictionary *dic = [[tableVieDataDic objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+    [self gainTaskDetailView:[dic objectForKey:@"taskId"]];
+}
+
+- (void)gainTaskDetailView:(NSString *)taskId {
+    TaskDetailInfoTableViewController *taskDetailInfoTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskDetailInfoTableViewController"];
+    taskDetailInfoTableViewController.taskId = taskId;
+    [self.navigationController pushViewController:taskDetailInfoTableViewController animated:YES];
 }
 
 #pragma mark - Menu操作

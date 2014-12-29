@@ -7,9 +7,13 @@
 //
 
 #import "BaseViewController.h"
+#import "LeaveHomeTableViewCell.h"
 
-@interface LeaveViewController : BaseViewController
+@interface LeaveViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 
 - (IBAction)showMenu:(id)sender;
+- (IBAction)addNewLeave:(id)sender;
 
 @end

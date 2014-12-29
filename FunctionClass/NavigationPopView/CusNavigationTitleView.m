@@ -89,12 +89,13 @@
 
 - (void)setTitleString:(NSString *)titleStr {
     CGFloat viewWidth = 0;
-
+    titleString = titleStr;
     titleLabel.text = titleStr;
     [titleLabel setFrame:CGRectMake(0, 0, [self gainTextWidth] + 10, 44)];
     viewWidth = titleLabel.frame.size.width + 10;
     if (self.imageNameString) {
-        viewWidth += 25;
+        [titleImageView setFrame:CGRectMake(titleLabel.frame.size.width, (44 - 25) /2, 25, 25)];
+        viewWidth = viewWidth + 25;
     }
     
     self.frame = [self setViewFrame:viewWidth];

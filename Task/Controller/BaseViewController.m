@@ -53,7 +53,7 @@
 }
 
 #pragma mark - 网络操作
-- (void)createAsynchronousRequest:(NSString *)action parmeters:(NSDictionary *)parmeters success:(void(^)(NSDictionary *dic))success {
+- (void)createAsynchronousRequest:(NSString *)action parmeters:(NSDictionary *)parmeters success:(void(^)(NSDictionary *dic))success failure:(Failure)failure {
     
     NSURL *url = [NSURL URLWithString:HttpURL];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
@@ -63,9 +63,21 @@
         [self.view.window showHUDWithText:nil Type:ShowDismiss Enabled:YES];
         success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        failure();       
         NSLog(@"error: %@, \n error.localizedDescription: %@", error, [error localizedDescription]);
         [self.view.window showHUDWithText:@"网络错误..." Type:ShowPhotoNo Enabled:YES];
     }];
+}
+
+#pragma mark 去除 tableView 多余的横线
+- (void)setTableFooterView:(UITableView *)tb {
+    if (!tb) {
+        return;
+    }
+    
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor whiteColor];
+    [tb setTableFooterView:view];
 }
 
 
@@ -93,7 +105,7 @@
     }
     
     //添加手势，点击屏幕其他区域关闭键盘的操作
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboardWithTextField)];
     gesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gesture];
 }
@@ -136,7 +148,7 @@
 }
 
 //隐藏键盘的方法
--(void)hidenKeyboard
+-(void)hidenKeyboardWithTextField
 {
     for (UITextField *textField in textFieldArr) {
         //指定本身为代理
@@ -148,7 +160,7 @@
 -(IBAction)nextOnKeyboard:(UITextField *)sender
 {
     if ([sender isEqual: [textFieldArr lastObject]]) {
-        [self hidenKeyboard];
+        [self hidenKeyboardWithTextField];
         return;
     }else {
         for (int i = 0; i < [textFieldArr count]; i++) {
@@ -170,6 +182,12 @@
     return YES;
 }
 
-
+#pragma mark - 判断一个数据是不是 NSNull 类型
+- (NSString *)judgeTextIsNULL:(id)text {
+    if (text == [NSNull null]) {
+        return @"";
+    }
+    return text;
+}
 
 @end

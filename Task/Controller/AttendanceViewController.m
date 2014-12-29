@@ -200,7 +200,7 @@
     
     [self createAsynchronousRequest:AttendanceAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithNetManageResult: dic];
-    }];
+    } failure:^{}];
 }
 
 //处理网络操作结果
@@ -232,6 +232,8 @@
     
     [self createAsynchronousRequest:AttendanceMonthAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithGainAttendanceInfoResult: dic];
+    } failure:^{
+        [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
     }];
 }
 
@@ -283,6 +285,9 @@
 - (id)setCellRowsString:(id)rowName {
     if ([rowName isKindOfClass:[NSString class]]) {
         return rowName;
+    } else if ([rowName isKindOfClass:[NSArray class]]) {
+        NSArray *arr = rowName;
+        return [arr[0] dictionaryToString];
     }
     NSDictionary *dic = rowName;
     return [dic dictionaryToString];
@@ -314,7 +319,7 @@
         attendanceTime = [[datePicker date] dateToStringWithDateFormat:@"yyyy-MM"];
         myAttendanceListLabel.text = myAttendanceListLabel.text = [NSString stringWithFormat:@"我的 %@ 的考勤信息", attendanceTime];
     }];
-    [actionSheet addButton:okItem type:RIButtonItemType_Destructive];
+    [actionSheet addButton:okItem type:RIButtonItemType_Cancel];
     
     [actionSheet showInView:self.view];
 }

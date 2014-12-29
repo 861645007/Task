@@ -63,7 +63,7 @@
     
     [self createAsynchronousRequest:AttendanceAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithNetManageResult: dic];
-    }];
+    } failure:^{}];
 }
 
 //处理网络操作结果
