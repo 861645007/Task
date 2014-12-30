@@ -7,6 +7,7 @@
 //
 
 #import "WorkHomeViewController.h"
+#import "PlistOperation.h"
 
 @interface WorkHomeViewController () {
     NSMutableDictionary *proclamationDic;
@@ -26,6 +27,11 @@
     if ([self detectionNetworkStatus]) {
         // 获取信息操作
         [self gainUserBaseInfo];
+        
+        // 后台多线程
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self gainAllPersonInfo];
+        });
     }else {
         [self createSimpleAlertView:@"暂无网络" msg:@"请您打开手机流量"];
     }
@@ -103,6 +109,38 @@
     proclamationDic = [NSMutableDictionary dictionaryWithDictionary:dic];
     [proclamationDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"unreadNoticeCount"]] forKey:@"unreadNoticeCount"];
     [proclamationDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"lastNoticeId"]] forKey:@"lastNoticeId"];
+}
+
+#pragma mark - 获取公司所有人员信息
+- (void)gainAllPersonInfo {
+    NSString *employeeId = [userInfo gainUserId];
+    NSString *realName = [userInfo gainUserName];
+    NSString *enterpriseId = [userInfo gainUserEnterpriseId];
+    //参数
+    NSDictionary *parameters = @{@"employeeId": employeeId,
+                                 @"realName":realName,
+                                 @"enterpriseId": enterpriseId};
+    
+    [self createAsynchronousRequest:AllEmployeesAction parmeters:parameters success:^(NSDictionary *dic){
+        [self dealWithGainProclamationInfoResult: dic];
+    } failure:^{
+        [self gainAllPersonInfo];
+    }];
+}
+
+//处理网络操作结果
+- (void)dealWithGainProclamationInfoResult:(NSDictionary *)dic {
+
+    switch ([[dic objectForKey:@"result"] intValue]) {
+        case 0: {
+            [self gainAllPersonInfo];
+            break;
+        }
+        case 1: {
+            [[PlistOperation shareInstance] saveAllPersonInfoToFile:[dic objectForKey:@"employees"]];
+            break;
+        }
+    }
 }
 
 #pragma mark - TableView Delegate

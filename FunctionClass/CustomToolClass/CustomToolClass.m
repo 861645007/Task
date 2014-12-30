@@ -19,103 +19,82 @@ static CustomToolClass *instnce;
     return instnce;
 }
 
-#pragma mark - NSArray与NSString的转换
-- (NSString *)arrayToString:(NSArray *)array andSeparator:(NSString *)separator
+#pragma mark - 在Documents文件夹下的操作子文件夹
+/*
+ 方法：在Documents文件夹下创建子文件夹
+ */
+- (void)createFolderInDocuments:(NSString *)folderName
 {
-    NSString *arrString = [NSString string];
+    NSString *path = [[self gainDocumentsPath] stringByAppendingPathComponent:folderName];
+    BOOL bo = [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
+    NSAssert(bo,@"创建目录失败");
+}
+
+/*
+ 方法：判断在Documents文件夹下是否存在指定文件夹
+ */
+- (BOOL)theFolderIsExits:(NSString *)folderName {
+    NSString *path = [[self gainDocumentsPath] stringByAppendingPathComponent:folderName];
+    BOOL isDirExist = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    return isDirExist;
+}
+
+/*
+ 方法：删除指定文件夹下的所有文件
+ */
+- (void)removeFileInTheFolder:(NSString *)folderName {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *path = [[self gainDocumentsPath] stringByAppendingPathComponent:folderName];
+    NSArray *contents = [fileManager contentsOfDirectoryAtPath:path error:NULL];
+    NSEnumerator *e = [contents objectEnumerator];
     
-    for (NSString *stringInArr in array) {
-        if ([stringInArr isEqualToString:[array lastObject]]) {
-            arrString = [arrString stringByAppendingFormat:@"%@",stringInArr];
-        }
-        else
-        {
-            arrString = [arrString stringByAppendingFormat:@"%@%@",stringInArr,separator];
-        }
+    NSString *filename;
+    while ((filename = [e nextObject])) {
+        [fileManager removeItemAtPath:[path stringByAppendingPathComponent:filename] error:NULL];
     }
-    return arrString;
 }
 
-- (NSArray *)stringToArray:(NSString *)string andSeparator:(NSString *)separator
-{
-    NSArray *array = [NSArray array];
-    
-    array = [string componentsSeparatedByString:separator];
-    
-    return array;
+#pragma mark - 保存文件
+//获取沙盒的documents文件夹路径
+- (NSString *)gainDocumentsPath {
+    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
 }
 
-#pragma mark - NSDate与NSString的转换
-
-- (NSDate *)stringToDate:(NSString *)dateString
-           andDateFormat:(NSString *)dateFormatStrring
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = dateFormatStrring;
-    NSDate *date = [[NSDate alloc] init];
-    date = [dateFormatter dateFromString:dateString];
-    
-    return date;
-}
-
-- (NSString *)dateToString:(NSDate *)date
-             andDateFormat:(NSString *)dateFormatStrring
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = dateFormatStrring;
-    NSString *dateString = [[NSString alloc] init];
-    dateString = [dateFormatter stringFromDate:date];
-    
-    return dateString;
-}
-
-#pragma mark - 验证手机号码
--(BOOL)validateMobile:(NSString* )mobileNumber {
-    NSString *mobileStr = @"^((145|147)|(15[^4])|(17[6-8])|((13|18)[0-9]))\\d{8}$";
-    NSPredicate *cateMobileStr = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",mobileStr];
-    
-    if ([cateMobileStr evaluateWithObject:mobileNumber]==YES)
-    {
-        return YES;
+// 获取指定文件夹路径
+- (NSString *)gainTheFolderName:(NSString *)folderName {
+    NSString *path = @"";
+    if (![folderName isEqualToString:@""] || folderName != nil) {
+        path = [[self gainDocumentsPath] stringByAppendingFormat:@"/%@", folderName];
     }
-    return NO;
+    return path;
 }
 
-#pragma mark -  UIColor 转 CGColorRef
-- (CGColorRef)getColorFromRed:(int)red Green:(int)green Blue:(int)blue Alpha:(int)alpha {
-    CGFloat r = (CGFloat) red/255.0;
-    CGFloat g = (CGFloat) green/255.0;
-    CGFloat b = (CGFloat) blue/255.0;
-    CGFloat a = (CGFloat) alpha/255.0;
-    CGFloat components[4] = {r,g,b,a};
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+// 获取指定文件路径
+- (NSString *)gainFilePath:(NSString *)plistFileName folderName:(NSString *)folderName {
+    return [[self gainTheFolderName:folderName] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", plistFileName]];
+}
+
+// 从指定文件中保存数据
+- (void)saveDataToPlist:(id)dataList plistFileName:(NSString *)plistFileName folderName:(NSString *)folderName {
+    NSString *plistPath = [self gainFilePath:plistFileName folderName:folderName];
+    //创建文件管理器
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    CGColorRef color = (CGColorRef)CGColorCreate(colorSpace, components);
-    CGColorSpaceRelease(colorSpace);
-    
-    return color;
-}
-
-#pragma mark - 给我评分
-- (void)gotoGrade:(NSString *)appleID {
-    NSString *str = [NSString stringWithFormat:
-                     @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%d", [appleID intValue]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-}
-
-#pragma mark - 打开dream网址
--(void)openWebURL:(NSString *)urlString {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-}
-
-
-#pragma mark - 判断输入框是否有输入
-- (BOOL)TextFieldIsFull:(NSArray *)textFieldArr {
-    for (UITextField *textField in textFieldArr) {
-        if ([textField.text isEqualToString:@""]) {
-            return NO;
-        }
+    if([fileManager fileExistsAtPath:plistPath] == NO) {
+        [fileManager createFileAtPath:plistPath contents:nil attributes:nil];
     }
-    return YES;
+    
+    /*存文件*/
+    if (dataList) {
+        [dataList writeToFile:plistPath atomically:YES];
+    }
 }
+
+- (id)getDataFromPlist:(NSString *)plistFileName folderName:(NSString *)folderName {
+    id fileData = [[NSArray alloc] initWithContentsOfFile:[self gainFilePath:plistFileName folderName:folderName]];
+    return fileData;
+}
+
+
+
 @end

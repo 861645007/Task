@@ -9,12 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@protocol PassValueDelegate <NSObject>
-
--(void)passValue:(id)value;
-
-@end
-
 @interface CustomToolClass : NSObject
 #pragma mark - 外部文件可以直接访问CustomToolClass内部函数
 /*
@@ -22,81 +16,48 @@
  */
 + (id)shareInstance;
 
-#pragma mark - NSArray与NSString的转换
-/*
- 方法：数组转字符串
- 参数介绍：
- array：需转化的数组；
- separator：分隔符
- */
-- (NSString *)arrayToString:(NSArray *)array andSeparator:(NSString *)separator;
-
-/*
- 方法：字符串转数组
- 参数介绍：
- string：需转化的字符串；
- separator：分隔符
- */
-- (NSArray *)stringToArray:(NSString *)string andSeparator:(NSString *)separator;
-
-#pragma mark - NSDate与NSString的转换
-/*
- 方法：字符串转化成时间
- 参数介绍：
- dateString：需转化的字符串；
- dateFormatStrring：要转化的时间戳格式 @"yyyy-MM-dd HH:mm:ss.S"
- */
-- (NSDate *)stringToDate:(NSString *)dateString
-           andDateFormat:(NSString *)dateFormatStrring;
-
-/*
- 方法：时间转化成字符串
- 参数介绍：
- date：需转化的时间；
- dateFormatStrring：要转化的时间戳格式
- */
-- (NSString *)dateToString:(NSDate *)date
-             andDateFormat:(NSString *)dateFormatStrring;
-
-#pragma mark - 验证手机号码
-/*
- 方法：验证手机号码是否为11位
- 参数介绍：
-    mobileNumber： 手机号
- 返回值：
-    号码正确：返回 yes
-    号码错误：返回 NO
- */
--(BOOL)validateMobile:(NSString* )mobileNumber;
-
-#pragma mark -  UIColor 转 CGColorRef
+#pragma mark - 在Documents文件夹下创建子文件夹
 /**
- *  UIColor 转 CGColorRef
+ *  在Documents文件夹下创建子文件夹
  *
- *  @param red   red's double
- *  @param green green double
- *  @param blue  blue double
- *  @param alpha alpha's double
+ *  @param folderName 文件夹名称
+ */
+- (void)createFolderInDocuments:(NSString *)folderName;
+
+/**
+ *  判断在Documents文件夹下是否存在指定文件夹
  *
- *  @return CGColorRef类型数据
+ *  @param folderName 文件夹名称
+ *
+ *  @return YES：存在； NO：不存在
  */
-- (CGColorRef)getColorFromRed:(int)red Green:(int)green Blue:(int)blue Alpha:(int)alpha;
+- (BOOL)theFolderIsExits:(NSString *)folderName;
 
-#pragma mark - 给我评分
-/*
- 方法：传入本 app 的 appID ，使用户跳转到 APP 商店进行打分；
- 参数介绍：
- appleID： 本 app 的 appID
+/**
+ *  删除指定文件夹下的所有文件
+ *
+ *  @param folderName 文件夹名称
  */
-- (void)gotoGrade:(NSString *)appleID;
+- (void)removeFileInTheFolder:(NSString *)folderName;
 
-#pragma mark - 打开dream网址
-/*
- 方法：通过传入一个 url的字符串，在 Safari 上打开该网址
- 参数介绍：
- urlString： url 的字符串
+#pragma mark - 保存文件
+/**
+ *  从指定文件中保存数据
+ *
+ *  @param dataList      数据源
+ *  @param plistFileName 文件名称
+ *  @param folderName    文件夹名称
  */
--(void)openWebURL:(NSString *)urlString;
+- (void)saveDataToPlist:(id)dataList plistFileName:(NSString *)plistFileName folderName:(NSString *)folderName;
 
+/**
+ *  从指定文件中获取数据
+ *
+ *  @param plistFileName 文件名称
+ *  @param folderName    文件夹名称
+ *
+ *  @return 文件中数据
+ */
+- (id)getDataFromPlist:(NSString *)plistFileName folderName:(NSString *)folderName;
 
 @end

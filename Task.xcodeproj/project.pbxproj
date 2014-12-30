@@ -105,6 +105,7 @@
 		E676539B1A4D06DB000A13D9 /* NSString+ExtensionWithString.m in Sources */ = {isa = PBXBuildFile; fileRef = E67653921A4D06DB000A13D9 /* NSString+ExtensionWithString.m */; };
 		E676539C1A4D06DB000A13D9 /* UIColor+ExtensionWithUIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E67653951A4D06DB000A13D9 /* UIColor+ExtensionWithUIColor.m */; };
 		E676539F1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E676539E1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.m */; };
+		E67BA4D21A522FCE000520CE /* PlistOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E67BA4D11A522FCE000520CE /* PlistOperation.m */; };
 		E67C77B11A42FF2800C24054 /* ProclamationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67C77B01A42FF2800C24054 /* ProclamationListViewController.m */; };
 		E67C77B41A4304C800C24054 /* ProclamationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E67C77B31A4304C800C24054 /* ProclamationTableViewCell.m */; };
 		E67C77B81A431A4D00C24054 /* AddNewProclamationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67C77B71A431A4D00C24054 /* AddNewProclamationViewController.m */; };
@@ -175,6 +176,15 @@
 		E68C0FF71A480CEF00832CCF /* Very_urgent.png in Resources */ = {isa = PBXBuildFile; fileRef = E68C0FF11A480CEF00832CCF /* Very_urgent.png */; };
 		E68C0FF81A480CEF00832CCF /* Very_urgent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E68C0FF21A480CEF00832CCF /* Very_urgent@2x.png */; };
 		E68C0FFE1A480E2E00832CCF /* ModifyUrgentLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E68C0FFD1A480E2E00832CCF /* ModifyUrgentLevelViewController.m */; };
+		E699645F1A519055005F219A /* NSString+XHMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = E699644A1A519055005F219A /* NSString+XHMD5.m */; };
+		E69964651A519055005F219A /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = E69964521A519055005F219A /* UIImage+Utility.m */; };
+		E69964661A519055005F219A /* UIImageView+XHURLDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = E69964541A519055005F219A /* UIImageView+XHURLDownload.m */; };
+		E69964671A519055005F219A /* XHCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E69964561A519055005F219A /* XHCacheManager.m */; };
+		E69964681A519055005F219A /* XHFileAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = E69964581A519055005F219A /* XHFileAttribute.m */; };
+		E69964691A519055005F219A /* XHImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = E699645A1A519055005F219A /* XHImageViewer.m */; };
+		E699646A1A519055005F219A /* XHViewState.m in Sources */ = {isa = PBXBuildFile; fileRef = E699645C1A519055005F219A /* XHViewState.m */; };
+		E699646B1A519055005F219A /* XHZoomingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E699645E1A519055005F219A /* XHZoomingImageView.m */; };
+		E699646E1A519839005F219A /* UIImage+ExtensionWithUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E699646D1A519839005F219A /* UIImage+ExtensionWithUIImage.m */; };
 		E69C51D81A41BC11001CA405 /* Task_Add.png in Resources */ = {isa = PBXBuildFile; fileRef = E69C51D71A41BC11001CA405 /* Task_Add.png */; };
 		E6B312DA1A3FBD1300AEF923 /* left_information_background.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D21A3FBD1300AEF923 /* left_information_background.png */; };
 		E6B312DB1A3FBD1300AEF923 /* nav_menu_add.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D31A3FBD1300AEF923 /* nav_menu_add.png */; };
@@ -377,6 +387,8 @@
 		E67653961A4D06DB000A13D9 /* UIKit+CustomExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+CustomExtension.h"; sourceTree = "<group>"; };
 		E676539D1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ExtensionWithUIButton.h"; sourceTree = "<group>"; };
 		E676539E1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ExtensionWithUIButton.m"; sourceTree = "<group>"; };
+		E67BA4D01A522FCE000520CE /* PlistOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistOperation.h; sourceTree = "<group>"; };
+		E67BA4D11A522FCE000520CE /* PlistOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlistOperation.m; sourceTree = "<group>"; };
 		E67C77AF1A42FF2800C24054 /* ProclamationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProclamationListViewController.h; path = Controller/ProclamationListViewController.h; sourceTree = "<group>"; };
 		E67C77B01A42FF2800C24054 /* ProclamationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProclamationListViewController.m; path = Controller/ProclamationListViewController.m; sourceTree = "<group>"; };
 		E67C77B21A4304C800C24054 /* ProclamationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProclamationTableViewCell.h; path = Controller/ProclamationTableViewCell.h; sourceTree = "<group>"; };
@@ -504,6 +516,24 @@
 		E68C0FF21A480CEF00832CCF /* Very_urgent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Very_urgent@2x.png"; path = "Image/Very_urgent@2x.png"; sourceTree = "<group>"; };
 		E68C0FFC1A480E2E00832CCF /* ModifyUrgentLevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModifyUrgentLevelViewController.h; path = Controller/ModifyUrgentLevelViewController.h; sourceTree = "<group>"; };
 		E68C0FFD1A480E2E00832CCF /* ModifyUrgentLevelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModifyUrgentLevelViewController.m; path = Controller/ModifyUrgentLevelViewController.m; sourceTree = "<group>"; };
+		E69964491A519055005F219A /* NSString+XHMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XHMD5.h"; sourceTree = "<group>"; };
+		E699644A1A519055005F219A /* NSString+XHMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XHMD5.m"; sourceTree = "<group>"; };
+		E69964511A519055005F219A /* UIImage+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utility.h"; sourceTree = "<group>"; };
+		E69964521A519055005F219A /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
+		E69964531A519055005F219A /* UIImageView+XHURLDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+XHURLDownload.h"; sourceTree = "<group>"; };
+		E69964541A519055005F219A /* UIImageView+XHURLDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+XHURLDownload.m"; sourceTree = "<group>"; };
+		E69964551A519055005F219A /* XHCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHCacheManager.h; sourceTree = "<group>"; };
+		E69964561A519055005F219A /* XHCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHCacheManager.m; sourceTree = "<group>"; };
+		E69964571A519055005F219A /* XHFileAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHFileAttribute.h; sourceTree = "<group>"; };
+		E69964581A519055005F219A /* XHFileAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHFileAttribute.m; sourceTree = "<group>"; };
+		E69964591A519055005F219A /* XHImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHImageViewer.h; sourceTree = "<group>"; };
+		E699645A1A519055005F219A /* XHImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHImageViewer.m; sourceTree = "<group>"; };
+		E699645B1A519055005F219A /* XHViewState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHViewState.h; sourceTree = "<group>"; };
+		E699645C1A519055005F219A /* XHViewState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHViewState.m; sourceTree = "<group>"; };
+		E699645D1A519055005F219A /* XHZoomingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHZoomingImageView.h; sourceTree = "<group>"; };
+		E699645E1A519055005F219A /* XHZoomingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHZoomingImageView.m; sourceTree = "<group>"; };
+		E699646C1A519839005F219A /* UIImage+ExtensionWithUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ExtensionWithUIImage.h"; sourceTree = "<group>"; };
+		E699646D1A519839005F219A /* UIImage+ExtensionWithUIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ExtensionWithUIImage.m"; sourceTree = "<group>"; };
 		E69C51D71A41BC11001CA405 /* Task_Add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Task_Add.png; path = Image/Task_Add.png; sourceTree = "<group>"; };
 		E6B312D21A3FBD1300AEF923 /* left_information_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = left_information_background.png; path = Image/left_information_background.png; sourceTree = "<group>"; };
 		E6B312D31A3FBD1300AEF923 /* nav_menu_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_menu_add.png; path = Image/nav_menu_add.png; sourceTree = "<group>"; };
@@ -903,6 +933,8 @@
 				E67653961A4D06DB000A13D9 /* UIKit+CustomExtension.h */,
 				E676539D1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.h */,
 				E676539E1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.m */,
+				E699646C1A519839005F219A /* UIImage+ExtensionWithUIImage.h */,
+				E699646D1A519839005F219A /* UIImage+ExtensionWithUIImage.m */,
 			);
 			path = UIKitExtension;
 			sourceTree = "<group>";
@@ -1008,6 +1040,7 @@
 		E67FBB801A3EA5E700CE839C /* FunctionClass */ = {
 			isa = PBXGroup;
 			children = (
+				E69964481A519055005F219A /* XHImageView */,
 				E6006B3F1A4D0D4E00E974DD /* ExtensibleToolView */,
 				E60C94DE1A4ADFFA0003B33B /* GetPhotoWithPhone */,
 				E6394F791A445B7200706882 /* Pingyin */,
@@ -1270,6 +1303,8 @@
 				E67FBC3F1A3EA9FE00CE839C /* UserInfo.m */,
 				E67190021A43B45300CCA424 /* ProclamationInfoClass.h */,
 				E67190031A43B45300CCA424 /* ProclamationInfoClass.m */,
+				E67BA4D01A522FCE000520CE /* PlistOperation.h */,
+				E67BA4D11A522FCE000520CE /* PlistOperation.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1386,6 +1421,30 @@
 			);
 			name = NetworkConnectionState;
 			path = FunctionClass/NetworkConnectionState;
+			sourceTree = "<group>";
+		};
+		E69964481A519055005F219A /* XHImageView */ = {
+			isa = PBXGroup;
+			children = (
+				E69964491A519055005F219A /* NSString+XHMD5.h */,
+				E699644A1A519055005F219A /* NSString+XHMD5.m */,
+				E69964511A519055005F219A /* UIImage+Utility.h */,
+				E69964521A519055005F219A /* UIImage+Utility.m */,
+				E69964531A519055005F219A /* UIImageView+XHURLDownload.h */,
+				E69964541A519055005F219A /* UIImageView+XHURLDownload.m */,
+				E69964551A519055005F219A /* XHCacheManager.h */,
+				E69964561A519055005F219A /* XHCacheManager.m */,
+				E69964571A519055005F219A /* XHFileAttribute.h */,
+				E69964581A519055005F219A /* XHFileAttribute.m */,
+				E69964591A519055005F219A /* XHImageViewer.h */,
+				E699645A1A519055005F219A /* XHImageViewer.m */,
+				E699645B1A519055005F219A /* XHViewState.h */,
+				E699645C1A519055005F219A /* XHViewState.m */,
+				E699645D1A519055005F219A /* XHZoomingImageView.h */,
+				E699645E1A519055005F219A /* XHZoomingImageView.m */,
+			);
+			name = XHImageView;
+			path = FunctionClass/XHImageView;
 			sourceTree = "<group>";
 		};
 		E6B312E21A3FC01600AEF923 /* WorkHome */ = {
@@ -1649,6 +1708,7 @@
 				E6E0C76E1A3F345E0054F2C4 /* JHRefreshHeaderView.m in Sources */,
 				E67FBC401A3EA9FE00CE839C /* UserInfo.m in Sources */,
 				E67FBBFA1A3EA83E00CE839C /* AFHTTPRequestOperation.m in Sources */,
+				E69964681A519055005F219A /* XHFileAttribute.m in Sources */,
 				E674AE771A46F99A00E10718 /* ModifyTaskTitleViewController.m in Sources */,
 				E68C0FFE1A480E2E00832CCF /* ModifyUrgentLevelViewController.m in Sources */,
 				E68082FB1A400C45008FFA03 /* PopoverView.m in Sources */,
@@ -1670,6 +1730,8 @@
 				E6006B761A4D22CE00E974DD /* ExtensibleToolBar.m in Sources */,
 				E67FBBFD1A3EA83E00CE839C /* AFNetworkReachabilityManager.m in Sources */,
 				E6E0C7701A3F345E0054F2C4 /* UIScrollView+JHRefresh.m in Sources */,
+				E69964651A519055005F219A /* UIImage+Utility.m in Sources */,
+				E699646B1A519055005F219A /* XHZoomingImageView.m in Sources */,
 				E6394F581A444E8800706882 /* CalendarLogic.m in Sources */,
 				E6319DAD1A41A98000982A46 /* MoreViewController.m in Sources */,
 				E6394F591A444E8800706882 /* CalendarMonthCollectionViewLayout.m in Sources */,
@@ -1694,6 +1756,7 @@
 				E67FBC1B1A3EA83E00CE839C /* UIViewController+MJPopupViewController.m in Sources */,
 				E67FBC271A3EA83E00CE839C /* UIAlertView+Blocks.m in Sources */,
 				E6394F5B1A444E8800706882 /* CalendarViewController.m in Sources */,
+				E69964671A519055005F219A /* XHCacheManager.m in Sources */,
 				E6E0C76F1A3F345E0054F2C4 /* UIScrollView+JHExtension.m in Sources */,
 				E6886AFD1A40798F008D4E7F /* DetectionNetworkStatus.m in Sources */,
 				E67FBC561A3EB06100CE839C /* TaskViewController.m in Sources */,
@@ -1715,6 +1778,7 @@
 				E6E0C7461A3F24750054F2C4 /* UIViewController+REFrostedViewController.m in Sources */,
 				E6E0C7681A3F345E0054F2C4 /* JHRefreshAniBaseView.m in Sources */,
 				E6E0C7411A3F24750054F2C4 /* RECommonFunctions.m in Sources */,
+				E69964691A519055005F219A /* XHImageViewer.m in Sources */,
 				E67027161A455A9B00C1B537 /* TaskDetailInfoTableViewController.m in Sources */,
 				E67FBBFC1A3EA83E00CE839C /* AFHTTPSessionManager.m in Sources */,
 				E6394F551A444E8800706882 /* CalendarDayCell.m in Sources */,
@@ -1728,11 +1792,13 @@
 				E6DCD6161A416EEC008B0582 /* AttendanceListTableViewCell.m in Sources */,
 				E6E0C7431A3F24750054F2C4 /* REFrostedViewController.m in Sources */,
 				E67FBC171A3EA83E00CE839C /* MYBlurIntroductionView.m in Sources */,
+				E69964661A519055005F219A /* UIImageView+XHURLDownload.m in Sources */,
 				E6C9C7FE1A4CF4D500FA0A5F /* ImageAccessorysViewController.m in Sources */,
 				E67FBC031A3EA83E00CE839C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E67FBC191A3EA83E00CE839C /* LogInToolClass.m in Sources */,
 				E676539B1A4D06DB000A13D9 /* NSString+ExtensionWithString.m in Sources */,
 				E6E0C76B1A3F345E0054F2C4 /* JHRefreshBaseView.m in Sources */,
+				E67BA4D21A522FCE000520CE /* PlistOperation.m in Sources */,
 				E67FBC2F1A3EA83E00CE839C /* YzdHUDIndicator.m in Sources */,
 				E6E0C7691A3F345E0054F2C4 /* JHRefreshCommonAniView.m in Sources */,
 				E6E0C7451A3F24750054F2C4 /* UIView+REFrostedViewController.m in Sources */,
@@ -1740,6 +1806,7 @@
 				E676539F1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.m in Sources */,
 				E676539C1A4D06DB000A13D9 /* UIColor+ExtensionWithUIColor.m in Sources */,
 				E62C79451A5113A40026EC5B /* LeaveDetailViewController.m in Sources */,
+				E699646A1A519055005F219A /* XHViewState.m in Sources */,
 				E670271D1A456F5F00C1B537 /* TaskDetailInfoTableViewCell.m in Sources */,
 				E6DB5EDE1A4E9E54002906F1 /* TaskLookDetailTableViewCell.m in Sources */,
 				E6E0C7711A3F345E0054F2C4 /* UIView+JHExtension.m in Sources */,
@@ -1761,9 +1828,11 @@
 				E67FBC0C1A3EA83E00CE839C /* CustomToolClass.m in Sources */,
 				E67FBC391A3EA95400CE839C /* BaseViewController.m in Sources */,
 				E6DB5ED91A4E9A88002906F1 /* TaskReportTableViewCell.m in Sources */,
+				E699645F1A519055005F219A /* NSString+XHMD5.m in Sources */,
 				E6753BC21A4FEA4E00AAD8DC /* AddTaskReportJudgementCollectionViewCell.m in Sources */,
 				E6394F561A444E8800706882 /* CalendarDayModel.m in Sources */,
 				E67653981A4D06DB000A13D9 /* NSData+ExtensionWithData.m in Sources */,
+				E699646E1A519839005F219A /* UIImage+ExtensionWithUIImage.m in Sources */,
 				E60C94E11A4AE0920003B33B /* GetAllPhotoCollectionViewController.m in Sources */,
 				E67C77B41A4304C800C24054 /* ProclamationTableViewCell.m in Sources */,
 			);

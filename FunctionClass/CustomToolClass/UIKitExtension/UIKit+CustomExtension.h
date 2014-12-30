@@ -12,6 +12,7 @@
 
 #import "UIColor+ExtensionWithUIColor.h"
 #import "UIButton+ExtensionWithUIButton.h"
+#import "UIImage+ExtensionWithUIImage.h"
 
 #endif
 

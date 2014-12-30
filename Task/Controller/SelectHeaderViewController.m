@@ -7,6 +7,7 @@
 //
 
 #import "SelectHeaderViewController.h"
+#import "PlistOperation.h"
 
 @interface SelectHeaderViewController () {
     NSArray *indexArr;
@@ -47,12 +48,24 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self gainHeaderInfo];
+    [self gainPersonInfoWithFolder];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)gainPersonInfoWithFolder {
+    NSArray *array = [[PlistOperation shareInstance] gainAllPersonInfoWithFile];
+    
+    if ([array isEqualToArray:@[]] || array == nil) {
+        [self gainHeaderInfo];
+    }else {
+        [self setIndexSection:array];
+        [self.mainTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        [mainTableView reloadData];
+    }
 }
 
 #pragma mark - 获取联系人信息
@@ -89,7 +102,8 @@
             if ([[dic objectForKey:@"employees"] isEqualToArray:@[]]) {
                 [self.mainTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             }else {
-                [self setIndexSection:[dic objectForKey:@"employees"]];
+                [[PlistOperation shareInstance] saveAllPersonInfoToFile:[dic objectForKey:@"employees"]];
+                [self performSelector:@selector(gainPersonInfoWithFolder) withObject:nil afterDelay:0.3];
                 [self.mainTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
             }
             
@@ -176,17 +190,7 @@
     cell.selectedHeaderNameLabel.text = headerNameStr;
     
     // 添加用户图片
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", HttpURL, [dic objectForKey:@"image"]]];
-    __weak SelectHeaderTableViewCell *weakCell = cell;
-    [cell.selectedHeaderImageView setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:url]
-                          placeholderImage:[UIImage imageNamed:@"NoSingle60"]
-                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image){
-                                       [weakCell.selectedHeaderImageView setImage:image];
-                                       if (weakCell.imageView.frame.size.height == 0 || weakCell.imageView.frame.size.width == 0) {
-                                           [weakCell setNeedsLayout];
-                                       }
-                                   }
-                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){}];
+    cell.selectedHeaderImageView.image = [[PlistOperation shareInstance] gainPersonImage:[dic objectForKey:@"image"]];
     
     // 判断是否被选中
     if ([[dic objectForKey:@"isSelected"] intValue] == 0) {
