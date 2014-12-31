@@ -18,6 +18,8 @@
 #import "ModifyUrgentLevelViewController.h"
 #import "SelectHeaderViewController.h"
 #import "GetAllPhotoCollectionViewController.h"
+#import "PreviewFileViewController.h"
+#import "RelateTaskListViewController.h"
 
 #import "SubmitTaskModifyInfoViewController.h"
 

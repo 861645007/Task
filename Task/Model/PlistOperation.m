@@ -11,7 +11,7 @@
 @implementation PlistOperation
 
 #define imageFolderName @"allPersonInfo"
-#define plistName @"enterpriseAllPersonInfo"
+#define plistName @"enterpriseAllPersonInfo.plist"
 
 #pragma mark - 对外接口
 static PlistOperation *instnce;
@@ -25,12 +25,7 @@ static PlistOperation *instnce;
 }
 
 #pragma mark - 保存员工信息
-- (void)saveAllPersonInfoToFile:(NSArray *)personList {
-    // 创建文件夹
-    if (![[CustomToolClass shareInstance] theFolderIsExits:imageFolderName]) {
-        [[CustomToolClass shareInstance] createFolderInDocuments:imageFolderName];
-    }
-    
+- (void)saveAllPersonInfoToFile:(NSArray *)personList {    
     NSMutableArray *personInfoAfterProcessingArr = [NSMutableArray array];
     for (NSDictionary *personDic in personList) {
         [personInfoAfterProcessingArr addObject:[self dealWithData:personDic]];

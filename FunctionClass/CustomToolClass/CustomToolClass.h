@@ -40,9 +40,9 @@
  */
 - (void)removeFileInTheFolder:(NSString *)folderName;
 
-#pragma mark - 保存文件
+#pragma mark - 保存文件数据
 /**
- *  从指定文件中保存数据
+ *  向指定文件中保存数据
  *
  *  @param dataList      数据源
  *  @param plistFileName 文件名称
@@ -59,5 +59,15 @@
  *  @return 文件中数据
  */
 - (id)getDataFromPlist:(NSString *)plistFileName folderName:(NSString *)folderName;
+
+/**
+ *  获取指定文佳路径
+ *
+ *  @param fileName   文件名称
+ *  @param folderName 文件夹名称
+ *
+ *  @return 文件路径
+ */
+- (NSString *)gainFilePath:(NSString *) fileName folderName:(NSString *)folderName;
 
 @end

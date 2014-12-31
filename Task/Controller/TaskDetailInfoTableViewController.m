@@ -19,6 +19,8 @@
     NSMutableArray *taskReportArr;         // 任务汇报列表
     NSMutableArray *taskLookDetailArr;     // 任务查阅列表
     
+    int isDelete;                          // 0表示没有进行删除操作， 1表示进行了删除操作
+    int isNeedRefresh;                     // 是否需要刷新数据  0表示需要刷新， 1表示不需要刷新
     int section1ISselected;                // 用来判断辅助信息那一栏是否展开 ， 0：为展开； 1：展开
     int clickCellTag;                      // 判断所选择的 cell 是哪一个
     int modifyContextIndex;                // 用来表示修改了哪一个内容，其值分别为 对应上传方法的 index
@@ -48,7 +50,7 @@
     section1ISselected = 0;
     clickCellTag = 0;
     isReportViewOrLookView = 0;
-    
+    isDelete = 0;
     // 添加底部 ToolView
     [self createToolView];
     
@@ -62,7 +64,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    if ([taskDetailInfoDic isEqualToDictionary:@{}]) {
+    if ([taskDetailInfoDic isEqualToDictionary:@{}] || isNeedRefresh == 0) {
+        isNeedRefresh = 1;
         [self gainTaskDetailInfo];
     }
 }
@@ -77,13 +80,10 @@
     toolView = [[ExtensibleToolView alloc] init];
     
     ExtensibleToolBar *attentionBar = [self addAttentionBar];
-    ExtensibleToolBar *feedbackBar = [self addFeedbackBar];
-    ExtensibleToolBar *completeBar = [self addCompleteBar];
-    ExtensibleToolBar *shareBar = [self addShareBar];
-    ExtensibleToolBar *deleteBar = [ExtensibleToolBar itemWithLabel:@"删除" imageNormal:[UIImage imageNamed:@"Delete_nav"] imageSelected:[UIImage imageNamed:@"Delete_nav_click"] action:^(){
-        NSLog(@"DeleteBar");
-    }];
-    
+    ExtensibleToolBar *feedbackBar  = [self addFeedbackBar];
+    ExtensibleToolBar *completeBar  = [self addCompleteBar];
+    ExtensibleToolBar *shareBar     = [self addShareBar];
+    ExtensibleToolBar *deleteBar    = [self addDeleteBar];
     toolView.buttonArr = @[attentionBar, feedbackBar, completeBar, shareBar, deleteBar];
     [self.view addSubview:toolView];
 }
@@ -112,12 +112,13 @@
     ExtensibleToolBar *feedbackBar = [ExtensibleToolBar itemWithLabel:@"反馈" imageNormal:[UIImage imageNamed:@"Feedback_nav"] imageSelected:[UIImage imageNamed:@"Feedback_nav_click"] action:^(){
         // 跳转反馈页面
         modifyContextIndex = 1;
+        isNeedRefresh = 0;
         AddTaskReportJudgementViewController *addTaskReportJudgementViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddTaskReportJudgementViewController"];
         addTaskReportJudgementViewController.isFeedBackOrJudgement = 0;
         addTaskReportJudgementViewController.titleStr = @"反馈";
         addTaskReportJudgementViewController.taskId = [taskDetailInfoDic objectForKey:@"taskId"];
         [self.navigationController pushViewController:addTaskReportJudgementViewController animated:YES];
-    }];
+    }]; 
     
     return feedbackBar;
 }
@@ -143,6 +144,16 @@
     return shareBar;
 }
 
+// 删除 按钮
+- (ExtensibleToolBar *)addDeleteBar {
+    ExtensibleToolBar *deleteBar = [ExtensibleToolBar itemWithLabel:@"删除" imageNormal:[UIImage imageNamed:@"Delete_nav"] imageSelected:[UIImage imageNamed:@"Delete_nav_click"] action:^(){
+        isDelete = 1;
+        ExtensibleToolBar *curreentItem = toolView.toolBarArr[4];
+        [[self createSubmitTaskModifyInfoViewController] modifyTaskState:[NSString stringWithFormat:@"%d", curreentItem.itemState] atIndex:4];
+    }];
+    return deleteBar;
+}
+
 
 #pragma mark - 获取数据
 // 获取数据
@@ -155,7 +166,7 @@
     NSDictionary *parameters = @{@"employeeId": employeeId,
                                  @"realName":realName,
                                  @"enterpriseId": enterpriseId,
-                                 @"taskId": @"2"};
+                                 @"taskId": taskId};
 
     [self createAsynchronousRequest:TaskDetailAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithTaskDetailInfoResult: dic];
@@ -234,7 +245,7 @@
     NSString *enterpriseId = [[UserInfo shareInstance] gainUserEnterpriseId];
     
     //参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"taskId": @"2"}];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"taskId": taskId}];
     
     [self createAsynchronousRequest:action parmeters:parameters success:^(NSDictionary *dic){
         if (cellIndex == 0) {
@@ -310,13 +321,10 @@
     for (NSDictionary *reportContentDic in [dic objectForKey:@"reportJudges"]) {
         contentText = [contentText stringByAppendingFormat:@"@%@ %@ \n", [reportContentDic objectForKey:@"judgedUserName"], [reportContentDic objectForKey:@"judgeContent"]];
     }
-    NSString *accessoryText = @"";
-    for (NSDictionary *accessoryDic in [dic objectForKey:@"reportAccessorys"]) {
-        accessoryText = [accessoryText stringByAppendingFormat:@" %@ \n", [accessoryDic objectForKey:@"accessoryName"]];
-    }
+    CGFloat accessoryH = [[dic objectForKey:@"reportAccessorys"] count] * 30;
     // 获取并设置高度
     CGFloat contentH = [self textHeight:contentText];
-    CGFloat accessoryH = [self textHeight:accessoryText];
+    
     return 60 + contentH + accessoryH + 27;
 }
 
@@ -581,8 +589,10 @@
             taskReportCell.reportPersonNameLabel.text= [dic objectForKey:@"reportPersonName"];
             taskReportCell.reportTimeLabel.text = [dic objectForKey:@"reportTime"];
             taskReportCell.reportContentLabel.text = [dic objectForKey:@"desc"];
+
+            taskReportCell.reportPersonIconImageView.image = [taskReportCell gainUserIcon:[dic objectForKey:@"reportPersonId"]];
             
-            [taskReportCell setAutoHeight:[dic objectForKey:@"reportJudges"] reportAccessorysList:[dic objectForKey:@"reportAccessorys"]];
+            [taskReportCell setAutoHeight:[dic objectForKey:@"reportJudges"] reportAccessorysList:[dic objectForKey:@"reportAccessorys"] baseViewController:self];
             taskReportCell.reportReplyBtn.tag = indexPath.row;
             [taskReportCell.reportReplyBtn addTarget:self action:@selector(addTaskReportJudgement:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -609,6 +619,7 @@
 
 // 评论回复接口
 - (void)addTaskReportJudgement:(UIButton *)btn {
+    isNeedRefresh = 0;
     NSDictionary *dic = [taskReportArr objectAtIndex:btn.tag];
     
     AddTaskReportJudgementViewController *addTaskReportJudgementViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddTaskReportJudgementViewController"];
@@ -643,9 +654,14 @@
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         button.titleLabel.font            = [UIFont fontWithName:@"Helvetica Neue" size:15];
         button.tag                        = i;
-        
         [button setTitle:[dic objectForKey:keyStr] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        if (cellIndex == 4) {
+            [button addTarget:self action:@selector(showRelateTaskInfo:) forControlEvents:UIControlEventTouchUpInside];
+        }else if (cellIndex == 5) {
+            [button addTarget:self action:@selector(lookoverAccessAry:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
         [cell.contentView addSubview:button];
         originY += sizeH;
         
@@ -674,9 +690,29 @@
     [cell.contentView addSubview:cusButton];
 }
 
-// 修改相关附件
+- (void)showRelateTaskInfo:(UIButton *)btn {
+    TaskDetailInfoTableViewController *taskDetailInfoTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskDetailInfoTableViewController"];
+    taskDetailInfoTableViewController.taskId = [[relationTasksArr objectAtIndex:btn.tag] objectForKey:@"relationId"];
+    [self.navigationController pushViewController:taskDetailInfoTableViewController animated:YES];
+}
+
+- (void)lookoverAccessAry:(UIButton *)btn {
+    isNeedRefresh = 0;
+    
+    NSDictionary *accessAryDic = [taskAccessorysArr objectAtIndex:btn.tag];
+    PreviewFileViewController *previewFileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PreviewFileViewController"];
+    previewFileViewController.isTaskOrReportAccessory = 0;
+    previewFileViewController.accessoryId = [accessAryDic objectForKey:@"accessoryId"];
+    previewFileViewController.fileName = [accessAryDic objectForKey:@"accessoryTempName"];
+    [self.navigationController pushViewController:previewFileViewController animated:YES];
+}
+
+// 修改关联
 - (void)modifyTaskRelationInfo {
-    NSLog(@"123456789");
+    isNeedRefresh = 0;
+    RelateTaskListViewController *relateTaskListViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RelateTaskListViewController"];
+    relateTaskListViewController.taskId = taskId;
+    [self.navigationController pushViewController:relateTaskListViewController animated:YES];
 }
 
 // 选取照片
@@ -715,7 +751,6 @@
     
     [self presentViewController:imagePicker animated:YES completion:^{}];
 }
-
 
 - (UICollectionViewFlowLayout *)setCollectionViewController {
     CGFloat cellWidth = (self.view.frame.size.width - 5 * 6) / 3;
@@ -827,7 +862,7 @@
 }
 
 // 修改 内容 等
-- (void)modifyTaskContext:(NSString *)titleStr content:(NSString *)contentStr {
+- (void)modifyTaskContext:(NSString *)titleStr content:(NSString *)contentStr {    
     ModifyTaskTitleViewController *modifyTaskTitleViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ModifyTaskTitleViewController"];
     modifyTaskTitleViewController.taskId = [taskDetailInfoDic objectForKey:@"taskId"];
     modifyTaskTitleViewController.title = titleStr;
@@ -916,13 +951,22 @@
         }
         case 1: {
             [self.view.window showHUDWithText:@"修改成功" Type:ShowPhotoYes Enabled:YES];
-            [self performSelector:@selector(gainTaskDetailInfo) withObject:nil afterDelay:0.9];
+            if (isDelete) {
+                [self performSelector:@selector(comeback) withObject:nil afterDelay:0.9];
+            }else {
+                [self performSelector:@selector(gainTaskDetailInfo) withObject:nil afterDelay:0.9];
+            }
+            
             break;
         }
     }
     if (![msg isEqualToString:@""]) {
         [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
     }
+}
+
+- (void)comeback {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

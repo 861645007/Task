@@ -214,9 +214,11 @@
                 [self.view.window showHUDWithText:@"提交成功" Type:ShowPhotoYes Enabled:YES];
                 [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
             }else {
-                if (isFeedBackOrJudgement == 0) {
+                if (isFeedBackOrJudgement == 1) {
                     submitImageIndex = 0;
-                    [self submitReportImage:selectedImageArr[0]];
+                    [self submitReportImage:selectedImageArr[submitImageIndex]];
+                }else {
+                    [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
                 }
             }            
             break;
@@ -264,8 +266,9 @@
         [formData appendPartWithFileData:imageData name:@"uploadFile" fileName:fileName mimeType:@"image/png"];
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (submitImageIndex == [selectedImageArr count] - 1) {
+        if (submitImageIndex == [selectedImageArr count] - 2) {
             [self.view.window showHUDWithText:@"上传完成" Type:ShowPhotoYes Enabled:YES];
+            [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
         }else {
             [self submitReportImage:selectedImageArr[++submitImageIndex]];
         }

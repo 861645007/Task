@@ -66,12 +66,16 @@ static CustomToolClass *instnce;
     if (![folderName isEqualToString:@""] || folderName != nil) {
         path = [[self gainDocumentsPath] stringByAppendingFormat:@"/%@", folderName];
     }
+    // 创建文件夹
+    if (![self theFolderIsExits:folderName]) {
+        [self createFolderInDocuments:folderName];
+    }
     return path;
 }
 
 // 获取指定文件路径
-- (NSString *)gainFilePath:(NSString *)plistFileName folderName:(NSString *)folderName {
-    return [[self gainTheFolderName:folderName] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", plistFileName]];
+- (NSString *)gainFilePath:(NSString *) fileName folderName:(NSString *)folderName {
+    return [[self gainTheFolderName:folderName] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
 }
 
 // 从指定文件中保存数据
@@ -94,7 +98,5 @@ static CustomToolClass *instnce;
     id fileData = [[NSArray alloc] initWithContentsOfFile:[self gainFilePath:plistFileName folderName:folderName]];
     return fileData;
 }
-
-
 
 @end

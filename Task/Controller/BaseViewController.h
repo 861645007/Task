@@ -60,6 +60,8 @@
 #define TaskDetailReportAction        @"app_taskDetailReport.action"       // 获取任务汇报
 #define AddTaskReportJudgementAction  @"app_addTaskReportJudgement.action" // 添加任务汇报评论
 #define AddTaskReportAccessoryAcrion  @"app_addTaskReportAccessory.action" // 添加任务汇报附件
+#define RelateTaskListAction          @"app_relateTaskList.action"         // 获取选择关联任务列表
+#define AddRelateTaskAction           @"app_addRelateTask.action"          // 增加或修改关联任务
 
 
 // 请假

@@ -98,6 +98,7 @@
 
             [self setSectionTableVieDataDic:[dic objectForKey:@"classifyTask"]];
             
+            [mainTableView reloadData];
             // 事情做完了, 结束刷新动画~~~
             [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
             break;

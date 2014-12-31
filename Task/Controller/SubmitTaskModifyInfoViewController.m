@@ -90,7 +90,7 @@
     NSDictionary *parameters = @{@"employeeId": employeeId,
                                  @"realName":realName,
                                  @"enterpriseId": enterpriseId,
-                                 @"taskId": @"2"};
+                                 @"taskId":taskId};
 
     AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
     requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
