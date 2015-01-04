@@ -162,9 +162,7 @@
     BOAlertController *alertView = [[BOAlertController alloc] initWithTitle:@"提示" message:@"请选择考勤的方式" subView:nil viewController:self];
     RIButtonItem *attendanceItem = [RIButtonItem itemWithLabel:@"二维码" action:^() {
         attendancePatten = @"1";
-        ReadQRCodeViewController *readQRCodeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReadQRCodeViewController"];
-        readQRCodeViewController.delegate = self;
-        [self.navigationController pushViewController:readQRCodeViewController animated:true];
+        [self gotoQRCodeViewController];
     }];
     [alertView addButton:attendanceItem type:RIButtonItemType_Other];
     
@@ -176,6 +174,32 @@
     [alertView show];
 }
 
+- (void)gotoQRCodeViewController {
+    static QRCodeReaderViewController *reader = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        reader                        = [QRCodeReaderViewController new];
+        reader.modalPresentationStyle = UIModalPresentationFormSheet;
+    });
+    reader.delegate = self;
+
+    [self presentViewController:reader animated:YES completion:NULL];
+}
+
+// 二维码考勤返回数据
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self submitQRCodeAttendance:result];
+    }];
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+// 外勤
 - (void)gotoLocationViewController {
     LocationAttendanceViewController *locationAttendanceViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationAttendanceViewController"];
     locationAttendanceViewController.attendancePatten = @"2";
@@ -183,11 +207,6 @@
     locationAttendanceViewController.address = address;
     locationAttendanceViewController.coordinate = coordinate;
     [self.navigationController pushViewController:locationAttendanceViewController animated:true];
-}
-
-// 二维码考勤返回数据
-- (void)comebackValeue:(id)value {
-    [self submitQRCodeAttendance:value];
 }
 
 // 考勤
@@ -233,7 +252,7 @@
     [self createAsynchronousRequest:AttendanceMonthAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithGainAttendanceInfoResult: dic];
     } failure:^{
-        [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
+        [mainTableView headerEndRefreshingWithResult:JHRefreshResultFailure];
     }];
 }
 
@@ -256,11 +275,11 @@
             }else {
                 self.noneAttendanceDataLabel.hidden = true;
             }
-            // 事情做完了, 结束刷新动画~~~
-            [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
             break;
         }
     }
+    // 事情做完了, 结束刷新动画~~~
+    [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
     if (![msg isEqualToString:@""]) {
         [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
     }

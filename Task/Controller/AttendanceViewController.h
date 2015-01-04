@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "ReadQRCodeViewController.h"
+#import "QRCodeReaderViewController.h"
 #import "LocationAttendanceViewController.h"
 #import "AttendanceListTableViewCell.h"
 #import <CoreLocation/CoreLocation.h>
@@ -15,7 +15,7 @@
 #define LocationNO @"尚未定位(点击定位)"
 #define LocationLoading @"正在定位中..."
 
-@interface AttendanceViewController : BaseViewController<CLLocationManagerDelegate, ComebackValueProtocol, UITableViewDataSource, UITableViewDelegate> {
+@interface AttendanceViewController : BaseViewController<CLLocationManagerDelegate,  UITableViewDataSource, UITableViewDelegate, QRCodeReaderDelegate> {
     CLLocationManager *locationManager;
 }
 

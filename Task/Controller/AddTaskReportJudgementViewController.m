@@ -17,6 +17,8 @@
 
 @implementation AddTaskReportJudgementViewController
 @synthesize mainCollectionView;
+@synthesize photoBtn;
+@synthesize cameraBtn;
 @synthesize promptLabel;
 @synthesize reportJudgementTextView;
 @synthesize titleStr;
@@ -37,6 +39,12 @@
     [reportJudgementTextView becomeFirstResponder];
     
     [self initCollectionCell];
+    
+    if (isFeedBackOrJudgement == 1) {
+        mainCollectionView.hidden = YES;
+        photoBtn.hidden = YES;
+        cameraBtn.hidden = YES;
+    }
     
     // 右上角添加提交 bar
     UIBarButtonItem *saveBar = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(submitTaskFeedback)];
@@ -214,9 +222,9 @@
                 [self.view.window showHUDWithText:@"提交成功" Type:ShowPhotoYes Enabled:YES];
                 [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
             }else {
-                if (isFeedBackOrJudgement == 1) {
+                if (isFeedBackOrJudgement == 0) {
                     submitImageIndex = 0;
-                    [self submitReportImage:selectedImageArr[submitImageIndex]];
+                    [self submitReportImage:selectedImageArr[submitImageIndex] taskReportId:[dic objectForKey:@"taskReortId"]];
                 }else {
                     [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
                 }
@@ -230,7 +238,7 @@
 }
 
 // 上传图片
-- (void)submitReportImage:(UIImage *)sImage {
+- (void)submitReportImage:(UIImage *)sImage taskReportId:(NSString *)reportId {
     [self.view.window showHUDWithText:@"上传中..." Type:ShowLoading Enabled:YES];  
     
     NSString *employeeId   = [[UserInfo shareInstance] gainUserId];
@@ -238,23 +246,14 @@
     NSString *enterpriseId = [[UserInfo shareInstance] gainUserEnterpriseId];
     
     NSData *imageData = UIImageJPEGRepresentation(sImage, 0.30);
-    NSString *action = @"";
     
     //参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId}];
-    
-    if (isFeedBackOrJudgement == 0) {
-        action = AddTaskReportAction;
-        [parameters setValue:taskId forKey:@"taskId"];
-    }else {
-        action = AddTaskReportAccessoryAcrion;
-        [parameters setValue:taskReportId forKey:@"taskReportId"];
-    }
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"taskReportId": reportId}];
     
     AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
     requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
     requestManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [requestManager POST:[NSString stringWithFormat:@"%@%@",HttpURL, action] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [requestManager POST:[NSString stringWithFormat:@"%@%@",HttpURL, AddTaskReportAccessoryAction] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         /**
          *  appendPartWithFileURL   //  指定上传的文件
@@ -270,7 +269,7 @@
             [self.view.window showHUDWithText:@"上传完成" Type:ShowPhotoYes Enabled:YES];
             [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
         }else {
-            [self submitReportImage:selectedImageArr[++submitImageIndex]];
+            [self submitReportImage:selectedImageArr[++submitImageIndex] taskReportId:reportId];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"获取服务器响应出错");

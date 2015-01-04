@@ -20,10 +20,9 @@
     userInfo = [UserInfo shareInstance];
     
     //设置NavigationBar背景颜色
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:12/255.0 green:112/255.0 blue:186/255.0 alpha:1]];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,7 +64,6 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failure();       
         NSLog(@"error: %@, \n error.localizedDescription: %@", error, [error localizedDescription]);
-        [self.view.window showHUDWithText:@"网络错误..." Type:ShowPhotoNo Enabled:YES];
     }];
 }
 

@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSString *taskReportId;     // 被评论的返回 Id
 @property (nonatomic, strong) NSString *judgedUserId;     // 评论时的被评论人 Id
 @property (nonatomic, strong) NSString *judgedUserName;   // 评论时的被评论人 Name
+@property (weak, nonatomic) IBOutlet UIButton *cameraBtn;
+@property (weak, nonatomic) IBOutlet UIButton *photoBtn;
 
 
 @property (weak, nonatomic) IBOutlet UITextView *reportJudgementTextView;

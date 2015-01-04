@@ -7,6 +7,7 @@
 //
 
 #import "TaskDetailInfoTableViewController.h"
+#import "SubTaskTableViewController.h"
 
 @interface TaskDetailInfoTableViewController () {
     NSMutableDictionary *taskDetailInfoDic;
@@ -14,10 +15,10 @@
     NSMutableArray *taskAccessorysArr;     // 任务附件
     NSMutableArray *attentionTaskUsersArr; // 任务关注人列表
     NSMutableArray *joinTaskUsersArr;      // 参与人列表
-    NSMutableArray *childrenTasksArr;      // 子任务列表
     NSMutableArray *shareTaskUsersArr;     // 分享人列表
     NSMutableArray *taskReportArr;         // 任务汇报列表
     NSMutableArray *taskLookDetailArr;     // 任务查阅列表
+    NSMutableArray *subTaskList;           // 子任务列表
     
     int isDelete;                          // 0表示没有进行删除操作， 1表示进行了删除操作
     int isNeedRefresh;                     // 是否需要刷新数据  0表示需要刷新， 1表示不需要刷新
@@ -38,14 +39,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     taskDetailInfoDic = [NSMutableDictionary dictionary];
-    relationTasksArr = [NSMutableArray array];
+    relationTasksArr  = [NSMutableArray array];
     taskAccessorysArr = [NSMutableArray array];
     attentionTaskUsersArr = [NSMutableArray array];
     joinTaskUsersArr = [NSMutableArray array];
-    childrenTasksArr = [NSMutableArray array];
     shareTaskUsersArr = [NSMutableArray array];
     taskReportArr = [NSMutableArray array];
     taskLookDetailArr = [NSMutableArray array];
+    subTaskList = [NSMutableArray array];
     
     section1ISselected = 0;
     clickCellTag = 0;
@@ -56,7 +57,7 @@
     
     // 去除 tableView 多余的横线
     [self setTableFooterView:mainTableView];
-
+    
     // 注册刷新控件
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self gainTaskDetailInfo];
@@ -172,7 +173,7 @@
         [self dealWithTaskDetailInfoResult: dic];
     } failure:^{
         // 事情做完了, 结束刷新动画~~~
-        [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
+        [mainTableView headerEndRefreshingWithResult:JHRefreshResultFailure];
     }];
 }
 
@@ -189,11 +190,12 @@
             [self.view.window showHUDWithText:@"获取详情成功" Type:ShowPhotoYes Enabled:YES];
             [self dealData:dic];
             [mainTableView reloadData];
-            // 事情做完了, 结束刷新动画~~~
-            [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
+            
             break;
         }
     }
+    // 事情做完了, 结束刷新动画~~~
+    [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
     if (![msg isEqualToString:@""]) {
         [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
     }
@@ -207,8 +209,8 @@
     attentionTaskUsersArr = [taskDetailInfoDic objectForKey:@"attentionTaskUsers"];
     [self updateAttentionItemState];
     joinTaskUsersArr      = [taskDetailInfoDic objectForKey:@"joinTaskUsers"];
-    childrenTasksArr      = [taskDetailInfoDic objectForKey:@"childrenTasks"];
     shareTaskUsersArr     = [taskDetailInfoDic objectForKey:@"shareTaskUsers"];
+    subTaskList           = [taskDetailInfoDic objectForKey:@"childrenTasks"];
     
     [self updateReportInfo:TaskDetailReportAction cellIndex:0];
     [self updateReportInfo:TaskDetailLookAction cellIndex:1];
@@ -285,7 +287,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 2;
+        return 0;
     }
     return 44;
 }
@@ -315,17 +317,19 @@
 - (CGFloat)setSection3CellHeight:(NSIndexPath *)indexPath {
 
     NSDictionary *dic = [taskReportArr objectAtIndex:indexPath.row];
+    CGFloat descHeight = [self textHeight:[dic objectForKey:@"desc"]];
 
     // 获取字符串
     NSString *contentText = @"";
     for (NSDictionary *reportContentDic in [dic objectForKey:@"reportJudges"]) {
         contentText = [contentText stringByAppendingFormat:@"@%@ %@ \n", [reportContentDic objectForKey:@"judgedUserName"], [reportContentDic objectForKey:@"judgeContent"]];
     }
+    
     CGFloat accessoryH = [[dic objectForKey:@"reportAccessorys"] count] * 30;
     // 获取并设置高度
     CGFloat contentH = [self textHeight:contentText];
     
-    return 60 + contentH + accessoryH + 27;
+    return 35 + descHeight + contentH + accessoryH + 27;
 }
 
 // 获取 label 实际所需要的高度
@@ -394,7 +398,7 @@
         
         if (section == 2) {
             titleLabel.text = @"子任务";
-            detailLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)[childrenTasksArr count]];
+            detailLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)[subTaskList count]];
             [imageView setImage:[UIImage imageNamed:@"pullback"]];
         }
         
@@ -451,6 +455,11 @@
         
         // 刷新点击的组标题，动画使用卡片
         [mainTableView reloadSections:[NSIndexSet indexSetWithIndex:btn.tag] withRowAnimation:UITableViewRowAnimationFade];
+    }else if (btn.tag == 2) {
+        SubTaskTableViewController *subTaskView = [self.storyboard instantiateViewControllerWithIdentifier:@"SubTaskTableViewController"];
+        subTaskView.subTaskList = subTaskList;
+        subTaskView.superTaskId = taskId;
+        [self.navigationController pushViewController:subTaskView animated:YES];
     }
 }
 
@@ -592,7 +601,7 @@
 
             taskReportCell.reportPersonIconImageView.image = [taskReportCell gainUserIcon:[dic objectForKey:@"reportPersonId"]];
             
-            [taskReportCell setAutoHeight:[dic objectForKey:@"reportJudges"] reportAccessorysList:[dic objectForKey:@"reportAccessorys"] baseViewController:self];
+            [taskReportCell setAutoHeight:[dic objectForKey:@"reportJudges"] reportAccessorysList:[dic objectForKey:@"reportAccessorys"] taskContentText:[dic objectForKey:@"desc"] baseViewController:self];
             taskReportCell.reportReplyBtn.tag = indexPath.row;
             [taskReportCell.reportReplyBtn addTarget:self action:@selector(addTaskReportJudgement:) forControlEvents:UIControlEventTouchUpInside];
             

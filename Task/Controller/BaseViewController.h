@@ -59,7 +59,7 @@
 #define TaskDetailLookAction          @"app_taskDetailLook.action"         // 获取任务查阅情况
 #define TaskDetailReportAction        @"app_taskDetailReport.action"       // 获取任务汇报
 #define AddTaskReportJudgementAction  @"app_addTaskReportJudgement.action" // 添加任务汇报评论
-#define AddTaskReportAccessoryAcrion  @"app_addTaskReportAccessory.action" // 添加任务汇报附件
+#define AddTaskReportAccessoryAction  @"app_addTaskReportAccessory.action" // 添加任务汇报附件
 #define RelateTaskListAction          @"app_relateTaskList.action"         // 获取选择关联任务列表
 #define AddRelateTaskAction           @"app_addRelateTask.action"          // 增加或修改关联任务
 
@@ -69,6 +69,14 @@
 #define LeaveHomeAction               @"app_leaveHome.action"              // 请假主页
 #define LeaveDetailAction             @"app_leaveDetail.action"            // 请假详情
 #define ApproveLeaveAction            @"app_approveLeave.action"           // 审批请假
+#define LeaveHistoryAction            @"app_leaveHistory.action"           // 我的历史请假
+#define LeaveHistoryApproveAction     @"app_leaveHistoryApprove.action"    // 我的历史审批
+
+// 更多
+#define EmployeeInfoAction            @"app_employeeInfo.action"           // 个人资料
+#define ChangePwdAction               @"app_changePwd.action"              // 修改密码
+#define AutoUpdateIOSAction           @"app_autoUpdateIOS.action"          // IOS检查版本更新
+
 
 
 typedef void(^ Failure)();

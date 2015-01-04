@@ -7,9 +7,15 @@
 //
 
 #import "MoreViewController.h"
+#import "PersonInfoViewController.h"
+#import "AppDelegate.h"
+#import "AboutUsViewController.h"
 
-@interface MoreViewController ()
+@interface MoreViewController () {
+    NSArray *tableViewData;
+}
 
+@property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @end
 
 @implementation MoreViewController
@@ -17,6 +23,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    tableViewData = @[@[@"个人资料"], @[@"新版本检查", @"关于"]];
+    [self setTableFooterView:self.mainTableView];
+    self.mainTableView.tableFooterView = [self gainFootView];
+}
+
+- (void)setTableFooterView:(UITableView *)tb {
+    if (!tb) {
+        return;
+    }
+    
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor whiteColor];
+    [tb setTableFooterView:view];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,6 +44,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIView *)gainFootView {
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    footView.backgroundColor = self.mainTableView.backgroundColor;
+    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 200) / 2, 7, 200, 30)];
+    [btn setBackgroundColor:[UIColor redColor]];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setTitle:@"退出当前帐号" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(logOut) forControlEvents:UIControlEventTouchUpInside];
+    
+    [footView addSubview:btn];
+    
+    return footView;
+}
+
+- (void)logOut {
+    [self gotoLogInController];
+}
+
+//转到主界面
+- (void)gotoLogInController {
+    //视图转换 至 rootViewController  （原理：直接将根视图转换----只能在主线程生调用）
+    REFrostedViewController *frosted = [[REFrostedViewController alloc] initWithContentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LogInViewController"] menuViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LeftMenuViewController"]];
+    
+    UIApplication *app =[UIApplication sharedApplication];
+    AppDelegate *app2 = app.delegate;
+    app2.window.rootViewController = frosted;
+}
 /*
 #pragma mark - Navigation
 
@@ -33,5 +81,104 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - UITableView DataSource 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [tableViewData count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [[tableViewData objectAtIndex:section] count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 1) {
+        return 26;
+    }
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 1) {
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 19)];
+        titleLabel.textColor = GrayColorForTitle;
+        titleLabel.text = @"   其他";
+        titleLabel.font = [UIFont systemFontOfSize:15];
+        titleLabel.textAlignment = NSTextAlignmentLeft;
+        
+        return titleLabel;
+    }
+    return  nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellIdentifier = @"MoreCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    cell.textLabel.text = [[tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            PersonInfoViewController *personInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PersonInfoViewController"];
+            [self.navigationController pushViewController:personInfoViewController animated:YES];
+        }
+    }else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            [self checkNewVersion];
+        }else if (indexPath.row == 1) {
+            [self gainToAboutUsView];
+        }
+    }
+}
+
+#pragma mark - 检查新版本
+- (void)checkNewVersion {
+    [self.view.window showHUDWithText:@"正在查询..." Type:ShowLoading Enabled:YES];
+    
+    NSString *employeeId = [userInfo gainUserId];
+    NSString *realName = [userInfo gainUserName];
+    NSString *enterpriseId = [userInfo gainUserEnterpriseId];
+    //参数
+    NSDictionary *parameters = @{@"employeeId": employeeId,
+                                 @"realName": realName,
+                                 @"enterpriseId": enterpriseId};
+    
+    [self createAsynchronousRequest:AutoUpdateIOSAction parmeters:parameters success:^(NSDictionary *dic){
+        [self dealWithGainPersonInfoResult: dic];
+    } failure:^{
+        [self.view.window showHUDWithText:@"网络错误..." Type:ShowLoading Enabled:YES];
+    }];
+}
+
+//处理网络操作结果
+- (void)dealWithGainPersonInfoResult:(NSDictionary *)dic {
+    NSString *msg = @"";
+    
+    switch ([[dic objectForKey:@"result"] intValue]) {
+        case 0: {
+            msg = [dic objectForKey:@"message"];
+            break;
+        }
+        case 1: {
+            [self createSimpleAlertView:@"温馨提示" msg:[NSString stringWithFormat:@"%@\n您的当前版本为:%@",[dic objectForKey:@"description"], [dic objectForKey:@"versionName"]]];
+            break;
+        }
+    }
+    if (![msg isEqualToString:@""]) {
+        [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
+    }
+}
+
+#pragma mark - 关于我们
+- (void)gainToAboutUsView {
+    AboutUsViewController *aboutUsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutUsViewController"];
+    [self.navigationController pushViewController:aboutUsViewController animated:YES];
+}
 
 @end

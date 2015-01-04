@@ -24,6 +24,7 @@
 @synthesize saveWithPerfectTaskInfoBtn;
 @synthesize taskId;
 @synthesize taskEndTimeStr;
+@synthesize superTaskId;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,7 +32,7 @@
     taskTitleLabel.delegate = self;
     headerIdStrList = [NSString string];
     
-    if ([taskEndTimeStr isEqualToString:@""]) {
+    if ([taskEndTimeStr isEqualToString:@""] || taskEndTimeStr == nil) {
         [selectTaskEndTimeBtn setTitle:@"选择到期日" forState:UIControlStateNormal];
         [selectTaskEndTimeBtn setTitleColor:[UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0] forState:UIControlStateNormal];
     }else {
@@ -122,29 +123,41 @@
     NSString *employeeId = [userInfo gainUserId];
     NSString *realName = [userInfo gainUserName];
     NSString *enterpriseId = [userInfo gainUserEnterpriseId];
+
+    
     //参数
     NSDictionary *parameters;
-    if ([taskId isEqualToString:@""]) {
+    if (superTaskId != nil) {
         parameters = @{@"employeeId": employeeId,
-                                     @"realName":realName,
-                                     @"enterpriseId": enterpriseId,
-                                     @"title":taskTitleLabel.text,
-                                     @"principalId": headerIdStrList,
-                                     @"principalName": selectTaskLeaderBtn.titleLabel.text,
-                                     @"deadline": selectTaskEndTimeBtn.titleLabel.text};
-
+                       @"realName":realName,
+                       @"enterpriseId": enterpriseId,
+                       @"title":taskTitleLabel.text,
+                       @"principalId": headerIdStrList,
+                       @"principalName": selectTaskLeaderBtn.titleLabel.text,
+                       @"deadline": selectTaskEndTimeBtn.titleLabel.text,
+                       @"parentId": superTaskId};
     }else {
-        parameters = @{@"employeeId": employeeId,
-                                     @"realName":realName,
-                                     @"enterpriseId": enterpriseId,
-                                     @"taskId": employeeId,
-                                     @"title":taskTitleLabel.text,
-                                     @"principalId": headerIdStrList,
-                                     @"principalName": selectTaskLeaderBtn.titleLabel.text,
-                                     @"deadline": selectTaskEndTimeBtn.titleLabel.text};
+        if ([taskId isEqual:@""]) {
+            parameters = @{@"employeeId": employeeId,
+                           @"realName":realName,
+                           @"enterpriseId": enterpriseId,
+                           @"title":taskTitleLabel.text,
+                           @"principalId": headerIdStrList,
+                           @"principalName": selectTaskLeaderBtn.titleLabel.text,
+                           @"deadline": selectTaskEndTimeBtn.titleLabel.text};
+            
+        }else {
+            parameters = @{@"employeeId": employeeId,
+                           @"realName":realName,
+                           @"enterpriseId": enterpriseId,
+                           @"taskId": employeeId,
+                           @"title":taskTitleLabel.text,
+                           @"principalId": headerIdStrList,
+                           @"principalName": selectTaskLeaderBtn.titleLabel.text,
+                           @"deadline": selectTaskEndTimeBtn.titleLabel.text};
+        }
     }
-    
-    
+
     [self createAsynchronousRequest:AddTaskAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithGainAttendanceInfoResult: dic];
     } failure:^{}];

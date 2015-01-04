@@ -16,13 +16,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="陈亮" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNU-eh-bGO">
-                        <rect key="frame" x="8" y="8" width="28" height="17"/>
+                        <rect key="frame" x="16" y="8" width="28" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方的就" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNY-fy-OJp">
-                        <rect key="frame" x="8" y="28" width="304" height="18"/>
+                        <rect key="frame" x="16" y="28" width="296" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -36,10 +36,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="iNU-eh-bGO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="LDV-Qz-Qq2"/>
-                    <constraint firstItem="iNU-eh-bGO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Qn6-aD-DVf"/>
+                    <constraint firstItem="iNU-eh-bGO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Qn6-aD-DVf"/>
                     <constraint firstItem="FNY-fy-OJp" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="UnT-4x-0Xp"/>
                     <constraint firstItem="HNf-Rl-bAY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Vc2-fF-klG"/>
-                    <constraint firstItem="FNY-fy-OJp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="gED-wb-Sj3"/>
+                    <constraint firstItem="FNY-fy-OJp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="gED-wb-Sj3"/>
                     <constraint firstItem="HNf-Rl-bAY" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="kgI-gI-FOJ"/>
                     <constraint firstItem="FNY-fy-OJp" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="m13-gG-Pto"/>
                 </constraints>

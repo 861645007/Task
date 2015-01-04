@@ -13,8 +13,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    proclamationView.layer.borderWidth = 0.5;
-    proclamationView.layer.borderColor = [UIColor colorWithRed:127/255.0 green:127/255.0 blue:127/255.0 alpha:1].CGColor;
+    proclamationView.layer.borderWidth = 1;
+    proclamationView.layer.masksToBounds = YES;
+    proclamationView.layer.cornerRadius = 8.0;
+    proclamationView.layer.borderColor = [UIColor colorWithRed:12/255.0 green:112/255.0 blue:186/255.0 alpha:1].CGColor;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

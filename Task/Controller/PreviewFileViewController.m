@@ -85,21 +85,9 @@
     
     NSString *pathExtension = [fileSavePath pathExtension];
     if ([pathExtension isEqualToString:@"png"] || [pathExtension isEqualToString:@"jpg"]) {
-        CGFloat viewH = self.view.frame.size.height;
-        CGFloat viewW = self.view.frame.size.width;
-        CGRect frame;
         UIImage *fileImage = [UIImage imageWithContentsOfFile:fileSavePath];
-        NSLog(@"%f", fileImage.size.height);
-        if (fileImage.size.width > viewW && fileImage.size.height >  viewH - 44) {
-            frame = CGRectMake(0, 64, viewW, viewH - 44);
-        }else if (fileImage.size.width > viewW && fileImage.size.height <  viewH - 44) {
-            frame = CGRectMake(0, (viewH - fileImage.size.height) / 2, viewW, fileImage.size.height);
-        }else if (fileImage.size.width < viewW && fileImage.size.height >  viewH - 44) {
-            frame = CGRectMake((viewW - fileImage.size.width) / 2, 64, fileImage.size.width, viewH - 44);
-        }else {
-            frame = CGRectMake((viewW - fileImage.size.width) / 2, (viewH - fileImage.size.height) / 2, fileImage.size.width, fileImage.size.height);
-        }
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:[self gainImageFrame:fileImage.size]];
         imageView.image = fileImage;
         [self.view addSubview:imageView];
         [self.view bringSubviewToFront:toolVIew];
@@ -111,6 +99,30 @@
     // 添加预览按钮
     UIBarButtonItem *previewBar = [[UIBarButtonItem alloc] initWithTitle:@"预览" style:UIBarButtonItemStylePlain target:self action:@selector(previewFile)];
     self.navigationItem.rightBarButtonItem = previewBar;
+}
+
+- (CGRect )gainImageFrame:(CGSize )imageSize {
+    CGFloat viewH = self.view.frame.size.height;
+    CGFloat viewW = self.view.frame.size.width;
+    CGRect frame;
+    
+    CGFloat wHRatio = imageSize.width / imageSize.height;  // 图片的长宽比
+    
+    if (imageSize.width > viewW && imageSize.height >  viewH - 44) {
+        if (imageSize.width > imageSize.height) {
+            frame = CGRectMake(0, (viewH - viewW / wHRatio) / 2, viewW, viewW / wHRatio);
+        }else {
+            frame = CGRectMake((viewW - viewH * wHRatio) / 2, 64, viewH * wHRatio, viewH);
+        }
+    }else if (imageSize.width > viewW && imageSize.height <  viewH - 44) {
+        frame = CGRectMake(0, (viewH - viewW / wHRatio) / 2, viewW, viewW / wHRatio);
+    }else if (imageSize.width < viewW && imageSize.height >  viewH - 44) {
+        frame = CGRectMake((viewW - viewH * wHRatio) / 2, 64, viewH * wHRatio, viewH);
+    }else {
+        frame = CGRectMake((viewW - imageSize.width) / 2, (viewH - imageSize.height) / 2, imageSize.width, imageSize.height);
+    }
+    
+    return frame;
 }
 
 - (void)setImageViewWithSuccess {

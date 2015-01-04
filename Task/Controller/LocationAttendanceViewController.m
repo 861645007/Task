@@ -43,6 +43,7 @@
 - (IBAction)sureAttendance:(id)sender {
     if ([self.commentTextView.text isEqualToString:@""]) {
         [self createSimpleAlertView:@"抱歉" msg:@"请输入考勤信息"];
+        return ;
     }
     
     [self signInAttendance];

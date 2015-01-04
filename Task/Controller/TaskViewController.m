@@ -40,7 +40,6 @@
     __block CusNavigationTitleView *copyNavView = navView; // 防止陷入“retain cycle” -- “形成怪圈”的错误
     navView.selectRowAtIndex = ^(NSInteger index){
         copyNavView.titleString = navArr[(long)index];
-        self.title = navArr[(long)index];
         // 选择标题后刷新界面
         titleCMD = [NSString stringWithFormat:@"%ld", (long)index];
         [self gainAttendanceInfo];
@@ -80,7 +79,8 @@
         [self dealWithGainAttendanceInfoResult: dic];
     } failure:^{
         // 事情做完了, 结束刷新动画~~~
-        [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
+        [mainTableView headerEndRefreshingWithResult:JHRefreshResultFailure];
+        [self.view.window showHUDWithText:@"网络错误..." Type:ShowLoading Enabled:YES];
     }];
 }
 
@@ -99,11 +99,12 @@
             [self setSectionTableVieDataDic:[dic objectForKey:@"classifyTask"]];
             
             [mainTableView reloadData];
-            // 事情做完了, 结束刷新动画~~~
-            [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
+            
             break;
         }
     }
+    // 事情做完了, 结束刷新动画~~~
+    [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
     if (![msg isEqualToString:@""]) {
         [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
     }
@@ -176,7 +177,7 @@
     gainToAddBtn.tag = section;
     [gainToAddBtn addTarget:self action:@selector(addNewTask:) forControlEvents:UIControlEventTouchUpInside];
     
-    if ([[isShow objectAtIndex:btn.tag] intValue]) {
+    if ([[isShow objectAtIndex:btn.tag] intValue] == 0) {
         numberLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[[tableVieDataDic objectForKey:key] count]];
         gainToAddBtn.hidden = true;
     }else {
@@ -215,24 +216,11 @@
 // 点击 section 后的触发事件
 - (void)btnClick:(UIButton *)btn
 {
-    UIView *headerView = [self.mainTableView headerViewForSection:btn.tag];
-    UILabel *numberLabel = (UILabel *)[headerView viewWithTag:200];
-    UIImageView *imageView = (UIImageView *)[headerView viewWithTag:201];
-    
-    if ([[isShow objectAtIndex:btn.tag] intValue]) {
-        isShow[btn.tag] = @"0";
-        if ([numberLabel.text isEqualToString:@"0"]) {
-            imageView.hidden = false;
-            numberLabel.hidden = true;
-        }else {
-            imageView.hidden = true;
-            numberLabel.hidden = false;
-        }
+    if ([[isShow objectAtIndex:btn.tag] intValue] == 0) {
+        isShow[btn.tag] = @"1";
     }
     else {
-        isShow[btn.tag] = @"1";
-        imageView.hidden = false;
-        numberLabel.hidden = true;
+        isShow[btn.tag] = @"0";
     }
     // 刷新点击的组标题，动画使用卡片
     [mainTableView reloadSections:[NSIndexSet indexSetWithIndex:btn.tag]

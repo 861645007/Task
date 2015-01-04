@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关联任务:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3u-Vi-qmY">
-                        <rect key="frame" x="8" y="12" width="70" height="18"/>
+                        <rect key="frame" x="16" y="12" width="70" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="MnS-14-Ttc"/>
                         </constraints>
@@ -24,7 +24,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmK-e4-Wpg">
-                        <rect key="frame" x="86" y="12" width="226" height="18"/>
+                        <rect key="frame" x="94" y="12" width="218" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -36,7 +36,7 @@
                     <constraint firstItem="n3u-Vi-qmY" firstAttribute="top" secondItem="9sU-Zq-JKX" secondAttribute="topMargin" constant="4" id="Gax-29-qQY"/>
                     <constraint firstItem="n3u-Vi-qmY" firstAttribute="centerY" secondItem="AmK-e4-Wpg" secondAttribute="centerY" id="aej-ea-RTt"/>
                     <constraint firstItem="AmK-e4-Wpg" firstAttribute="leading" secondItem="n3u-Vi-qmY" secondAttribute="trailing" constant="8" id="qQL-wN-dnJ"/>
-                    <constraint firstItem="n3u-Vi-qmY" firstAttribute="leading" secondItem="9sU-Zq-JKX" secondAttribute="leadingMargin" id="y0S-He-gV2"/>
+                    <constraint firstItem="n3u-Vi-qmY" firstAttribute="leading" secondItem="9sU-Zq-JKX" secondAttribute="leadingMargin" constant="8" id="y0S-He-gV2"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">

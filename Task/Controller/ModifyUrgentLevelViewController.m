@@ -65,7 +65,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if ([self.delegate respondsToSelector:@selector(selectedUrgentLevel:)]) {
-        [self.delegate selectedUrgentLevel:[NSString stringWithFormat:@"%d", indexPath.row]];
+        [self.delegate selectedUrgentLevel:[NSString stringWithFormat:@"%ld", (long)indexPath.row]];
     }
     
     [self.navigationController popViewControllerAnimated:YES];

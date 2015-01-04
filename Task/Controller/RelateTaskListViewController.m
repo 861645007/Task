@@ -59,7 +59,7 @@
         [self dealWithGainnRelateTaskInfoResult: dic];
     } failure:^{
         // 事情做完了, 结束刷新动画~~~
-        [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
+        [mainTableView headerEndRefreshingWithResult:JHRefreshResultFailure];
     }];
 }
 
@@ -91,11 +91,11 @@
             }
             
             [mainTableView reloadData];
-            // 事情做完了, 结束刷新动画~~~
-            [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
             break;
         }
     }
+    // 事情做完了, 结束刷新动画~~~
+    [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
     if (![msg isEqualToString:@""]) {
         [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
     }

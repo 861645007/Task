@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *saveWithPerfectTaskInfoBtn;
 @property (nonatomic, copy) NSString *taskId;
 @property (nonatomic, copy) NSString *taskEndTimeStr;
+@property (nonatomic, copy) NSString *superTaskId;
 
 - (IBAction)selectTaskLeader:(id)sender;
 - (IBAction)selectTaskEndTime:(id)sender;

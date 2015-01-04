@@ -22,7 +22,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efX-LE-OTa">
-                        <rect key="frame" x="276" y="8" width="36" height="17"/>
+                        <rect key="frame" x="268" y="8" width="36" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -39,7 +39,7 @@
                     <constraint firstItem="2rS-Gd-yDB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Jk8-Dv-PuK"/>
                     <constraint firstItem="2rS-Gd-yDB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="Kxc-Pq-P9J"/>
                     <constraint firstItem="2rS-Gd-yDB" firstAttribute="top" secondItem="axR-uK-rIF" secondAttribute="bottom" constant="4" id="X0L-04-h54"/>
-                    <constraint firstItem="efX-LE-OTa" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="c2o-Py-2BP"/>
+                    <constraint firstItem="efX-LE-OTa" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="c2o-Py-2BP"/>
                     <constraint firstItem="efX-LE-OTa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="eJU-2x-8FE"/>
                     <constraint firstItem="axR-uK-rIF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="laV-ZR-8Lp"/>
                 </constraints>

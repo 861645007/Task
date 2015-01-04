@@ -22,12 +22,12 @@
 }
 
 
-- (void)setAutoHeight:(NSArray *)reportContentArr reportAccessorysList:(NSArray *)reportAccessorysArr baseViewController:(UIViewController *)viewController {
+- (void)setAutoHeight:(NSArray *)reportContentArr reportAccessorysList:(NSArray *)reportAccessorysArr taskContentText:(NSString *)taskContentText baseViewController:(UIViewController *)viewController {
     reportAccessorysList = [NSArray arrayWithArray:reportAccessorysArr];
     baseViewController = viewController;
     
-    int originX = 46;
-    int originY = 60;
+    int originX = 50;
+    int originY = 30 + [self textHeight:taskContentText];
     int sizeW = [[UIScreen mainScreen] bounds].size.width - 62;
     
     // 获取字符串
@@ -72,7 +72,7 @@
     }
 
     if ([reportAccessorysArr count] != 0) {
-        UILabel *accessoryTitlelabel = [[UILabel alloc] initWithFrame:CGRectMake(8, originY + contentH + 4, sizeW, 30)];
+        UILabel *accessoryTitlelabel = [[UILabel alloc] initWithFrame:CGRectMake(16, originY + contentH + 4, sizeW, 30)];
         [accessoryTitlelabel setText:@"附件:"];
         accessoryTitlelabel.numberOfLines = 0;
         accessoryTitlelabel.font = [UIFont systemFontOfSize:14];

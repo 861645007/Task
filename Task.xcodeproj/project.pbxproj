@@ -46,6 +46,7 @@
 		E60C94EF1A4AF50D0003B33B /* diaryBook_NoSelectedImage.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C94ED1A4AF50D0003B33B /* diaryBook_NoSelectedImage.png */; };
 		E60C94F01A4AF50D0003B33B /* diaryBook_SelectedImage.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C94EE1A4AF50D0003B33B /* diaryBook_SelectedImage.png */; };
 		E60C94F41A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C94F31A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m */; };
+		E615EFAC1A55331A00D2621A /* SubTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E615EFAB1A55331A00D2621A /* SubTaskTableViewController.m */; };
 		E62C793C1A50F9B60026EC5B /* select_item_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = E62C793A1A50F9B60026EC5B /* select_item_checked.png */; };
 		E62C793D1A50F9B60026EC5B /* select_item_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = E62C793B1A50F9B60026EC5B /* select_item_unchecked.png */; };
 		E62C79411A50FD650026EC5B /* EditLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E62C79401A50FD650026EC5B /* EditLeaveViewController.m */; };
@@ -211,10 +212,25 @@
 		E6B312E01A3FBD1300AEF923 /* tab_menu_task.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D81A3FBD1300AEF923 /* tab_menu_task.png */; };
 		E6B312E11A3FBD1300AEF923 /* tab_menu_workcenter.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D91A3FBD1300AEF923 /* tab_menu_workcenter.png */; };
 		E6B312E51A3FC04F00AEF923 /* WorkHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B312E41A3FC04F00AEF923 /* WorkHomeViewController.m */; };
+		E6C8C43A1A57DB4D00B2ECC9 /* card_hairtask.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C8C4371A57DB4D00B2ECC9 /* card_hairtask.png */; };
+		E6C8C43B1A57DB4D00B2ECC9 /* dontsay1.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C8C4381A57DB4D00B2ECC9 /* dontsay1.png */; };
+		E6C8C43C1A57DB4D00B2ECC9 /* ic_password.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C8C4391A57DB4D00B2ECC9 /* ic_password.png */; };
+		E6C8C43E1A57DB5A00B2ECC9 /* Personal_Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C8C43D1A57DB5A00B2ECC9 /* Personal_Default.png */; };
+		E6C8C4421A57DC0100B2ECC9 /* PersonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C8C4411A57DC0100B2ECC9 /* PersonInfoViewController.m */; };
+		E6C8C4461A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C8C4451A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m */; };
 		E6C9A6871A50E880005E17FB /* LeaveHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C9A6851A50E880005E17FB /* LeaveHomeTableViewCell.m */; };
 		E6C9A6881A50E880005E17FB /* LeaveHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6C9A6861A50E880005E17FB /* LeaveHomeTableViewCell.xib */; };
 		E6C9C7F91A4CF3BB00FA0A5F /* preViewDelete.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C9C7F71A4CF3BB00FA0A5F /* preViewDelete.png */; };
 		E6C9C7FA1A4CF3BB00FA0A5F /* preViewDelete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C9C7F81A4CF3BB00FA0A5F /* preViewDelete@2x.png */; };
+		E6D940681A59176600E0A865 /* Icon_58.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D940631A59176600E0A865 /* Icon_58.png */; };
+		E6D940691A59176600E0A865 /* Icon_80.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D940641A59176600E0A865 /* Icon_80.png */; };
+		E6D9406A1A59176600E0A865 /* Icon_89.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D940651A59176600E0A865 /* Icon_89.png */; };
+		E6D9406B1A59176600E0A865 /* Icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D940661A59176600E0A865 /* Icon_120.png */; };
+		E6D9406C1A59176600E0A865 /* Icon_180.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D940671A59176600E0A865 /* Icon_180.png */; };
+		E6D9406E1A59192B00E0A865 /* card_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D9406D1A59192B00E0A865 /* card_bg.png */; };
+		E6D940721A5928D500E0A865 /* ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D940711A5928D500E0A865 /* ChangePwdViewController.m */; };
+		E6D940741A596EAC00E0A865 /* Icon_Login.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D940731A596EAC00E0A865 /* Icon_Login.png */; };
+		E6D940781A59731100E0A865 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D940771A59731100E0A865 /* AboutUsViewController.m */; };
 		E6DB5ED91A4E9A88002906F1 /* TaskReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5ED71A4E9A88002906F1 /* TaskReportTableViewCell.m */; };
 		E6DB5EDA1A4E9A88002906F1 /* TaskReportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5ED81A4E9A88002906F1 /* TaskReportTableViewCell.xib */; };
 		E6DB5EDE1A4E9E54002906F1 /* TaskLookDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5EDC1A4E9E54002906F1 /* TaskLookDetailTableViewCell.m */; };
@@ -225,6 +241,9 @@
 		E6DCD6101A415109008B0582 /* Password_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E6DCD60C1A415109008B0582 /* Password_icon.png */; };
 		E6DCD6131A41690D008B0582 /* LocationAttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DCD6121A41690D008B0582 /* LocationAttendanceViewController.m */; };
 		E6DCD6161A416EEC008B0582 /* AttendanceListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DCD6151A416EEC008B0582 /* AttendanceListTableViewCell.m */; };
+		E6DE47511A5430B2008EFA51 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DE474B1A5430B2008EFA51 /* QRCameraSwitchButton.m */; };
+		E6DE47521A5430B2008EFA51 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DE474E1A5430B2008EFA51 /* QRCodeReaderView.m */; };
+		E6DE47531A5430B2008EFA51 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DE47501A5430B2008EFA51 /* QRCodeReaderViewController.m */; };
 		E6E0C7411A3F24750054F2C4 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C7361A3F24750054F2C4 /* RECommonFunctions.m */; };
 		E6E0C7421A3F24750054F2C4 /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C7381A3F24750054F2C4 /* REFrostedContainerViewController.m */; };
 		E6E0C7431A3F24750054F2C4 /* REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C73A1A3F24750054F2C4 /* REFrostedViewController.m */; };
@@ -304,6 +323,8 @@
 		E60C94EE1A4AF50D0003B33B /* diaryBook_SelectedImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = diaryBook_SelectedImage.png; path = FunctionClass/GetPhoto/diaryBook_SelectedImage.png; sourceTree = "<group>"; };
 		E60C94F21A4B05B40003B33B /* SubmitTaskModifyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubmitTaskModifyInfoViewController.h; path = Controller/SubmitTaskModifyInfoViewController.h; sourceTree = "<group>"; };
 		E60C94F31A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubmitTaskModifyInfoViewController.m; path = Controller/SubmitTaskModifyInfoViewController.m; sourceTree = "<group>"; };
+		E615EFAA1A55331A00D2621A /* SubTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubTaskTableViewController.h; path = Controller/SubTaskTableViewController.h; sourceTree = "<group>"; };
+		E615EFAB1A55331A00D2621A /* SubTaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubTaskTableViewController.m; path = Controller/SubTaskTableViewController.m; sourceTree = "<group>"; };
 		E62C793A1A50F9B60026EC5B /* select_item_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = select_item_checked.png; path = Image/select_item_checked.png; sourceTree = "<group>"; };
 		E62C793B1A50F9B60026EC5B /* select_item_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = select_item_unchecked.png; path = Image/select_item_unchecked.png; sourceTree = "<group>"; };
 		E62C793F1A50FD650026EC5B /* EditLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditLeaveViewController.h; path = Controller/EditLeaveViewController.h; sourceTree = "<group>"; };
@@ -579,11 +600,30 @@
 		E6B312D91A3FBD1300AEF923 /* tab_menu_workcenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_menu_workcenter.png; path = Image/tab_menu_workcenter.png; sourceTree = "<group>"; };
 		E6B312E31A3FC04F00AEF923 /* WorkHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkHomeViewController.h; path = Controller/WorkHomeViewController.h; sourceTree = "<group>"; };
 		E6B312E41A3FC04F00AEF923 /* WorkHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkHomeViewController.m; path = Controller/WorkHomeViewController.m; sourceTree = "<group>"; };
+		E6C8C4371A57DB4D00B2ECC9 /* card_hairtask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = card_hairtask.png; path = Image/card_hairtask.png; sourceTree = "<group>"; };
+		E6C8C4381A57DB4D00B2ECC9 /* dontsay1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dontsay1.png; path = Image/dontsay1.png; sourceTree = "<group>"; };
+		E6C8C4391A57DB4D00B2ECC9 /* ic_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_password.png; path = Image/ic_password.png; sourceTree = "<group>"; };
+		E6C8C43D1A57DB5A00B2ECC9 /* Personal_Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Personal_Default.png; path = Image/Personal_Default.png; sourceTree = "<group>"; };
+		E6C8C4401A57DC0100B2ECC9 /* PersonInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonInfoViewController.h; path = Controller/PersonInfoViewController.h; sourceTree = "<group>"; };
+		E6C8C4411A57DC0100B2ECC9 /* PersonInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoViewController.m; path = Controller/PersonInfoViewController.m; sourceTree = "<group>"; };
+		E6C8C4441A57DCFE00B2ECC9 /* PersonInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonInfoTableViewCell.h; path = Controller/PersonInfoTableViewCell.h; sourceTree = "<group>"; };
+		E6C8C4451A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoTableViewCell.m; path = Controller/PersonInfoTableViewCell.m; sourceTree = "<group>"; };
 		E6C9A6841A50E880005E17FB /* LeaveHomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeaveHomeTableViewCell.h; path = Controller/LeaveHomeTableViewCell.h; sourceTree = "<group>"; };
 		E6C9A6851A50E880005E17FB /* LeaveHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeaveHomeTableViewCell.m; path = Controller/LeaveHomeTableViewCell.m; sourceTree = "<group>"; };
 		E6C9A6861A50E880005E17FB /* LeaveHomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeaveHomeTableViewCell.xib; path = Controller/LeaveHomeTableViewCell.xib; sourceTree = "<group>"; };
 		E6C9C7F71A4CF3BB00FA0A5F /* preViewDelete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preViewDelete.png; path = Image/preViewDelete.png; sourceTree = "<group>"; };
 		E6C9C7F81A4CF3BB00FA0A5F /* preViewDelete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "preViewDelete@2x.png"; path = "Image/preViewDelete@2x.png"; sourceTree = "<group>"; };
+		E6D940631A59176600E0A865 /* Icon_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_58.png; path = Image/Icon_58.png; sourceTree = "<group>"; };
+		E6D940641A59176600E0A865 /* Icon_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_80.png; path = Image/Icon_80.png; sourceTree = "<group>"; };
+		E6D940651A59176600E0A865 /* Icon_89.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_89.png; path = Image/Icon_89.png; sourceTree = "<group>"; };
+		E6D940661A59176600E0A865 /* Icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_120.png; path = Image/Icon_120.png; sourceTree = "<group>"; };
+		E6D940671A59176600E0A865 /* Icon_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_180.png; path = Image/Icon_180.png; sourceTree = "<group>"; };
+		E6D9406D1A59192B00E0A865 /* card_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = card_bg.png; path = Image/card_bg.png; sourceTree = "<group>"; };
+		E6D940701A5928D500E0A865 /* ChangePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePwdViewController.h; path = Controller/ChangePwdViewController.h; sourceTree = "<group>"; };
+		E6D940711A5928D500E0A865 /* ChangePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePwdViewController.m; path = Controller/ChangePwdViewController.m; sourceTree = "<group>"; };
+		E6D940731A596EAC00E0A865 /* Icon_Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_Login.png; path = Image/Icon_Login.png; sourceTree = "<group>"; };
+		E6D940761A59731100E0A865 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutUsViewController.h; path = Controller/AboutUsViewController.h; sourceTree = "<group>"; };
+		E6D940771A59731100E0A865 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutUsViewController.m; path = Controller/AboutUsViewController.m; sourceTree = "<group>"; };
 		E6DB5ED61A4E9A88002906F1 /* TaskReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskReportTableViewCell.h; path = Controller/TaskReportTableViewCell.h; sourceTree = "<group>"; };
 		E6DB5ED71A4E9A88002906F1 /* TaskReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskReportTableViewCell.m; path = Controller/TaskReportTableViewCell.m; sourceTree = "<group>"; };
 		E6DB5ED81A4E9A88002906F1 /* TaskReportTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TaskReportTableViewCell.xib; path = Controller/TaskReportTableViewCell.xib; sourceTree = "<group>"; };
@@ -598,6 +638,13 @@
 		E6DCD6121A41690D008B0582 /* LocationAttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationAttendanceViewController.m; path = Controller/LocationAttendanceViewController.m; sourceTree = "<group>"; };
 		E6DCD6141A416EEC008B0582 /* AttendanceListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttendanceListTableViewCell.h; path = Controller/AttendanceListTableViewCell.h; sourceTree = "<group>"; };
 		E6DCD6151A416EEC008B0582 /* AttendanceListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttendanceListTableViewCell.m; path = Controller/AttendanceListTableViewCell.m; sourceTree = "<group>"; };
+		E6DE474A1A5430B2008EFA51 /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCameraSwitchButton.h; sourceTree = "<group>"; };
+		E6DE474B1A5430B2008EFA51 /* QRCameraSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCameraSwitchButton.m; sourceTree = "<group>"; };
+		E6DE474C1A5430B2008EFA51 /* QRCodeReaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeReaderDelegate.h; sourceTree = "<group>"; };
+		E6DE474D1A5430B2008EFA51 /* QRCodeReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeReaderView.h; sourceTree = "<group>"; };
+		E6DE474E1A5430B2008EFA51 /* QRCodeReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeReaderView.m; sourceTree = "<group>"; };
+		E6DE474F1A5430B2008EFA51 /* QRCodeReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeReaderViewController.h; sourceTree = "<group>"; };
+		E6DE47501A5430B2008EFA51 /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeReaderViewController.m; sourceTree = "<group>"; };
 		E6E0C7351A3F24750054F2C4 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		E6E0C7361A3F24750054F2C4 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		E6E0C7371A3F24750054F2C4 /* REFrostedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedContainerViewController.h; sourceTree = "<group>"; };
@@ -790,6 +837,15 @@
 			name = SubmitModifyInfo;
 			sourceTree = "<group>";
 		};
+		E615EFA91A55329C00D2621A /* SubTaskList */ = {
+			isa = PBXGroup;
+			children = (
+				E615EFAA1A55331A00D2621A /* SubTaskTableViewController.h */,
+				E615EFAB1A55331A00D2621A /* SubTaskTableViewController.m */,
+			);
+			name = SubTaskList;
+			sourceTree = "<group>";
+		};
 		E62C793E1A50FD120026EC5B /* EditLeaveViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -820,6 +876,8 @@
 		E6319DA71A41A90E00982A46 /* MoreViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E6D940751A5972E100E0A865 /* AboutUsViewController */,
+				E6C8C43F1A57DBD800B2ECC9 /* PersonInfoViewController */,
 				E6319DAB1A41A98000982A46 /* MoreViewController.h */,
 				E6319DAC1A41A98000982A46 /* MoreViewController.m */,
 			);
@@ -1113,6 +1171,7 @@
 		E67FBB801A3EA5E700CE839C /* FunctionClass */ = {
 			isa = PBXGroup;
 			children = (
+				E6DE47491A5430B2008EFA51 /* QRCodeReaderViewController */,
 				E69964481A519055005F219A /* XHImageView */,
 				E6006B3F1A4D0D4E00E974DD /* ExtensibleToolView */,
 				E60C94DE1A4ADFFA0003B33B /* GetPhotoWithPhone */,
@@ -1333,6 +1392,7 @@
 		E67FBC341A3EA8F000CE839C /* TaskViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E615EFA91A55329C00D2621A /* SubTaskList */,
 				E67027171A455AA000C1B537 /* TaskDetailInfoTableViewController */,
 				E66DCBAB1A429C7000C2C184 /* AddNewTaskViewController */,
 				E67FBC541A3EB06100CE839C /* TaskViewController.h */,
@@ -1396,6 +1456,17 @@
 		E67FBC491A3EAF2400CE839C /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				E6D940731A596EAC00E0A865 /* Icon_Login.png */,
+				E6D9406D1A59192B00E0A865 /* card_bg.png */,
+				E6D940631A59176600E0A865 /* Icon_58.png */,
+				E6D940641A59176600E0A865 /* Icon_80.png */,
+				E6D940651A59176600E0A865 /* Icon_89.png */,
+				E6D940661A59176600E0A865 /* Icon_120.png */,
+				E6D940671A59176600E0A865 /* Icon_180.png */,
+				E6C8C43D1A57DB5A00B2ECC9 /* Personal_Default.png */,
+				E6C8C4371A57DB4D00B2ECC9 /* card_hairtask.png */,
+				E6C8C4381A57DB4D00B2ECC9 /* dontsay1.png */,
+				E6C8C4391A57DB4D00B2ECC9 /* ic_password.png */,
 				E67BA4D71A52776F000520CE /* Docment */,
 				E62C793A1A50F9B60026EC5B /* select_item_checked.png */,
 				E62C793B1A50F9B60026EC5B /* select_item_unchecked.png */,
@@ -1533,6 +1604,26 @@
 			name = WorkHome;
 			sourceTree = "<group>";
 		};
+		E6C8C43F1A57DBD800B2ECC9 /* PersonInfoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E6D9406F1A5928A800E0A865 /* ChangePwdViewController */,
+				E6C8C4431A57DCD800B2ECC9 /* Cell */,
+				E6C8C4401A57DC0100B2ECC9 /* PersonInfoViewController.h */,
+				E6C8C4411A57DC0100B2ECC9 /* PersonInfoViewController.m */,
+			);
+			name = PersonInfoViewController;
+			sourceTree = "<group>";
+		};
+		E6C8C4431A57DCD800B2ECC9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E6C8C4441A57DCFE00B2ECC9 /* PersonInfoTableViewCell.h */,
+				E6C8C4451A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		E6C9A6831A50E86F005E17FB /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1544,6 +1635,39 @@
 				E62C79481A511B1A0026EC5B /* LeaveApprovesTableViewCell.xib */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		E6D9406F1A5928A800E0A865 /* ChangePwdViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E6D940701A5928D500E0A865 /* ChangePwdViewController.h */,
+				E6D940711A5928D500E0A865 /* ChangePwdViewController.m */,
+			);
+			name = ChangePwdViewController;
+			sourceTree = "<group>";
+		};
+		E6D940751A5972E100E0A865 /* AboutUsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E6D940761A59731100E0A865 /* AboutUsViewController.h */,
+				E6D940771A59731100E0A865 /* AboutUsViewController.m */,
+			);
+			name = AboutUsViewController;
+			sourceTree = "<group>";
+		};
+		E6DE47491A5430B2008EFA51 /* QRCodeReaderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E6DE474A1A5430B2008EFA51 /* QRCameraSwitchButton.h */,
+				E6DE474B1A5430B2008EFA51 /* QRCameraSwitchButton.m */,
+				E6DE474C1A5430B2008EFA51 /* QRCodeReaderDelegate.h */,
+				E6DE474D1A5430B2008EFA51 /* QRCodeReaderView.h */,
+				E6DE474E1A5430B2008EFA51 /* QRCodeReaderView.m */,
+				E6DE474F1A5430B2008EFA51 /* QRCodeReaderViewController.h */,
+				E6DE47501A5430B2008EFA51 /* QRCodeReaderViewController.m */,
+			);
+			name = QRCodeReaderViewController;
+			path = FunctionClass/QRCodeReaderViewController;
 			sourceTree = "<group>";
 		};
 		E6E0C74D1A3F345E0054F2C4 /* JHRefresh */ = {
@@ -1667,6 +1791,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E67BA4E21A527787000520CE /* DOCX.png in Resources */,
+				E6D9406A1A59176600E0A865 /* Icon_89.png in Resources */,
 				E6394F671A44520500706882 /* Member_click@2x.png in Resources */,
 				E6E0C76A1A3F345E0054F2C4 /* JHRefresh.bundle in Resources */,
 				E6006B5D1A4D1FC500E974DD /* Attention_nav@2x.png in Resources */,
@@ -1674,6 +1799,7 @@
 				E6394F641A44520500706882 /* Addchoice@2x.png in Resources */,
 				E67BA4EB1A527787000520CE /* preViewMenu@2x.png in Resources */,
 				E6006B631A4D1FC500E974DD /* Complete_ok_nav@2x.png in Resources */,
+				E6D9406E1A59192B00E0A865 /* card_bg.png in Resources */,
 				E637A0621A46B47D00E547AE /* pullback.png in Resources */,
 				E6006B611A4D1FC500E974DD /* Complete_nav@2x.png in Resources */,
 				E6DCD60F1A415109008B0582 /* ic_account.png in Resources */,
@@ -1682,11 +1808,14 @@
 				E67BA4E61A527787000520CE /* MP3.png in Resources */,
 				E6006B7D1A4D2BA400E974DD /* More_nav@2x.png in Resources */,
 				E6006B671A4D1FC500E974DD /* Delete_nav@2x.png in Resources */,
+				E6C8C43A1A57DB4D00B2ECC9 /* card_hairtask.png in Resources */,
+				E6C8C43E1A57DB5A00B2ECC9 /* Personal_Default.png in Resources */,
 				E67FBC141A3EA83E00CE839C /* HeaderImage.png in Resources */,
 				E6753BBD1A4FE6DF00AAD8DC /* document_images.png in Resources */,
 				E67FBB661A3EA5DF00CE839C /* Main.storyboard in Resources */,
 				E6DCD60E1A415109008B0582 /* Expansion@2x.png in Resources */,
 				E6394F5C1A444E8800706882 /* chack.png in Resources */,
+				E6D9406C1A59176600E0A865 /* Icon_180.png in Resources */,
 				E6394EB31A43BAAB00706882 /* listleft_icon.png in Resources */,
 				E60349A21A418580005B8719 /* ic_locus.png in Resources */,
 				E637A0631A46B47D00E547AE /* pullback@2x.png in Resources */,
@@ -1697,6 +1826,7 @@
 				E6006B7E1A4D2BA400E974DD /* More_nav_click.png in Resources */,
 				E67FBC291A3EA83E00CE839C /* HUD_NO@2x.png in Resources */,
 				E6B312E01A3FBD1300AEF923 /* tab_menu_task.png in Resources */,
+				E6D9406B1A59176600E0A865 /* Icon_120.png in Resources */,
 				E6006B681A4D1FC500E974DD /* Feedback_nav_click.png in Resources */,
 				E6B312DB1A3FBD1300AEF923 /* nav_menu_add.png in Resources */,
 				E637A0651A46B47D00E547AE /* Pulldown@2x.png in Resources */,
@@ -1726,11 +1856,13 @@
 				E67FBB6B1A3EA5DF00CE839C /* LaunchScreen.xib in Resources */,
 				E67BA4E31A527787000520CE /* invalid_image.png in Resources */,
 				E6B312E11A3FBD1300AEF923 /* tab_menu_workcenter.png in Resources */,
+				E6D940741A596EAC00E0A865 /* Icon_Login.png in Resources */,
 				E6006B641A4D1FC500E974DD /* Delete_nav_click.png in Resources */,
 				E6394F651A44520500706882 /* choose.png in Resources */,
 				E6006B661A4D1FC500E974DD /* Delete_nav.png in Resources */,
 				E6753BBE1A4FE6DF00AAD8DC /* menu_images_click.png in Resources */,
 				E62C794A1A511B1A0026EC5B /* LeaveApprovesTableViewCell.xib in Resources */,
+				E6D940681A59176600E0A865 /* Icon_58.png in Resources */,
 				E6B312DD1A3FBD1300AEF923 /* nav_menu_date_normal.png in Resources */,
 				E6C9A6881A50E880005E17FB /* LeaveHomeTableViewCell.xib in Resources */,
 				E67FBC2A1A3EA83E00CE839C /* HUD_YES.png in Resources */,
@@ -1741,6 +1873,7 @@
 				E6319DA61A41A76D00982A46 /* tab_menu_workcenter_more.png in Resources */,
 				E67FBB681A3EA5DF00CE839C /* Images.xcassets in Resources */,
 				E6006B811A4D6D9600E974DD /* TaskOtherDetailInfoTableViewCell.xib in Resources */,
+				E6C8C43B1A57DB4D00B2ECC9 /* dontsay1.png in Resources */,
 				E67BA4E71A527787000520CE /* MP4.png in Resources */,
 				E6C9C7FA1A4CF3BB00FA0A5F /* preViewDelete@2x.png in Resources */,
 				E68C0FF31A480CEF00832CCF /* Nomal.png in Resources */,
@@ -1758,8 +1891,10 @@
 				E67BA4F31A529310000520CE /* TXT.png in Resources */,
 				E6B312DA1A3FBD1300AEF923 /* left_information_background.png in Resources */,
 				E67FBC121A3EA83E00CE839C /* CheckMarkWhite.png in Resources */,
+				E6C8C43C1A57DB4D00B2ECC9 /* ic_password.png in Resources */,
 				E637A0641A46B47D00E547AE /* Pulldown.png in Resources */,
 				E67FBC151A3EA83E00CE839C /* Toronto, ON.jpg in Resources */,
+				E6D940691A59176600E0A865 /* Icon_80.png in Resources */,
 				E6753BBF1A4FE6DF00AAD8DC /* photo.png in Resources */,
 				E6394F6A1A44551100706882 /* NoSingle60.png in Resources */,
 				E62C793D1A50F9B60026EC5B /* select_item_unchecked.png in Resources */,
@@ -1807,6 +1942,7 @@
 				E67FBC081A3EA83E00CE839C /* UIProgressView+AFNetworking.m in Sources */,
 				E6006B761A4D22CE00E974DD /* ExtensibleToolBar.m in Sources */,
 				E67FBBFD1A3EA83E00CE839C /* AFNetworkReachabilityManager.m in Sources */,
+				E6C8C4421A57DC0100B2ECC9 /* PersonInfoViewController.m in Sources */,
 				E6E0C7701A3F345E0054F2C4 /* UIScrollView+JHRefresh.m in Sources */,
 				E69964651A519055005F219A /* UIImage+Utility.m in Sources */,
 				E699646B1A519055005F219A /* XHZoomingImageView.m in Sources */,
@@ -1821,6 +1957,7 @@
 				E60C94E41A4AE5390003B33B /* PhotoCollectionViewCell.m in Sources */,
 				E6E0C74C1A3F26320054F2C4 /* MenuViewController.m in Sources */,
 				E62C79411A50FD650026EC5B /* EditLeaveViewController.m in Sources */,
+				E6DE47531A5430B2008EFA51 /* QRCodeReaderViewController.m in Sources */,
 				E67FBC011A3EA83E00CE839C /* AFURLResponseSerialization.m in Sources */,
 				E67FBBFF1A3EA83E00CE839C /* AFURLConnectionOperation.m in Sources */,
 				E6394EBE1A44009B00706882 /* ProclamationCommentsViewController.m in Sources */,
@@ -1854,6 +1991,7 @@
 				E6394F751A44565000706882 /* SelectHeaderTableViewCell.m in Sources */,
 				E67FBC531A3EB05400CE839C /* LeaveViewController.m in Sources */,
 				E67FBC0B1A3EA83E00CE839C /* CLLocation+YCLocation.m in Sources */,
+				E6D940781A59731100E0A865 /* AboutUsViewController.m in Sources */,
 				E604E3441A52D2DE000313C9 /* RelateTaskListViewController.m in Sources */,
 				E6E0C7461A3F24750054F2C4 /* UIViewController+REFrostedViewController.m in Sources */,
 				E6E0C7681A3F345E0054F2C4 /* JHRefreshAniBaseView.m in Sources */,
@@ -1882,6 +2020,7 @@
 				E6E0C7691A3F345E0054F2C4 /* JHRefreshCommonAniView.m in Sources */,
 				E6E0C7451A3F24750054F2C4 /* UIView+REFrostedViewController.m in Sources */,
 				E67FBC1A1A3EA83E00CE839C /* MJPopupBackgroundView.m in Sources */,
+				E615EFAC1A55331A00D2621A /* SubTaskTableViewController.m in Sources */,
 				E604E3471A52D2FF000313C9 /* RelateTaskTableViewCell.m in Sources */,
 				E676539F1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.m in Sources */,
 				E676539C1A4D06DB000A13D9 /* UIColor+ExtensionWithUIColor.m in Sources */,
@@ -1899,15 +2038,19 @@
 				E676539A1A4D06DB000A13D9 /* NSDictionary+ExtensionWithDictionary.m in Sources */,
 				E67FBB601A3EA5DF00CE839C /* AppDelegate.m in Sources */,
 				E6394EC51A44114500706882 /* ProclamationUsersInfoTableViewCell.m in Sources */,
+				E6DE47521A5430B2008EFA51 /* QRCodeReaderView.m in Sources */,
 				E6E0C76C1A3F345E0054F2C4 /* JHRefreshConfig.m in Sources */,
 				E6E0C7491A3F24BB0054F2C4 /* RootViewController.m in Sources */,
 				E6E0C7671A3F345E0054F2C4 /* JHRefreshAmazingAniView.m in Sources */,
 				E67FBB5D1A3EA5DF00CE839C /* main.m in Sources */,
+				E6DE47511A5430B2008EFA51 /* QRCameraSwitchButton.m in Sources */,
 				E6394F571A444E8800706882 /* CalendarHomeViewController.m in Sources */,
 				E6886AFE1A40798F008D4E7F /* Reachability.m in Sources */,
 				E67FBC0C1A3EA83E00CE839C /* CustomToolClass.m in Sources */,
 				E67FBC391A3EA95400CE839C /* BaseViewController.m in Sources */,
 				E6DB5ED91A4E9A88002906F1 /* TaskReportTableViewCell.m in Sources */,
+				E6C8C4461A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m in Sources */,
+				E6D940721A5928D500E0A865 /* ChangePwdViewController.m in Sources */,
 				E699645F1A519055005F219A /* NSString+XHMD5.m in Sources */,
 				E6753BC21A4FEA4E00AAD8DC /* AddTaskReportJudgementCollectionViewCell.m in Sources */,
 				E6394F561A444E8800706882 /* CalendarDayModel.m in Sources */,

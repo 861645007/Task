@@ -39,9 +39,8 @@
     __block CusNavigationTitleView *copyNavView = navView; // 防止陷入“retain cycle” -- “形成怪圈”的错误
     navView.selectRowAtIndex = ^(NSInteger index){
         copyNavView.titleString = navArr[(long)index];
-        self.title = navArr[(long)index];
         // 选择标题后刷新界面
-        sectionType = (long)index;
+        sectionType = index;
         [self gainLeaveHomeInfo];
     };
     self.navigationItem.titleView = navView;
@@ -85,13 +84,19 @@
     
     if (sectionType == 0) {
         action = LeaveHomeAction;
+    }else if (sectionType == 1) {
+        action = LeaveHistoryAction;
+    }else {
+        action = LeaveHistoryApproveAction;
     }
     
     [self createAsynchronousRequest:action parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithGainLeaveHomeInfoResult: dic];
     } failure:^{
+        [mainTableView reloadData];
         // 事情做完了, 结束刷新动画~~~
-        [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
+        [mainTableView headerEndRefreshingWithResult:JHRefreshResultFailure];
+        [self.view.window showHUDWithText:@"网路错误..." Type:ShowLoading Enabled:YES];
     }];
 }
 
@@ -112,15 +117,21 @@
                 NSDictionary *leaveInfoDic = [dic objectForKey:@"leaveInfo"];
                 NSDictionary *leaveHomeDic = @{@"处理中的请假": [leaveInfoDic objectForKey:@"processingLeaves"],  @"需要我审批的请假": [leaveInfoDic objectForKey:@"approveingLeaves"] , @"新审批的请假": [leaveInfoDic objectForKey:@"newProcessLeaves"]};
                 tableViewArr[0] = leaveHomeDic;
+            } else if (sectionType == 1) {
+                sectionType = 1;
+                tableViewArr[1] = [dic objectForKey:@"historyLeaveList"];
+            } else if (sectionType == 2) {
+                sectionType = 2;
+                tableViewArr[2] = [dic objectForKey:@"historyApproveList"];
             }
-            // 事情做完了, 结束刷新动画~~~
-            [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
             break;
         }
     }
     if (![msg isEqualToString:@""]) {
         [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
     }
+    // 事情做完了, 结束刷新动画~~~
+    [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
     [mainTableView reloadData];
 }
 
@@ -134,12 +145,21 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([[isShow objectAtIndex:section] intValue]) {
-        if (sectionType == 0) {
+    
+    if (sectionType == 0) {
+        if ([[isShow objectAtIndex:section] intValue]) {
             NSString *key = [leaveHomeSectionArr objectAtIndex:section];
             if (![[tableViewArr objectAtIndex:sectionType] isEqual: @{}]) {
                 return [[[tableViewArr objectAtIndex:sectionType] objectForKey:key] count];
             }
+        }
+    } else if (sectionType == 1) {
+        if ([tableViewArr[1] count] != 0) {
+            return [tableViewArr[1] count];
+        }
+    } else if (sectionType == 2) {
+        if ([tableViewArr[2] count] != 0) {
+            return [tableViewArr[2] count];
         }
     }
     return 0;
@@ -147,6 +167,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 2;
 }
 
 // 定义头标题的视图，添加点击事件
@@ -209,16 +233,19 @@
         NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"LeaveHomeTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-
+    NSDictionary *dic = nil;
     if (sectionType == 0) {
         NSString *sectionTitle = [leaveHomeSectionArr objectAtIndex:indexPath.section];
-        NSDictionary *dic = [[[tableViewArr objectAtIndex:sectionType] objectForKey:sectionTitle] objectAtIndex:indexPath.row];
-
-        cell.leaveNameLabel.text = [dic objectForKey:@"leaveUserName"];
-        cell.leaveTypeLabel.text = [dic objectForKey:@"type"];
-        cell.leaveContentLabel.text = [dic objectForKey:@"comment"];
-        cell.leaveTimeLabel.text = [NSString stringWithFormat:@"%@至%@", [dic objectForKey:@"startTime"], [dic objectForKey:@"endTime"]];
+        dic = [[[tableViewArr objectAtIndex:sectionType] objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+    }else {
+        dic = [tableViewArr[indexPath.section] objectAtIndex:indexPath.row];
     }
+
+    cell.leaveNameLabel.text = [dic objectForKey:@"leaveUserName"];
+    cell.leaveTypeLabel.text = [dic objectForKey:@"type"];
+    cell.leaveContentLabel.text = [dic objectForKey:@"comment"];
+    cell.leaveTimeLabel.text = [NSString stringWithFormat:@"%@至%@", [dic objectForKey:@"startTime"], [dic objectForKey:@"endTime"]];
+
     
     return cell;
 }
@@ -230,6 +257,8 @@
     if (sectionType == 0) {
         NSString *sectionTitle = [leaveHomeSectionArr objectAtIndex:indexPath.section];
         dic = [[[tableViewArr objectAtIndex:sectionType] objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+    }else{
+        dic = [tableViewArr[indexPath.section] objectAtIndex:indexPath.row];
     }
     
     LeaveDetailViewController *leaveDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveDetailViewController"];

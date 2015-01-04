@@ -20,6 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *reportTransferBtn;
 @property (weak, nonatomic) IBOutlet UIButton *reportReplyBtn;
 
-- (void)setAutoHeight:(NSArray *)reportContentArr reportAccessorysList:(NSArray *)reportAccessorysArr baseViewController:(UIViewController *)viewController ;
+- (void)setAutoHeight:(NSArray *)reportContentArr reportAccessorysList:(NSArray *)reportAccessorysArr taskContentText:(NSString *)taskContentText baseViewController:(UIViewController *)viewController;
 - (UIImage *)gainUserIcon:(NSString *)userId;
 @end
