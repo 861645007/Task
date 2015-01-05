@@ -7,9 +7,12 @@
 //
 
 #import "AttendanceViewController.h"
+#import "AttendanceDetailViewController.h"
 
 @interface AttendanceViewController (){
     NSString *attendanceType;
+    
+    int isShareAttendance;                        // 0 表示点击按钮，1表示摇一摇
     NSString *attendancePatten;
     CLLocationCoordinate2D coordinate;
     NSString *address;
@@ -32,6 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     attendanceArr = [NSMutableArray array];
+    isShareAttendance = 0;
     [self initLocation];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(getAddressInfo)];
@@ -55,11 +59,24 @@
     [self gainAttendanceInfo];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [self resignFirstResponder];
+    [super viewWillAppear:animated];
+}
+
+
 - (void)judgeAttendanceBtn:(NSString *)attendanceTypeBtn {
     if ([attendanceTypeBtn isEqualToString:@"0"]) {
         self.signInBtn.hidden = false;
         self.signOutBtn.hidden = true;
+        attendanceType = @"1";
     } else if ([attendanceTypeBtn isEqualToString:@"1"] || [attendanceTypeBtn isEqualToString:@"2"]) {
+        attendanceType = @"0";
         self.signInBtn.hidden = true;
         self.signOutBtn.hidden = false;
     }
@@ -70,15 +87,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"GainToAttendanceDetailView"]) {
+        NSIndexPath *indexPath = [mainTableView indexPathForSelectedRow];
+        
+        AttendanceDetailViewController *attendanceDetailViewController = [segue destinationViewController];
+        attendanceDetailViewController.attendanceInfo = [attendanceArr objectAtIndex:indexPath.row];
+    }
 }
-*/
+
 
 #pragma mark - 定位
 -(void)initLocation {
@@ -143,7 +167,7 @@
         [self createSimpleAlertView:@"抱歉" msg:@"您尚未定位"];
         return ;
     }
-    
+    isShareAttendance = 0;
     attendanceType = @"1";
     [self createSelectAttendanceAlertView];
 }
@@ -154,9 +178,27 @@
         return ;
     }
     
+    isShareAttendance = 0;
     [self createSelectAttendanceAlertView];
     attendanceType = @"0";
 }
+
+// 摇一摇
+#pragma mark - Shake
+
+- (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (motion == UIEventSubtypeMotionShake) {
+        //在此处实现摇一摇的功能
+        if ([address isEqualToString:@""] || address == nil) {
+            [self createSimpleAlertView:@"抱歉" msg:@"您尚未定位"];
+            return ;
+        }
+        isShareAttendance = 1;
+        [self submitQRCodeAttendance:nil];
+    }
+}
+
+
 
 - (void)createSelectAttendanceAlertView {
     BOAlertController *alertView = [[BOAlertController alloc] initWithTitle:@"提示" message:@"请选择考勤的方式" subView:nil viewController:self];
@@ -174,6 +216,7 @@
     [alertView show];
 }
 
+// 二维码考勤
 - (void)gotoQRCodeViewController {
     static QRCodeReaderViewController *reader = nil;
     static dispatch_once_t onceToken;
@@ -215,9 +258,17 @@
     NSString *realName = [userInfo gainUserName];
     NSString *enterpriseId = [userInfo gainUserEnterpriseId];
     //参数
-    NSDictionary *parameters = @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"type": attendanceType, @"pattern":attendancePatten, @"longitude": [NSString stringWithFormat:@"%f", coordinate.longitude], @"latitude": [NSString stringWithFormat:@"%f", coordinate.latitude], @"address":address, @"phoneImei": @"123", @"description": description};
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"type": attendanceType, @"pattern":attendancePatten, @"longitude": [NSString stringWithFormat:@"%f", coordinate.longitude], @"latitude": [NSString stringWithFormat:@"%f", coordinate.latitude], @"address":address, @"phoneImei": @"123"}];
+    NSString *action = @"";
     
-    [self createAsynchronousRequest:AttendanceAction parmeters:parameters success:^(NSDictionary *dic){
+    if (isShareAttendance == 0) {
+        action = AttendanceAction;
+        [parameters setObject:description forKey:@"description"];
+    }else {
+        action = @"";
+    }
+    
+    [self createAsynchronousRequest:action parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithNetManageResult: dic];
     } failure:^{}];
 }

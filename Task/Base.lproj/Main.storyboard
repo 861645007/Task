@@ -823,8 +823,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="deleteFile:" destination="V7g-Lv-8Pd" eventType="touchUpInside" id="T2Z-jL-bgf"/>
-                                            <action selector="deleteImage:" destination="V7g-Lv-8Pd" eventType="touchUpInside" id="Qea-Iy-sjN"/>
+                                            <action selector="deleteFile:" destination="V7g-Lv-8Pd" eventType="touchUpInside" id="hze-Eb-4ss"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ozu-pT-Jfl">
@@ -1325,25 +1324,6 @@
             </objects>
             <point key="canvasLocation" x="5556" y="605"/>
         </scene>
-        <!--扫描二维码-->
-        <scene sceneID="Q9z-oj-HYG">
-            <objects>
-                <viewController storyboardIdentifier="ReadQRCodeViewController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4bL-Q0-FtK" customClass="ReadQRCodeViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OiP-KB-cDs"/>
-                        <viewControllerLayoutGuide type="bottom" id="R3C-3r-IWg"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="E8w-Sw-yUy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="扫描二维码" id="xC7-aE-Ziz"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="enD-NI-eb9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4115" y="1628"/>
-        </scene>
         <!--外勤-->
         <scene sceneID="yLv-45-Qzt">
             <objects>
@@ -1541,6 +1521,7 @@
                                         <connections>
                                             <outlet property="attendanceDescLabel" destination="SaO-cw-GpV" id="3pJ-e4-JH2"/>
                                             <outlet property="attendanceTypeLabel" destination="zKq-rZ-RDN" id="2UG-3Y-Aql"/>
+                                            <segue destination="owN-Qh-xEM" kind="show" identifier="GainToAttendanceDetailView" id="KTM-bn-XaY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1602,6 +1583,87 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FI7-mS-zsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3402" y="1626"/>
+        </scene>
+        <!--考勤详情-->
+        <scene sceneID="COG-Jg-HMQ">
+            <objects>
+                <viewController storyboardIdentifier="AttendanceDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="owN-Qh-xEM" customClass="AttendanceDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hwQ-RG-hOI"/>
+                        <viewControllerLayoutGuide type="bottom" id="F1j-5I-xkB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JGM-vx-EiR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="考勤人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQo-FU-jbA">
+                                <rect key="frame" x="24" y="94" width="51" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Y0-Xb-lmx">
+                                <rect key="frame" x="89" y="151" width="495" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="描述：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZT-1M-Pic">
+                                <rect key="frame" x="24" y="151" width="51" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="51" id="IKx-qG-9LY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="考勤时间：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbV-4y-YgY">
+                                <rect key="frame" x="24" y="123" width="75" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sk-YA-sCT">
+                                <rect key="frame" x="534" y="94" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhx-4Q-onD">
+                                <rect key="frame" x="107" y="124" width="38" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6Y0-Xb-lmx" firstAttribute="leading" secondItem="gZT-1M-Pic" secondAttribute="trailing" constant="14" id="11E-0M-ZLk"/>
+                            <constraint firstItem="hhx-4Q-onD" firstAttribute="leading" secondItem="mbV-4y-YgY" secondAttribute="trailing" constant="8" id="651-Sg-YgY"/>
+                            <constraint firstItem="fQo-FU-jbA" firstAttribute="top" secondItem="hwQ-RG-hOI" secondAttribute="bottom" constant="30" id="6ZI-83-MqD"/>
+                            <constraint firstItem="mbV-4y-YgY" firstAttribute="centerY" secondItem="hhx-4Q-onD" secondAttribute="centerY" constant="-0.5" id="7w7-Jx-sap"/>
+                            <constraint firstItem="fQo-FU-jbA" firstAttribute="leading" secondItem="JGM-vx-EiR" secondAttribute="leadingMargin" constant="8" id="Hp3-Vs-wJz"/>
+                            <constraint firstItem="6Y0-Xb-lmx" firstAttribute="top" secondItem="hhx-4Q-onD" secondAttribute="bottom" constant="9" id="Rrp-cl-x0W"/>
+                            <constraint firstItem="6Y0-Xb-lmx" firstAttribute="trailing" secondItem="JGM-vx-EiR" secondAttribute="trailingMargin" id="S5H-2h-K5k"/>
+                            <constraint firstItem="mbV-4y-YgY" firstAttribute="top" secondItem="fQo-FU-jbA" secondAttribute="bottom" constant="8" id="Sr7-Zi-m14"/>
+                            <constraint firstItem="6sk-YA-sCT" firstAttribute="trailing" secondItem="JGM-vx-EiR" secondAttribute="trailingMargin" constant="-8" id="bVh-Hs-Zh3"/>
+                            <constraint firstItem="6Y0-Xb-lmx" firstAttribute="centerY" secondItem="gZT-1M-Pic" secondAttribute="centerY" id="baz-bG-19C"/>
+                            <constraint firstItem="6sk-YA-sCT" firstAttribute="centerY" secondItem="fQo-FU-jbA" secondAttribute="centerY" id="g9N-gM-s8U"/>
+                            <constraint firstItem="mbV-4y-YgY" firstAttribute="leading" secondItem="fQo-FU-jbA" secondAttribute="leading" id="nV7-7X-CaC"/>
+                            <constraint firstItem="gZT-1M-Pic" firstAttribute="leading" secondItem="JGM-vx-EiR" secondAttribute="leadingMargin" constant="8" id="psP-ve-eBS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="考勤详情" id="Dcf-Gr-4zu"/>
+                    <connections>
+                        <outlet property="attendanceDetailDescLabel" destination="6Y0-Xb-lmx" id="Bjf-SR-zln"/>
+                        <outlet property="attendanceDetailPersonNameLabel" destination="fQo-FU-jbA" id="FWI-M8-P53"/>
+                        <outlet property="attendanceDetailTimeLabel" destination="hhx-4Q-onD" id="z9y-Dt-pmV"/>
+                        <outlet property="attendanceDetailTypeLabel" destination="6sk-YA-sCT" id="lVb-db-KGT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g8g-R9-c2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4084" y="1626"/>
         </scene>
         <!--Log In View Controller-->
         <scene sceneID="eT8-Kc-rkq">

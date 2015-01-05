@@ -34,6 +34,7 @@
 		E6006B7E1A4D2BA400E974DD /* More_nav_click.png in Resources */ = {isa = PBXBuildFile; fileRef = E6006B7A1A4D2BA400E974DD /* More_nav_click.png */; };
 		E6006B7F1A4D2BA400E974DD /* More_nav_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6006B7B1A4D2BA400E974DD /* More_nav_click@2x.png */; };
 		E6006B811A4D6D9600E974DD /* TaskOtherDetailInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6006B801A4D6D9600E974DD /* TaskOtherDetailInfoTableViewCell.xib */; };
+		E6033BD31A5ABF9C00504F9C /* AttendanceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6033BD21A5ABF9C00504F9C /* AttendanceDetailViewController.m */; };
 		E603499E1A417E17005B8719 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E603499D1A417E17005B8719 /* AVFoundation.framework */; };
 		E60349A11A418580005B8719 /* ic_locus_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = E603499F1A418580005B8719 /* ic_locus_pressed.png */; };
 		E60349A21A418580005B8719 /* ic_locus.png in Resources */ = {isa = PBXBuildFile; fileRef = E60349A01A418580005B8719 /* ic_locus.png */; };
@@ -93,7 +94,6 @@
 		E670271D1A456F5F00C1B537 /* TaskDetailInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E670271C1A456F5F00C1B537 /* TaskDetailInfoTableViewCell.m */; };
 		E67190041A43B45300CCA424 /* ProclamationInfoClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E67190031A43B45300CCA424 /* ProclamationInfoClass.m */; };
 		E674AE041A41239D0086C05B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E674AE031A41239D0086C05B /* CoreLocation.framework */; };
-		E674AE071A41242D0086C05B /* ReadQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E674AE061A41242D0086C05B /* ReadQRCodeViewController.m */; };
 		E674AE771A46F99A00E10718 /* ModifyTaskTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E674AE761A46F99A00E10718 /* ModifyTaskTitleViewController.m */; };
 		E6753BB91A4FE54900AAD8DC /* AddTaskReportJudgementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6753BB81A4FE54900AAD8DC /* AddTaskReportJudgementViewController.m */; };
 		E6753BBD1A4FE6DF00AAD8DC /* document_images.png in Resources */ = {isa = PBXBuildFile; fileRef = E6753BBA1A4FE6DF00AAD8DC /* document_images.png */; };
@@ -305,6 +305,8 @@
 		E6006B7A1A4D2BA400E974DD /* More_nav_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = More_nav_click.png; sourceTree = "<group>"; };
 		E6006B7B1A4D2BA400E974DD /* More_nav_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "More_nav_click@2x.png"; sourceTree = "<group>"; };
 		E6006B801A4D6D9600E974DD /* TaskOtherDetailInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TaskOtherDetailInfoTableViewCell.xib; path = Controller/TaskOtherDetailInfoTableViewCell.xib; sourceTree = "<group>"; };
+		E6033BD11A5ABF9C00504F9C /* AttendanceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttendanceDetailViewController.h; path = Controller/AttendanceDetailViewController.h; sourceTree = "<group>"; };
+		E6033BD21A5ABF9C00504F9C /* AttendanceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttendanceDetailViewController.m; path = Controller/AttendanceDetailViewController.m; sourceTree = "<group>"; };
 		E603499D1A417E17005B8719 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E603499F1A418580005B8719 /* ic_locus_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_locus_pressed.png; path = Image/ic_locus_pressed.png; sourceTree = "<group>"; };
 		E60349A01A418580005B8719 /* ic_locus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_locus.png; path = Image/ic_locus.png; sourceTree = "<group>"; };
@@ -399,8 +401,6 @@
 		E67190021A43B45300CCA424 /* ProclamationInfoClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProclamationInfoClass.h; sourceTree = "<group>"; };
 		E67190031A43B45300CCA424 /* ProclamationInfoClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProclamationInfoClass.m; sourceTree = "<group>"; };
 		E674AE031A41239D0086C05B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		E674AE051A41242D0086C05B /* ReadQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadQRCodeViewController.h; path = Controller/ReadQRCodeViewController.h; sourceTree = "<group>"; };
-		E674AE061A41242D0086C05B /* ReadQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReadQRCodeViewController.m; path = Controller/ReadQRCodeViewController.m; sourceTree = "<group>"; };
 		E674AE751A46F99A00E10718 /* ModifyTaskTitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModifyTaskTitleViewController.h; path = Controller/ModifyTaskTitleViewController.h; sourceTree = "<group>"; };
 		E674AE761A46F99A00E10718 /* ModifyTaskTitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModifyTaskTitleViewController.m; path = Controller/ModifyTaskTitleViewController.m; sourceTree = "<group>"; };
 		E6753BB71A4FE54900AAD8DC /* AddTaskReportJudgementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddTaskReportJudgementViewController.h; path = Controller/AddTaskReportJudgementViewController.h; sourceTree = "<group>"; };
@@ -776,6 +776,15 @@
 				E6DB5EDD1A4E9E54002906F1 /* TaskLookDetailTableViewCell.xib */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		E6033BD01A5ABF6E00504F9C /* AttendanceDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E6033BD11A5ABF9C00504F9C /* AttendanceDetailViewController.h */,
+				E6033BD21A5ABF9C00504F9C /* AttendanceDetailViewController.m */,
+			);
+			name = AttendanceDetailViewController;
 			sourceTree = "<group>";
 		};
 		E604E3411A52D2A7000313C9 /* RelateTaskListViewController */ = {
@@ -1417,12 +1426,11 @@
 		E67FBC361A3EA91800CE839C /* AttendanceViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E6033BD01A5ABF6E00504F9C /* AttendanceDetailViewController */,
 				E67FBC4E1A3EB04600CE839C /* AttendanceViewController.h */,
 				E67FBC4F1A3EB04600CE839C /* AttendanceViewController.m */,
 				E6DCD6141A416EEC008B0582 /* AttendanceListTableViewCell.h */,
 				E6DCD6151A416EEC008B0582 /* AttendanceListTableViewCell.m */,
-				E674AE051A41242D0086C05B /* ReadQRCodeViewController.h */,
-				E674AE061A41242D0086C05B /* ReadQRCodeViewController.m */,
 				E6DCD6111A41690D008B0582 /* LocationAttendanceViewController.h */,
 				E6DCD6121A41690D008B0582 /* LocationAttendanceViewController.m */,
 			);
@@ -1930,7 +1938,6 @@
 				E60C94E91A4AEDFE0003B33B /* GetPhotoFromAlbumClass.m in Sources */,
 				E6394EBB1A43FB4300706882 /* ProclamationListCell.m in Sources */,
 				E67FBC071A3EA83E00CE839C /* UIImageView+AFNetworking.m in Sources */,
-				E674AE071A41242D0086C05B /* ReadQRCodeViewController.m in Sources */,
 				E6394EC21A440B0F00706882 /* ProclamationUsersInfoViewController.m in Sources */,
 				E67C77B11A42FF2800C24054 /* ProclamationListViewController.m in Sources */,
 				E67FBC441A3EAADA00CE839C /* LeftMenuViewController.m in Sources */,
@@ -2001,6 +2008,7 @@
 				E67FBBFC1A3EA83E00CE839C /* AFHTTPSessionManager.m in Sources */,
 				E6394F551A444E8800706882 /* CalendarDayCell.m in Sources */,
 				E6753BB91A4FE54900AAD8DC /* AddTaskReportJudgementViewController.m in Sources */,
+				E6033BD31A5ABF9C00504F9C /* AttendanceDetailViewController.m in Sources */,
 				E67FBC051A3EA83E00CE839C /* UIAlertView+AFNetworking.m in Sources */,
 				E6394F781A44566000706882 /* SelectHeaderViewController.m in Sources */,
 				E6E0C7421A3F24750054F2C4 /* REFrostedContainerViewController.m in Sources */,

@@ -38,29 +38,29 @@
 
 // TableView 的头文件
 - (UIView *)setMaiTableHeaderView {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width + 20, 220)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width + 20, 210)];
     
     // 背景图片
-    UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width + 20, 200)];
+    UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width + 20, 190)];
     bgImageView.image = [UIImage imageNamed:@"card_bg"];
     [headerView addSubview:bgImageView];
     
     // 头像
-    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 140, 80, 80)];
+    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 130, 80, 80)];
     headerImageView.backgroundColor = [UIColor clearColor];
     headerImageView.layer.masksToBounds = YES;
     headerImageView.layer.cornerRadius = 40.0;
     [headerImageView setImage:[self gainHeaderImageImage]];
     [headerView addSubview:headerImageView];
     
-    UILabel *personNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 148, 100, 21)];
+    UILabel *personNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 138, 100, 21)];
     personNameLabel.text = [userInfo gainUserName];
     personNameLabel.font = [UIFont systemFontOfSize:20];
     [personNameLabel setTextColor:[UIColor whiteColor]];
     [headerView addSubview:personNameLabel];
     
     // 按钮
-    UIButton *createTaskBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, 190, 85, 30)];
+    UIButton *createTaskBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, 180, 85, 30)];
     createTaskBtn.layer.cornerRadius = 5.0;
     createTaskBtn.layer.borderWidth = 1;
     createTaskBtn.layer.borderColor = [UIColor colorWithRed:143/255.0 green:195/255.0 blue:31/255.0 alpha:1.0].CGColor;
@@ -76,7 +76,7 @@
     [headerView addSubview:createTaskBtn];
     
     
-    UIButton *changePwdBtn = [[UIButton alloc] initWithFrame:CGRectMake(215, 190, 85, 30)];
+    UIButton *changePwdBtn = [[UIButton alloc] initWithFrame:CGRectMake(215, 180, 85, 30)];
     changePwdBtn.layer.cornerRadius = 5.0;
     changePwdBtn.layer.borderWidth = 1;
     changePwdBtn.layer.borderColor = [UIColor colorWithRed:143/255.0 green:195/255.0 blue:31/255.0 alpha:1.0].CGColor;
