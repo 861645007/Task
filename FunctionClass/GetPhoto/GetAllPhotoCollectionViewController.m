@@ -24,6 +24,26 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
+#pragma mark - initCollectionViewFlowLayout
++ (id)setCollectionViewController:(NSInteger)cellItemNum delegate:(id<SelectedPhotoProtocol>)viewDelegate {
+    GetAllPhotoCollectionViewController *getPhotoController = [[GetAllPhotoCollectionViewController alloc] initWithCollectionViewLayout:[GetAllPhotoCollectionViewController setCollectionViewFlowLayout:cellItemNum]];
+    getPhotoController.delegate = viewDelegate;
+    return getPhotoController;
+}
+
++ (UICollectionViewFlowLayout *)setCollectionViewFlowLayout:(NSInteger)cellNumber {
+    CGFloat cellWidth = ([UIScreen mainScreen].bounds.size.width - 5 * cellNumber * 2) / cellNumber;
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setItemSize:CGSizeMake(cellWidth, cellWidth)];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 0, 5);
+    flowLayout.minimumLineSpacing = 5;
+    
+    return flowLayout;
+}
+
+#pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -54,7 +74,6 @@ static NSString * const reuseIdentifier = @"Cell";
         }
         
         [self.collectionView reloadData];
-    
     }];
 }
 
@@ -63,12 +82,11 @@ static NSString * const reuseIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if ([allPhotoList count] == 0) {
@@ -94,8 +112,7 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
-
+#pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([[isSelectedImageArr objectAtIndex:indexPath.row] intValue]) {
         isSelectedImageArr[indexPath.row] = @"0";

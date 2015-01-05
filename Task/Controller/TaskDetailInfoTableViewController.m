@@ -127,10 +127,14 @@
 // 完成 按钮
 - (ExtensibleToolBar *)addCompleteBar {
     ExtensibleToolBar *completeBar = [ExtensibleToolBar itemWithLabel:@"完成" imageNormal:[UIImage imageNamed:@"Complete_nav"] imageSelected:[UIImage imageNamed:@"Complete_ok_nav"] action:^(){
-        [toolView reloadToolView:2];
-        ExtensibleToolBar *curreentItem = toolView.toolBarArr[2];
-        [[self createSubmitTaskModifyInfoViewController] modifyTaskState:[NSString stringWithFormat:@"%d", curreentItem.itemState] atIndex:2];
-
+        NSString *createId = [NSString stringWithFormat:@"%@",[taskDetailInfoDic objectForKey:@"createName"]];
+        if ([createId isEqualToString:[userInfo gainUserId]]) {
+            [toolView reloadToolView:2];
+            ExtensibleToolBar *curreentItem = toolView.toolBarArr[2];
+            [[self createSubmitTaskModifyInfoViewController] modifyTaskState:[NSString stringWithFormat:@"%d", curreentItem.itemState] atIndex:2];
+        }else {
+            [self createSimpleAlertView:@"提示" msg:@"你不是创建者，不能更改此任务状态"];
+        }
     }];
     return completeBar;
 }
@@ -148,9 +152,15 @@
 // 删除 按钮
 - (ExtensibleToolBar *)addDeleteBar {
     ExtensibleToolBar *deleteBar = [ExtensibleToolBar itemWithLabel:@"删除" imageNormal:[UIImage imageNamed:@"Delete_nav"] imageSelected:[UIImage imageNamed:@"Delete_nav_click"] action:^(){
-        isDelete = 1;
-        ExtensibleToolBar *curreentItem = toolView.toolBarArr[4];
-        [[self createSubmitTaskModifyInfoViewController] modifyTaskState:[NSString stringWithFormat:@"%d", curreentItem.itemState] atIndex:4];
+        NSString *createId = [NSString stringWithFormat:@"%@",[taskDetailInfoDic objectForKey:@"createName"]];
+        if ([createId isEqualToString:[userInfo gainUserId]]) {
+            isDelete = 1;
+            ExtensibleToolBar *curreentItem = toolView.toolBarArr[4];
+            [[self createSubmitTaskModifyInfoViewController] modifyTaskState:[NSString stringWithFormat:@"%d", curreentItem.itemState] atIndex:4];
+        }else {
+            [self createSimpleAlertView:@"提示" msg:@"你不是创建者，不能删除此任务"];
+        }
+        
     }];
     return deleteBar;
 }
@@ -298,7 +308,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0  && indexPath.row == 0) {
-        return 80;
+        CGFloat contentH = [self setSectionOneRowOneHeight];
+        if (contentH == 0) {
+            return 80;
+        }else {
+            return 59 + contentH;
+        }
     } else if (indexPath.section == 1  && indexPath.row == 4) {
         return 44 * (relationTasksArr.count + 1);
     } else if (indexPath.section == 1  && indexPath.row == 5) {
@@ -311,6 +326,15 @@
         }
     }
     return  44;
+}
+
+- (CGFloat)setSectionOneRowOneHeight {
+    NSString *content = [self judgeTextIsNULL:[taskDetailInfoDic objectForKey:@"content"]];
+    if ([content isEqualToString:@""]) {
+        return 0;
+    }else {
+        return [self textHeight:content];
+    }
 }
 
 // 设置 section 即反馈的 cell 的高度

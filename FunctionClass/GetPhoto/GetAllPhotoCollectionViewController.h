@@ -13,6 +13,11 @@
 
 @protocol SelectedPhotoProtocol <NSObject>
 
+/**
+ *  选择的照片协议
+ *
+ *  @param imageList 返回选择的照片的列表（UIImage）
+ */
 - (void)selectedPhoto:(NSArray *)imageList;
 
 @end
@@ -20,5 +25,8 @@
 @interface GetAllPhotoCollectionViewController : UICollectionViewController
 
 @property (nonatomic, strong) id<SelectedPhotoProtocol> delegate;
+
++ (UICollectionViewFlowLayout *)setCollectionViewFlowLayout:(NSInteger)cellNumber;
++ (id)setCollectionViewController:(NSInteger)cellItemNum delegate:(id<SelectedPhotoProtocol>)viewDelegate;
 
 @end

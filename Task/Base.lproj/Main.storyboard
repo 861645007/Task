@@ -385,8 +385,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无内容" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dza-2j-NPv">
-                                                    <rect key="frame" x="16" y="33" width="52" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无内容" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dza-2j-NPv">
+                                                    <rect key="frame" x="16" y="33" width="568" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.41176470590000003" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -406,6 +406,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="dza-2j-NPv" firstAttribute="top" secondItem="poc-6V-UMg" secondAttribute="bottom" constant="4" id="0mz-aG-cWW"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="dza-2j-NPv" secondAttribute="trailing" constant="8" id="Odn-vp-EsF"/>
                                                 <constraint firstItem="qY9-QZ-34P" firstAttribute="bottom" secondItem="GGA-qP-plT" secondAttribute="bottomMargin" id="S50-qI-NJD"/>
                                                 <constraint firstItem="dza-2j-NPv" firstAttribute="leading" secondItem="GGA-qP-plT" secondAttribute="leadingMargin" constant="8" id="TAe-69-1cm"/>
                                                 <constraint firstItem="db7-NJ-sbK" firstAttribute="centerY" secondItem="qY9-QZ-34P" secondAttribute="centerY" id="df5-3y-sp5"/>

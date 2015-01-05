@@ -39,13 +39,7 @@
     [reportJudgementTextView becomeFirstResponder];
     
     [self initCollectionCell];
-    
-    if (isFeedBackOrJudgement == 1) {
-        mainCollectionView.hidden = YES;
-        photoBtn.hidden = YES;
-        cameraBtn.hidden = YES;
-    }
-    
+
     // 右上角添加提交 bar
     UIBarButtonItem *saveBar = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(submitTaskFeedback)];
     self.navigationItem.rightBarButtonItem = saveBar;
@@ -123,27 +117,15 @@
 }
 
 - (IBAction)getImageWithAlbum:(id)sender {
-    [self hidenKeyboard];
     [self pickImageFromAlbum];
 }
 
 - (void)pickImageFromAlbum {
-    GetAllPhotoCollectionViewController *allPhotoCollectionView = [[GetAllPhotoCollectionViewController alloc] initWithCollectionViewLayout:[self setCollectionViewController]];
-    allPhotoCollectionView.delegate = self;
+    [self hidenKeyboard];
+    GetAllPhotoCollectionViewController *allPhotoCollectionView = [GetAllPhotoCollectionViewController setCollectionViewController:4 delegate:self];
     [self.navigationController pushViewController:allPhotoCollectionView animated:YES];
 }
 
-- (UICollectionViewFlowLayout *)setCollectionViewController {
-    CGFloat cellWidth = (self.view.frame.size.width - 5 * 6) / 3;
-    
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(cellWidth, cellWidth)];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 0, 5);
-    flowLayout.minimumLineSpacing = 5;
-    
-    return flowLayout;
-}
 
 #pragma mark - 从相册获取图片
 - (void)selectedPhoto:(NSArray *)imageList {
@@ -177,6 +159,8 @@
 
 #pragma mark - 保存操作
 - (void)submitTaskFeedback {
+    [self hidenKeyboard];
+    
     if ([reportJudgementTextView.text isEqualToString:@""]) {
         [self createSimpleAlertView:@"抱歉" msg:[NSString stringWithFormat:@"请输入新的%@", titleStr]];
         return ;
@@ -222,11 +206,11 @@
                 [self.view.window showHUDWithText:@"提交成功" Type:ShowPhotoYes Enabled:YES];
                 [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
             }else {
+                submitImageIndex = 0;
                 if (isFeedBackOrJudgement == 0) {
-                    submitImageIndex = 0;
                     [self submitReportImage:selectedImageArr[submitImageIndex] taskReportId:[dic objectForKey:@"taskReortId"]];
                 }else {
-                    [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
+                    [self submitReportImage:selectedImageArr[submitImageIndex] taskReportId:taskReportId];
                 }
             }            
             break;

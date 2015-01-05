@@ -23,9 +23,9 @@ static GetPhotoFromAlbumClass *instnce;
 }
 
 #pragma mark - ALAsset的使用（一次获取所有照片或视频）
-static NSInteger count = 0;
 
 -(void)getAllPictures:(ALAssetsLibrary *)library AndPhotoOperateBlock:(DealWithPhotoOperateBlock )dealWithPhotoOperateBlock{
+    __block NSInteger count = 0;
     NSMutableArray *imageOfAlAssetArr = [NSMutableArray array];
     
     NSMutableArray* assetURLDictionaries = [[NSMutableArray alloc] init];
@@ -39,9 +39,13 @@ static NSInteger count = 0;
                 //根据路径重新获取了每一个照片的 asset
                 [library assetForURL:url
                          resultBlock:^(ALAsset *asset) {
-                             [imageOfAlAssetArr addObject:asset];
-                             if ([imageOfAlAssetArr count] == count) {
-                                 //处理照片操作
+                             if (asset != nil ) {
+                                 [imageOfAlAssetArr addObject:asset];
+                                 if ([imageOfAlAssetArr count] == count) {
+                                     //处理照片操作
+                                     dealWithPhotoOperateBlock(imageOfAlAssetArr);
+                                 }
+                             }else {
                                  dealWithPhotoOperateBlock(imageOfAlAssetArr);
                              }
                          }
@@ -57,7 +61,7 @@ static NSInteger count = 0;
         if(group != nil) {
             [group enumerateAssetsUsingBlock:assetEnumerator];
             [assetGroups addObject:group];
-            count = [group numberOfAssets];
+            count += [group numberOfAssets];
         }
     };
     

@@ -18,7 +18,9 @@
     if (self) {
         // Initialization code
         [self SetPhotoView:frame];
-        self.layer.borderWidth = 0.5;
+//        self.layer.borderWidth = 0.5;
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = 5.0f;
     }
     return self;
 }
