@@ -351,16 +351,15 @@
 
     NSDictionary *dic = [taskReportArr objectAtIndex:indexPath.row];
     CGFloat descHeight = [self textHeight:[dic objectForKey:@"desc"]];
-
+    CGFloat contentH = 0;
     // 获取字符串
-    NSString *contentText = @"";
     for (NSDictionary *reportContentDic in [dic objectForKey:@"reportJudges"]) {
-        contentText = [contentText stringByAppendingFormat:@"@%@ %@ \n", [reportContentDic objectForKey:@"judgedUserName"], [reportContentDic objectForKey:@"judgeContent"]];
+        NSString *contentText = [NSString stringWithFormat:@"@%@ %@ \n", [reportContentDic objectForKey:@"judgedUserName"], [reportContentDic objectForKey:@"judgeContent"]];
+        contentH += ([self textHeight:contentText] +3);
     }
     
     CGFloat accessoryH = [[dic objectForKey:@"reportAccessorys"] count] * 30;
     // 获取并设置高度
-    CGFloat contentH = [self textHeight:contentText];
     
     return 35 + descHeight + contentH + accessoryH + 27;
 }
@@ -638,7 +637,7 @@
 
             taskReportCell.reportPersonIconImageView.image = [taskReportCell gainUserIcon:[dic objectForKey:@"reportPersonId"]];
             
-            [taskReportCell setAutoHeight:[dic objectForKey:@"reportJudges"] reportAccessorysList:[dic objectForKey:@"reportAccessorys"] taskContentText:[dic objectForKey:@"desc"] baseViewController:self];
+            [taskReportCell setAutoHeight:dic baseViewController:self];
             taskReportCell.reportReplyBtn.tag = indexPath.row;
             [taskReportCell.reportReplyBtn addTarget:self action:@selector(addTaskReportJudgement:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -678,6 +677,7 @@
     AddTaskReportJudgementViewController *addTaskReportJudgementViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddTaskReportJudgementViewController"];
     addTaskReportJudgementViewController.isFeedBackOrJudgement = 1;
     addTaskReportJudgementViewController.titleStr = @"评论";
+    addTaskReportJudgementViewController.judgeId = @"";
     addTaskReportJudgementViewController.taskReportId = [dic objectForKey:@"taskReportId"];
     addTaskReportJudgementViewController.judgedUserId = [dic objectForKey:@"reportPersonId"];
     addTaskReportJudgementViewController.judgedUserName = [dic objectForKey:@"reportPersonName"];

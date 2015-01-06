@@ -11,6 +11,7 @@
 
 @interface TaskReportTableViewCell : UITableViewCell {
     NSArray *reportAccessorysList;
+    NSDictionary *reportDic;
     UIViewController *baseViewController;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *reportPersonIconImageView;
@@ -20,6 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *reportTransferBtn;
 @property (weak, nonatomic) IBOutlet UIButton *reportReplyBtn;
 
-- (void)setAutoHeight:(NSArray *)reportContentArr reportAccessorysList:(NSArray *)reportAccessorysArr taskContentText:(NSString *)taskContentText baseViewController:(UIViewController *)viewController;
+- (void)setAutoHeight:(NSDictionary *)taskReportDic baseViewController:(UIViewController *)viewController;
 - (UIImage *)gainUserIcon:(NSString *)userId;
 @end

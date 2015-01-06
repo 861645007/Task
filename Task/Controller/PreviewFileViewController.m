@@ -188,7 +188,7 @@
         }
         case 1: {
             [self.view.window showHUDWithText:@"删除成功" Type:ShowPhotoYes Enabled:YES];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"DeleteAccessaryFile" object:@"0"];//发送一个字典过去
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DeleteAccessaryFile" object:@"0"];
             [self performSelector:@selector(comeback) withObject:nil afterDelay:0.9];
             break;
         }

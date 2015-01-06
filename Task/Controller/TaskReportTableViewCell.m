@@ -8,6 +8,7 @@
 
 #import "TaskReportTableViewCell.h"
 #import "PlistOperation.h"
+#import "AddTaskReportJudgementViewController.h"
 
 @implementation TaskReportTableViewCell
 @synthesize reportContentLabel;
@@ -21,9 +22,13 @@
 
     // Configure the view for the selected state
 }
-
 // 设置cell高度和其内容控件
-- (void)setAutoHeight:(NSArray *)reportContentArr reportAccessorysList:(NSArray *)reportAccessorysArr taskContentText:(NSString *)taskContentText baseViewController:(UIViewController *)viewController {
+- (void)setAutoHeight:(NSDictionary *)taskReportDic baseViewController:(UIViewController *)viewController {
+    reportDic = [NSDictionary dictionaryWithDictionary:taskReportDic];
+    NSString *taskContentText = [taskReportDic objectForKey:@"desc"];
+    NSArray *reportAccessorysArr = [taskReportDic objectForKey:@"reportAccessorys"];
+    NSArray *reportContentArr = [taskReportDic objectForKey:@"reportJudges"];
+    
     reportAccessorysList = [NSArray arrayWithArray:reportAccessorysArr];
     baseViewController = viewController;
     
@@ -32,27 +37,28 @@
     int sizeW = [[UIScreen mainScreen] bounds].size.width - 62;
     
     // 获取字符串
-    NSString *contentText = [NSString stringWithFormat:@""];
-    for (NSDictionary *reportContentDic in reportContentArr) {
-        if ([reportContentDic isEqual:[reportContentArr lastObject]]) {
-            contentText = [contentText stringByAppendingFormat:@"@%@ %@", [reportContentDic objectForKey:@"judgedUserName"], [reportContentDic objectForKey:@"judgeContent"]];
-        }else {
-            contentText = [contentText stringByAppendingFormat:@"@%@ %@ \n", [reportContentDic objectForKey:@"judgedUserName"], [reportContentDic objectForKey:@"judgeContent"]];
-        }
+    CGFloat judgeOriginY = originY + 4;
+    for (int i = 0; i < [reportContentArr count]; i++) {
+        NSDictionary *judgeDic = [reportContentArr objectAtIndex:i];
+        
+        NSString *contentText = [NSString stringWithFormat:@"@%@ %@", [judgeDic objectForKey:@"judgedUserName"], [judgeDic objectForKey:@"judgeContent"]];
+        
+        UILabel *judgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(originX, judgeOriginY, sizeW, [self textHeight:contentText] + 3)];
+        judgeLabel.textAlignment = NSTextAlignmentLeft;
+        judgeLabel.text = contentText;
+        judgeLabel.font = [UIFont systemFontOfSize:14];
+        judgeLabel.numberOfLines = 0;
+        judgeLabel.tag = i;
+        judgeLabel.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(modifyTaskReportJudgement:)];
+        [judgeLabel addGestureRecognizer:tapG];
+        [self.contentView addSubview:judgeLabel];
+        judgeOriginY += ([self textHeight:contentText] + 3);
     }
-    
-    // 获取内容高度
-    CGFloat contentH = [self textHeight:contentText];
-    UILabel *judgeContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(originX, originY, sizeW, contentH)];
-    [judgeContentLabel setText:contentText];
-    judgeContentLabel.numberOfLines = 0;
-    judgeContentLabel.font = [UIFont systemFontOfSize:13];
-    
-    [self.contentView addSubview:judgeContentLabel];
     
     
     // 设置附件
-    CGFloat accessoryOriginY = originY + contentH + 4;
+    CGFloat accessoryOriginY = judgeOriginY + 4;
     for (int i = 0; i < [reportAccessorysArr count]; i++) {
         NSDictionary *accessoryDic = [reportAccessorysArr objectAtIndex:i];
         
@@ -74,7 +80,7 @@
     }
 
     if ([reportAccessorysArr count] != 0) {
-        UILabel *accessoryTitlelabel = [[UILabel alloc] initWithFrame:CGRectMake(16, originY + contentH + 4, sizeW, 30)];
+        UILabel *accessoryTitlelabel = [[UILabel alloc] initWithFrame:CGRectMake(16, judgeOriginY + 4, sizeW, 30)];
         [accessoryTitlelabel setText:@"附件:"];
         accessoryTitlelabel.numberOfLines = 0;
         accessoryTitlelabel.font = [UIFont systemFontOfSize:14];
@@ -88,7 +94,7 @@
 
 // 获取 label 实际所需要的高度
 - (CGFloat)textHeight:(NSString *)labelText {
-    UIFont *tfont = [UIFont systemFontOfSize:13.0];
+    UIFont *tfont = [UIFont systemFontOfSize:14.0];
     NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
     //  ios7 的API，判断 labelText 这个字符串需要的高度；    这里的宽度（self.view.frame.size.width - 140he）按照需要自己换就 OK
     CGSize sizeText = [labelText boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width - 62, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
@@ -125,5 +131,21 @@
     previewFileViewController.fileName = [dic objectForKey:@"accessoryTempName"];
     [baseViewController.navigationController pushViewController:previewFileViewController animated:YES];
 }
+
+// 修改评论回复接口
+- (void)modifyTaskReportJudgement:(UITapGestureRecognizer *)tapG {
+    UILabel *label = (UILabel *)tapG.view;
+    NSDictionary *judgeDic = [[reportDic objectForKey:@"reportJudges"] objectAtIndex:label.tag];
+    
+    AddTaskReportJudgementViewController *addTaskReportJudgementViewController = [baseViewController.storyboard instantiateViewControllerWithIdentifier:@"AddTaskReportJudgementViewController"];
+    addTaskReportJudgementViewController.isFeedBackOrJudgement = 1;
+    addTaskReportJudgementViewController.titleStr = @"评论";
+    addTaskReportJudgementViewController.judgeId = [NSString stringWithFormat:@"%@",[judgeDic objectForKey:@"judgeId"]];
+    addTaskReportJudgementViewController.taskReportId = [reportDic objectForKey:@"taskReportId"];
+    addTaskReportJudgementViewController.judgedUserId = [reportDic objectForKey:@"reportPersonId"];
+    addTaskReportJudgementViewController.judgedUserName = [reportDic objectForKey:@"reportPersonName"];
+    [baseViewController.navigationController pushViewController:addTaskReportJudgementViewController animated:YES];
+}
+
 
 @end

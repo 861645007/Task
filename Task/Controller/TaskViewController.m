@@ -15,7 +15,6 @@
     NSMutableDictionary *tableVieDataDic;
     
     NSString *titleCMD;
-    int isCompleteTask;                // 1 现在加载的是已完成和下属任务，0表示其他几项任务
 }
 
 @end
@@ -28,7 +27,6 @@
     // Do any additional setup after loading the view.
     // 设置 tableView
     sectionArr = @[@"延期", @"今天", @"明天", @"即将", @"无日期"];
-    isCompleteTask = 0;
     isShow = [NSMutableArray array];
     for (int i = 0; i<[sectionArr count]; i++) {
         [isShow addObject:@"0"];
@@ -44,17 +42,14 @@
         copyNavView.titleString = navArr[(long)index];
         titleCMD = [NSString stringWithFormat:@"%ld", (long)index];
         if (index < 7) {
-            isCompleteTask = 0;
-            self.mainTableView.tableFooterView = nil;
-        }else {
-            isCompleteTask = 1;
-            // 添加上拉刷新
-            [self.mainTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-                // 上拉刷新加载数据
-            }];
+            // 选择标题后刷新界面
+            [self gainAttendanceInfo];
+        }else if (index == 7) {
+            
+        }else if (index == 8) {
+            
         }
-        // 选择标题后刷新界面
-        [self gainAttendanceInfo];
+        
     };
     self.navigationItem.titleView = navView;
 

@@ -111,7 +111,7 @@
 #pragma mark - 定位
 -(void)initLocation {
     locationManager=[[CLLocationManager alloc] init];
-    locationManager.delegate=self;
+    locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
         [locationManager requestWhenInUseAuthorization];
@@ -198,6 +198,7 @@
             return ;
         }
         isShareAttendance = 1;
+        attendancePatten = @"3";
         [self submitQRCodeAttendance:nil];
     }
 }
@@ -263,16 +264,13 @@
     NSString *enterpriseId = [userInfo gainUserEnterpriseId];
     //参数
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"type": attendanceType, @"pattern":attendancePatten, @"longitude": [NSString stringWithFormat:@"%f", coordinate.longitude], @"latitude": [NSString stringWithFormat:@"%f", coordinate.latitude], @"address":address, @"phoneImei": @"123"}];
-    NSString *action = @"";
     
     if (isShareAttendance == 0) {
-        action = AttendanceAction;
         [parameters setObject:description forKey:@"description"];
     }else {
-        action = @"";
     }
     
-    [self createAsynchronousRequest:action parmeters:parameters success:^(NSDictionary *dic){
+    [self createAsynchronousRequest:AttendanceAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithNetManageResult: dic];
     } failure:^{}];
 }
@@ -288,6 +286,8 @@
         }
         case 1: {
             [self.view.window showHUDWithText:@"考勤成功" Type:ShowPhotoYes Enabled:YES];
+            [self judgeAttendanceBtn:@"1"];
+            [self gainAttendanceInfo];
             break;
         }
     }

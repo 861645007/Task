@@ -27,6 +27,7 @@
 @synthesize taskReportId;
 @synthesize judgedUserId;
 @synthesize judgedUserName;
+@synthesize judgeId;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -78,8 +79,7 @@
     if ([[selectedImageArr objectAtIndex:indexPath.row] isEqual:[selectedImageArr lastObject]]) {
         taskJudgeCollectionViewCell.judgementImageView.image = [selectedImageArr objectAtIndex:indexPath.row];
     }
-    else
-    {
+    else {
         taskJudgeCollectionViewCell.judgementImageView.image = [selectedImageArr objectAtIndex:indexPath.row];
     }
     
@@ -181,6 +181,9 @@
         [parameters setValue:reportJudgementTextView.text forKey:@"description"];
     }else {
         action = AddTaskReportJudgementAction;
+        if (![judgeId isEqualToString:@""]) {
+            [parameters setValue:judgeId forKey:@"judgeId"];
+        }
         [parameters setValue:taskReportId forKey:@"taskReportId"];
         [parameters setValue:judgedUserId forKey:@"judgedUserId"];
         [parameters setValue:judgedUserName forKey:@"judgedUserName"];
@@ -204,13 +207,14 @@
         case 1: {
             if ([selectedImageArr count] == 1) {
                 [self.view.window showHUDWithText:@"提交成功" Type:ShowPhotoYes Enabled:YES];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"DeleteAccessaryFile" object:@"0"];
                 [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
             }else {
                 submitImageIndex = 0;
                 if (isFeedBackOrJudgement == 0) {
                     [self submitReportImage:selectedImageArr[submitImageIndex] taskReportId:[dic objectForKey:@"taskReortId"]];
                 }else {
-                    [self submitReportImage:selectedImageArr[submitImageIndex] taskReportId:taskReportId];
+                    [self submitReportImage:selectedImageArr[submitImageIndex] taskReportId:[dic objectForKey:@"judgeId"]];
                 }
             }            
             break;
@@ -251,6 +255,7 @@
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (submitImageIndex == [selectedImageArr count] - 2) {
             [self.view.window showHUDWithText:@"上传完成" Type:ShowPhotoYes Enabled:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DeleteAccessaryFile" object:@"0"];
             [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
         }else {
             [self submitReportImage:selectedImageArr[++submitImageIndex] taskReportId:reportId];
