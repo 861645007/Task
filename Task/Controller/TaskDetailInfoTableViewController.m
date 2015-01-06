@@ -52,6 +52,9 @@
     clickCellTag = 0;
     isReportViewOrLookView = 0;
     isDelete = 0;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setIsRefresh:) name:@"DeleteAccessaryFile" object:nil];
+    
     // 添加底部 ToolView
     [self createToolView];
     
@@ -69,6 +72,10 @@
         isNeedRefresh = 1;
         [self gainTaskDetailInfo];
     }
+}
+
+- (void)setIsRefresh:(NSNotification *)notification {
+    isNeedRefresh = [[NSString stringWithFormat:@"%@",[notification userInfo]] intValue];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,8 +134,10 @@
 // 完成 按钮
 - (ExtensibleToolBar *)addCompleteBar {
     ExtensibleToolBar *completeBar = [ExtensibleToolBar itemWithLabel:@"完成" imageNormal:[UIImage imageNamed:@"Complete_nav"] imageSelected:[UIImage imageNamed:@"Complete_ok_nav"] action:^(){
-        NSString *createId = [NSString stringWithFormat:@"%@",[taskDetailInfoDic objectForKey:@"createName"]];
-        if ([createId isEqualToString:[userInfo gainUserId]]) {
+        NSString *createId = [NSString stringWithFormat:@"%@",[taskDetailInfoDic objectForKey:@"createId"]];
+        NSString *principalId = [NSString stringWithFormat:@"%@", [taskDetailInfoDic objectForKey:@"principalId"]];
+        NSString *myId = [userInfo gainUserId];
+        if ([createId isEqualToString:myId] || [myId isEqualToString:principalId]) {
             [toolView reloadToolView:2];
             ExtensibleToolBar *curreentItem = toolView.toolBarArr[2];
             [[self createSubmitTaskModifyInfoViewController] modifyTaskState:[NSString stringWithFormat:@"%d", curreentItem.itemState] atIndex:2];
@@ -213,7 +222,7 @@
 
 - (void)dealData:(NSDictionary *)dic {
     taskDetailInfoDic     = [dic objectForKey:@"taskDetail"];
-    [self updateCompleteItemState:[[dic objectForKey:@"state"] intValue]];
+    [self updateCompleteItemState:[[taskDetailInfoDic objectForKey:@"state"] intValue]];
     relationTasksArr      = [taskDetailInfoDic objectForKey:@"relationTasks"];
     taskAccessorysArr     = [taskDetailInfoDic objectForKey:@"taskAccessorys"];
     attentionTaskUsersArr = [taskDetailInfoDic objectForKey:@"attentionTaskUsers"];
@@ -622,6 +631,10 @@
             taskReportCell.reportPersonNameLabel.text= [dic objectForKey:@"reportPersonName"];
             taskReportCell.reportTimeLabel.text = [dic objectForKey:@"reportTime"];
             taskReportCell.reportContentLabel.text = [dic objectForKey:@"desc"];
+            taskReportCell.reportContentLabel.tag = indexPath.row;
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(modifyReportContent:)];
+            taskReportCell.reportContentLabel.userInteractionEnabled = YES;
+            [taskReportCell.reportContentLabel addGestureRecognizer:tapGestureRecognizer];
 
             taskReportCell.reportPersonIconImageView.image = [taskReportCell gainUserIcon:[dic objectForKey:@"reportPersonId"]];
             
@@ -648,6 +661,13 @@
     }
     
     return cell;
+}
+
+// 设置 反馈 可以修改
+- (void)modifyReportContent:(UITapGestureRecognizer *)tapG {
+    UILabel *label = (UILabel *)tapG.view;
+    NSDictionary *dic = [taskReportArr objectAtIndex:label.tag];
+    [self modifyTaskContext:@"评论" content:[dic objectForKey:@"desc"]];
 }
 
 // 评论回复接口
@@ -730,8 +750,6 @@
 }
 
 - (void)lookoverAccessAry:(UIButton *)btn {
-    isNeedRefresh = 0;
-    
     NSDictionary *accessAryDic = [taskAccessorysArr objectAtIndex:btn.tag];
     PreviewFileViewController *previewFileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PreviewFileViewController"];
     previewFileViewController.isTaskOrReportAccessory = 0;

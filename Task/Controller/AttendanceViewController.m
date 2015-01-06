@@ -11,6 +11,7 @@
 
 @interface AttendanceViewController (){
     NSString *attendanceType;
+    NSTimer *changeCurrentTimer;
     
     int isShareAttendance;                        // 0 表示点击按钮，1表示摇一摇
     NSString *attendancePatten;
@@ -37,20 +38,19 @@
     attendanceArr = [NSMutableArray array];
     isShareAttendance = 0;
     [self initLocation];
-    
+    changeCurrentTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self  selector:@selector(changecurrentTime) userInfo:nil repeats:true];
+    [changeCurrentTimer fire];
+
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(getAddressInfo)];
     [locationLabel addGestureRecognizer:tapGestureRecognizer];
-    
-    // 设置日期
-    currentTimeLabel.text = [[NSDate date] dateToStringWithDateFormat:@"MM-dd hh:mm"];
-    
+
     // 设置考勤列表Label信息
     attendanceTime = [[NSDate date] dateToStringWithDateFormat:@"yyyy-MM"];
     myAttendanceListLabel.text = [NSString stringWithFormat:@"我的 %@ 的考勤信息", attendanceTime];
-    
+
     // 判断考勤按钮
     [self judgeAttendanceBtn:[userInfo gainUserAttendance]];
-    
+
     // 注册刷新控件
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self gainAttendanceInfo];
@@ -69,6 +69,10 @@
     [super viewWillAppear:animated];
 }
 
+- (void)changecurrentTime {
+    // 设置日期
+    currentTimeLabel.text = [[NSDate date] dateToStringWithDateFormat:@"MM-dd hh:mm"];
+}
 
 - (void)judgeAttendanceBtn:(NSString *)attendanceTypeBtn {
     if ([attendanceTypeBtn isEqualToString:@"0"]) {

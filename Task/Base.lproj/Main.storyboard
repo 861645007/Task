@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yoK-f9-lc7">
     <dependencies>
-        <deployment version="1792" identifier="iOS"/>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -665,7 +665,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsL-ZY-XDP">
-                                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                                    <rect key="frame" x="16" y="11" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -681,7 +681,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="j4R-8K-P0X" secondAttribute="centerY" id="LWU-hs-b9F"/>
                                                 <constraint firstItem="j4R-8K-P0X" firstAttribute="trailing" secondItem="dw4-Yg-yAK" secondAttribute="trailingMargin" constant="-8" id="azo-CM-crl"/>
-                                                <constraint firstItem="bsL-ZY-XDP" firstAttribute="leading" secondItem="dw4-Yg-yAK" secondAttribute="leadingMargin" id="bw5-n9-MgN"/>
+                                                <constraint firstItem="bsL-ZY-XDP" firstAttribute="leading" secondItem="dw4-Yg-yAK" secondAttribute="leadingMargin" constant="8" id="bw5-n9-MgN"/>
                                                 <constraint firstAttribute="centerY" secondItem="bsL-ZY-XDP" secondAttribute="centerY" id="eTr-KC-OqG"/>
                                             </constraints>
                                         </tableViewCellContentView>

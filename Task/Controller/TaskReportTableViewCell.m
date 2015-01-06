@@ -10,6 +10,7 @@
 #import "PlistOperation.h"
 
 @implementation TaskReportTableViewCell
+@synthesize reportContentLabel;
 
 - (void)awakeFromNib {
     // Initialization code
@@ -21,7 +22,7 @@
     // Configure the view for the selected state
 }
 
-
+// 设置cell高度和其内容控件
 - (void)setAutoHeight:(NSArray *)reportContentArr reportAccessorysList:(NSArray *)reportAccessorysArr taskContentText:(NSString *)taskContentText baseViewController:(UIViewController *)viewController {
     reportAccessorysList = [NSArray arrayWithArray:reportAccessorysArr];
     baseViewController = viewController;
@@ -48,6 +49,7 @@
     judgeContentLabel.font = [UIFont systemFontOfSize:13];
     
     [self.contentView addSubview:judgeContentLabel];
+    
     
     // 设置附件
     CGFloat accessoryOriginY = originY + contentH + 4;
@@ -97,6 +99,8 @@
     return sizeText.height;
 }
 
+
+// 获取个人照片
 - (UIImage *)gainUserIcon:(NSString *)userId {
     NSString *imageName = @"";
     NSArray *personArr = [[PlistOperation shareInstance] gainAllPersonInfoWithFile];
@@ -110,6 +114,8 @@
     return  image;
 }
 
+
+// 预览附件
 - (void)gainToPreview:(UIButton *)btn {
     NSDictionary *dic = [reportAccessorysList objectAtIndex:btn.tag];
     

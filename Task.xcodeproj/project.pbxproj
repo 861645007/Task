@@ -1116,6 +1116,7 @@
 				E67FBB581A3EA5DF00CE839C /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		E67FBB581A3EA5DF00CE839C /* Products */ = {
 			isa = PBXGroup;

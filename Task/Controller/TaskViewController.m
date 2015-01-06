@@ -52,6 +52,8 @@
     }];
 }
 
+//- (void)setFoot
+
 - (void)viewDidAppear:(BOOL)animated {
     [self gainAttendanceInfo];
 }

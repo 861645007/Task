@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+     
     attendanceDetailDescLabel.text = [attendanceInfo objectForKey:@"desc"];
     attendanceDetailPersonNameLabel.text = [userInfo gainUserName];
     attendanceDetailTimeLabel.text = [attendanceInfo objectForKey:@"date"];

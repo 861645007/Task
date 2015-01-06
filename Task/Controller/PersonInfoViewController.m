@@ -34,14 +34,16 @@
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self gainPersonInfo];
     }];
+    
+    [self gainPersonInfo];
 }
 
 // TableView 的头文件
 - (UIView *)setMaiTableHeaderView {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width + 20, 210)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, -10, self.view.frame.size.width, 210)];
     
     // 背景图片
-    UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width + 20, 190)];
+    UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -8, self.view.frame.size.width + 10, 180)];
     bgImageView.image = [UIImage imageNamed:@"card_bg"];
     [headerView addSubview:bgImageView];
     
@@ -113,10 +115,6 @@
     return img;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [self gainPersonInfo];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -153,7 +151,7 @@
     } failure:^{
         // 事情做完了, 结束刷新动画~~~
         [mainTableView headerEndRefreshingWithResult:JHRefreshResultFailure];
-        [self.view.window showHUDWithText:@"网络错误..." Type:ShowLoading Enabled:YES];
+        [self.view.window showHUDWithText:@"网络错误..." Type:ShowPhotoNo Enabled:YES];
     }];
 
 }
