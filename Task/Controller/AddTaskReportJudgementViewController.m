@@ -22,6 +22,7 @@
 @synthesize promptLabel;
 @synthesize reportJudgementTextView;
 @synthesize titleStr;
+@synthesize desc;
 @synthesize isFeedBackOrJudgement;
 @synthesize taskId;
 @synthesize taskReportId;
@@ -32,12 +33,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = [NSString stringWithFormat:@"新的%@", titleStr];
+    self.title = [NSString stringWithFormat:@"%@", titleStr];
     self.promptLabel.text = [NSString stringWithFormat:@"请输入新的%@", titleStr];
     
     selectedImageArr = [NSMutableArray arrayWithObject:[UIImage imageNamed:@"document_add"]];    
     reportJudgementTextView.layer.borderWidth = 0.5;
     [reportJudgementTextView becomeFirstResponder];
+    reportJudgementTextView.text = desc;
     
     [self initCollectionCell];
 
@@ -177,6 +179,9 @@
     
     if (isFeedBackOrJudgement == 0) {
         action = AddTaskReportAction;
+        if (![taskReportId isEqualToString:@""] || taskReportId != nil) {
+            [parameters setValue:taskReportId forKey:@"taskReportId"];
+        }
         [parameters setValue:taskId forKey:@"taskId"];
         [parameters setValue:reportJudgementTextView.text forKey:@"description"];
     }else {
@@ -234,14 +239,23 @@
     NSString *enterpriseId = [[UserInfo shareInstance] gainUserEnterpriseId];
     
     NSData *imageData = UIImageJPEGRepresentation(sImage, 0.30);
+    NSString *action = @"";
     
     //参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"taskReportId": reportId}];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId}];
+    
+    if (isFeedBackOrJudgement == 0) {
+        action = AddTaskReportAccessoryAction;
+        [parameters setObject:reportId forKey:@"taskReportId"];
+    }else{
+        action = AddTaskReportJudgeAccessoryAction;
+        [parameters setObject:reportId forKey:@"judgeId"];
+    }
     
     AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
     requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
     requestManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [requestManager POST:[NSString stringWithFormat:@"%@%@",HttpURL, AddTaskReportAccessoryAction] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [requestManager POST:[NSString stringWithFormat:@"%@%@",HttpURL, action] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         /**
          *  appendPartWithFileURL   //  指定上传的文件

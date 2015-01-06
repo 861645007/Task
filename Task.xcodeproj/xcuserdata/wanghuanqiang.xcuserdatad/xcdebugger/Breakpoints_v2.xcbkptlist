@@ -118,7 +118,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Task/Controller/SubmitTaskModifyInfoViewController.m"
@@ -131,13 +131,13 @@
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SubmitTaskModifyInfoViewController modifyTaskState:atIndex:]"
                   moduleName = "Task"
                   urlString = "file:///Users/wanghuanqiang/Documents/MyProject/Team/ReWrite/Task/Task/Controller/SubmitTaskModifyInfoViewController.m"
-                  timestampString = "442244450.624787"
+                  timestampString = "442244742.73724"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "159"
@@ -145,13 +145,13 @@
                   offsetFromSymbolStart = "852">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__62-[SubmitTaskModifyInfoViewController modifyTaskState:atIndex:]_block_invoke"
                   moduleName = "Task"
                   urlString = "file:///Users/wanghuanqiang/Documents/MyProject/Team/ReWrite/Task/Task/Controller/SubmitTaskModifyInfoViewController.m"
-                  timestampString = "442244450.625047"
+                  timestampString = "442244742.737495"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "159"
@@ -174,22 +174,6 @@
             startingLineNumber = "61"
             endingLineNumber = "61"
             landmarkName = "-setAutoHeight:baseViewController:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Task/Controller/AddTaskReportJudgementViewController.m"
-            timestampString = "442243254.421405"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "-submitTaskFeedback"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

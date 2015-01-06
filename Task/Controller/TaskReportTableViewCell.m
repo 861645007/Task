@@ -37,7 +37,7 @@
     int sizeW = [[UIScreen mainScreen] bounds].size.width - 62;
     
     // 获取字符串
-    CGFloat judgeOriginY = originY + 4;
+    CGFloat judgeOriginY = originY + 8;
     for (int i = 0; i < [reportContentArr count]; i++) {
         NSDictionary *judgeDic = [reportContentArr objectAtIndex:i];
         
@@ -58,7 +58,7 @@
     
     
     // 设置附件
-    CGFloat accessoryOriginY = judgeOriginY + 4;
+    CGFloat accessoryOriginY = judgeOriginY ;
     for (int i = 0; i < [reportAccessorysArr count]; i++) {
         NSDictionary *accessoryDic = [reportAccessorysArr objectAtIndex:i];
         
@@ -139,7 +139,8 @@
     
     AddTaskReportJudgementViewController *addTaskReportJudgementViewController = [baseViewController.storyboard instantiateViewControllerWithIdentifier:@"AddTaskReportJudgementViewController"];
     addTaskReportJudgementViewController.isFeedBackOrJudgement = 1;
-    addTaskReportJudgementViewController.titleStr = @"评论";
+    addTaskReportJudgementViewController.titleStr = @"修改评论";
+    addTaskReportJudgementViewController.desc = [judgeDic objectForKey:@"judgeContent"];
     addTaskReportJudgementViewController.judgeId = [NSString stringWithFormat:@"%@",[judgeDic objectForKey:@"judgeId"]];
     addTaskReportJudgementViewController.taskReportId = [reportDic objectForKey:@"taskReportId"];
     addTaskReportJudgementViewController.judgedUserId = [reportDic objectForKey:@"reportPersonId"];

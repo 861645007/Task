@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *titleStr;
 @property (nonatomic, strong) NSString *taskId;           // 反馈时使用的
 
+@property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSString *judgeId;          // 评论 Id
 @property (nonatomic, strong) NSString *taskReportId;     // 被评论的返回 Id
 @property (nonatomic, strong) NSString *judgedUserId;     // 评论时的被评论人 Id

@@ -123,7 +123,8 @@
         isNeedRefresh = 0;
         AddTaskReportJudgementViewController *addTaskReportJudgementViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddTaskReportJudgementViewController"];
         addTaskReportJudgementViewController.isFeedBackOrJudgement = 0;
-        addTaskReportJudgementViewController.titleStr = @"反馈";
+        addTaskReportJudgementViewController.titleStr = @"新的反馈";
+        addTaskReportJudgementViewController.desc = @"";
         addTaskReportJudgementViewController.taskId = [taskDetailInfoDic objectForKey:@"taskId"];
         [self.navigationController pushViewController:addTaskReportJudgementViewController animated:YES];
     }]; 
@@ -354,19 +355,19 @@
     CGFloat contentH = 0;
     // 获取字符串
     for (NSDictionary *reportContentDic in [dic objectForKey:@"reportJudges"]) {
-        NSString *contentText = [NSString stringWithFormat:@"@%@ %@ \n", [reportContentDic objectForKey:@"judgedUserName"], [reportContentDic objectForKey:@"judgeContent"]];
-        contentH += ([self textHeight:contentText] +3);
+        NSString *contentText = [NSString stringWithFormat:@"@%@ %@", [reportContentDic objectForKey:@"judgedUserName"], [reportContentDic objectForKey:@"judgeContent"]];
+        contentH += ([self textHeight:contentText] + 3);
     }
     
     CGFloat accessoryH = [[dic objectForKey:@"reportAccessorys"] count] * 30;
     // 获取并设置高度
     
-    return 35 + descHeight + contentH + accessoryH + 27;
+    return 40 + descHeight + contentH + accessoryH + 27;
 }
 
 // 获取 label 实际所需要的高度
 - (CGFloat)textHeight:(NSString *)labelText {
-    UIFont *tfont = [UIFont systemFontOfSize:13.0];
+    UIFont *tfont = [UIFont systemFontOfSize:14.0];
     NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
     //  ios7 的API，判断 labelText 这个字符串需要的高度；    这里的宽度（self.view.frame.size.width - 140he）按照需要自己换就 OK
     CGSize sizeText = [labelText boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width - 62, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
@@ -666,7 +667,13 @@
 - (void)modifyReportContent:(UITapGestureRecognizer *)tapG {
     UILabel *label = (UILabel *)tapG.view;
     NSDictionary *dic = [taskReportArr objectAtIndex:label.tag];
-    [self modifyTaskContext:@"评论" content:[dic objectForKey:@"desc"]];
+    AddTaskReportJudgementViewController *addTaskReportJudgementViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddTaskReportJudgementViewController"];
+    addTaskReportJudgementViewController.isFeedBackOrJudgement = 0;
+    addTaskReportJudgementViewController.titleStr = @"修改反馈";
+    addTaskReportJudgementViewController.taskReportId = [NSString stringWithFormat:@"%@",[dic objectForKey:@"taskReportId"]];
+    addTaskReportJudgementViewController.desc = [dic objectForKey:@"desc"];
+    addTaskReportJudgementViewController.taskId = [taskDetailInfoDic objectForKey:@"taskId"];
+    [self.navigationController pushViewController:addTaskReportJudgementViewController animated:YES];
 }
 
 // 评论回复接口
@@ -676,8 +683,9 @@
     
     AddTaskReportJudgementViewController *addTaskReportJudgementViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddTaskReportJudgementViewController"];
     addTaskReportJudgementViewController.isFeedBackOrJudgement = 1;
-    addTaskReportJudgementViewController.titleStr = @"评论";
+    addTaskReportJudgementViewController.titleStr = @"新的评论";
     addTaskReportJudgementViewController.judgeId = @"";
+    addTaskReportJudgementViewController.desc = @"";
     addTaskReportJudgementViewController.taskReportId = [dic objectForKey:@"taskReportId"];
     addTaskReportJudgementViewController.judgedUserId = [dic objectForKey:@"reportPersonId"];
     addTaskReportJudgementViewController.judgedUserName = [dic objectForKey:@"reportPersonName"];
@@ -887,7 +895,7 @@
                 [self gainToSelectedPersonView:1 title:@"共享人"];
             }
                 break;
-            case 3: {
+            case 3: { 
                 [self sureClickCellTag:indexPath.section row:indexPath.row];
             }
                 break;
@@ -895,7 +903,6 @@
                 break;
         }
     }
-
 }
 
 // 确定 cell 的 tag

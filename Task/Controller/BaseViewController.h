@@ -62,6 +62,7 @@
 #define AddTaskReportAccessoryAction  @"app_addTaskReportAccessory.action" // 添加任务汇报附件
 #define RelateTaskListAction          @"app_relateTaskList.action"         // 获取选择关联任务列表
 #define AddRelateTaskAction           @"app_addRelateTask.action"          // 增加或修改关联任务
+#define AddTaskReportJudgeAccessoryAction @"app_addTaskReportJudgeAccessory.action" // 添加任务评论反馈附件
 
 
 // 请假
