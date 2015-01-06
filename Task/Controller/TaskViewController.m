@@ -15,6 +15,7 @@
     NSMutableDictionary *tableVieDataDic;
     
     NSString *titleCMD;
+    int isCompleteTask;                // 1 现在加载的是已完成和下属任务，0表示其他几项任务
 }
 
 @end
@@ -27,6 +28,7 @@
     // Do any additional setup after loading the view.
     // 设置 tableView
     sectionArr = @[@"延期", @"今天", @"明天", @"即将", @"无日期"];
+    isCompleteTask = 0;
     isShow = [NSMutableArray array];
     for (int i = 0; i<[sectionArr count]; i++) {
         [isShow addObject:@"0"];
@@ -35,13 +37,23 @@
     titleCMD = @"0";
     
     // 设置导航栏为可点击1
-    navArr = @[@"我的任务", @"我创建的任务", @"我参与的任务", @"我负责的任务", @"未读的任务", @"我关注的任务", @"共享给我的任务", @"已完成的任务"];
+    navArr = @[@"我的任务", @"我创建的任务", @"我参与的任务", @"我负责的任务", @"未读的任务", @"我关注的任务", @"共享给我的任务", @"下属任务", @"已完成的任务"];
     CusNavigationTitleView *navView = [[CusNavigationTitleView alloc] initWithTitle:@"我的任务" titleStrArr:navArr imageName:@"Expansion"];
     __block CusNavigationTitleView *copyNavView = navView; // 防止陷入“retain cycle” -- “形成怪圈”的错误
     navView.selectRowAtIndex = ^(NSInteger index){
         copyNavView.titleString = navArr[(long)index];
-        // 选择标题后刷新界面
         titleCMD = [NSString stringWithFormat:@"%ld", (long)index];
+        if (index < 7) {
+            isCompleteTask = 0;
+            self.mainTableView.tableFooterView = nil;
+        }else {
+            isCompleteTask = 1;
+            // 添加上拉刷新
+            [self.mainTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+                // 上拉刷新加载数据
+            }];
+        }
+        // 选择标题后刷新界面
         [self gainAttendanceInfo];
     };
     self.navigationItem.titleView = navView;
@@ -51,8 +63,6 @@
         [self gainAttendanceInfo];
     }];
 }
-
-//- (void)setFoot
 
 - (void)viewDidAppear:(BOOL)animated {
     [self gainAttendanceInfo];
