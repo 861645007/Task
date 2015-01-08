@@ -62,8 +62,10 @@
 #define AddTaskReportAccessoryAction  @"app_addTaskReportAccessory.action" // 添加任务汇报附件
 #define RelateTaskListAction          @"app_relateTaskList.action"         // 获取选择关联任务列表
 #define AddRelateTaskAction           @"app_addRelateTask.action"          // 增加或修改关联任务
+#define FinishTaskListAction          @"app_finishTaskList.action"         // 获取已完成任务
+#define NofinishTaskListAction        @"app_nofinishTaskList.action"       // 获取未完成任务
+#define DownEmployeesTaskAction       @"app_downEmployeesTask.action"      // 获取下属任务
 #define AddTaskReportJudgeAccessoryAction @"app_addTaskReportJudgeAccessory.action" // 添加任务评论反馈附件
-
 
 // 请假
 #define AddLeaveAction                @"app_addLeave.action"               // 新增、编辑请假

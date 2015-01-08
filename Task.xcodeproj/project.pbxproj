@@ -198,7 +198,6 @@
 		E699646B1A519055005F219A /* XHZoomingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E699645E1A519055005F219A /* XHZoomingImageView.m */; };
 		E699646E1A519839005F219A /* UIImage+ExtensionWithUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E699646D1A519839005F219A /* UIImage+ExtensionWithUIImage.m */; };
 		E69C51D81A41BC11001CA405 /* Task_Add.png in Resources */ = {isa = PBXBuildFile; fileRef = E69C51D71A41BC11001CA405 /* Task_Add.png */; };
-		E6B219951A5C09630040DFD2 /* UnderlTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B219941A5C09630040DFD2 /* UnderlTaskViewController.m */; };
 		E6B219991A5C0A0B0040DFD2 /* CompletedTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B219981A5C0A0B0040DFD2 /* CompletedTaskViewController.m */; };
 		E6B312DA1A3FBD1300AEF923 /* left_information_background.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D21A3FBD1300AEF923 /* left_information_background.png */; };
 		E6B312DB1A3FBD1300AEF923 /* nav_menu_add.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D31A3FBD1300AEF923 /* nav_menu_add.png */; };
@@ -588,8 +587,6 @@
 		E699646C1A519839005F219A /* UIImage+ExtensionWithUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ExtensionWithUIImage.h"; sourceTree = "<group>"; };
 		E699646D1A519839005F219A /* UIImage+ExtensionWithUIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ExtensionWithUIImage.m"; sourceTree = "<group>"; };
 		E69C51D71A41BC11001CA405 /* Task_Add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Task_Add.png; path = Image/Task_Add.png; sourceTree = "<group>"; };
-		E6B219931A5C09630040DFD2 /* UnderlTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnderlTaskViewController.h; path = Controller/UnderlTaskViewController.h; sourceTree = "<group>"; };
-		E6B219941A5C09630040DFD2 /* UnderlTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnderlTaskViewController.m; path = Controller/UnderlTaskViewController.m; sourceTree = "<group>"; };
 		E6B219971A5C0A0B0040DFD2 /* CompletedTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompletedTaskViewController.h; path = Controller/CompletedTaskViewController.h; sourceTree = "<group>"; };
 		E6B219981A5C0A0B0040DFD2 /* CompletedTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CompletedTaskViewController.m; path = Controller/CompletedTaskViewController.m; sourceTree = "<group>"; };
 		E6B312D21A3FBD1300AEF923 /* left_information_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = left_information_background.png; path = Image/left_information_background.png; sourceTree = "<group>"; };
@@ -1381,7 +1378,6 @@
 			isa = PBXGroup;
 			children = (
 				E6B219961A5C097F0040DFD2 /* CompeletedTaskViewController */,
-				E6B219921A5C09340040DFD2 /* UnderlTaskViewController */,
 				E615EFA91A55329C00D2621A /* SubTaskList */,
 				E67027171A455AA000C1B537 /* TaskDetailInfoTableViewController */,
 				E66DCBAB1A429C7000C2C184 /* AddNewTaskViewController */,
@@ -1579,15 +1575,6 @@
 			);
 			name = XHImageView;
 			path = FunctionClass/XHImageView;
-			sourceTree = "<group>";
-		};
-		E6B219921A5C09340040DFD2 /* UnderlTaskViewController */ = {
-			isa = PBXGroup;
-			children = (
-				E6B219931A5C09630040DFD2 /* UnderlTaskViewController.h */,
-				E6B219941A5C09630040DFD2 /* UnderlTaskViewController.m */,
-			);
-			name = UnderlTaskViewController;
 			sourceTree = "<group>";
 		};
 		E6B219961A5C097F0040DFD2 /* CompeletedTaskViewController */ = {
@@ -2124,7 +2111,6 @@
 				E6394EC51A44114500706882 /* ProclamationUsersInfoTableViewCell.m in Sources */,
 				E6DE47521A5430B2008EFA51 /* QRCodeReaderView.m in Sources */,
 				E6E0C76C1A3F345E0054F2C4 /* JHRefreshConfig.m in Sources */,
-				E6B219951A5C09630040DFD2 /* UnderlTaskViewController.m in Sources */,
 				E6E0C7491A3F24BB0054F2C4 /* RootViewController.m in Sources */,
 				E6E0C7671A3F345E0054F2C4 /* JHRefreshAmazingAniView.m in Sources */,
 				E67FBB5D1A3EA5DF00CE839C /* main.m in Sources */,

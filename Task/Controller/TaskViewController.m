@@ -7,6 +7,7 @@
 //
 
 #import "TaskViewController.h"
+#import "CompletedTaskViewController.h"
 
 @interface TaskViewController (){
     NSArray *navArr;
@@ -35,21 +36,21 @@
     titleCMD = @"0";
     
     // 设置导航栏为可点击1
-    navArr = @[@"我的任务", @"我创建的任务", @"我参与的任务", @"我负责的任务", @"未读的任务", @"我关注的任务", @"共享给我的任务", @"下属任务", @"已完成的任务"];
+    navArr = @[@"我的任务", @"我创建的任务", @"我参与的任务", @"我负责的任务", @"未读的任务", @"我关注的任务", @"共享给我的任务", @"下属任务", @"未完成的任务", @"已完成的任务"];
     CusNavigationTitleView *navView = [[CusNavigationTitleView alloc] initWithTitle:@"我的任务" titleStrArr:navArr imageName:@"Expansion"];
     __block CusNavigationTitleView *copyNavView = navView; // 防止陷入“retain cycle” -- “形成怪圈”的错误
     navView.selectRowAtIndex = ^(NSInteger index){
-        copyNavView.titleString = navArr[(long)index];
-        titleCMD = [NSString stringWithFormat:@"%ld", (long)index];
         if (index < 7) {
+            copyNavView.titleString = navArr[(long)index];
+            titleCMD = [NSString stringWithFormat:@"%ld", (long)index];
             // 选择标题后刷新界面
             [self gainAttendanceInfo];
-        }else if (index == 7) {
-            
-        }else if (index == 8) {
-            
+        }else  {
+            CompletedTaskViewController *completedTaskViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CompletedTaskViewController"];
+            completedTaskViewController.titleStr = navArr[(long)index];
+            completedTaskViewController.taskListType = index;
+            [self.navigationController pushViewController:completedTaskViewController animated:YES];
         }
-        
     };
     self.navigationItem.titleView = navView;
 
