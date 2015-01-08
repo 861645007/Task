@@ -17,13 +17,12 @@
 #import "ModifyTaskTitleViewController.h"
 #import "ModifyUrgentLevelViewController.h"
 #import "SelectHeaderViewController.h"
-#import "GetAllPhotoCollectionViewController.h"
 #import "PreviewFileViewController.h"
 #import "RelateTaskListViewController.h"
 
 #import "SubmitTaskModifyInfoViewController.h"
 
-@interface TaskDetailInfoTableViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, SelectedHeaderProtocol, SelectedUrgentLevelProtocol, SelectedPhotoProtocol, SubmitTaskModifyInfoProtocol, ModifyTaskContextInfoProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface TaskDetailInfoTableViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, SelectedHeaderProtocol, SelectedUrgentLevelProtocol, SubmitTaskModifyInfoProtocol, ModifyTaskContextInfoProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RBImagePickerDelegate, RBImagePickerDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (nonatomic, copy) NSString *taskId;

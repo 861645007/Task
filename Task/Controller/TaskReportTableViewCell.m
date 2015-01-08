@@ -58,7 +58,7 @@
     
     
     // 设置附件
-    CGFloat accessoryOriginY = judgeOriginY ;
+    CGFloat accessoryOriginY = judgeOriginY;
     for (int i = 0; i < [reportAccessorysArr count]; i++) {
         NSDictionary *accessoryDic = [reportAccessorysArr objectAtIndex:i];
         
@@ -80,7 +80,7 @@
     }
 
     if ([reportAccessorysArr count] != 0) {
-        UILabel *accessoryTitlelabel = [[UILabel alloc] initWithFrame:CGRectMake(16, judgeOriginY + 4, sizeW, 30)];
+        UILabel *accessoryTitlelabel = [[UILabel alloc] initWithFrame:CGRectMake(16, judgeOriginY, sizeW, 30)];
         [accessoryTitlelabel setText:@"附件:"];
         accessoryTitlelabel.numberOfLines = 0;
         accessoryTitlelabel.font = [UIFont systemFontOfSize:14];

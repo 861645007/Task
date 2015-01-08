@@ -783,9 +783,7 @@
     [sheetAction addButton:cameraItem type:RIButtonItemType_Other];
     
     RIButtonItem *albumItem = [RIButtonItem itemWithLabel:@"相册获取" action:^(){
-        GetAllPhotoCollectionViewController *allPhotoCollectionView = [[GetAllPhotoCollectionViewController alloc] initWithCollectionViewLayout:[self setCollectionViewController]];
-        allPhotoCollectionView.delegate = self;
-        [self.navigationController pushViewController:allPhotoCollectionView animated:YES];
+        [self pickImageFromAlbum];
     }];
     [sheetAction addButton:albumItem type:RIButtonItemType_Other];
 
@@ -794,6 +792,41 @@
     
     [sheetAction showInView:self.view];
 }
+
+#pragma mark - 从相册获取
+- (void)pickImageFromAlbum {
+    RBImagePickerController *imagePicker = [[RBImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.dataSource = self;
+    imagePicker.selectionType = RBMultipleImageSelectionType;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+#pragma mark RBImagePickerDataSource
+-(NSInteger)imagePickerControllerMaxSelectionCount:(RBImagePickerController *)imagePicker {
+    return 9;
+}
+
+-(NSInteger)imagePickerControllerMinSelectionCount:(RBImagePickerController *)imagePicker {
+    return 0;
+}
+
+#pragma mark RBImagePickerDelegate
+-(void)imagePickerController:(RBImagePickerController *)imagePicker didFinishPickingImagesList:(NSArray *)imageList {
+    SubmitTaskModifyInfoViewController *submitTaskModifyInfoViewController = [[SubmitTaskModifyInfoViewController alloc] init];
+    submitTaskModifyInfoViewController.taskId = [taskDetailInfoDic objectForKey:@"taskId"];
+    submitTaskModifyInfoViewController.delegate = self;
+
+    for (UIImage *image in imageList) {
+        [submitTaskModifyInfoViewController submitModifyImage:image];
+    }
+}
+
+-(void)imagePickerControllerDoneCancel:(RBImagePickerController *)imagePicker{
+    [imagePicker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 从照相机获取
 
 - (void)pickImageFromCamera {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -959,17 +992,6 @@
     submitTaskModifyInfoViewController.delegate = self;
     
     [submitTaskModifyInfoViewController submitModifyTask:modifyTaskStr cellTag:clickCellTag];
-}
-
-#pragma mark - 从相册获取图片
-- (void)selectedPhoto:(NSArray *)imageList {
-    SubmitTaskModifyInfoViewController *submitTaskModifyInfoViewController = [[SubmitTaskModifyInfoViewController alloc] init];
-    submitTaskModifyInfoViewController.taskId = [taskDetailInfoDic objectForKey:@"taskId"];
-    submitTaskModifyInfoViewController.delegate = self;
-
-    for (UIImage *image in imageList) {
-        [submitTaskModifyInfoViewController submitModifyImage:image];
-    }
 }
 
 #pragma mark - 从照相机获取照片 image picker delegte

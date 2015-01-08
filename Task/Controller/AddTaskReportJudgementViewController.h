@@ -8,9 +8,9 @@
 
 #import "BaseViewController.h"
 #import "AddTaskReportJudgementCollectionViewCell.h"
-#import "GetAllPhotoCollectionViewController.h"
+#import "RBImagePickerController.h"
 
-@interface AddTaskReportJudgementViewController : BaseViewController<UICollectionViewDataSource,UICollectionViewDelegate, SelectedPhotoProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface AddTaskReportJudgementViewController : BaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,RBImagePickerDelegate, RBImagePickerDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic) int isFeedBackOrJudgement;          // 0：表示反馈  1：表示评论
 @property (nonatomic, strong) NSString *titleStr;

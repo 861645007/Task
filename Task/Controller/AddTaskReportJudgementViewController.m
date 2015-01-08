@@ -8,6 +8,7 @@
 
 #import "AddTaskReportJudgementViewController.h"
 
+
 @interface AddTaskReportJudgementViewController () {
     NSMutableArray *selectedImageArr;
     int submitImageIndex;
@@ -124,8 +125,31 @@
 
 - (void)pickImageFromAlbum {
     [self hidenKeyboard];
-    GetAllPhotoCollectionViewController *allPhotoCollectionView = [GetAllPhotoCollectionViewController setCollectionViewController:4 delegate:self];
-    [self.navigationController pushViewController:allPhotoCollectionView animated:YES];
+    
+    RBImagePickerController *imagePicker = [[RBImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.dataSource = self;
+    imagePicker.selectionType = RBMultipleImageSelectionType;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+#pragma mark - RBImagePickerDataSource
+-(NSInteger)imagePickerControllerMaxSelectionCount:(RBImagePickerController *)imagePicker {
+    return 9;
+}
+
+-(NSInteger)imagePickerControllerMinSelectionCount:(RBImagePickerController *)imagePicker {
+    return 0;
+}
+
+#pragma mark - RBImagePickerDelegate
+-(void)imagePickerController:(RBImagePickerController *)imagePicker didFinishPickingImagesList:(NSArray *)imageList {
+    // the image picker is desmissed internally.
+    [self addImageToSelectd:imageList];
+}
+
+-(void)imagePickerControllerDoneCancel:(RBImagePickerController *)imagePicker{
+    [imagePicker dismissViewControllerAnimated:YES completion:nil];
 }
 
 
