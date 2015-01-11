@@ -10,9 +10,10 @@
 #import "PreviewFileViewController.h"
 
 @interface TaskReportTableViewCell : UITableViewCell {
-    NSArray *reportAccessorysList;
+    NSMutableArray *reportAccessorysList;
     NSDictionary *reportDic;
     UIViewController *baseViewController;
+    NSString *theTaskId;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *reportPersonIconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *reportPersonNameLabel;
@@ -21,6 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *reportTransferBtn;
 @property (weak, nonatomic) IBOutlet UIButton *reportReplyBtn;
 
-- (void)setAutoHeight:(NSDictionary *)taskReportDic baseViewController:(UIViewController *)viewController;
+- (void)setAutoHeight:(NSDictionary *)taskReportDic taskId:(NSString *)taskId baseViewController:(UIViewController *)viewController;
 - (UIImage *)gainUserIcon:(NSString *)userId;
 @end

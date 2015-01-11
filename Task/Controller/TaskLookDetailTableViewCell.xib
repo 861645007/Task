@@ -28,7 +28,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNf-Rl-bAY">
-                        <rect key="frame" x="276" y="8" width="36" height="17"/>
+                        <rect key="frame" x="268" y="8" width="36" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -40,7 +40,7 @@
                     <constraint firstItem="FNY-fy-OJp" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="UnT-4x-0Xp"/>
                     <constraint firstItem="HNf-Rl-bAY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Vc2-fF-klG"/>
                     <constraint firstItem="FNY-fy-OJp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="gED-wb-Sj3"/>
-                    <constraint firstItem="HNf-Rl-bAY" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="kgI-gI-FOJ"/>
+                    <constraint firstItem="HNf-Rl-bAY" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="kgI-gI-FOJ"/>
                     <constraint firstItem="FNY-fy-OJp" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="m13-gG-Pto"/>
                 </constraints>
             </tableViewCellContentView>

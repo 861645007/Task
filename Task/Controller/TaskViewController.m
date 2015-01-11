@@ -16,6 +16,7 @@
     NSMutableDictionary *tableVieDataDic;
     
     NSString *titleCMD;
+    int isNeedRefresh;                   // 0 不需要刷新； 1 需要刷新；
 }
 
 @end
@@ -34,6 +35,7 @@
     }
     tableVieDataDic = [NSMutableDictionary dictionary];
     titleCMD = @"0";
+    isNeedRefresh = 1;
     
     // 设置导航栏为可点击1
     navArr = @[@"我的任务", @"我创建的任务", @"我参与的任务", @"我负责的任务", @"未读的任务", @"我关注的任务", @"共享给我的任务", @"下属任务", @"未完成的任务", @"已完成的任务"];
@@ -58,10 +60,19 @@
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self gainAttendanceInfo];
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setIsRefresh:) name:@"refreshTaskMainView" object:nil];
+}
+
+- (void)setIsRefresh:(NSNotification *)notification {
+    isNeedRefresh = 1;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self gainAttendanceInfo];
+    if (isNeedRefresh) {
+        isNeedRefresh = 0;
+        [self gainAttendanceInfo];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

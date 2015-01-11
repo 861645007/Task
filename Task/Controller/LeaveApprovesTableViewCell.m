@@ -34,7 +34,6 @@
         NSString *result = [approvesDic objectForKey:@"result"];
         NSString *description = [self textIsNull:[approvesDic objectForKey:@"description"]];
         NSString *deliverName = [self textIsNull:[approvesDic objectForKey:@"deliverName"]];
-        NSString *approvesTime = [self textIsNull:[approvesDic objectForKey:@"approveTime"]];
         if ([result intValue]) {
             approvesReslut = [NSString stringWithFormat:@"请假已经被同意"];
         }else {
@@ -42,7 +41,7 @@
         }
         
         if (![description isEqualToString:@""]) {
-            approvesReslut = [approvesReslut stringByAppendingFormat:@", %@", description];
+            approvesReslut = [approvesReslut stringByAppendingFormat:@"\n%@", description];
         }
         
         if (![deliverName isEqualToString:@""]) {
@@ -74,7 +73,7 @@
         }
         
         if (![description isEqualToString:@""]) {
-            approvesReslut = [approvesReslut stringByAppendingFormat:@", %@", description];
+            approvesReslut = [approvesReslut stringByAppendingFormat:@"\n理由：%@", description];
         }
         
         if (![deliverName isEqualToString:@""]) {

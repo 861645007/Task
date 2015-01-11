@@ -37,6 +37,7 @@
     // Do any additional setup after loading the view.
     attendanceArr = [NSMutableArray array];
     isShareAttendance = 0;
+    [self setTableFooterView:self.mainTableView];
     [self initLocation];
     changeCurrentTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self  selector:@selector(changecurrentTime) userInfo:nil repeats:true];
     [changeCurrentTimer fire];
@@ -53,6 +54,7 @@
 
     // 注册刷新控件
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        self.noneAttendanceDataLabel.hidden = true;
         [self gainAttendanceInfo];
     }];
 
@@ -95,17 +97,17 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
-    if ([segue.identifier isEqualToString:@"GainToAttendanceDetailView"]) {
-        NSIndexPath *indexPath = [mainTableView indexPathForSelectedRow];
-        
-        AttendanceDetailViewController *attendanceDetailViewController = [segue destinationViewController];
-        attendanceDetailViewController.attendanceInfo = [attendanceArr objectAtIndex:indexPath.row];
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    // Get the new view controller using [segue destinationViewController].
+//    // Pass the selected object to the new view controller.
+//    
+//    if ([segue.identifier isEqualToString:@"GainToAttendanceDetailView"]) {
+//        NSIndexPath *indexPath = [mainTableView indexPathForSelectedRow];
+//        
+//        AttendanceDetailViewController *attendanceDetailViewController = [segue destinationViewController];
+//        attendanceDetailViewController.attendanceInfo = [attendanceArr objectAtIndex:indexPath.row];
+//    }
+//}
 
 
 #pragma mark - 定位
@@ -188,9 +190,9 @@
 }
 
 // 摇一摇
-#pragma mark - Shake
+#pragma mark - Shake 摇一摇
 
-- (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (motion == UIEventSubtypeMotionShake) {
         //在此处实现摇一摇的功能
         if ([address isEqualToString:@""] || address == nil) {
@@ -325,8 +327,9 @@
             [self.view.window showHUDWithText:@"获取考勤成功" Type:ShowPhotoYes Enabled:YES];
             attendanceArr = [dic objectForKey:@"list"];
             [self.mainTableView reloadData];
-            if ([[dic objectForKey:@"list"] isEqualToArray:@[]]) {
+            if ([attendanceArr isEqualToArray:@[]]) {
                 self.noneAttendanceDataLabel.hidden = false;
+                [self.view bringSubviewToFront:self.noneAttendanceDataLabel];
             }else {
                 self.noneAttendanceDataLabel.hidden = true;
             }
@@ -350,7 +353,7 @@
     AttendanceListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     NSDictionary *dic = [attendanceArr objectAtIndex:indexPath.row];
-    cell.attendanceDescLabel.text = [NSString stringWithFormat:@"%@：%@",[dic objectForKey:@"date"], [self setCellRowsString:[dic objectForKey:@"desc"]]];
+    cell.attendanceDescLabel.text = [NSString stringWithFormat:@"%@：%@",[dic objectForKey:@"date"], [self setCellRowsString:[dic objectForKey:@"address"]]];
     cell.attendanceTypeLabel.text = [dic objectForKey:@"type"];
     
     return cell;
@@ -369,6 +372,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
+    NSDictionary *dic = [attendanceArr objectAtIndex:indexPath.row];
+    
+    NSString *msg = @"";
+    msg = [msg stringByAppendingFormat:@"考勤地址:%@\n", [self setCellRowsString:[dic objectForKey:@"address"]]];
+    msg = [msg stringByAppendingFormat:@"考勤描述:%@\n", [self setCellRowsString:[dic objectForKey:@"desc"]]];
+    msg = [msg stringByAppendingFormat:@"考勤时间:%@\n", [self setCellRowsString:[dic objectForKey:@"date"]]];
+    msg = [msg stringByAppendingFormat:@"考勤状态:%@\n", [self setCellRowsString:[dic objectForKey:@"type"]]];
+    [self showAttendanceInfo:msg];
+}
+
+- (void)showAttendanceInfo:(NSString *)msg {
+    BOAlertController *alertView = [[BOAlertController alloc] initWithTitle:@"考勤详情" message:msg subView:nil viewController:self];
+    
+    RIButtonItem *okItem = [RIButtonItem itemWithLabel:@"确定" action:^{}];
+    [alertView addButton:okItem type:RIButtonItemType_Other];
+    
+    [alertView show];
 }
 
 #pragma mark - 选择考勤时间
@@ -378,7 +398,7 @@
 
 - (UIDatePicker *)createDatePicker {
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    datePicker.datePickerMode = UIDatePickerModeDate;
     datePicker.date = [NSDate date];
     
     return datePicker;
@@ -391,7 +411,10 @@
     
     RIButtonItem *okItem = [RIButtonItem itemWithLabel:@"确定" action:^{
         attendanceTime = [[datePicker date] dateToStringWithDateFormat:@"yyyy-MM"];
-        myAttendanceListLabel.text = myAttendanceListLabel.text = [NSString stringWithFormat:@"我的 %@ 的考勤信息", attendanceTime];
+        if (![attendanceTime isEqualToString:myAttendanceListLabel.text]) {
+            myAttendanceListLabel.text = myAttendanceListLabel.text = [NSString stringWithFormat:@"我的 %@ 的考勤信息", attendanceTime];
+            [self gainAttendanceInfo];
+        }
     }];
     [actionSheet addButton:okItem type:RIButtonItemType_Cancel];
     

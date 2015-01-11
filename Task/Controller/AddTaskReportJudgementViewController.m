@@ -199,14 +199,13 @@
     NSString *action = @"";
     
     //参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId}];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"taskId": taskId}];
     
     if (isFeedBackOrJudgement == 0) {
         action = AddTaskReportAction;
         if (![taskReportId isEqualToString:@""] || taskReportId != nil) {
             [parameters setValue:taskReportId forKey:@"taskReportId"];
         }
-        [parameters setValue:taskId forKey:@"taskId"];
         [parameters setValue:reportJudgementTextView.text forKey:@"description"];
     }else {
         action = AddTaskReportJudgementAction;
@@ -266,7 +265,7 @@
     NSString *action = @"";
     
     //参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId}];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"taskId": taskId}];
     
     if (isFeedBackOrJudgement == 0) {
         action = AddTaskReportAccessoryAction;

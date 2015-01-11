@@ -65,20 +65,26 @@
 #define FinishTaskListAction          @"app_finishTaskList.action"         // 获取已完成任务
 #define NofinishTaskListAction        @"app_nofinishTaskList.action"       // 获取未完成任务
 #define DownEmployeesTaskAction       @"app_downEmployeesTask.action"      // 获取下属任务
+#define TaskLogListAction             @"app_taskLogList.action"            // 获取任务操作日志
 #define AddTaskReportJudgeAccessoryAction @"app_addTaskReportJudgeAccessory.action" // 添加任务评论反馈附件
 
 // 请假
-#define AddLeaveAction                @"app_addLeave.action"               // 新增、编辑请假
-#define LeaveHomeAction               @"app_leaveHome.action"              // 请假主页
-#define LeaveDetailAction             @"app_leaveDetail.action"            // 请假详情
-#define ApproveLeaveAction            @"app_approveLeave.action"           // 审批请假
-#define LeaveHistoryAction            @"app_leaveHistory.action"           // 我的历史请假
-#define LeaveHistoryApproveAction     @"app_leaveHistoryApprove.action"    // 我的历史审批
+#define AddLeaveAction            @"app_addLeave.action"           // 新增、编辑请假
+#define LeaveHomeAction           @"app_leaveHome.action"          // 请假主页
+#define LeaveDetailAction         @"app_leaveDetail.action"        // 请假详情
+#define ApproveLeaveAction        @"app_approveLeave.action"       // 审批请假
+#define LeaveHistoryAction        @"app_leaveHistory.action"       // 我的历史请假
+#define LeaveHistoryApproveAction @"app_leaveHistoryApprove.action"// 我的历史审批
 
 // 更多
-#define EmployeeInfoAction            @"app_employeeInfo.action"           // 个人资料
-#define ChangePwdAction               @"app_changePwd.action"              // 修改密码
-#define AutoUpdateIOSAction           @"app_autoUpdateIOS.action"          // IOS检查版本更新
+
+// 个人资料
+#define EmployeeInfoAction        @"app_employeeInfo.action"       // 个人资料
+#define SetUpEmployeesAction      @"app_setUpEmployees.action"     // 设置上级
+#define SetDownEmployeesAction    @"app_setDownEmployees.action"   // 设置下级
+
+#define ChangePwdAction           @"app_changePwd.action"          // 修改密码
+#define AutoUpdateIOSAction       @"app_autoUpdateIOS.action"      // IOS检查版本更新
 
 
 

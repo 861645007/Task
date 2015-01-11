@@ -12,8 +12,10 @@
     NSArray *navArr;
     NSMutableArray *isShow;
     NSArray *leaveHomeSectionArr;
-    NSMutableArray *tableViewArr;        //0 为主页接口； 1 为历史审核；   2为历史请假；
-    int sectionType;                     //0 为主页接口； 1 为历史审核；   2为历史请假；
+    NSMutableArray *tableViewArr;        // 0 为主页接口； 1 为历史审核；   2为历史请假；
+    int sectionType;                     // 0 为主页接口； 1 为历史审核；   2为历史请假；
+    
+    int isNeedRefresh;                   // 0 不需要刷新； 1 需要刷新；
 }
 
 @end
@@ -27,6 +29,7 @@
     [self setTableFooterView:mainTableView];
     tableViewArr = [NSMutableArray arrayWithArray:@[@{},@{},@{}]];
     sectionType = 0;
+    isNeedRefresh = 1;
     leaveHomeSectionArr = @[@"处理中的请假", @"需要我审批的请假", @"新审批的请假"];
     isShow = [NSMutableArray array];
     for (int i = 0; i<[leaveHomeSectionArr count]; i++) {
@@ -41,6 +44,7 @@
         copyNavView.titleString = navArr[(long)index];
         // 选择标题后刷新界面
         sectionType = index;
+        isNeedRefresh = 1;
         [self gainLeaveHomeInfo];
     };
     self.navigationItem.titleView = navView;
@@ -53,7 +57,11 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self gainLeaveHomeInfo];
+    if (isNeedRefresh) {
+        isNeedRefresh = 0;
+        [self gainLeaveHomeInfo];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -166,11 +174,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 44;
+    if (sectionType == 0) {
+        return 44;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 2;
+    if (sectionType == 0) {
+        return 2;
+    }
+    return 0;
 }
 
 // 定义头标题的视图，添加点击事件
@@ -238,7 +252,7 @@
         NSString *sectionTitle = [leaveHomeSectionArr objectAtIndex:indexPath.section];
         dic = [[[tableViewArr objectAtIndex:sectionType] objectForKey:sectionTitle] objectAtIndex:indexPath.row];
     }else {
-        dic = [tableViewArr[indexPath.section] objectAtIndex:indexPath.row];
+        dic = [tableViewArr[sectionType] objectAtIndex:indexPath.row];
     }
 
     cell.leaveNameLabel.text = [dic objectForKey:@"leaveUserName"];
@@ -258,7 +272,7 @@
         NSString *sectionTitle = [leaveHomeSectionArr objectAtIndex:indexPath.section];
         dic = [[[tableViewArr objectAtIndex:sectionType] objectForKey:sectionTitle] objectAtIndex:indexPath.row];
     }else{
-        dic = [tableViewArr[indexPath.section] objectAtIndex:indexPath.row];
+        dic = [tableViewArr[sectionType] objectAtIndex:indexPath.row];
     }
     
     LeaveDetailViewController *leaveDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveDetailViewController"];

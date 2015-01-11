@@ -23,13 +23,30 @@
     // Configure the view for the selected state
 }
 // 设置cell高度和其内容控件
-- (void)setAutoHeight:(NSDictionary *)taskReportDic baseViewController:(UIViewController *)viewController {
+- (void)setAutoHeight:(NSDictionary *)taskReportDic taskId:(NSString *)taskId baseViewController:(UIViewController *)viewController {
+    theTaskId = taskId;
     reportDic = [NSDictionary dictionaryWithDictionary:taskReportDic];
     NSString *taskContentText = [taskReportDic objectForKey:@"desc"];
     NSArray *reportAccessorysArr = [taskReportDic objectForKey:@"reportAccessorys"];
+    NSArray *reportJudges = [taskReportDic objectForKey:@"reportJudges"];
     NSArray *reportContentArr = [taskReportDic objectForKey:@"reportJudges"];
     
-    reportAccessorysList = [NSArray arrayWithArray:reportAccessorysArr];
+    reportAccessorysList = [NSMutableArray array];
+    
+    for (NSDictionary *accessaryInfo in reportAccessorysArr) {
+        NSMutableDictionary *accessaryInfoCopy = [NSMutableDictionary dictionaryWithDictionary:accessaryInfo];
+        [accessaryInfoCopy setValue:@"0" forKey:@"isReportOrJudgeAccessory"];
+        [reportAccessorysList addObject:accessaryInfoCopy];
+    }
+    
+    for (NSDictionary *reportAccessaryInfo in reportJudges) {
+        for (NSDictionary *accessaryInfo  in [reportAccessaryInfo objectForKey:@"judgeAccessorys"]) {
+            NSMutableDictionary *accessaryInfoCopy = [NSMutableDictionary dictionaryWithDictionary:accessaryInfo];
+            [accessaryInfoCopy setValue:@"1" forKey:@"isReportOrJudgeAccessory"];
+            [reportAccessorysList addObject:accessaryInfoCopy];
+        }
+    }
+    
     baseViewController = viewController;
     
     int originX = 50;
@@ -59,8 +76,8 @@
     
     // 设置附件
     CGFloat accessoryOriginY = judgeOriginY;
-    for (int i = 0; i < [reportAccessorysArr count]; i++) {
-        NSDictionary *accessoryDic = [reportAccessorysArr objectAtIndex:i];
+    for (int i = 0; i < [reportAccessorysList count]; i++) {
+        NSDictionary *accessoryDic = [reportAccessorysList objectAtIndex:i];
         
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(originX, accessoryOriginY, sizeW, 30)];
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -72,14 +89,14 @@
         [self.contentView addSubview:btn];
         accessoryOriginY += 30;
         
-        if (i != [reportAccessorysArr count] - 1) {
+        if (i != [reportAccessorysList count] - 1) {
             UIView *line = [[UIView alloc] initWithFrame:CGRectMake(originX, accessoryOriginY, sizeW + 8, 1)];
             [line  setBackgroundColor:[UIColor colorWithRed:160/255.0 green:160/255.0 blue:160/255.0 alpha:1.0f]];
             [self.contentView addSubview:line];
         }
     }
 
-    if ([reportAccessorysArr count] != 0) {
+    if ([reportAccessorysList count] != 0) {
         UILabel *accessoryTitlelabel = [[UILabel alloc] initWithFrame:CGRectMake(16, judgeOriginY, sizeW, 30)];
         [accessoryTitlelabel setText:@"附件:"];
         accessoryTitlelabel.numberOfLines = 0;
@@ -127,6 +144,7 @@
     
     PreviewFileViewController *previewFileViewController = [baseViewController.storyboard instantiateViewControllerWithIdentifier:@"PreviewFileViewController"];
     previewFileViewController.isTaskOrReportAccessory = 1;
+    previewFileViewController.isReportOrJudgeAccessory = [[dic objectForKey:@"isReportOrJudgeAccessory"] intValue];
     previewFileViewController.accessoryId = [dic objectForKey:@"accessoryId"];
     previewFileViewController.fileName = [dic objectForKey:@"accessoryTempName"];
     [baseViewController.navigationController pushViewController:previewFileViewController animated:YES];
@@ -145,6 +163,7 @@
     addTaskReportJudgementViewController.taskReportId = [reportDic objectForKey:@"taskReportId"];
     addTaskReportJudgementViewController.judgedUserId = [reportDic objectForKey:@"reportPersonId"];
     addTaskReportJudgementViewController.judgedUserName = [reportDic objectForKey:@"reportPersonName"];
+    addTaskReportJudgementViewController.taskId = theTaskId;
     [baseViewController.navigationController pushViewController:addTaskReportJudgementViewController animated:YES];
 }
 

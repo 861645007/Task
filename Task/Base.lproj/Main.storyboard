@@ -1581,7 +1581,6 @@
                                         <connections>
                                             <outlet property="attendanceDescLabel" destination="SaO-cw-GpV" id="3pJ-e4-JH2"/>
                                             <outlet property="attendanceTypeLabel" destination="zKq-rZ-RDN" id="2UG-3Y-Aql"/>
-                                            <segue destination="owN-Qh-xEM" kind="show" identifier="GainToAttendanceDetailView" id="KTM-bn-XaY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1984,7 +1983,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="O4T-Zf-1GS">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProclamationCell" rowHeight="88" id="I8T-oZ-h1k" customClass="ProclamationTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -2047,7 +2046,6 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="O9b-ic-n9W" firstAttribute="leading" secondItem="yaC-hI-TgM" secondAttribute="leading" constant="15" id="1BD-lX-wPn"/>
                                                         <constraint firstAttribute="trailing" secondItem="ScW-uu-XDd" secondAttribute="trailing" constant="8" id="4DA-3s-IjZ"/>
@@ -2097,7 +2095,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="O4T-Zf-1GS" firstAttribute="top" secondItem="iIx-bB-80F" secondAttribute="topMargin" id="0H4-bR-iwT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="O4T-Zf-1GS" secondAttribute="trailing" constant="-16" id="5em-nM-PX8"/>
@@ -2128,7 +2125,6 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="AN0-WF-WFv">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProclamationListCell" rowHeight="60" id="6Fr-q8-ode" customClass="ProclamationListCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -2262,7 +2258,6 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NhC-1p-NWx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProclamationHistoryCell" textLabel="5xZ-qi-Mjr" detailTextLabel="2pT-sI-bEi" style="IBUITableViewCellStyleValue1" id="SRk-8W-BGE">
                                 <autoresizingMask key="autoresizingMask"/>

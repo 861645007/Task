@@ -19,6 +19,7 @@
 @synthesize fileName;
 @synthesize accessoryId;
 @synthesize isTaskOrReportAccessory;
+@synthesize isReportOrJudgeAccessory;
 @synthesize toolVIew;
 @synthesize loadingImageView;
 @synthesize loadingProcessView;
@@ -51,29 +52,38 @@
     if (isTaskOrReportAccessory == 0) {
         folderName = @"taskAccessory";
     }else {
-        folderName = @"taskReportAccessory";
+        if (isReportOrJudgeAccessory == 0) {
+            folderName = @"taskReportAccessory";
+        }else {
+            folderName = @"taskReportJudgeAccessory";
+        }
     }
+    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://vmr82ksj.zhy35065.zhihui.chinaccnet.cn/upload/%@/%@", folderName, fileName]];
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.inputStream   = [NSInputStream inputStreamWithURL:url];
     operation.outputStream  = [NSOutputStream outputStreamToFileAtPath:fileSavePath append:NO];
     
-    //下载进度控制
+    // 下载进度控制
     [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
          loadingProcessView.progress = (float)totalBytesRead/totalBytesExpectedToRead;
     }];
     
-    //已完成下载
+    // 已完成下载
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         // 下载成功
         [self dealWithSuccess];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // 下载失败
-        loadingProcessView.hidden = NO;
+        loadingProcessView.hidden = YES;
         loadingImageView.hidden = NO;
+        [self.view.window showHUDWithText:@"下载失败" Type:ShowPhotoNo Enabled:YES];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager removeItemAtPath:fileSavePath error:nil];
     }];
     
     [operation start];

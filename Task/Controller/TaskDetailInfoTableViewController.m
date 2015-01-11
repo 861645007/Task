@@ -18,6 +18,7 @@
     NSMutableArray *shareTaskUsersArr;     // 分享人列表
     NSMutableArray *taskReportArr;         // 任务汇报列表
     NSMutableArray *taskLookDetailArr;     // 任务查阅列表
+    NSMutableArray *taskLogArr;            // 任务操作日志列表
     NSMutableArray *subTaskList;           // 子任务列表
     
     int isDelete;                          // 0表示没有进行删除操作， 1表示进行了删除操作
@@ -46,6 +47,7 @@
     shareTaskUsersArr = [NSMutableArray array];
     taskReportArr = [NSMutableArray array];
     taskLookDetailArr = [NSMutableArray array];
+    taskLogArr = [NSMutableArray array];
     subTaskList = [NSMutableArray array];
     
     section1ISselected = 0;
@@ -125,6 +127,7 @@
         addTaskReportJudgementViewController.isFeedBackOrJudgement = 0;
         addTaskReportJudgementViewController.titleStr = @"新的反馈";
         addTaskReportJudgementViewController.desc = @"";
+        addTaskReportJudgementViewController.taskId = taskId;
         addTaskReportJudgementViewController.taskId = [taskDetailInfoDic objectForKey:@"taskId"];
         [self.navigationController pushViewController:addTaskReportJudgementViewController animated:YES];
     }]; 
@@ -234,6 +237,7 @@
     
     [self updateReportInfo:TaskDetailReportAction cellIndex:0];
     [self updateReportInfo:TaskDetailLookAction cellIndex:1];
+    [self updateReportInfo:TaskLogListAction cellIndex:2];
 }
 
 // 更新 关注 bar 的状态
@@ -260,7 +264,7 @@
     }
 }
 
-#pragma mark - 加载 评论 及 查阅 的数据
+#pragma mark - 加载 评论、 查阅 及 操作日志 的数据
 - (void)updateReportInfo:(NSString *)action cellIndex:(int)cellIndex {
     NSString *employeeId   = [[UserInfo shareInstance] gainUserId];
     NSString *realName     = [[UserInfo shareInstance] gainUserName];
@@ -275,6 +279,8 @@
             [self.mainTableView reloadData];
         }else if (cellIndex == 1) {
             taskLookDetailArr = [dic objectForKey:@"taskLooks"];
+        }else if (cellIndex == 2) {
+            taskLogArr = [dic objectForKey:@"taskLogs"];
         }
     } failure:^{}];
     
@@ -299,6 +305,8 @@
             return [taskReportArr count];
         }else if (isReportViewOrLookView == 1) {
             return [taskLookDetailArr count];
+        }else if (isReportViewOrLookView == 2) {
+            return [taskLogArr count];
         }
     }
     return 0;
@@ -360,6 +368,9 @@
     }
     
     CGFloat accessoryH = [[dic objectForKey:@"reportAccessorys"] count] * 30;
+    for (NSDictionary *reportJudgeDic in [dic objectForKey:@"reportJudges"]) {
+        accessoryH += [[reportJudgeDic objectForKey:@"judgeAccessorys"] count] * 30;
+    }
     // 获取并设置高度
     
     return 40 + descHeight + contentH + accessoryH + 27;
@@ -447,12 +458,12 @@
         [reportButton addTarget:self action:@selector(SelectedReportOrLookView:) forControlEvents:UIControlEventTouchUpInside];
         [sectionView addSubview:reportButton];
         
-        UIView *blockLineViewWithReport = [[UIView alloc] initWithFrame:CGRectMake(14, 44 - 3, 77, 3)];
+        UIView *blockLineViewWithReport = [[UIView alloc] initWithFrame:CGRectMake(15, 44 - 3, 80, 3)];
         blockLineViewWithReport.tag = 1002;
         [blockLineViewWithReport setBackgroundColor:[UIColor blackColor]];
         [sectionView addSubview:blockLineViewWithReport];
         
-        UIButton *lookButton = [[UIButton alloc] initWithFrame:CGRectMake(92, 0, 90, 43)];
+        UIButton *lookButton = [[UIButton alloc] initWithFrame:CGRectMake(92, 0, 80, 43)];
         [lookButton setTitle:@"查阅情况" forState:UIControlStateNormal];
         [lookButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         lookButton.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -460,17 +471,36 @@
         [lookButton addTarget:self action:@selector(SelectedReportOrLookView:) forControlEvents:UIControlEventTouchUpInside];
         [sectionView addSubview:lookButton];
         
-        UIView *blockLineViewWithLook = [[UIView alloc] initWithFrame:CGRectMake(102, 44 - 3, 72, 3)];
+        UIView *blockLineViewWithLook = [[UIView alloc] initWithFrame:CGRectMake(96, 44 - 3, 72, 3)];
         blockLineViewWithLook.tag     = 1004;
         [blockLineViewWithLook setBackgroundColor:[UIColor blackColor]];
         [sectionView addSubview:blockLineViewWithLook];
         
-        if (isReportViewOrLookView) {
-            blockLineViewWithReport.hidden = YES;
-            blockLineViewWithLook.hidden = NO;
-        }else {
+        UIButton *logsButton = [[UIButton alloc] initWithFrame:CGRectMake(165, 0, 80, 43)];
+        [logsButton setTitle:@"操作日志" forState:UIControlStateNormal];
+        [logsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        logsButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        logsButton.tag = 104;
+        [logsButton addTarget:self action:@selector(SelectedReportOrLookView:) forControlEvents:UIControlEventTouchUpInside];
+        [sectionView addSubview:logsButton];
+        
+        UIView *blockLineViewWithLogs = [[UIView alloc] initWithFrame:CGRectMake(170, 44 - 3, 72, 3)];
+        blockLineViewWithLogs.tag     = 1005;
+        [blockLineViewWithLogs setBackgroundColor:[UIColor blackColor]];
+        [sectionView addSubview:blockLineViewWithLogs];
+        
+        if (isReportViewOrLookView == 0) {
             blockLineViewWithReport.hidden = NO;
             blockLineViewWithLook.hidden = YES;
+            blockLineViewWithLogs.hidden = YES;
+        }else if (isReportViewOrLookView == 1){
+            blockLineViewWithReport.hidden = YES;
+            blockLineViewWithLook.hidden = NO;
+            blockLineViewWithLogs.hidden = YES;
+        }else {
+            blockLineViewWithReport.hidden = YES;
+            blockLineViewWithLook.hidden = YES;
+            blockLineViewWithLogs.hidden = NO;
         }
         
         return sectionView;
@@ -502,6 +532,8 @@
         isReportViewOrLookView = 0;
     }else if (btn.tag == 103) {
         isReportViewOrLookView = 1;
+    }else if (btn.tag == 104) {
+        isReportViewOrLookView = 2;
     }
     [self.mainTableView reloadData];
 }
@@ -638,7 +670,7 @@
 
             taskReportCell.reportPersonIconImageView.image = [taskReportCell gainUserIcon:[dic objectForKey:@"reportPersonId"]];
             
-            [taskReportCell setAutoHeight:dic baseViewController:self];
+            [taskReportCell setAutoHeight:dic taskId:taskId baseViewController:self];
             taskReportCell.reportReplyBtn.tag = indexPath.row;
             [taskReportCell.reportReplyBtn addTarget:self action:@selector(addTaskReportJudgement:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -657,6 +689,20 @@
             taskLookDetailCell.lookTaskTimeLabel.text = [dic objectForKey:@"lookTime"];
             
             cell = taskLookDetailCell;
+        }else if (isReportViewOrLookView == 2) {
+            cellIdentifier = @"TaskLogDetailCell";
+            
+            TaskLookDetailTableViewCell *taskLogDetailCell = (TaskLookDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (cell == nil) {
+                NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"TaskLookDetailTableViewCell" owner:self options:nil];
+                taskLogDetailCell = [nib objectAtIndex:0];
+            }
+            NSDictionary *dic = [taskLogArr objectAtIndex:indexPath.row];
+            taskLogDetailCell.lookTaskContentLabel.text = [dic objectForKey:@"desciption"];
+            taskLogDetailCell.lookTaskPersonNameLabel.text = [dic objectForKey:@"operationName"];
+            taskLogDetailCell.lookTaskTimeLabel.text = [dic objectForKey:@"operationTime"];
+            
+            cell = taskLogDetailCell;
         }
     }
     
@@ -686,6 +732,7 @@
     addTaskReportJudgementViewController.titleStr = @"新的评论";
     addTaskReportJudgementViewController.judgeId = @"";
     addTaskReportJudgementViewController.desc = @"";
+    addTaskReportJudgementViewController.taskId = taskId;
     addTaskReportJudgementViewController.taskReportId = [dic objectForKey:@"taskReportId"];
     addTaskReportJudgementViewController.judgedUserId = [dic objectForKey:@"reportPersonId"];
     addTaskReportJudgementViewController.judgedUserName = [dic objectForKey:@"reportPersonName"];
@@ -1032,6 +1079,7 @@
         case 1: {
             [self.view.window showHUDWithText:@"修改成功" Type:ShowPhotoYes Enabled:YES];
             if (isDelete) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTaskMainView" object:@"1"];
                 [self performSelector:@selector(comeback) withObject:nil afterDelay:0.9];
             }else {
                 [self performSelector:@selector(gainTaskDetailInfo) withObject:nil afterDelay:0.9];

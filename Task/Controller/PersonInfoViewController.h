@@ -7,8 +7,9 @@
 //
 
 #import "BaseViewController.h"
+#import "SelectHeaderViewController.h"
 
-@interface PersonInfoViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource>
+@interface PersonInfoViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource, SelectedHeaderProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @end

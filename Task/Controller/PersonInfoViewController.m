@@ -15,6 +15,9 @@
 @interface PersonInfoViewController () {
     NSDictionary *personInfoDic;
     NSMutableArray *personInfoArr;
+    
+    NSInteger selectIndex;
+    NSString *headerNameListStr;
 }
 
 @end
@@ -25,7 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    personInfoArr = [NSMutableArray arrayWithArray:@[@{@"部门:": @""}, @{@"电话:": @""}, @{@"Email:": @""}, @{@"上级:": @""}, @{@"下属:": @""}]];
+    selectIndex = 0;
+    headerNameListStr = @"";
+    personInfoArr = [NSMutableArray arrayWithArray:@[@{@"部门:": @""}, @{@"角色:": @""}, @{@"电话:": @""}, @{@"Email:": @""}, @{@"上级:": @""}, @{@"下级:": @""}]];
     
     self.mainTableView.tableHeaderView = [self setMaiTableHeaderView];
     [self setTableFooterView:self.mainTableView];
@@ -48,6 +53,14 @@
     [headerView addSubview:bgImageView];
     
     // 头像
+    UIView *bgHeaderImageView = [[UIView alloc] initWithFrame:CGRectMake(15, 125, 90, 90)];
+    [bgHeaderImageView setBackgroundColor:[UIColor whiteColor]];
+    bgHeaderImageView.layer.masksToBounds = YES;
+    bgHeaderImageView.layer.cornerRadius = 45;
+    bgHeaderImageView.layer.borderWidth = 2;
+    bgHeaderImageView.layer.borderColor = GrayColorForTitle.CGColor;
+    [headerView addSubview:bgHeaderImageView];
+    
     UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 130, 80, 80)];
     headerImageView.backgroundColor = [UIColor clearColor];
     headerImageView.layer.masksToBounds = YES;
@@ -185,10 +198,11 @@
 
 - (void)dealWithResult:(NSDictionary *)dic {
     [personInfoArr replaceObjectAtIndex:0 withObject:[self setPersonBaseInfo:@"部门:" rowContext:[dic objectForKey:@"departmentName"]]];
-    [personInfoArr replaceObjectAtIndex:1 withObject:[self setPersonBaseInfo:@"电话:" rowContext:[dic objectForKey:@"phone"]]];
-    [personInfoArr replaceObjectAtIndex:2 withObject:[self setPersonBaseInfo:@"Email:" rowContext:[dic objectForKey:@"email"]]];
-    [personInfoArr replaceObjectAtIndex:3 withObject:[self setPersonEmployeeNames:@"上级:" employeeArr:[dic objectForKey:@"upEmployees"] employeeKey:@"upEmployeeName"]];
-    [personInfoArr replaceObjectAtIndex:4 withObject:[self setPersonEmployeeNames:@"下属:" employeeArr:[dic objectForKey:@"downEmployees"] employeeKey:@"downEmployeeName"]];
+    [personInfoArr replaceObjectAtIndex:1 withObject:[self setPersonBaseInfo:@"角色:" rowContext:[dic objectForKey:@"role"]]];
+    [personInfoArr replaceObjectAtIndex:2 withObject:[self setPersonBaseInfo:@"电话:" rowContext:[dic objectForKey:@"phone"]]];
+    [personInfoArr replaceObjectAtIndex:3 withObject:[self setPersonBaseInfo:@"Email:" rowContext:[dic objectForKey:@"email"]]];
+    [personInfoArr replaceObjectAtIndex:4 withObject:[self setPersonEmployeeNames:@"上级:" employeeArr:[dic objectForKey:@"upEmployees"] employeeKey:@"upEmployeeName"]];
+    [personInfoArr replaceObjectAtIndex:5 withObject:[self setPersonEmployeeNames:@"下级:" employeeArr:[dic objectForKey:@"downEmployees"] employeeKey:@"downEmployeeName"]];
     
 }
 
@@ -238,6 +252,105 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *dic = [personInfoArr objectAtIndex:indexPath.row];
+    NSString *key = [[dic allKeys] firstObject];
+    if ([key isEqualToString: @"上级:"] || [key isEqualToString:@"下级:"]) {
+        selectIndex = indexPath.row;
+        [self setUpOrDownEmployees];
+    }
+    
+}
+
+
+#pragma mark - 设置上下级
+- (void)setUpOrDownEmployees {
+    SelectHeaderViewController *selectHeaderViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SelectHeaderViewController"];
+    selectHeaderViewController.delegate = self;
+    selectHeaderViewController.isRadio = 1;
+    if (selectIndex == 4) {
+        selectHeaderViewController.viewTitle = @"选择上级";
+    }else {
+        selectHeaderViewController.viewTitle = @"选择下级";
+    }
+    [self.navigationController pushViewController:selectHeaderViewController animated:YES];
+}
+
+// 返回联系人
+- (void)selectedHeader:(NSArray *)headerList {
+    NSString *headerIdList = @"";
+    headerNameListStr = @"";
+    for (NSDictionary *dic in headerList) {
+        if ([dic isEqual:[headerList lastObject]]) {
+            headerNameListStr = [headerNameListStr stringByAppendingFormat:@"%@",[dic objectForKey:@"realName"]];
+            headerIdList = [headerIdList stringByAppendingFormat:@"%@",[dic objectForKey:@"employeeId"]];
+            
+        }else {
+            headerNameListStr = [headerNameListStr stringByAppendingFormat:@"%@,",[dic objectForKey:@"realName"]];
+            headerIdList = [headerIdList stringByAppendingFormat:@"%@,",[dic objectForKey:@"employeeId"]];
+        }
+    }
+    
+    if ([headerList isEqualToArray:@[]]) {
+        if (selectIndex == 4) {
+            [personInfoArr replaceObjectAtIndex:4 withObject:[self setPersonEmployeeNames:@"上级:" employeeArr:@[@{@"upEmployeeName": @"请选择负责人"}]  employeeKey:@"upEmployeeName"]];
+        }else {
+            [personInfoArr replaceObjectAtIndex:5 withObject:[self setPersonEmployeeNames:@"下级:" employeeArr:@[@{@"downEmployeeName": @"请选择负责人"}] employeeKey:@"downEmployeeName"]];
+        }
+        [mainTableView reloadData];
+    }else {
+        [self submitEmployees:headerIdList];
+    }
+}
+
+- (void)submitEmployees:(NSString *)employeeIds {
+    NSString *employeeId = [userInfo gainUserId];
+    NSString *realName = [userInfo gainUserName];
+    NSString *enterpriseId = [userInfo gainUserEnterpriseId];
+    //参数
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId}];
+    
+    NSString *action = @"";
+    if (selectIndex == 4) {
+        action = SetUpEmployeesAction;
+        [parameters setValue:employeeIds forKey:@"upEmployeeIds"];
+    }else {
+        action = SetDownEmployeesAction;
+        [parameters setValue:employeeIds forKey:@"downEmployeeIds"];
+    }
+    
+    [self createAsynchronousRequest:action parmeters:parameters success:^(NSDictionary *dic){
+        [self dealWithGainProclamationInfoResult: dic];
+    } failure:^{}];
+}
+
+//处理网络操作结果
+- (void)dealWithGainProclamationInfoResult:(NSDictionary *)dic {
+    NSString *msg = @"";
+    
+    switch ([[dic objectForKey:@"result"] intValue]) {
+        case 0: {
+            msg = [dic objectForKey:@"message"];
+            break;
+        }
+        case 1: {
+            [self.view.window showHUDWithText:@"修改信息成功" Type:ShowPhotoYes Enabled:YES];
+            
+            if (selectIndex == 4) {
+                [personInfoArr replaceObjectAtIndex:4 withObject:[self setPersonEmployeeNames:@"上级:" employeeArr:@[@{@"upEmployeeName": headerNameListStr}] employeeKey:@"upEmployeeName"]];
+            }else {
+                [personInfoArr replaceObjectAtIndex:5 withObject:[self setPersonEmployeeNames:@"下级:" employeeArr:@[@{@"downEmployeeName": headerNameListStr}] employeeKey:@"downEmployeeName"]];
+            }
+            
+            [mainTableView reloadData];
+            break;
+        }
+    }
+
+    if (![msg isEqualToString:@""]) {
+        [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
+    }
+
 }
 
 @end

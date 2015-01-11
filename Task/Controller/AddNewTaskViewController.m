@@ -175,6 +175,7 @@
         case 1: {
             [self.view.window showHUDWithText:@"新建任务成功" Type:ShowPhotoYes Enabled:YES];
             if ([saveType isEqualToString:@"0"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTaskMainView" object:@"1"];
                 [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
             }else if ([saveType isEqualToString:@"1"]) {
                 // 新增
@@ -249,8 +250,8 @@
             headerIdStrList = [headerIdStrList stringByAppendingFormat:@"%@",[dic objectForKey:@"employeeId"]];
 
         }else {
-            headerListStr = [headerListStr stringByAppendingFormat:@"%@、",[dic objectForKey:@"realName"]];
-            headerIdStrList = [headerIdStrList stringByAppendingFormat:@"%@、",[dic objectForKey:@"employeeId"]];
+            headerListStr = [headerListStr stringByAppendingFormat:@"%@,",[dic objectForKey:@"realName"]];
+            headerIdStrList = [headerIdStrList stringByAppendingFormat:@"%@,",[dic objectForKey:@"employeeId"]];
         }
     }
     
