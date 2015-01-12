@@ -191,6 +191,7 @@
         [self createSimpleAlertView:@"抱歉" msg:[NSString stringWithFormat:@"请输入新的%@", titleStr]];
         return ;
     }
+    
     [self.view.window showHUDWithText:@"上传中..." Type:ShowLoading Enabled:YES];
     NSString *employeeId   = [[UserInfo shareInstance] gainUserId];
     NSString *realName     = [[UserInfo shareInstance] gainUserName];

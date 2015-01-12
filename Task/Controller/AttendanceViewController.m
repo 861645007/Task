@@ -264,6 +264,7 @@
     NSString *employeeId = [userInfo gainUserId];
     NSString *realName = [userInfo gainUserName];
     NSString *enterpriseId = [userInfo gainUserEnterpriseId];
+    [self.view.window showHUDWithText:@"正在考勤..." Type:ShowLoading Enabled:YES];
     //参数
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"type": attendanceType, @"pattern":attendancePatten, @"longitude": [NSString stringWithFormat:@"%f", coordinate.longitude], @"latitude": [NSString stringWithFormat:@"%f", coordinate.latitude], @"address":address, @"phoneImei": @"123"}];
     

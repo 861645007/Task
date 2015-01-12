@@ -25,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     gainPersonInfoNum = 0;
-    proclamationDic = [NSMutableDictionary dictionaryWithDictionary:@{@"lastNoticeContent":@"", @"unreadNoticeCount":@"0", @"lastNoticeId":@"0"}];
+    proclamationDic = [NSMutableDictionary dictionaryWithDictionary:@{@"lastNoticeContent":@"", @"unreadNoticeCount":@"", @"lastNoticeId":@""}];
 
     if ([self detectionNetworkStatus]) {
         // 获取信息操作
@@ -111,8 +111,9 @@
 
 - (void)setProclamationInfo:(NSDictionary *)dic {
     proclamationDic = [NSMutableDictionary dictionaryWithDictionary:dic];
-    [proclamationDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"unreadNoticeCount"]] forKey:@"unreadNoticeCount"];
-    [proclamationDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"lastNoticeId"]] forKey:@"lastNoticeId"];
+    [proclamationDic setValue:[NSString stringWithFormat:@"%@",[self judgeTextIsNULL:[dic objectForKey:@"unreadNoticeCount"]]] forKey:@"unreadNoticeCount"];
+    [proclamationDic setValue:[NSString stringWithFormat:@"%@",[self judgeTextIsNULL:[dic objectForKey:@"lastNoticeContent"]]] forKey:@"lastNoticeContent"];
+    [proclamationDic setValue:[NSString stringWithFormat:@"%@",[self judgeTextIsNULL:[dic objectForKey:@"lastNoticeId"]]] forKey:@"lastNoticeId"];
 }
 
 #pragma mark - 获取公司所有人员信息
@@ -176,12 +177,12 @@
         [proclamationcell.gainToUnReadViewBtn addTarget:self action:@selector(gainToUnReadView) forControlEvents:UIControlEventTouchUpInside];
         [proclamationcell.gainToCurrenProclamationViewBtn addTarget:self action:@selector(gainToCurrenProclamationView) forControlEvents:UIControlEventTouchUpInside];
 
-        if ([[proclamationDic objectForKey:@"lastNoticeId"] isEqualToString:@"0"]) {
+        if ([[proclamationDic objectForKey:@"unreadNoticeCount"] isEqual:@"0"]) {
             proclamationcell.proclamationTitleLabel.text = @"暂无公告";
+            proclamationcell.taskAddImageView.hidden = NO;
             
             UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewProclamation)];
             [proclamationcell.taskAddImageView addGestureRecognizer:tapGestureRecognizer];
-            
         }else {
             proclamationcell.taskAddImageView.hidden = YES;
             proclamationcell.proclamationTitleLabel.text = [proclamationDic objectForKey:@"lastNoticeContent"];
