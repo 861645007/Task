@@ -6,32 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Task/Controller/EditLeaveViewController.m"
-            timestampString = "442850223.315923"
+            timestampString = "442895017.794854"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
             landmarkName = "-submitReportImage:leaveAccessaryId:imageName:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Task/Controller/PreviewFileViewController.m"
-            timestampString = "442851416.556084"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-downloadFile"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -49,6 +33,52 @@
             endingLineNumber = "84"
             landmarkName = "-downloadFile"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Task/Controller/EditLeaveViewController.m"
+            timestampString = "442895017.794854"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "438"
+            endingLineNumber = "438"
+            landmarkName = "-submitReportImage:leaveAccessaryId:imageName:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__72-[EditLeaveViewController submitReportImage:leaveAccessaryId:imageName:]_block_invoke"
+                  moduleName = "Task"
+                  urlString = "file:///Users/wanghuanqiang/Documents/MyProject/Team/ReWrite/Task/Task/Controller/EditLeaveViewController.m"
+                  timestampString = "442894666.991969"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "434"
+                  endingLineNumber = "434"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__72-[EditLeaveViewController submitReportImage:leaveAccessaryId:imageName:]_block_invoke332"
+                  moduleName = "Task"
+                  urlString = "file:///Users/wanghuanqiang/Documents/MyProject/Team/ReWrite/Task/Task/Controller/EditLeaveViewController.m"
+                  timestampString = "442894666.992206"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "434"
+                  endingLineNumber = "434"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

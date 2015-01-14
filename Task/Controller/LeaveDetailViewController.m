@@ -16,6 +16,7 @@
     NSMutableArray *leaveApprovesList;
     NSMutableArray *leaveAccessaryList;
     NSMutableDictionary *leaveDetailInfoDic;
+    int isNeedRefresh;
     
     LeaveApprovesTableViewCell *leaveApprovesHeightCell;
 }
@@ -36,15 +37,26 @@
     leaveDetailInfoDic = [NSMutableDictionary dictionary];
     leaveApprovesHeightCell = [[LeaveApprovesTableViewCell alloc] init];
     [self setTableFooterView:mainTableView];
+    isNeedRefresh = 1;
 
     // 注册刷新控件
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self gainLeaveDetailInfo];
     }];
+    
+    // 通知刷新界面
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setIsRefresh:) name:@"refreshLeaveDetailView" object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self gainLeaveDetailInfo];
+    if (isNeedRefresh) {
+        isNeedRefresh = 0;
+        [self gainLeaveDetailInfo];
+    }
+}
+
+- (void)setIsRefresh:(NSNotification *)notification {
+    isNeedRefresh = 1;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,7 +98,14 @@
             
             leaveDetailInfoDic = [dic objectForKey:@"leaveInfo"];
             leaveApprovesList = [leaveDetailInfoDic objectForKey:@"leaveApproves"];
-            leaveAccessaryList = [leaveDetailInfoDic objectForKey:@"leaveAccessorys"];
+            leaveAccessaryList = [NSMutableArray arrayWithArray:[leaveDetailInfoDic objectForKey:@"leaveAccessorys"]];
+            
+            if ([leaveAccessaryList count] != 0) {
+                isShow[0] = @"1";
+            }
+            if ([leaveApprovesList count] != 0) {
+                isShow[1] = @"1";
+            }
             
             // 加载右上角按钮
             if (leaveEditType == 1) {
@@ -184,6 +203,13 @@
         }
     }
     
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section != 0) {
+        return 2;
+    }
     return 0;
 }
 

@@ -33,7 +33,6 @@
     }else {
         NSString *result = [approvesDic objectForKey:@"result"];
         NSString *description = [self textIsNull:[approvesDic objectForKey:@"description"]];
-        NSString *deliverName = [self textIsNull:[approvesDic objectForKey:@"deliverName"]];
         if ([result intValue]) {
             approvesReslut = [NSString stringWithFormat:@"请假已经被同意"];
         }else {
@@ -42,10 +41,6 @@
         
         if (![description isEqualToString:@""]) {
             approvesReslut = [approvesReslut stringByAppendingFormat:@"\n%@", description];
-        }
-        
-        if (![deliverName isEqualToString:@""]) {
-            approvesReslut = [approvesReslut stringByAppendingFormat:@"\n请假已经被移交至 %@ 处", deliverName];
         }
     }
     
@@ -64,7 +59,6 @@
     }else {
         NSString *result = [approvesDic objectForKey:@"result"];
         NSString *description = [self textIsNull:[approvesDic objectForKey:@"description"]];
-        NSString *deliverName = [self textIsNull:[approvesDic objectForKey:@"deliverName"]];
         NSString *approvesTime = [self textIsNull:[approvesDic objectForKey:@"approveTime"]];
         if ([result intValue]) {
             approvesReslut = [NSString stringWithFormat:@"请假已经被同意"];
@@ -74,10 +68,6 @@
         
         if (![description isEqualToString:@""]) {
             approvesReslut = [approvesReslut stringByAppendingFormat:@"\n理由：%@", description];
-        }
-        
-        if (![deliverName isEqualToString:@""]) {
-            approvesReslut = [approvesReslut stringByAppendingFormat:@"\n请假已经被移交至 %@ 处", deliverName];
         }
         
         if (![approvesTime isEqualToString:@""]) {

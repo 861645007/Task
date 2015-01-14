@@ -29,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"请假主页";
     [self setTableFooterView:mainTableView];
     leaveList = [NSMutableArray array];
     approveLeaveList = [NSMutableArray array];
@@ -43,7 +44,7 @@
     
     // 注册刷新控件
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-        [self gainTableViewData];
+        [self refreshTableViewData];
     }];
 }
 
@@ -54,7 +55,18 @@
 - (void)viewDidAppear:(BOOL)animated {
     if (isNeedRefresh) {
         isNeedRefresh = 0;
-        [self gainTableViewData];
+        [self refreshTableViewData];
+    }
+}
+
+// 刷新界面
+- (void)refreshTableViewData {
+    if (tableViewType == 0) {
+        leaveTablePageNo = 1;
+        [self gainLeaveListInfo];
+    }else {
+        approveLeaveTablePageNo = 1;
+        [self gainApproveLeaveListInfo];
     }
 }
 
@@ -73,13 +85,7 @@
 }
 
 #pragma mark - 获取数据
-- (void)gainTableViewData {
-    if (tableViewType == 0) {
-        [self gainLeaveListInfo];
-    }else {
-        [self gainApproveLeaveListInfo];
-    }
-}
+
 
 // 获取数据
 - (void)gainLeaveListInfo {
@@ -141,7 +147,14 @@
             [self.view.window showHUDWithText:@"获取数据成功" Type:ShowPhotoYes Enabled:YES];
             
             if (dataType == 0) {
-                leaveList = [[dic objectForKey:@"leaveInfo"] objectForKey:@"leaveList"];
+                if (leaveTablePageNo == 1) {
+                    leaveList = [NSMutableArray arrayWithArray:[[dic objectForKey:@"leaveInfo"] objectForKey:@"leaveList"]];
+                }else {
+                    for (NSDictionary *leaveDic in [[dic objectForKey:@"leaveInfo"] objectForKey:@"leaveList"]) {
+                        [leaveList addObject:leaveDic];
+                    }
+                }
+                
                 leaveTotalPageNum = [[[dic objectForKey:@"leaveInfo"] objectForKey:@"totalPages"] intValue];
                 leaveTablePageNo = [[[dic objectForKey:@"leaveInfo"] objectForKey:@"pageNo"] intValue];
                 
@@ -149,7 +162,14 @@
                     [self gainApproveLeaveListInfo];
                 }
             }else {
-                approveLeaveList = [[dic objectForKey:@"approveInfo"] objectForKey:@"approveList"];
+                if (approveLeaveTablePageNo == 1) {
+                    approveLeaveList = [NSMutableArray arrayWithArray:[[dic objectForKey:@"approveInfo"] objectForKey:@"approveList"]];
+                }else {
+                    for (NSDictionary *approveLeaveDic in [[dic objectForKey:@"approveInfo"] objectForKey:@"approveList"]) {
+                        [approveLeaveList addObject:approveLeaveDic];
+                    }
+                }
+                
                 approveLeaveTotalPageNum = [[[dic objectForKey:@"approveInfo"] objectForKey:@"totalPages"] intValue];
                 approveLeaveTablePageNo = [[[dic objectForKey:@"approveInfo"] objectForKey:@"pageNo"] intValue];
             }
@@ -171,7 +191,7 @@
     [label setText:@"已加载完数据"];
     
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-    [btn addTarget:self  action:@selector(gainTableViewData) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(gainTableViewData) forControlEvents:UIControlEventTouchUpInside];
     [btn setTitle:@"点击加载数据" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
@@ -179,14 +199,26 @@
         if (leaveTotalPageNum <= leaveTablePageNo && leaveTotalPageNum != -1) {
             return label;
         }else {
+            
             return btn;
         }
     }else {
         if (approveLeaveTotalPageNum <= approveLeaveTablePageNo && approveLeaveTotalPageNum != -1) {
             return label;
         }else {
+            
             return btn;
         }
+    }
+}
+
+- (void)gainTableViewData {
+    if (tableViewType == 0) {
+        leaveTablePageNo ++;
+        [self gainLeaveListInfo];
+    }else {
+        approveLeaveTablePageNo ++;
+        [self gainApproveLeaveListInfo];
     }
 }
 

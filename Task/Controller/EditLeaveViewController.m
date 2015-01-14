@@ -368,6 +368,11 @@
         }
         case 1: {
             if ([accessaryList count] == 0) {
+                if (isAddNewLeave) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLeaveDetailView" object:@"1"];
+                }else {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLeaveMainView" object:@"1"];
+                }
                 [self.view.window showHUDWithText:@"请假成功" Type:ShowPhotoYes Enabled:YES];
                 [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
             }else {
@@ -392,6 +397,11 @@
     NSDictionary *accessaryDic = [accessaryList objectAtIndex:submitImageIndex];
     if (![[NSString stringWithFormat:@"%@", [accessaryDic objectForKey:@"accessoryId"]] isEqualToString:@"(null)"]) {
         if (submitImageIndex == [accessaryList count] - 1) {
+            if (isAddNewLeave) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLeaveDetailView" object:@"1"];
+            }else {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLeaveMainView" object:@"1"];
+            }
             [self.view.window showHUDWithText:@"请假完成" Type:ShowPhotoYes Enabled:YES];
             [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
             return ;
@@ -427,6 +437,11 @@
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (submitImageIndex == [accessaryList count] - 1) {
+            if (isAddNewLeave) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLeaveDetailView" object:@"1"];
+            }else {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLeaveMainView" object:@"1"];
+            }
             [self.view.window showHUDWithText:@"请假完成" Type:ShowPhotoYes Enabled:YES];
             [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
         }else {
