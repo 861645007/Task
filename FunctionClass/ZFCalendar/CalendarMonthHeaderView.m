@@ -23,8 +23,8 @@
 @property (weak, nonatomic) UILabel *day7OfTheWeekLabel;
 @end
 
-
-#define CATDayLabelWidth  40.0f
+#define CAScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define CATDayLabelWidth  CAScreenWidth / 7
 #define CATDayLabelHeight 20.0f
 
 @implementation CalendarMonthHeaderView
@@ -55,7 +55,7 @@
     self.clipsToBounds = YES;
     
     //月份
-    UILabel *masterLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 10.0f, 300.0f, 30.f)];
+    UILabel *masterLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 10.0f, CAScreenWidth, 30.f)];
     [masterLabel setBackgroundColor:[UIColor clearColor]];
     [masterLabel setTextAlignment:NSTextAlignmentCenter];
     [masterLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:17.0f]];
@@ -63,7 +63,7 @@
     self.masterLabel.textColor = COLOR_THEME;
     [self addSubview:self.masterLabel];
     
-    CGFloat xOffset = 5.0f;
+    CGFloat xOffset = 0.f;
     CGFloat yOffset = 45.0f;
 
     //一，二，三，四，五，六，日
@@ -75,7 +75,7 @@
     self.day1OfTheWeekLabel.textColor = COLOR_THEME1;
     [self addSubview:self.day1OfTheWeekLabel];
 
-    xOffset += CATDayLabelWidth + 5.0f;
+    xOffset += CATDayLabelWidth;
     dayOfTheWeekLabel = [[UILabel alloc]initWithFrame:CGRectMake(xOffset,yOffset, CATDayLabelWidth, CATDayLabelHeight)];
     [dayOfTheWeekLabel setBackgroundColor:[UIColor clearColor]];
     [dayOfTheWeekLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f]];
@@ -84,7 +84,7 @@
     self.day2OfTheWeekLabel.textColor = COLOR_THEME;
     [self addSubview:self.day2OfTheWeekLabel];
 
-    xOffset += CATDayLabelWidth + 5.0f;
+    xOffset += CATDayLabelWidth;
     dayOfTheWeekLabel = [[UILabel alloc]initWithFrame:CGRectMake(xOffset,yOffset, CATDayLabelWidth, CATDayLabelHeight)];
     [dayOfTheWeekLabel setBackgroundColor:[UIColor clearColor]];
     [dayOfTheWeekLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f]];
@@ -93,7 +93,7 @@
     self.day3OfTheWeekLabel.textColor = COLOR_THEME;
     [self addSubview:self.day3OfTheWeekLabel];
 
-    xOffset += CATDayLabelWidth + 5.0f;
+    xOffset += CATDayLabelWidth;
     dayOfTheWeekLabel = [[UILabel alloc]initWithFrame:CGRectMake(xOffset,yOffset, CATDayLabelWidth, CATDayLabelHeight)];
     [dayOfTheWeekLabel setBackgroundColor:[UIColor clearColor]];
     [dayOfTheWeekLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f]];
@@ -102,7 +102,7 @@
     self.day4OfTheWeekLabel.textColor = COLOR_THEME;
     [self addSubview:self.day4OfTheWeekLabel];
 
-    xOffset += CATDayLabelWidth + 5.0f;
+    xOffset += CATDayLabelWidth;
     dayOfTheWeekLabel = [[UILabel alloc]initWithFrame:CGRectMake(xOffset,yOffset, CATDayLabelWidth, CATDayLabelHeight)];
     [dayOfTheWeekLabel setBackgroundColor:[UIColor clearColor]];
     [dayOfTheWeekLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f]];
@@ -111,7 +111,7 @@
     self.day5OfTheWeekLabel.textColor = COLOR_THEME;
     [self addSubview:self.day5OfTheWeekLabel];
 
-    xOffset += CATDayLabelWidth + 5.0f;
+    xOffset += CATDayLabelWidth;
     dayOfTheWeekLabel = [[UILabel alloc]initWithFrame:CGRectMake(xOffset,yOffset, CATDayLabelWidth, CATDayLabelHeight)];
     [dayOfTheWeekLabel setBackgroundColor:[UIColor clearColor]];
     [dayOfTheWeekLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f]];
@@ -120,7 +120,7 @@
     self.day6OfTheWeekLabel.textColor = COLOR_THEME;
     [self addSubview:self.day6OfTheWeekLabel];
 
-    xOffset += CATDayLabelWidth + 5.0f;
+    xOffset += CATDayLabelWidth;
     dayOfTheWeekLabel = [[UILabel alloc]initWithFrame:CGRectMake(xOffset,yOffset, CATDayLabelWidth, CATDayLabelHeight)];
     [dayOfTheWeekLabel setBackgroundColor:[UIColor clearColor]];
     [dayOfTheWeekLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f]];

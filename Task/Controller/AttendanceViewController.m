@@ -376,10 +376,10 @@
     NSDictionary *dic = [attendanceArr objectAtIndex:indexPath.row];
     
     NSString *msg = @"";
-    msg = [msg stringByAppendingFormat:@"考勤地址:%@\n", [self setCellRowsString:[dic objectForKey:@"address"]]];
-    msg = [msg stringByAppendingFormat:@"考勤描述:%@\n", [self setCellRowsString:[dic objectForKey:@"desc"]]];
-    msg = [msg stringByAppendingFormat:@"考勤时间:%@\n", [self setCellRowsString:[dic objectForKey:@"date"]]];
-    msg = [msg stringByAppendingFormat:@"考勤状态:%@\n", [self setCellRowsString:[dic objectForKey:@"type"]]];
+    msg = [msg stringByAppendingFormat:@"考勤地址:%@\n", [self setCellRowsString:[self judgeTextIsNULL:[dic objectForKey:@"address"]]]];
+    msg = [msg stringByAppendingFormat:@"考勤描述:%@\n", [self setCellRowsString:[self judgeTextIsNULL:[dic objectForKey:@"desc"]]]];
+    msg = [msg stringByAppendingFormat:@"考勤时间:%@\n", [self setCellRowsString:[self judgeTextIsNULL:[dic objectForKey:@"date"]]]];
+    msg = [msg stringByAppendingFormat:@"考勤状态:%@\n", [self setCellRowsString:[self judgeTextIsNULL:[dic objectForKey:@"type"]]]];
     [self showAttendanceInfo:msg];
 }
 

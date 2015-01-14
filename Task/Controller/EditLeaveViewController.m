@@ -7,9 +7,14 @@
 //
 
 #import "EditLeaveViewController.h"
+#import "AddLeaveAccessaryTableViewCell.h"
+#import "PreviewFileViewController.h"
+#import "PreviewLeaveAccessaryViewController.h"
 
 @interface EditLeaveViewController () {
     NSString *approvePersonIdList;
+    NSMutableArray *accessaryList;
+    int submitImageIndex;
 }
 
 @end
@@ -23,6 +28,7 @@
 @synthesize startTimeBtn;
 @synthesize endTimeBtn;
 @synthesize gainApprovePersonBtn;
+@synthesize selectedAccessaryBtn;
 @synthesize leaveApproveIds;
 @synthesize leaveApproveNames;
 @synthesize leaveContent;
@@ -31,6 +37,9 @@
 @synthesize leaveStartTime;
 @synthesize leaveType;
 @synthesize isAddNewLeave;
+@synthesize accessaryTableView;
+@synthesize leaveAccessaryList;
+
 
 #pragma mark - 函数开始
 - (void)viewDidLoad {
@@ -38,6 +47,7 @@
     // Do any additional setup after loading the view.
     self.title = titleStr;
     leaveReasonTextView.layer.borderWidth = 0.5;
+    [self setTableFooterView:accessaryTableView];
     
     if (isAddNewLeave == 1) {
         leaveReasonTextView.text = leaveContent;
@@ -49,6 +59,12 @@
         endTimeBtn.tag = 1;
         approvePersonIdList = leaveApproveIds;
         [self setOldLeaveType:leaveType];
+    }
+    
+    if (leaveAccessaryList == nil || [leaveAccessaryList count] == 0) {
+        accessaryList = [NSMutableArray array];
+    }else {
+        accessaryList = [NSMutableArray arrayWithArray:leaveAccessaryList];
     }
 }
 
@@ -71,15 +87,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"GainPreviewLeaveAccessaryView"]) {
+        NSIndexPath *indexPath = [accessaryTableView indexPathForSelectedRow];
+        
+        PreviewLeaveAccessaryViewController *previewLeaveAccessaryViewController = [segue destinationViewController];
+        UIImage *image = [[accessaryList objectAtIndex:indexPath.row] objectForKey:@"image"];
+        previewLeaveAccessaryViewController.previewImageData = UIImagePNGRepresentation(image);
+    }
 }
-*/
+
 
 #pragma mark - 选择请假类型
 - (IBAction)selectSickLeave:(id)sender {
@@ -188,7 +211,95 @@
     gainApprovePersonBtn.tag = 1;
 }
 
-#pragma mark - 保存
+#pragma mark - 选择附件
+- (IBAction)selectedAccessary:(id)sender {
+    [self clickTaskAccessorysBtn];
+}
+
+// 选取照片
+- (void)clickTaskAccessorysBtn {
+    BOAlertController *sheetAction = [[BOAlertController alloc] initWithTitle:@"请选择上传附件方式" message:nil subView:nil viewController:self];
+    RIButtonItem *cameraItem = [RIButtonItem itemWithLabel:@"拍照获取" action:^(){
+        [self pickImageFromCamera];
+    }];
+    [sheetAction addButton:cameraItem type:RIButtonItemType_Other];
+    
+    RIButtonItem *albumItem = [RIButtonItem itemWithLabel:@"相册获取" action:^(){
+        [self pickImageFromAlbum];
+    }];
+    [sheetAction addButton:albumItem type:RIButtonItemType_Other];
+    
+    RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"取消" action:^(){}];
+    [sheetAction addButton:cancelItem type:RIButtonItemType_Cancel];
+    
+    [sheetAction showInView:self.view];
+}
+
+#pragma mark - 从相册获取
+- (void)pickImageFromAlbum {
+    RBImagePickerController *imagePicker = [[RBImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.dataSource = self;
+    imagePicker.selectionType = RBMultipleImageSelectionType;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)pickImageFromCamera {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])  {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else{
+        NSLog(@"你这是模拟器！");
+    }
+    
+    imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    imagePicker.allowsEditing = YES;
+    
+    [self presentViewController:imagePicker animated:YES completion:^{}];
+}
+
+#pragma mark RBImagePickerDataSource
+-(NSInteger)imagePickerControllerMaxSelectionCount:(RBImagePickerController *)imagePicker {
+    return 9;
+}
+
+-(NSInteger)imagePickerControllerMinSelectionCount:(RBImagePickerController *)imagePicker {
+    return 0;
+}
+
+#pragma mark RBImagePickerDelegate
+-(void)imagePickerController:(RBImagePickerController *)imagePicker didFinishPickingImagesList:(NSArray *)imageList {
+    [self addNewAccessary:imageList];
+}
+
+-(void)imagePickerControllerDoneCancel:(RBImagePickerController *)imagePicker{
+    [imagePicker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark image picker delegte
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    [self addNewAccessary:@[image]];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+- (void)addNewAccessary:(NSArray *)imageList {
+    for (int i = 0; i < [imageList count]; i++) {
+        UIImage *image = [imageList objectAtIndex:i];
+        NSString *imageName = [NSString stringWithFormat:@"%@-%d.png", [[NSDate date] dateToStringWithDateFormat:@"hh-mm-ss"], i];
+        [accessaryList addObject:@{@"name": imageName, @"image": image}];
+    }
+
+    [accessaryTableView reloadData];
+}
+
+#pragma mark - 提交请假
 - (IBAction)saveLeaveInfo:(id)sender {
     // 判断是否选择了请假类型
     if (sickLeaveBtn.tag == 0 && affairLeaveBtn.tag == 0 && otherLaeveBtn.tag == 0) {
@@ -217,7 +328,7 @@
     [self submitLeaveInfo];
 }
 
-// 获取数据
+
 - (void)submitLeaveInfo {
     [self.view.window showHUDWithText:@"正在请假..." Type:ShowLoading Enabled:YES];
     
@@ -256,8 +367,18 @@
             break;
         }
         case 1: {
-            [self.view.window showHUDWithText:@"请假成功" Type:ShowPhotoYes Enabled:YES];
-            [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
+            if ([accessaryList count] == 0) {
+                [self.view.window showHUDWithText:@"请假成功" Type:ShowPhotoYes Enabled:YES];
+                [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
+            }else {
+                submitImageIndex = 0;
+                if (isAddNewLeave) {
+                    [self submitReportImage:[[accessaryList objectAtIndex:0] objectForKey:@"image"] leaveAccessaryId:leaveId imageName:[[accessaryList objectAtIndex:0] objectForKey:@"name"]];
+                }else {
+                    [self submitReportImage:[[accessaryList objectAtIndex:0] objectForKey:@"image"] leaveAccessaryId:[dic objectForKey:@"leaveId"] imageName:[[accessaryList objectAtIndex:0] objectForKey:@"name"]];
+                }
+            }
+            
             break;
         }
     }
@@ -266,8 +387,112 @@
     }
 }
 
+// 上传图片
+- (void)submitReportImage:(UIImage *)sImage leaveAccessaryId:(NSString *)leaveIdForAccessary imageName:(NSString *)imageName {
+    NSDictionary *accessaryDic = [accessaryList objectAtIndex:submitImageIndex];
+    if (![[NSString stringWithFormat:@"%@", [accessaryDic objectForKey:@"accessoryId"]] isEqualToString:@"(null)"]) {
+        if (submitImageIndex == [accessaryList count] - 1) {
+            [self.view.window showHUDWithText:@"请假完成" Type:ShowPhotoYes Enabled:YES];
+            [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
+            return ;
+        }
+        int index = ++submitImageIndex;
+        [self submitReportImage:[[accessaryList objectAtIndex:index] objectForKey:@"image"] leaveAccessaryId:leaveIdForAccessary imageName:[[accessaryList objectAtIndex:index] objectForKey:@"name"]];
+        return ;
+    }
+    
+    [self.view.window showHUDWithText:@"正在请假..." Type:ShowLoading Enabled:YES];
+    
+    NSString *employeeId   = [[UserInfo shareInstance] gainUserId];
+    NSString *realName     = [[UserInfo shareInstance] gainUserName];
+    NSString *enterpriseId = [[UserInfo shareInstance] gainUserEnterpriseId];
+    
+    NSData *imageData = UIImageJPEGRepresentation(sImage, 0.30);
+   
+    //参数
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"leaveId": leaveIdForAccessary}];
+    
+    AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+    requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    requestManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [requestManager POST:[NSString stringWithFormat:@"%@%@",HttpURL, AddLeaveAccessoryAction] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        /**
+         *  appendPartWithFileURL   //  指定上传的文件
+         *  name                    //  指定在服务器中获取对应文件或文本时的key
+         *  fileName                //  指定上传文件的原始文件名
+         *  mimeType                //  指定商家文件的MIME类型
+         */
+        [formData appendPartWithFileData:imageData name:@"uploadFile" fileName:imageName mimeType:@"image/png"];
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (submitImageIndex == [accessaryList count] - 1) {
+            [self.view.window showHUDWithText:@"请假完成" Type:ShowPhotoYes Enabled:YES];
+            [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
+        }else {
+            int index = ++submitImageIndex;
+            [self submitReportImage:[[accessaryList objectAtIndex:index] objectForKey:@"image"] leaveAccessaryId:leaveIdForAccessary imageName:[[accessaryList objectAtIndex:index] objectForKey:@"name"]];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"获取服务器响应出错");
+    }];
+}
+
 - (void)comeBack {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - TableView DataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return  [accessaryList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellIdentifier = @"AddLeaveAccessaryTableViewCell";
+    AddLeaveAccessaryTableViewCell *cell = (AddLeaveAccessaryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"AddLeaveAccessaryTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
+    NSDictionary *dic = [accessaryList objectAtIndex:indexPath.row];
+    cell.accessarySizeLabel.hidden = YES;
+    NSString *accessaryId = [self judgeTextIsNULL:[NSString stringWithFormat:@"%@", [dic objectForKey:@"accessoryId"]]];
+    if ([accessaryId isEqualToString:@"(null)"]) {
+        cell.accessaryNameLabel.text = [dic objectForKey:@"name"];
+        [cell.deleteAccessaryBtn addTarget:self action:@selector(deleteAccessary:) forControlEvents:UIControlEventTouchUpInside];
+        cell.deleteAccessaryBtn.tag = indexPath.row;
+    }else {
+        cell.accessaryNameLabel.text = [dic objectForKey:@"accessoryName"];
+        cell.deleteAccessaryBtn.hidden = YES;
+    }
+    
+    return  cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *accessAryDic = [accessaryList objectAtIndex:indexPath.row];
+    NSString *accessaryId = [self judgeTextIsNULL:[NSString stringWithFormat:@"%@", [accessAryDic objectForKey:@"accessoryId"]]];
+    if ([accessaryId isEqualToString:@"(null)"]) {
+        PreviewLeaveAccessaryViewController *previewLeaveAccessaryViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PreviewLeaveAccessaryViewController"];
+        UIImage *image = [[accessaryList objectAtIndex:indexPath.row] objectForKey:@"image"];
+        previewLeaveAccessaryViewController.previewImageData = UIImagePNGRepresentation(image);
+        [self.navigationController pushViewController:previewLeaveAccessaryViewController animated:YES];
+        
+    }else {
+        PreviewFileViewController *previewFileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PreviewFileViewController"];
+        previewFileViewController.isTaskOrReportAccessory = 2;
+        previewFileViewController.accessoryId = [accessAryDic objectForKey:@"accessoryId"];
+        previewFileViewController.fileName = [accessAryDic objectForKey:@"accessoryTempName"];
+        [self.navigationController pushViewController:previewFileViewController animated:YES];
+    }
+}
+
+- (void)deleteAccessary:(UIButton *)btn {
+    [accessaryList removeObjectAtIndex:btn.tag];
+    
+    [self.accessaryTableView reloadData];
 }
 
 
@@ -280,3 +505,4 @@
     [leaveReasonTextView resignFirstResponder];
 }
 @end
+

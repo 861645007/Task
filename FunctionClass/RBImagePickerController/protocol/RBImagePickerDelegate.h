@@ -15,9 +15,10 @@
 
 @optional
 -(void)imagePickerController:(RBImagePickerController *)imagePicker didFinishPickingImages:(NSArray *)images __deprecated_msg("This method is replaced with new delegate method returning image assset urls");
+-(void)imagePickerController:(RBImagePickerController *)imagePicker didFinishPickingImagesWithURL:(NSArray *)imageURLS;
+
 
 @required
--(void)imagePickerController:(RBImagePickerController *)imagePicker didFinishPickingImagesWithURL:(NSArray *)imageURLS;
 -(void)imagePickerController:(RBImagePickerController *)imagePicker didFinishPickingImagesList:(NSArray *)imageList;
 
 @optional

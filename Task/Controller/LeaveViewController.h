@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "LeaveHomeTableViewCell.h"
+#import "LeaveTableViewCell.h"
 #import "EditLeaveViewController.h"
 #import "LeaveDetailViewController.h"
 
@@ -17,5 +17,6 @@
 
 - (IBAction)showMenu:(id)sender;
 - (IBAction)addNewLeave:(id)sender;
+- (IBAction)selectedLeaveTableView:(id)sender;
 
 @end

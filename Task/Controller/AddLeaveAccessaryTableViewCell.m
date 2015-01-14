@@ -1,14 +1,14 @@
 //
-//  LeaveHomeTableViewCell.m
+//  AddLeaveAccessaryTableViewCell.m
 //  Task
 //
-//  Created by wanghuanqiang on 14/12/29.
-//  Copyright (c) 2014年 王焕强. All rights reserved.
+//  Created by wanghuanqiang on 15/1/13.
+//  Copyright (c) 2015年 王焕强. All rights reserved.
 //
 
-#import "LeaveHomeTableViewCell.h"
+#import "AddLeaveAccessaryTableViewCell.h"
 
-@implementation LeaveHomeTableViewCell
+@implementation AddLeaveAccessaryTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code

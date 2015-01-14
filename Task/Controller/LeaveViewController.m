@@ -9,11 +9,14 @@
 #import "LeaveViewController.h"
 
 @interface LeaveViewController () {
-    NSArray *navArr;
-    NSMutableArray *isShow;
-    NSArray *leaveHomeSectionArr;
-    NSMutableArray *tableViewArr;        // 0 为主页接口； 1 为历史审核；   2为历史请假；
-    int sectionType;                     // 0 为主页接口； 1 为历史审核；   2为历史请假；
+    int tableViewType;                   // 0 表示请假列表； 1表示审批列表
+    NSMutableArray *leaveList;
+    int leaveTablePageNo;
+    int leaveTotalPageNum;
+    
+    NSMutableArray *approveLeaveList;
+    int approveLeaveTablePageNo;
+    int approveLeaveTotalPageNum;
     
     int isNeedRefresh;                   // 0 不需要刷新； 1 需要刷新；
 }
@@ -27,41 +30,32 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setTableFooterView:mainTableView];
-    tableViewArr = [NSMutableArray arrayWithArray:@[@{},@{},@{}]];
-    sectionType = 0;
+    leaveList = [NSMutableArray array];
+    approveLeaveList = [NSMutableArray array];
+    tableViewType = 0;
+    leaveTablePageNo = 1;
+    leaveTotalPageNum = -1;
+    approveLeaveTablePageNo = 1;
+    approveLeaveTotalPageNum = -1;
+
     isNeedRefresh = 1;
-    leaveHomeSectionArr = @[@"处理中的请假", @"需要我审批的请假", @"新审批的请假"];
-    isShow = [NSMutableArray array];
-    for (int i = 0; i<[leaveHomeSectionArr count]; i++) {
-        [isShow addObject:@"0"];
-    }
-    
-    // 设置导航栏为可点击1
-    navArr = @[@"请假主页", @"历史审核", @"历史请假"];
-    CusNavigationTitleView *navView = [[CusNavigationTitleView alloc] initWithTitle:@"请假主页" titleStrArr:navArr imageName:@"Expansion"];
-    __block CusNavigationTitleView *copyNavView = navView; // 防止陷入“retain cycle” -- “形成怪圈”的错误
-    navView.selectRowAtIndex = ^(NSInteger index){
-        copyNavView.titleString = navArr[(long)index];
-        // 选择标题后刷新界面
-        sectionType = index;
-        isNeedRefresh = 1;
-        [self gainLeaveHomeInfo];
-    };
-    self.navigationItem.titleView = navView;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setIsRefresh:) name:@"refreshLeaveMainView" object:nil];
     
     // 注册刷新控件
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-        [self gainLeaveHomeInfo];
+        [self gainTableViewData];
     }];
+}
 
+- (void)setIsRefresh:(NSNotification *)notification {
+    isNeedRefresh = 1;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     if (isNeedRefresh) {
         isNeedRefresh = 0;
-        [self gainLeaveHomeInfo];
+        [self gainTableViewData];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,27 +73,53 @@
 }
 
 #pragma mark - 获取数据
+- (void)gainTableViewData {
+    if (tableViewType == 0) {
+        [self gainLeaveListInfo];
+    }else {
+        [self gainApproveLeaveListInfo];
+    }
+}
+
 // 获取数据
-- (void)gainLeaveHomeInfo {
+- (void)gainLeaveListInfo {
     [self.view.window showHUDWithText:@"加载数据..." Type:ShowLoading Enabled:YES];
     
     NSString *employeeId = [userInfo gainUserId];
     NSString *realName = [userInfo gainUserName];
     NSString *enterpriseId = [userInfo gainUserEnterpriseId];
     //参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId}];
-    NSString *action = @"";
+    NSDictionary *parameters = @{@"employeeId": employeeId,
+                                 @"realName":realName,
+                                 @"enterpriseId": enterpriseId,
+                                 @"pageNo": [NSString stringWithFormat:@"%d", leaveTablePageNo],
+                                 @"pageSize": @"10"};
     
-    if (sectionType == 0) {
-        action = LeaveHomeAction;
-    }else if (sectionType == 1) {
-        action = LeaveHistoryAction;
-    }else {
-        action = LeaveHistoryApproveAction;
-    }
+    [self createAsynchronousRequest:LeaveListAction parmeters:parameters success:^(NSDictionary *dic){
+        [self dealWithGainLeaveListInfoResult: dic dataType: 0];
+    } failure:^{
+        [mainTableView reloadData];
+        // 事情做完了, 结束刷新动画~~~
+        [mainTableView headerEndRefreshingWithResult:JHRefreshResultFailure];
+        [self.view.window showHUDWithText:@"网路错误..." Type:ShowLoading Enabled:YES];
+    }];
+}
+
+- (void)gainApproveLeaveListInfo {
+    [self.view.window showHUDWithText:@"加载数据..." Type:ShowLoading Enabled:YES];
     
-    [self createAsynchronousRequest:action parmeters:parameters success:^(NSDictionary *dic){
-        [self dealWithGainLeaveHomeInfoResult: dic];
+    NSString *employeeId = [userInfo gainUserId];
+    NSString *realName = [userInfo gainUserName];
+    NSString *enterpriseId = [userInfo gainUserEnterpriseId];
+    //参数
+    NSDictionary *parameters = @{@"employeeId": employeeId,
+                                 @"realName":realName,
+                                 @"enterpriseId": enterpriseId,
+                                 @"pageNo": [NSString stringWithFormat:@"%d", approveLeaveTablePageNo],
+                                 @"pageSize": @"10"};
+    
+    [self createAsynchronousRequest:ApproveListAction parmeters:parameters success:^(NSDictionary *dic){
+        [self dealWithGainLeaveListInfoResult: dic dataType: 1];
     } failure:^{
         [mainTableView reloadData];
         // 事情做完了, 结束刷新动画~~~
@@ -109,7 +129,7 @@
 }
 
 //处理网络操作结果
-- (void)dealWithGainLeaveHomeInfoResult:(NSDictionary *)dic {
+- (void)dealWithGainLeaveListInfoResult:(NSDictionary *)dic dataType:(int)dataType {
     NSString *msg = @"";
     
     switch ([[dic objectForKey:@"result"] intValue]) {
@@ -119,19 +139,21 @@
         }
         case 1: {
             [self.view.window showHUDWithText:@"获取数据成功" Type:ShowPhotoYes Enabled:YES];
-
-            if (sectionType == 0) {
-                sectionType = 0;
-                NSDictionary *leaveInfoDic = [dic objectForKey:@"leaveInfo"];
-                NSDictionary *leaveHomeDic = @{@"处理中的请假": [leaveInfoDic objectForKey:@"processingLeaves"],  @"需要我审批的请假": [leaveInfoDic objectForKey:@"approveingLeaves"] , @"新审批的请假": [leaveInfoDic objectForKey:@"newProcessLeaves"]};
-                tableViewArr[0] = leaveHomeDic;
-            } else if (sectionType == 1) {
-                sectionType = 1;
-                tableViewArr[1] = [dic objectForKey:@"historyLeaveList"];
-            } else if (sectionType == 2) {
-                sectionType = 2;
-                tableViewArr[2] = [dic objectForKey:@"historyApproveList"];
+            
+            if (dataType == 0) {
+                leaveList = [[dic objectForKey:@"leaveInfo"] objectForKey:@"leaveList"];
+                leaveTotalPageNum = [[[dic objectForKey:@"leaveInfo"] objectForKey:@"totalPages"] intValue];
+                leaveTablePageNo = [[[dic objectForKey:@"leaveInfo"] objectForKey:@"pageNo"] intValue];
+                
+                if ([approveLeaveList count] == 0) {
+                    [self gainApproveLeaveListInfo];
+                }
+            }else {
+                approveLeaveList = [[dic objectForKey:@"approveInfo"] objectForKey:@"approveList"];
+                approveLeaveTotalPageNum = [[[dic objectForKey:@"approveInfo"] objectForKey:@"totalPages"] intValue];
+                approveLeaveTablePageNo = [[[dic objectForKey:@"approveInfo"] objectForKey:@"pageNo"] intValue];
             }
+            self.mainTableView.tableFooterView = [self createFootButton];
             break;
         }
     }
@@ -143,150 +165,108 @@
     [mainTableView reloadData];
 }
 
+- (UIView *)createFootButton {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    label.textAlignment = NSTextAlignmentCenter;
+    [label setText:@"已加载完数据"];
+    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    [btn addTarget:self  action:@selector(gainTableViewData) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:@"点击加载数据" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    if (tableViewType == 0) {
+        if (leaveTotalPageNum <= leaveTablePageNo && leaveTotalPageNum != -1) {
+            return label;
+        }else {
+            return btn;
+        }
+    }else {
+        if (approveLeaveTotalPageNum <= approveLeaveTablePageNo && approveLeaveTotalPageNum != -1) {
+            return label;
+        }else {
+            return btn;
+        }
+    }
+}
+
 
 #pragma mark - TableViewDelegate And TableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (sectionType == 0) {
-        return [leaveHomeSectionArr count];
-    }
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if (sectionType == 0) {
-        if ([[isShow objectAtIndex:section] intValue]) {
-            NSString *key = [leaveHomeSectionArr objectAtIndex:section];
-            if (![[tableViewArr objectAtIndex:sectionType] isEqual: @{}]) {
-                return [[[tableViewArr objectAtIndex:sectionType] objectForKey:key] count];
-            }
-        }
-    } else if (sectionType == 1) {
-        if ([tableViewArr[1] count] != 0) {
-            return [tableViewArr[1] count];
-        }
-    } else if (sectionType == 2) {
-        if ([tableViewArr[2] count] != 0) {
-            return [tableViewArr[2] count];
-        }
+    if (tableViewType == 0) {
+        return [leaveList count];
+    }else {
+        return [approveLeaveList count];
     }
-    return 0;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (sectionType == 0) {
-        return 44;
-    }
-    return 0;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (sectionType == 0) {
-        return 2;
-    }
-    return 0;
-}
-
-// 定义头标题的视图，添加点击事件
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (sectionType == 0) {
-        UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 60, 44)];
-        sectionView.backgroundColor = [UIColor whiteColor];
-        NSString *key = [leaveHomeSectionArr objectAtIndex:section];
-        
-        // 设置按钮触发点击事件
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
-        btn.tag = section;
-        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        // 设置 section 标题
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 320, 44)];
-        titleLabel.textColor = [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
-        titleLabel.font = [UIFont systemFontOfSize:18];
-        titleLabel.text = key;
-        [titleLabel sizeToFit];
-        
-        UIImageView *pointToImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 36, 7, 30, 30)];
-        if ([[isShow objectAtIndex:btn.tag] intValue]) {
-            [pointToImageView setImage:[UIImage imageNamed:@"Pulldown"]];
-        }else {
-            [pointToImageView setImage:[UIImage imageNamed:@"pullback"]];
-        }
-        
-        [sectionView addSubview:btn];
-        [sectionView addSubview:titleLabel];
-        [sectionView addSubview:pointToImageView]; 
-        
-        return sectionView;
-    }
-    
-    return nil;
-}
-
-// 点击 section 后的触发事件
-- (void)btnClick:(UIButton *)btn
-{
-    if ([[isShow objectAtIndex:btn.tag] intValue]) {
-        isShow[btn.tag] = @"0";
-    }
-    else {
-        isShow[btn.tag] = @"1";
-    }
-    // 刷新点击的组标题，动画使用卡片
-    [mainTableView reloadSections:[NSIndexSet indexSetWithIndex:btn.tag]
-                 withRowAnimation:UITableViewRowAnimationFade];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = @"LeaveHomeCell";
-    LeaveHomeTableViewCell *cell = (LeaveHomeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"LeaveHomeTableViewCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
+    NSString *cellIdentifier = @"LeaveTableViewCell";
+    LeaveTableViewCell *leaveCell = (LeaveTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (leaveCell == nil) {
+        NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"LeaveTableViewCell" owner:self options:nil];
+        leaveCell = [nib objectAtIndex:0];
     }
     NSDictionary *dic = nil;
-    if (sectionType == 0) {
-        NSString *sectionTitle = [leaveHomeSectionArr objectAtIndex:indexPath.section];
-        dic = [[[tableViewArr objectAtIndex:sectionType] objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+    
+    if (tableViewType == 0) {
+        dic = [leaveList objectAtIndex:indexPath.row];
+        if ([[dic objectForKey:@"state"] intValue]) {
+            leaveCell.leaveStateLabel.text = @"已审批";
+            leaveCell.leaveStateLabel.textColor = [UIColor greenColor];
+        }else {
+            leaveCell.leaveStateLabel.text = @"审批中";
+            leaveCell.leaveStateLabel.textColor = [UIColor redColor];
+        }
     }else {
-        dic = [tableViewArr[sectionType] objectAtIndex:indexPath.row];
+        dic = [approveLeaveList objectAtIndex:indexPath.row];
+        if ([[dic objectForKey:@"isApprove"] intValue]) {
+            if ([[dic objectForKey:@"approveResult"] intValue]) {
+                leaveCell.leaveStateLabel.text = @"同意";
+            }else {
+                leaveCell.leaveStateLabel.text = @"不同意";
+            }
+            leaveCell.leaveStateLabel.textColor = [UIColor greenColor];
+        }else {
+            leaveCell.leaveStateLabel.text = @"未审批";
+            leaveCell.leaveStateLabel.textColor = [UIColor redColor];
+        }
     }
-
-    cell.leaveNameLabel.text = [dic objectForKey:@"leaveUserName"];
-    cell.leaveTypeLabel.text = [dic objectForKey:@"type"];
-    cell.leaveContentLabel.text = [dic objectForKey:@"comment"];
-    cell.leaveTimeLabel.text = [NSString stringWithFormat:@"%@至%@", [dic objectForKey:@"startTime"], [dic objectForKey:@"endTime"]];
+    
+    leaveCell.leaveContentLabel.text = [self judgeTextIsNULL:[dic objectForKey:@"comment"]];
+    leaveCell.leavePersonNameLabel.text = [self judgeTextIsNULL:[dic objectForKey:@"leaveUserName"]];
+    leaveCell.leaveTimeLabel.text = [self judgeTextIsNULL:[NSString stringWithFormat:@"%@ 至 %@", [dic objectForKey: @"startTime"], [dic objectForKey: @"endTime"]]];
+    leaveCell.leaveTypeLabel.text = [self judgeTextIsNULL:[dic objectForKey:@"type"]];
 
     
-    return cell;
+    return leaveCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary *dic = nil;
-    if (sectionType == 0) {
-        NSString *sectionTitle = [leaveHomeSectionArr objectAtIndex:indexPath.section];
-        dic = [[[tableViewArr objectAtIndex:sectionType] objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+    if (tableViewType == 0) {
+        dic = [leaveList objectAtIndex:indexPath.row];
     }else{
-        dic = [tableViewArr[sectionType] objectAtIndex:indexPath.row];
+        dic = [approveLeaveList objectAtIndex:indexPath.row];
     }
     
     LeaveDetailViewController *leaveDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveDetailViewController"];
     leaveDetailViewController.leaveId = [dic objectForKey:@"leaveId"];
-    if (sectionType == 0) {
-        if (indexPath.section == 0) {
-            leaveDetailViewController.leaveEditType = 1;
-        }else if (indexPath.section == 1) {
-            leaveDetailViewController.leaveEditType = 2;
-        }else {
+    if (tableViewType == 0) {
+        if ([[dic objectForKey:@"state"] intValue]) {
             leaveDetailViewController.leaveEditType = 0;
+        }else {
+            leaveDetailViewController.leaveEditType = 1;
         }
     }else {
-        leaveDetailViewController.leaveEditType = 0;
+        if ([[dic objectForKey:@"isApprove"] intValue]) {
+            leaveDetailViewController.leaveEditType = 0;
+        }else {
+            leaveDetailViewController.leaveEditType = 2;
+        }
     }
     
     [self.navigationController pushViewController:leaveDetailViewController animated:YES];
@@ -294,6 +274,17 @@
 
 #pragma mark - 新增请假操作
 - (IBAction)addNewLeave:(id)sender {
+}
+
+#pragma mark - 选择 请假列表 或者 审批列表
+- (IBAction)selectedLeaveTableView:(id)sender {
+    UISegmentedControl *segment = (UISegmentedControl *)sender;
+    if (segment.selectedSegmentIndex == 0) {
+        tableViewType = 0;
+    }else {
+        tableViewType = 1;
+    }
+    [mainTableView reloadData];
 }
 
 #pragma mark - Menu操作

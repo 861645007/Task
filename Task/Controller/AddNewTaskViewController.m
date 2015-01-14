@@ -194,7 +194,12 @@
 }
 
 - (void)comeBack {
-    [self.navigationController popViewControllerAnimated:true];
+    if (superTaskId != nil) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else {
+        [self.navigationController popViewControllerAnimated:true];
+    }
+    
 }
 
 - (void)gainToDetailInfoView:(NSString *)newTaskId {

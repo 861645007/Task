@@ -69,22 +69,22 @@
 #define AddTaskReportJudgeAccessoryAction @"app_addTaskReportJudgeAccessory.action" // 添加任务评论反馈附件
 
 // 请假
-#define AddLeaveAction            @"app_addLeave.action"           // 新增、编辑请假
-#define LeaveHomeAction           @"app_leaveHome.action"          // 请假主页
-#define LeaveDetailAction         @"app_leaveDetail.action"        // 请假详情
-#define ApproveLeaveAction        @"app_approveLeave.action"       // 审批请假
-#define LeaveHistoryAction        @"app_leaveHistory.action"       // 我的历史请假
-#define LeaveHistoryApproveAction @"app_leaveHistoryApprove.action"// 我的历史审批
+#define AddLeaveAction          @"app_addLeave.action"         // 新增、编辑请假
+#define LeaveListAction         @"app_leaveList.action"        // 获取请假列表
+#define ApproveListAction       @"app_approveList.action"      // 获取审批列表
+#define LeaveDetailAction       @"app_leaveDetail.action"      // 请假详情
+#define ApproveLeaveAction      @"app_approveLeave.action"     // 审批请假
+#define AddLeaveAccessoryAction @"app_addLeaveAccessory.action"// 添加请假附件
 
 // 更多
 
 // 个人资料
-#define EmployeeInfoAction        @"app_employeeInfo.action"       // 个人资料
-#define SetUpEmployeesAction      @"app_setUpEmployees.action"     // 设置上级
-#define SetDownEmployeesAction    @"app_setDownEmployees.action"   // 设置下级
+#define EmployeeInfoAction      @"app_employeeInfo.action"     // 个人资料
+#define SetUpEmployeesAction    @"app_setUpEmployees.action"   // 设置上级
+#define SetDownEmployeesAction  @"app_setDownEmployees.action" // 设置下级
 
-#define ChangePwdAction           @"app_changePwd.action"          // 修改密码
-#define AutoUpdateIOSAction       @"app_autoUpdateIOS.action"      // IOS检查版本更新
+#define ChangePwdAction         @"app_changePwd.action"        // 修改密码
+#define AutoUpdateIOSAction     @"app_autoUpdateIOS.action"    // IOS检查版本更新
 
 
 

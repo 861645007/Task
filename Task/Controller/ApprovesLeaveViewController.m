@@ -154,6 +154,7 @@
         }
         case 1: {
             [self.view.window showHUDWithText:@"审核成功" Type:ShowPhotoYes Enabled:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLeaveMainView" object:@"1"];
             [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
             break;
         }

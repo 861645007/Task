@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeaveTableViewCell" rowHeight="76" id="KGk-i7-Jjw" customClass="LeaveTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7p-v4-BJm">
+                        <rect key="frame" x="16" y="8" width="30" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9q-9H-Jqm">
+                        <rect key="frame" x="16" y="26" width="296" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MG0-Ce-k3M">
+                        <rect key="frame" x="16" y="51" width="26" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="病假" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybc-4p-UhW">
+                        <rect key="frame" x="209" y="8" width="30" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="审核中" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQb-Hm-zUS">
+                        <rect key="frame" x="259" y="8" width="45" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="M9q-9H-Jqm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="265-SE-36s"/>
+                    <constraint firstItem="hQb-Hm-zUS" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="869-gp-CpG"/>
+                    <constraint firstItem="hQb-Hm-zUS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="EyI-07-4tb"/>
+                    <constraint firstItem="k7p-v4-BJm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="HoC-rr-gBj"/>
+                    <constraint firstItem="M9q-9H-Jqm" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="IRb-pI-TZG"/>
+                    <constraint firstItem="k7p-v4-BJm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Ivc-aR-9CR"/>
+                    <constraint firstItem="MG0-Ce-k3M" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="JQv-sE-HIm"/>
+                    <constraint firstItem="MG0-Ce-k3M" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="cz3-O3-xnB"/>
+                    <constraint firstItem="M9q-9H-Jqm" firstAttribute="top" secondItem="k7p-v4-BJm" secondAttribute="bottom" id="hGa-ML-PL0"/>
+                    <constraint firstItem="hQb-Hm-zUS" firstAttribute="leading" secondItem="Ybc-4p-UhW" secondAttribute="trailing" constant="20" id="i3A-PP-6QB"/>
+                    <constraint firstItem="Ybc-4p-UhW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ovC-0N-p30"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="leaveContentLabel" destination="M9q-9H-Jqm" id="Vzh-JT-yT6"/>
+                <outlet property="leavePersonNameLabel" destination="k7p-v4-BJm" id="s4h-dc-xVk"/>
+                <outlet property="leaveStateLabel" destination="hQb-Hm-zUS" id="KZe-zB-85j"/>
+                <outlet property="leaveTimeLabel" destination="MG0-Ce-k3M" id="loQ-AK-4v5"/>
+                <outlet property="leaveTypeLabel" destination="Ybc-4p-UhW" id="Mkv-eP-ePo"/>
+            </connections>
+            <point key="canvasLocation" x="390" y="365"/>
+        </tableViewCell>
+    </objects>
+</document>

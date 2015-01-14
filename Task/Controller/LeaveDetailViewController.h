@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "LeaveHomeTableViewCell.h"
+#import "LeaveTableViewCell.h"
 #import "LeaveApprovesTableViewCell.h"
 #import "EditLeaveViewController.h"
 #import "ApprovesLeaveViewController.h"

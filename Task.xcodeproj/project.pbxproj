@@ -208,6 +208,12 @@
 		E6B312E01A3FBD1300AEF923 /* tab_menu_task.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D81A3FBD1300AEF923 /* tab_menu_task.png */; };
 		E6B312E11A3FBD1300AEF923 /* tab_menu_workcenter.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D91A3FBD1300AEF923 /* tab_menu_workcenter.png */; };
 		E6B312E51A3FC04F00AEF923 /* WorkHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B312E41A3FC04F00AEF923 /* WorkHomeViewController.m */; };
+		E6BB87D91A64F76D0073D574 /* LeaveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BB87D71A64F76D0073D574 /* LeaveTableViewCell.m */; };
+		E6BB87DA1A64F76D0073D574 /* LeaveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BB87D81A64F76D0073D574 /* LeaveTableViewCell.xib */; };
+		E6BB87E11A650DCE0073D574 /* deleteAccessary.png in Resources */ = {isa = PBXBuildFile; fileRef = E6BB87E01A650DCE0073D574 /* deleteAccessary.png */; };
+		E6BB87EA1A6537810073D574 /* PreviewLeaveAccessaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BB87E91A6537810073D574 /* PreviewLeaveAccessaryViewController.m */; };
+		E6BB87EE1A6555440073D574 /* AddLeaveAccessaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BB87EC1A6555440073D574 /* AddLeaveAccessaryTableViewCell.m */; };
+		E6BB87EF1A6555440073D574 /* AddLeaveAccessaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BB87ED1A6555440073D574 /* AddLeaveAccessaryTableViewCell.xib */; };
 		E6BE6D421A5E30FB00F92DDF /* ALAsset+RBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BE6D2F1A5E30FB00F92DDF /* ALAsset+RBAsset.m */; };
 		E6BE6D431A5E30FB00F92DDF /* RBImageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BE6D321A5E30FB00F92DDF /* RBImageCollectionCell.m */; };
 		E6BE6D441A5E30FB00F92DDF /* RBImageCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BE6D351A5E30FB00F92DDF /* RBImageCollectionController.m */; };
@@ -223,8 +229,6 @@
 		E6C8C43E1A57DB5A00B2ECC9 /* Personal_Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C8C43D1A57DB5A00B2ECC9 /* Personal_Default.png */; };
 		E6C8C4421A57DC0100B2ECC9 /* PersonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C8C4411A57DC0100B2ECC9 /* PersonInfoViewController.m */; };
 		E6C8C4461A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C8C4451A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m */; };
-		E6C9A6871A50E880005E17FB /* LeaveHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C9A6851A50E880005E17FB /* LeaveHomeTableViewCell.m */; };
-		E6C9A6881A50E880005E17FB /* LeaveHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6C9A6861A50E880005E17FB /* LeaveHomeTableViewCell.xib */; };
 		E6C9C7F91A4CF3BB00FA0A5F /* preViewDelete.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C9C7F71A4CF3BB00FA0A5F /* preViewDelete.png */; };
 		E6C9C7FA1A4CF3BB00FA0A5F /* preViewDelete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C9C7F81A4CF3BB00FA0A5F /* preViewDelete@2x.png */; };
 		E6D940681A59176600E0A865 /* Icon_58.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D940631A59176600E0A865 /* Icon_58.png */; };
@@ -599,6 +603,15 @@
 		E6B312D91A3FBD1300AEF923 /* tab_menu_workcenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_menu_workcenter.png; path = Image/tab_menu_workcenter.png; sourceTree = "<group>"; };
 		E6B312E31A3FC04F00AEF923 /* WorkHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkHomeViewController.h; path = Controller/WorkHomeViewController.h; sourceTree = "<group>"; };
 		E6B312E41A3FC04F00AEF923 /* WorkHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkHomeViewController.m; path = Controller/WorkHomeViewController.m; sourceTree = "<group>"; };
+		E6BB87D61A64F76D0073D574 /* LeaveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeaveTableViewCell.h; path = Controller/LeaveTableViewCell.h; sourceTree = "<group>"; };
+		E6BB87D71A64F76D0073D574 /* LeaveTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeaveTableViewCell.m; path = Controller/LeaveTableViewCell.m; sourceTree = "<group>"; };
+		E6BB87D81A64F76D0073D574 /* LeaveTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeaveTableViewCell.xib; path = Controller/LeaveTableViewCell.xib; sourceTree = "<group>"; };
+		E6BB87E01A650DCE0073D574 /* deleteAccessary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = deleteAccessary.png; path = Image/deleteAccessary.png; sourceTree = "<group>"; };
+		E6BB87E81A6537810073D574 /* PreviewLeaveAccessaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewLeaveAccessaryViewController.h; path = Controller/PreviewLeaveAccessaryViewController.h; sourceTree = "<group>"; };
+		E6BB87E91A6537810073D574 /* PreviewLeaveAccessaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviewLeaveAccessaryViewController.m; path = Controller/PreviewLeaveAccessaryViewController.m; sourceTree = "<group>"; };
+		E6BB87EB1A6555440073D574 /* AddLeaveAccessaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddLeaveAccessaryTableViewCell.h; path = Controller/AddLeaveAccessaryTableViewCell.h; sourceTree = "<group>"; };
+		E6BB87EC1A6555440073D574 /* AddLeaveAccessaryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddLeaveAccessaryTableViewCell.m; path = Controller/AddLeaveAccessaryTableViewCell.m; sourceTree = "<group>"; };
+		E6BB87ED1A6555440073D574 /* AddLeaveAccessaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddLeaveAccessaryTableViewCell.xib; path = Controller/AddLeaveAccessaryTableViewCell.xib; sourceTree = "<group>"; };
 		E6BE6D2E1A5E30FB00F92DDF /* ALAsset+RBAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+RBAsset.h"; sourceTree = "<group>"; };
 		E6BE6D2F1A5E30FB00F92DDF /* ALAsset+RBAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+RBAsset.m"; sourceTree = "<group>"; };
 		E6BE6D311A5E30FB00F92DDF /* RBImageCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBImageCollectionCell.h; sourceTree = "<group>"; };
@@ -622,9 +635,6 @@
 		E6C8C4411A57DC0100B2ECC9 /* PersonInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoViewController.m; path = Controller/PersonInfoViewController.m; sourceTree = "<group>"; };
 		E6C8C4441A57DCFE00B2ECC9 /* PersonInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonInfoTableViewCell.h; path = Controller/PersonInfoTableViewCell.h; sourceTree = "<group>"; };
 		E6C8C4451A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoTableViewCell.m; path = Controller/PersonInfoTableViewCell.m; sourceTree = "<group>"; };
-		E6C9A6841A50E880005E17FB /* LeaveHomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeaveHomeTableViewCell.h; path = Controller/LeaveHomeTableViewCell.h; sourceTree = "<group>"; };
-		E6C9A6851A50E880005E17FB /* LeaveHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeaveHomeTableViewCell.m; path = Controller/LeaveHomeTableViewCell.m; sourceTree = "<group>"; };
-		E6C9A6861A50E880005E17FB /* LeaveHomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeaveHomeTableViewCell.xib; path = Controller/LeaveHomeTableViewCell.xib; sourceTree = "<group>"; };
 		E6C9C7F71A4CF3BB00FA0A5F /* preViewDelete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preViewDelete.png; path = Image/preViewDelete.png; sourceTree = "<group>"; };
 		E6C9C7F81A4CF3BB00FA0A5F /* preViewDelete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "preViewDelete@2x.png"; path = "Image/preViewDelete@2x.png"; sourceTree = "<group>"; };
 		E6D940631A59176600E0A865 /* Icon_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_58.png; path = Image/Icon_58.png; sourceTree = "<group>"; };
@@ -835,6 +845,8 @@
 			children = (
 				E62C793F1A50FD650026EC5B /* EditLeaveViewController.h */,
 				E62C79401A50FD650026EC5B /* EditLeaveViewController.m */,
+				E6BB87E81A6537810073D574 /* PreviewLeaveAccessaryViewController.h */,
+				E6BB87E91A6537810073D574 /* PreviewLeaveAccessaryViewController.m */,
 			);
 			name = EditLeaveViewController;
 			sourceTree = "<group>";
@@ -1441,6 +1453,7 @@
 		E67FBC491A3EAF2400CE839C /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				E6BB87E01A650DCE0073D574 /* deleteAccessary.png */,
 				E6D940731A596EAC00E0A865 /* Icon_Login.png */,
 				E6D9406D1A59192B00E0A865 /* card_bg.png */,
 				E6D940631A59176600E0A865 /* Icon_58.png */,
@@ -1692,12 +1705,15 @@
 		E6C9A6831A50E86F005E17FB /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				E6C9A6841A50E880005E17FB /* LeaveHomeTableViewCell.h */,
-				E6C9A6851A50E880005E17FB /* LeaveHomeTableViewCell.m */,
-				E6C9A6861A50E880005E17FB /* LeaveHomeTableViewCell.xib */,
 				E62C79461A511B1A0026EC5B /* LeaveApprovesTableViewCell.h */,
 				E62C79471A511B1A0026EC5B /* LeaveApprovesTableViewCell.m */,
 				E62C79481A511B1A0026EC5B /* LeaveApprovesTableViewCell.xib */,
+				E6BB87D61A64F76D0073D574 /* LeaveTableViewCell.h */,
+				E6BB87D71A64F76D0073D574 /* LeaveTableViewCell.m */,
+				E6BB87D81A64F76D0073D574 /* LeaveTableViewCell.xib */,
+				E6BB87EB1A6555440073D574 /* AddLeaveAccessaryTableViewCell.h */,
+				E6BB87EC1A6555440073D574 /* AddLeaveAccessaryTableViewCell.m */,
+				E6BB87ED1A6555440073D574 /* AddLeaveAccessaryTableViewCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -1824,6 +1840,7 @@
 				TargetAttributes = {
 					E67FBB561A3EA5DF00CE839C = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = EYK6J4JA87;
 					};
 					E67FBB6F1A3EA5DF00CE839C = {
 						CreatedOnToolsVersion = 6.1;
@@ -1862,6 +1879,8 @@
 				E6006B5D1A4D1FC500E974DD /* Attention_nav@2x.png in Resources */,
 				E6006B5C1A4D1FC500E974DD /* Attention_nav.png in Resources */,
 				E6394F641A44520500706882 /* Addchoice@2x.png in Resources */,
+				E6BB87DA1A64F76D0073D574 /* LeaveTableViewCell.xib in Resources */,
+				E6BB87EF1A6555440073D574 /* AddLeaveAccessaryTableViewCell.xib in Resources */,
 				E67BA4EB1A527787000520CE /* preViewMenu@2x.png in Resources */,
 				E6006B631A4D1FC500E974DD /* Complete_ok_nav@2x.png in Resources */,
 				E6D9406E1A59192B00E0A865 /* card_bg.png in Resources */,
@@ -1883,6 +1902,7 @@
 				E6D9406C1A59176600E0A865 /* Icon_180.png in Resources */,
 				E6394EB31A43BAAB00706882 /* listleft_icon.png in Resources */,
 				E60349A21A418580005B8719 /* ic_locus.png in Resources */,
+				E6BB87E11A650DCE0073D574 /* deleteAccessary.png in Resources */,
 				E637A0631A46B47D00E547AE /* pullback@2x.png in Resources */,
 				E67BA4F11A527E26000520CE /* RAR.png in Resources */,
 				E6394F6B1A44551100706882 /* NoSingle60@2x.png in Resources */,
@@ -1927,7 +1947,6 @@
 				E62C794A1A511B1A0026EC5B /* LeaveApprovesTableViewCell.xib in Resources */,
 				E6D940681A59176600E0A865 /* Icon_58.png in Resources */,
 				E6B312DD1A3FBD1300AEF923 /* nav_menu_date_normal.png in Resources */,
-				E6C9A6881A50E880005E17FB /* LeaveHomeTableViewCell.xib in Resources */,
 				E67FBC2A1A3EA83E00CE839C /* HUD_YES.png in Resources */,
 				E6C9C7F91A4CF3BB00FA0A5F /* preViewDelete.png in Resources */,
 				E6006B601A4D1FC500E974DD /* Complete_nav.png in Resources */,
@@ -2002,7 +2021,6 @@
 				E67FBC441A3EAADA00CE839C /* LeftMenuViewController.m in Sources */,
 				E66DCBAE1A429C9B00C2C184 /* AddNewTaskViewController.m in Sources */,
 				E6394EB61A43C79B00706882 /* ProclamationDetailInfoViewController.m in Sources */,
-				E6C9A6871A50E880005E17FB /* LeaveHomeTableViewCell.m in Sources */,
 				E6394F7F1A445B7200706882 /* pinyin.c in Sources */,
 				E67FBBFB1A3EA83E00CE839C /* AFHTTPRequestOperationManager.m in Sources */,
 				E67FBC081A3EA83E00CE839C /* UIProgressView+AFNetworking.m in Sources */,
@@ -2096,15 +2114,18 @@
 				E676539F1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.m in Sources */,
 				E676539C1A4D06DB000A13D9 /* UIColor+ExtensionWithUIColor.m in Sources */,
 				E62C79451A5113A40026EC5B /* LeaveDetailViewController.m in Sources */,
+				E6BB87D91A64F76D0073D574 /* LeaveTableViewCell.m in Sources */,
 				E699646A1A519055005F219A /* XHViewState.m in Sources */,
 				E670271D1A456F5F00C1B537 /* TaskDetailInfoTableViewCell.m in Sources */,
 				E6DB5EDE1A4E9E54002906F1 /* TaskLookDetailTableViewCell.m in Sources */,
 				E6E0C7711A3F345E0054F2C4 /* UIView+JHExtension.m in Sources */,
 				E67FBC021A3EA83E00CE839C /* AFURLSessionManager.m in Sources */,
+				E6BB87EA1A6537810073D574 /* PreviewLeaveAccessaryViewController.m in Sources */,
 				E60C94F41A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m in Sources */,
 				E6006B421A4D0D9E00E974DD /* ExtensibleToolView.m in Sources */,
 				E6394F5A1A444E8800706882 /* CalendarMonthHeaderView.m in Sources */,
 				E67653991A4D06DB000A13D9 /* NSDate+ExtensionWithDate.m in Sources */,
+				E6BB87EE1A6555440073D574 /* AddLeaveAccessaryTableViewCell.m in Sources */,
 				E67FBC181A3EA83E00CE839C /* MYIntroductionPanel.m in Sources */,
 				E676539A1A4D06DB000A13D9 /* NSDictionary+ExtensionWithDictionary.m in Sources */,
 				E67FBB601A3EA5DF00CE839C /* AppDelegate.m in Sources */,
@@ -2250,6 +2271,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Task/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2262,6 +2284,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Task/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

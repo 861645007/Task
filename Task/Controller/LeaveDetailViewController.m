@@ -7,10 +7,14 @@
 //
 
 #import "LeaveDetailViewController.h"
+#import "PreviewFileViewController.h"
+#import "AddLeaveAccessaryTableViewCell.h"
 
 @interface LeaveDetailViewController () {
     int leaveApprovesIsShow;            // 0为展开   1已经展开
+    NSMutableArray *isShow;
     NSMutableArray *leaveApprovesList;
+    NSMutableArray *leaveAccessaryList;
     NSMutableDictionary *leaveDetailInfoDic;
     
     LeaveApprovesTableViewCell *leaveApprovesHeightCell;
@@ -26,7 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    isShow = [NSMutableArray arrayWithArray:@[@"0", @"0"]];
     leaveApprovesList = [NSMutableArray array];
+    leaveAccessaryList = [NSMutableArray array];
     leaveDetailInfoDic = [NSMutableDictionary dictionary];
     leaveApprovesHeightCell = [[LeaveApprovesTableViewCell alloc] init];
     [self setTableFooterView:mainTableView];
@@ -80,6 +86,7 @@
             
             leaveDetailInfoDic = [dic objectForKey:@"leaveInfo"];
             leaveApprovesList = [leaveDetailInfoDic objectForKey:@"leaveApproves"];
+            leaveAccessaryList = [leaveDetailInfoDic objectForKey:@"leaveAccessorys"];
             
             // 加载右上角按钮
             if (leaveEditType == 1) {
@@ -118,15 +125,16 @@
         }
     }
     
-    editLeaveViewController.isAddNewLeave     = 1;
-    editLeaveViewController.titleStr          = @"编辑请假";
-    editLeaveViewController.leaveId           = [leaveDetailInfoDic objectForKey:@"leaveId"];
-    editLeaveViewController.leaveType         = [leaveDetailInfoDic objectForKey:@"type"];
-    editLeaveViewController.leaveApproveIds   = leaveApproveIds;
-    editLeaveViewController.leaveApproveNames = leaveApproveNames;
-    editLeaveViewController.leaveContent      = [leaveDetailInfoDic objectForKey:@"comment"];
-    editLeaveViewController.leaveEndTime      = [leaveDetailInfoDic objectForKey:@"endTime"];
-    editLeaveViewController.leaveStartTime    = [leaveDetailInfoDic objectForKey:@"startTime"];
+    editLeaveViewController.isAddNewLeave      = 1;
+    editLeaveViewController.titleStr           = @"编辑请假";
+    editLeaveViewController.leaveId            = [leaveDetailInfoDic objectForKey:@"leaveId"];
+    editLeaveViewController.leaveType          = [leaveDetailInfoDic objectForKey:@"type"];
+    editLeaveViewController.leaveApproveIds    = leaveApproveIds;
+    editLeaveViewController.leaveApproveNames  = leaveApproveNames;
+    editLeaveViewController.leaveContent       = [leaveDetailInfoDic objectForKey:@"comment"];
+    editLeaveViewController.leaveEndTime       = [leaveDetailInfoDic objectForKey:@"endTime"];
+    editLeaveViewController.leaveStartTime     = [leaveDetailInfoDic objectForKey:@"startTime"];
+    editLeaveViewController.leaveAccessaryList = leaveAccessaryList;
     
     [self.navigationController pushViewController:editLeaveViewController animated:YES];
 }
@@ -150,10 +158,11 @@
 
 #pragma mark - TableViewDelegate And TableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if ([leaveApprovesList count] == 0) {
-        return 1;
+    if ([[leaveDetailInfoDic allKeys] count] == 0) {
+        return 0;
     }
-    return 2;
+    
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -162,7 +171,13 @@
             return 1;
         }
     }else if (section == 1) {
-        if (leaveApprovesIsShow == 1) {
+        if ([[isShow objectAtIndex:section - 1] intValue]) {
+            if ([leaveAccessaryList count] != 0) {
+                return [leaveAccessaryList count];
+            }
+        }
+    }else if (section == 2) {
+        if ([[isShow objectAtIndex:section - 1] intValue]) {
             if ([leaveApprovesList count] != 0) {
                 return [leaveApprovesList count];
             }
@@ -174,13 +189,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 1) {
-        return 44;
+        return 43;
+    }else if (section == 2) {
+        return 43;
     }
     return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
+        return 44;
+    }else if (indexPath.section == 2) {
         return [leaveApprovesHeightCell gainLeaveApprovesCellHeight:[leaveApprovesList objectAtIndex:indexPath.row]];
     }
     return 80;
@@ -189,25 +208,29 @@
 // 定义头标题的视图，添加点击事件
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (section == 1) {
+    if (section == 1 || section == 2) {
         UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 60, 44)];
         sectionView.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1.0f];
         
         // 设置按钮触发点击事件
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
-        btn.tag = section;
+        btn.tag = section - 1;
         [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         // 设置 section 标题
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 10, 320, 44)];
         titleLabel.textColor = GrayColorForTitle;
         titleLabel.font = [UIFont systemFontOfSize:17];
-        titleLabel.text = @"审批人列表";
+        if (section == 1) {
+            titleLabel.text = @"附件列表";
+        }else if (section == 2) {
+            titleLabel.text = @"审批人列表";
+        }
         [titleLabel sizeToFit];
         
         UIImageView *pointToImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 36, 7, 30, 30)];
-        if (leaveApprovesIsShow) {
+        if ([[isShow objectAtIndex:section - 1] intValue]) {
             [pointToImageView setImage:[UIImage imageNamed:@"Pulldown"]];
         }else {
             [pointToImageView setImage:[UIImage imageNamed:@"pullback"]];
@@ -226,14 +249,14 @@
 // 点击 section 后的触发事件
 - (void)btnClick:(UIButton *)btn
 {
-    if (leaveApprovesIsShow) {
-        leaveApprovesIsShow = 0;
+    if ([[isShow objectAtIndex:btn.tag] intValue]) {
+        isShow[btn.tag] = @"0";
     }
     else {
-        leaveApprovesIsShow = 1;
+        isShow[btn.tag] = @"1";
     }
     // 刷新点击的组标题，动画使用卡片
-    [mainTableView reloadSections:[NSIndexSet indexSetWithIndex:btn.tag]
+    [mainTableView reloadSections:[NSIndexSet indexSetWithIndex:btn.tag + 1]
                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
@@ -242,22 +265,42 @@
     NSString *cellIdentifier = @"";
     UITableViewCell *cell = nil;
     
-    if (indexPath.section == 0) {
-        cellIdentifier = @"LeaveHomeCell";
-        LeaveHomeTableViewCell *leaveDetailInfocell = (LeaveHomeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (leaveDetailInfocell == nil) {
-            NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"LeaveHomeTableViewCell" owner:self options:nil];
-            leaveDetailInfocell = [nib objectAtIndex:0];
+    if (indexPath.section == 0) {        
+        cellIdentifier = @"LeaveTableViewCell";
+        LeaveTableViewCell *leaveCell = (LeaveTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (leaveCell == nil) {
+            NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"LeaveTableViewCell" owner:self options:nil];
+            leaveCell = [nib objectAtIndex:0];
         }
         
-        leaveDetailInfocell.leaveNameLabel.text = [leaveDetailInfoDic objectForKey:@"leaveUserName"];
-        leaveDetailInfocell.leaveTypeLabel.text = [leaveDetailInfoDic objectForKey:@"type"];
-        leaveDetailInfocell.leaveContentLabel.text = [leaveDetailInfoDic objectForKey:@"comment"];
-        leaveDetailInfocell.leaveTimeLabel.text = [NSString stringWithFormat:@"%@至%@", [leaveDetailInfoDic objectForKey:@"startTime"], [leaveDetailInfoDic objectForKey:@"endTime"]];
+        leaveCell.leaveContentLabel.text = [self judgeTextIsNULL:[leaveDetailInfoDic objectForKey:@"comment"]];
+        leaveCell.leavePersonNameLabel.text = [self judgeTextIsNULL:[leaveDetailInfoDic objectForKey:@"leaveUserName"]];
+        leaveCell.leaveTimeLabel.text = [self judgeTextIsNULL:[NSString stringWithFormat:@"%@ 至 %@", [leaveDetailInfoDic objectForKey: @"startTime"], [leaveDetailInfoDic objectForKey: @"endTime"]]];
+        leaveCell.leaveTypeLabel.text = [self judgeTextIsNULL:[leaveDetailInfoDic objectForKey:@"type"]];
+        leaveCell.leaveStateLabel.hidden = YES;
         
-
-        cell = leaveDetailInfocell;
-    }else {
+        cell = leaveCell;
+    }else if (indexPath.section == 1){
+        cellIdentifier = @"AddLeaveAccessaryTableViewCell";
+        AddLeaveAccessaryTableViewCell *leaveAccessaryCell = (AddLeaveAccessaryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (leaveAccessaryCell == nil) {
+            NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"AddLeaveAccessaryTableViewCell" owner:self options:nil];
+            leaveAccessaryCell = [nib objectAtIndex:0];
+        }
+        
+        if (leaveEditType != 1) {
+            leaveAccessaryCell.deleteAccessaryBtn.hidden = YES;
+        }else {
+            [leaveAccessaryCell.deleteAccessaryBtn addTarget:self action:@selector(deleteAccessary:) forControlEvents:UIControlEventTouchUpInside];
+            leaveAccessaryCell.deleteAccessaryBtn.tag = indexPath.row;
+        }
+        
+        NSDictionary *dic = [leaveAccessaryList objectAtIndex:indexPath.row];
+        leaveAccessaryCell.accessaryNameLabel.text = [dic objectForKey:@"accessoryName"];
+        leaveAccessaryCell.accessarySizeLabel.text = [NSString stringWithFormat:@"大小:%@", [dic objectForKey:@"size"]];
+        
+        cell = leaveAccessaryCell;
+    }else if (indexPath.section == 2){
         cellIdentifier = @"LeaveApprovesCell";
         LeaveApprovesTableViewCell *leaveApprovesCell = (LeaveApprovesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (leaveApprovesCell == nil) {
@@ -277,6 +320,61 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1) {
+        NSDictionary *accessAryDic = [leaveAccessaryList objectAtIndex:indexPath.row];
+        PreviewFileViewController *previewFileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PreviewFileViewController"];
+        previewFileViewController.isTaskOrReportAccessory = 2;
+        previewFileViewController.accessoryId = [accessAryDic objectForKey:@"accessoryId"];
+        previewFileViewController.fileName = [accessAryDic objectForKey:@"accessoryTempName"];
+        [self.navigationController pushViewController:previewFileViewController animated:YES];
+
+    }
+}
+
+#pragma mark - 删除附件
+- (void)deleteAccessary:(UIButton *)btn {
+    [self.view.window showHUDWithText:@"加载数据..." Type:ShowLoading Enabled:YES];
+    
+    NSDictionary *accessaryDic = [leaveAccessaryList objectAtIndex:btn.tag];
+    
+    NSString *employeeId = [userInfo gainUserId];
+    NSString *realName = [userInfo gainUserName];
+    NSString *enterpriseId = [userInfo gainUserEnterpriseId];
+    //参数
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"leaveId": leaveId, @"accessoryId": [accessaryDic objectForKey:@"accessoryId"]}];
+    
+    [self createAsynchronousRequest:DeleteAccessoryAction parmeters:parameters success:^(NSDictionary *dic){
+        [self dealWithDeleteAccessaryResult: dic index:btn.tag];
+    } failure:^{
+        // 事情做完了, 结束刷新动画~~~
+        [mainTableView headerEndRefreshingWithResult:JHRefreshResultFailure];
+    }];
+}
+
+//处理网络操作结果
+- (void)dealWithDeleteAccessaryResult:(NSDictionary *)dic index:(NSInteger)index {
+    NSString *msg = @"";
+    
+    switch ([[dic objectForKey:@"result"] intValue]) {
+        case 0: {
+            msg = [dic objectForKey:@"message"];
+            break;
+        }
+        case 1: {
+            [self.view.window showHUDWithText:@"删除成功" Type:ShowPhotoYes Enabled:YES];
+            
+            [leaveAccessaryList removeObjectAtIndex:index];
+            [self.mainTableView reloadData];
+            
+            [mainTableView reloadData];
+            break;
+        }
+    }
+    if (![msg isEqualToString:@""]) {
+        [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
+    }
+    // 事情做完了, 结束刷新动画~~~
+    [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
 
 @end

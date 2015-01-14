@@ -891,17 +891,17 @@
     [self presentViewController:imagePicker animated:YES completion:^{}];
 }
 
-- (UICollectionViewFlowLayout *)setCollectionViewController {
-    CGFloat cellWidth = (self.view.frame.size.width - 5 * 6) / 3;
-    
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(cellWidth, cellWidth)];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 0, 5);
-    flowLayout.minimumLineSpacing = 5;
-    
-    return flowLayout;
-}
+//- (UICollectionViewFlowLayout *)setCollectionViewController {
+//    CGFloat cellWidth = (self.view.frame.size.width - 5 * 6) / 3;
+//    
+//    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+//    [flowLayout setItemSize:CGSizeMake(cellWidth, cellWidth)];
+//    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+//    flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 0, 5);
+//    flowLayout.minimumLineSpacing = 5;
+//    
+//    return flowLayout;
+//}
 
 // 判断 text 时候有内容
 - (void)gainTextWithArr:(NSArray *)arr title:(NSString *)titleStr key:(NSString *)key label:(UILabel *)label {

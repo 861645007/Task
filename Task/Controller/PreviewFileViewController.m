@@ -51,6 +51,8 @@
     NSString *folderName = @"";
     if (isTaskOrReportAccessory == 0) {
         folderName = @"taskAccessory";
+    }else if (isTaskOrReportAccessory == 2) {
+        folderName = @"leaveAccessory";
     }else {
         if (isReportOrJudgeAccessory == 0) {
             folderName = @"taskReportAccessory";
@@ -111,7 +113,7 @@
     self.navigationItem.rightBarButtonItem = previewBar;
 }
 
-- (CGRect )gainImageFrame:(CGSize )imageSize {
+- (CGRect)gainImageFrame:(CGSize )imageSize {
     CGFloat viewH = self.view.frame.size.height;
     CGFloat viewW = self.view.frame.size.width;
     CGRect frame;
@@ -221,7 +223,7 @@
 
 
 #pragma mark - Document Interaction Controller Delegate Methods
-- (UIViewController *) documentInteractionControllerViewControllerForPreview: (UIDocumentInteractionController *) controller {
+- (UIViewController *)documentInteractionControllerViewControllerForPreview: (UIDocumentInteractionController *) controller {
     return self;
 }
 @end

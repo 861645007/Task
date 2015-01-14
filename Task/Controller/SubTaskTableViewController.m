@@ -28,6 +28,7 @@
     
     UIBarButtonItem *addNewSubTaskBar = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_menu_add"] style:UIBarButtonItemStylePlain target:self action:@selector(gainToAddNewTask)];
     self.navigationItem.rightBarButtonItem = addNewSubTaskBar;
+
 }
 
 - (void)didReceiveMemoryWarning {

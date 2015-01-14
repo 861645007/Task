@@ -226,7 +226,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     if(![self.selected_images_index containsObject:indexPath]) {
         if ([self.selected_images_index count] == self.maxSelectionCount) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"您最多可选%d 张照片", self.maxSelectionCount] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"您最多可选%ld 张照片", (long)self.maxSelectionCount] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [alertView show];
             return;
         }
@@ -237,7 +237,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
         [self deselectSelectedImageFromIndexpath:indexPath];
     }
     
-    self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"Done(%d)",[self.selected_images_index count]];
+    self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"Done(%lu)",(unsigned long)[self.selected_images_index count]];
     
     if([self.pickerDelegate selectionType] == RBSingleImageSelectionType){
         [self.pickerDelegate finishPickingImages];
