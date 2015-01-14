@@ -272,6 +272,7 @@
 		E6E0C76F1A3F345E0054F2C4 /* UIScrollView+JHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C7621A3F345E0054F2C4 /* UIScrollView+JHExtension.m */; };
 		E6E0C7701A3F345E0054F2C4 /* UIScrollView+JHRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C7641A3F345E0054F2C4 /* UIScrollView+JHRefresh.m */; };
 		E6E0C7711A3F345E0054F2C4 /* UIView+JHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C7661A3F345E0054F2C4 /* UIView+JHExtension.m */; };
+		E6FF19001A66482100A2F1FE /* AutoUpdateVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FF18FF1A66482100A2F1FE /* AutoUpdateVersion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -709,6 +710,8 @@
 		E6E0C7641A3F345E0054F2C4 /* UIScrollView+JHRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+JHRefresh.m"; sourceTree = "<group>"; };
 		E6E0C7651A3F345E0054F2C4 /* UIView+JHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JHExtension.h"; sourceTree = "<group>"; };
 		E6E0C7661A3F345E0054F2C4 /* UIView+JHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JHExtension.m"; sourceTree = "<group>"; };
+		E6FF18FE1A66482100A2F1FE /* AutoUpdateVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoUpdateVersion.h; path = Controller/AutoUpdateVersion.h; sourceTree = "<group>"; };
+		E6FF18FF1A66482100A2F1FE /* AutoUpdateVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutoUpdateVersion.m; path = Controller/AutoUpdateVersion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1602,6 +1605,7 @@
 		E6B312E21A3FC01600AEF923 /* WorkHome */ = {
 			isa = PBXGroup;
 			children = (
+				E6FF19011A664CB200A2F1FE /* AutoUpdateVersion */,
 				E67C77AE1A42FE4500C24054 /* ProclamationViewController */,
 				E6B312E31A3FC04F00AEF923 /* WorkHomeViewController.h */,
 				E6B312E41A3FC04F00AEF923 /* WorkHomeViewController.m */,
@@ -1789,6 +1793,15 @@
 				E6E0C7541A3F345E0054F2C4 /* JHRefreshCommonAniView.m */,
 			);
 			path = AnimationView;
+			sourceTree = "<group>";
+		};
+		E6FF19011A664CB200A2F1FE /* AutoUpdateVersion */ = {
+			isa = PBXGroup;
+			children = (
+				E6FF18FE1A66482100A2F1FE /* AutoUpdateVersion.h */,
+				E6FF18FF1A66482100A2F1FE /* AutoUpdateVersion.m */,
+			);
+			name = AutoUpdateVersion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2039,6 +2052,7 @@
 				E67FBCE31A3F0F4000CE839C /* BaseMenuViewController.m in Sources */,
 				E6DCD6131A41690D008B0582 /* LocationAttendanceViewController.m in Sources */,
 				E67FBC2E1A3EA83E00CE839C /* YzdHUDImageView.m in Sources */,
+				E6FF19001A66482100A2F1FE /* AutoUpdateVersion.m in Sources */,
 				E6E0C74C1A3F26320054F2C4 /* MenuViewController.m in Sources */,
 				E62C79411A50FD650026EC5B /* EditLeaveViewController.m in Sources */,
 				E6DE47531A5430B2008EFA51 /* QRCodeReaderViewController.m in Sources */,

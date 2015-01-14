@@ -10,6 +10,7 @@
 #import "PersonInfoViewController.h"
 #import "AppDelegate.h"
 #import "AboutUsViewController.h"
+#import "AutoUpdateVersion.h"
 
 @interface MoreViewController () {
     NSArray *tableViewData;
@@ -139,40 +140,7 @@
 
 #pragma mark - 检查新版本
 - (void)checkNewVersion {
-    [self.view.window showHUDWithText:@"正在查询..." Type:ShowLoading Enabled:YES];
-    
-    NSString *employeeId = [userInfo gainUserId];
-    NSString *realName = [userInfo gainUserName];
-    NSString *enterpriseId = [userInfo gainUserEnterpriseId];
-    //参数
-    NSDictionary *parameters = @{@"employeeId": employeeId,
-                                 @"realName": realName,
-                                 @"enterpriseId": enterpriseId};
-    
-    [self createAsynchronousRequest:AutoUpdateIOSAction parmeters:parameters success:^(NSDictionary *dic){
-        [self dealWithGainPersonInfoResult: dic];
-    } failure:^{
-        [self.view.window showHUDWithText:@"网络错误..." Type:ShowLoading Enabled:YES];
-    }];
-}
-
-//处理网络操作结果
-- (void)dealWithGainPersonInfoResult:(NSDictionary *)dic {
-    NSString *msg = @"";
-    
-    switch ([[dic objectForKey:@"result"] intValue]) {
-        case 0: {
-            msg = [dic objectForKey:@"message"];
-            break;
-        }
-        case 1: {
-            [self createSimpleAlertView:@"温馨提示" msg:[NSString stringWithFormat:@"%@\n您的当前版本为:%@",[dic objectForKey:@"description"], [dic objectForKey:@"versionName"]]];
-            break;
-        }
-    }
-    if (![msg isEqualToString:@""]) {
-        [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
-    }
+    [[AutoUpdateVersion alloc] checkNewVersion:self isAutoSelected:0];
 }
 
 #pragma mark - 关于我们

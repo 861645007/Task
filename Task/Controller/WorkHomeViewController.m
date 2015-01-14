@@ -8,6 +8,7 @@
 
 #import "WorkHomeViewController.h"
 #import "PlistOperation.h"
+#import "AutoUpdateVersion.h"
 
 @interface WorkHomeViewController () {
     NSMutableDictionary *proclamationDic;
@@ -145,6 +146,7 @@
             break;
         }
         case 1: {
+            [[AutoUpdateVersion alloc] checkNewVersion:self isAutoSelected:1];
             [[PlistOperation shareInstance] saveAllPersonInfoToFile:[dic objectForKey:@"employees"]];
             break;
         }
