@@ -82,6 +82,7 @@
 		E6394F781A44566000706882 /* SelectHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6394F771A44566000706882 /* SelectHeaderViewController.m */; };
 		E6394F7E1A445B7200706882 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = E6394F7B1A445B7200706882 /* ChineseString.m */; };
 		E6394F7F1A445B7200706882 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = E6394F7C1A445B7200706882 /* pinyin.c */; };
+		E659B50F1A66806200BB7959 /* CusTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E659B50E1A66806200BB7959 /* CusTabBarViewController.m */; };
 		E662CECD1A4C51C10046430F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E662CECC1A4C51C10046430F /* QuartzCore.framework */; };
 		E66DCBAE1A429C9B00C2C184 /* AddNewTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66DCBAD1A429C9B00C2C184 /* AddNewTaskViewController.m */; };
 		E67027161A455A9B00C1B537 /* TaskDetailInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67027151A455A9B00C1B537 /* TaskDetailInfoTableViewController.m */; };
@@ -391,6 +392,8 @@
 		E6394F7B1A445B7200706882 /* ChineseString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseString.m; sourceTree = "<group>"; };
 		E6394F7C1A445B7200706882 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		E6394F7D1A445B7200706882 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		E659B50D1A66806200BB7959 /* CusTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CusTabBarViewController.h; path = Controller/CusTabBarViewController.h; sourceTree = "<group>"; };
+		E659B50E1A66806200BB7959 /* CusTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CusTabBarViewController.m; path = Controller/CusTabBarViewController.m; sourceTree = "<group>"; };
 		E662CECC1A4C51C10046430F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E66DCBAC1A429C9B00C2C184 /* AddNewTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddNewTaskViewController.h; path = Controller/AddNewTaskViewController.h; sourceTree = "<group>"; };
 		E66DCBAD1A429C9B00C2C184 /* AddNewTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddNewTaskViewController.m; path = Controller/AddNewTaskViewController.m; sourceTree = "<group>"; };
@@ -961,6 +964,15 @@
 			path = FunctionClass/Pingyin;
 			sourceTree = "<group>";
 		};
+		E659B50C1A66803F00BB7959 /* TabBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E659B50D1A66806200BB7959 /* CusTabBarViewController.h */,
+				E659B50E1A66806200BB7959 /* CusTabBarViewController.m */,
+			);
+			name = TabBarViewController;
+			sourceTree = "<group>";
+		};
 		E66DCBAB1A429C7000C2C184 /* AddNewTaskViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1120,6 +1132,7 @@
 		E67FBB591A3EA5DF00CE839C /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				E659B50C1A66803F00BB7959 /* TabBarViewController */,
 				E67FBC321A3EA89D00CE839C /* BeseViewController */,
 				E67FBC411A3EAA8900CE839C /* Menu */,
 				E67FBC3D1A3EA9FE00CE839C /* Model */,
@@ -2158,6 +2171,7 @@
 				E6C8C4461A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m in Sources */,
 				E6D940721A5928D500E0A865 /* ChangePwdViewController.m in Sources */,
 				E699645F1A519055005F219A /* NSString+XHMD5.m in Sources */,
+				E659B50F1A66806200BB7959 /* CusTabBarViewController.m in Sources */,
 				E6753BC21A4FEA4E00AAD8DC /* AddTaskReportJudgementCollectionViewCell.m in Sources */,
 				E6394F561A444E8800706882 /* CalendarDayModel.m in Sources */,
 				E67653981A4D06DB000A13D9 /* NSData+ExtensionWithData.m in Sources */,

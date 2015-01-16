@@ -157,25 +157,41 @@
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 1) {
         return 44;
     }
     return 2;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            NSString *key = [cellTitleArr objectAtIndex:indexPath.row];
+            return [self textHeight:[cellInfoDic objectForKey:key]] + 24;
+        }
         return 44;
     }
     return  60;
 }
+
+// 获取 label 实际所需要的高度
+- (CGFloat)textHeight:(NSString *)labelText {
+    UIFont *tfont = [UIFont systemFontOfSize:14.0];
+    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:tfont,NSFontAttributeName,nil];
+    //  ios7 的API，判断 labelText 这个字符串需要的高度；    这里的宽度（self.view.frame.size.width - 140he）按照需要自己换就 OK
+    CGSize sizeText = [labelText boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width - 62, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
+    if ([labelText isEqualToString:@""]) {
+        return 0;
+    }
+    return sizeText.height;
+}
+
 
 // 定义头标题的视图，添加点击事件
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
