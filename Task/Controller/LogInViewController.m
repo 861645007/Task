@@ -35,8 +35,8 @@
     if ([self TextFieldIsFull:self->textFieldArr]) {
         [self hidenKeyboardWithTextField];
         //进行网络操作
-        [self logInWithNetService];
         [self.view.window showHUDWithText:@"正在登录..." Type:ShowLoading Enabled:true];
+        [self logInWithNetService];
     }else {
         //提醒用户进行输入完整
         [self createSimpleAlertView:@"抱歉" msg:@"请输入完整信息"];
@@ -74,6 +74,7 @@
 }
 
 - (void)savePersonInfo:(NSDictionary *)dic {
+    
     //设置用户登录标志
     [userInfo saveUserCookie];
     //保存用户信息

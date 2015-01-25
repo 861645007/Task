@@ -29,6 +29,7 @@
 
 
 #define HttpURL @"http://vmr82ksj.zhy35065.zhihui.chinaccnet.cn/"
+//#define HttpURL @"http://192.168.191.1:8080/new/"
 #define LogInAction                   @"app_login.action"
 #define HomeAction                    @"app_home.action"                   // 获取用户的基本信息
 

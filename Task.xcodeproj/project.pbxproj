@@ -273,6 +273,16 @@
 		E6E0C76F1A3F345E0054F2C4 /* UIScrollView+JHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C7621A3F345E0054F2C4 /* UIScrollView+JHExtension.m */; };
 		E6E0C7701A3F345E0054F2C4 /* UIScrollView+JHRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C7641A3F345E0054F2C4 /* UIScrollView+JHRefresh.m */; };
 		E6E0C7711A3F345E0054F2C4 /* UIView+JHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E0C7661A3F345E0054F2C4 /* UIView+JHExtension.m */; };
+		E6FD57991A68A26C005E4845 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FD57981A68A26C005E4845 /* CFNetwork.framework */; };
+		E6FD579B1A68A274005E4845 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FD579A1A68A274005E4845 /* CoreFoundation.framework */; };
+		E6FD579D1A68A27C005E4845 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FD579C1A68A27C005E4845 /* CoreTelephony.framework */; };
+		E6FD579F1A68A282005E4845 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FD579E1A68A282005E4845 /* SystemConfiguration.framework */; };
+		E6FD57A11A68A289005E4845 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FD57A01A68A289005E4845 /* CoreGraphics.framework */; };
+		E6FD57A31A68A291005E4845 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FD57A21A68A291005E4845 /* Security.framework */; };
+		E6FD57A51A68A299005E4845 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FD57A41A68A299005E4845 /* UIKit.framework */; };
+		E6FD57A71A68A2A2005E4845 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FD57A61A68A2A2005E4845 /* libz.dylib */; };
+		E6FD57AB1A68A2B5005E4845 /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FD57AA1A68A2B5005E4845 /* libPushSDK-1.8.2.a */; };
+		E6FD57AD1A68A302005E4845 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E6FD57AC1A68A302005E4845 /* PushConfig.plist */; };
 		E6FF19001A66482100A2F1FE /* AutoUpdateVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FF18FF1A66482100A2F1FE /* AutoUpdateVersion.m */; };
 /* End PBXBuildFile section */
 
@@ -713,6 +723,17 @@
 		E6E0C7641A3F345E0054F2C4 /* UIScrollView+JHRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+JHRefresh.m"; sourceTree = "<group>"; };
 		E6E0C7651A3F345E0054F2C4 /* UIView+JHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JHExtension.h"; sourceTree = "<group>"; };
 		E6E0C7661A3F345E0054F2C4 /* UIView+JHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JHExtension.m"; sourceTree = "<group>"; };
+		E6FD57981A68A26C005E4845 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		E6FD579A1A68A274005E4845 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		E6FD579C1A68A27C005E4845 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		E6FD579E1A68A282005E4845 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E6FD57A01A68A289005E4845 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E6FD57A21A68A291005E4845 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E6FD57A41A68A299005E4845 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E6FD57A61A68A2A2005E4845 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		E6FD57A91A68A2B5005E4845 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		E6FD57AA1A68A2B5005E4845 /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
+		E6FD57AC1A68A302005E4845 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		E6FF18FE1A66482100A2F1FE /* AutoUpdateVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoUpdateVersion.h; path = Controller/AutoUpdateVersion.h; sourceTree = "<group>"; };
 		E6FF18FF1A66482100A2F1FE /* AutoUpdateVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutoUpdateVersion.m; path = Controller/AutoUpdateVersion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -722,10 +743,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6FD57A71A68A2A2005E4845 /* libz.dylib in Frameworks */,
+				E6FD57A51A68A299005E4845 /* UIKit.framework in Frameworks */,
+				E6FD57A31A68A291005E4845 /* Security.framework in Frameworks */,
+				E6FD57A11A68A289005E4845 /* CoreGraphics.framework in Frameworks */,
+				E6FD579F1A68A282005E4845 /* SystemConfiguration.framework in Frameworks */,
+				E6FD579D1A68A27C005E4845 /* CoreTelephony.framework in Frameworks */,
+				E6FD579B1A68A274005E4845 /* CoreFoundation.framework in Frameworks */,
+				E6FD57991A68A26C005E4845 /* CFNetwork.framework in Frameworks */,
 				E662CECD1A4C51C10046430F /* QuartzCore.framework in Frameworks */,
 				E60C94EB1A4AEE870003B33B /* AssetsLibrary.framework in Frameworks */,
 				E603499E1A417E17005B8719 /* AVFoundation.framework in Frameworks */,
 				E674AE041A41239D0086C05B /* CoreLocation.framework in Frameworks */,
+				E6FD57AB1A68A2B5005E4845 /* libPushSDK-1.8.2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,6 +1138,14 @@
 		E67FBB4E1A3EA5DF00CE839C = {
 			isa = PBXGroup;
 			children = (
+				E6FD57A61A68A2A2005E4845 /* libz.dylib */,
+				E6FD57A41A68A299005E4845 /* UIKit.framework */,
+				E6FD57A21A68A291005E4845 /* Security.framework */,
+				E6FD57A01A68A289005E4845 /* CoreGraphics.framework */,
+				E6FD579E1A68A282005E4845 /* SystemConfiguration.framework */,
+				E6FD579C1A68A27C005E4845 /* CoreTelephony.framework */,
+				E6FD579A1A68A274005E4845 /* CoreFoundation.framework */,
+				E6FD57981A68A26C005E4845 /* CFNetwork.framework */,
 				E662CECC1A4C51C10046430F /* QuartzCore.framework */,
 				E60C94EA1A4AEE870003B33B /* AssetsLibrary.framework */,
 				E603499D1A417E17005B8719 /* AVFoundation.framework */,
@@ -1132,8 +1170,8 @@
 		E67FBB591A3EA5DF00CE839C /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				E659B50C1A66803F00BB7959 /* TabBarViewController */,
 				E67FBC321A3EA89D00CE839C /* BeseViewController */,
+				E659B50C1A66803F00BB7959 /* TabBarViewController */,
 				E67FBC411A3EAA8900CE839C /* Menu */,
 				E67FBC3D1A3EA9FE00CE839C /* Model */,
 				E6886AF41A406B3C008D4E7F /* LogInViewController */,
@@ -1160,6 +1198,7 @@
 				E67FBC491A3EAF2400CE839C /* Image */,
 				E67FBB5B1A3EA5DF00CE839C /* Info.plist */,
 				E67FBB5C1A3EA5DF00CE839C /* main.m */,
+				E6FD57AC1A68A302005E4845 /* PushConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1184,6 +1223,7 @@
 		E67FBB801A3EA5E700CE839C /* FunctionClass */ = {
 			isa = PBXGroup;
 			children = (
+				E6FD57A81A68A2B5005E4845 /* JPush */,
 				E6BE6D2C1A5E30FB00F92DDF /* RBImagePickerController */,
 				E6DE47491A5430B2008EFA51 /* QRCodeReaderViewController */,
 				E69964481A519055005F219A /* XHImageView */,
@@ -1808,6 +1848,16 @@
 			path = AnimationView;
 			sourceTree = "<group>";
 		};
+		E6FD57A81A68A2B5005E4845 /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				E6FD57A91A68A2B5005E4845 /* APService.h */,
+				E6FD57AA1A68A2B5005E4845 /* libPushSDK-1.8.2.a */,
+			);
+			name = JPush;
+			path = FunctionClass/JPush;
+			sourceTree = "<group>";
+		};
 		E6FF19011A664CB200A2F1FE /* AutoUpdateVersion */ = {
 			isa = PBXGroup;
 			children = (
@@ -1867,6 +1917,11 @@
 					E67FBB561A3EA5DF00CE839C = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = EYK6J4JA87;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					E67FBB6F1A3EA5DF00CE839C = {
 						CreatedOnToolsVersion = 6.1;
@@ -1922,6 +1977,7 @@
 				E6C8C43E1A57DB5A00B2ECC9 /* Personal_Default.png in Resources */,
 				E67FBC141A3EA83E00CE839C /* HeaderImage.png in Resources */,
 				E6753BBD1A4FE6DF00AAD8DC /* document_images.png in Resources */,
+				E6FD57AD1A68A302005E4845 /* PushConfig.plist in Resources */,
 				E67FBB661A3EA5DF00CE839C /* Main.storyboard in Resources */,
 				E6DCD60E1A415109008B0582 /* Expansion@2x.png in Resources */,
 				E6394F5C1A444E8800706882 /* chack.png in Resources */,
@@ -2303,6 +2359,10 @@
 				INFOPLIST_FILE = Task/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FunctionClass/JPush",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2316,6 +2376,10 @@
 				INFOPLIST_FILE = Task/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FunctionClass/JPush",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

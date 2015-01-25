@@ -9,6 +9,7 @@
 #import "WorkHomeViewController.h"
 #import "PlistOperation.h"
 #import "AutoUpdateVersion.h"
+#import "APService.h"
 
 @interface WorkHomeViewController () {
     NSMutableDictionary *proclamationDic;
@@ -44,6 +45,9 @@
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self gainUserBaseInfo];
     }];
+
+    // 接受自定义通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealWithNotifition:) name:@"systemNotification" object:nil];
 }
 
 - (BOOL)detectionNetworkStatus {
@@ -56,6 +60,57 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 接受通知数据
+- (void)dealWithNotifition:(NSNotification *)notification {
+    NSDictionary *notificationInfo = [notification object];
+    NSLog(@"进入主页推送调用接口%@", [NSDate date]);
+    // 判断 app 是否处于前端
+    NSString *applicationState = [notificationInfo objectForKey:@"ApplicationState"];
+    if ([applicationState intValue] != 0) {
+
+        int page = [[notificationInfo objectForKey:@"badgePage"] intValue];
+        if (page == 0) {
+            [self gainToNewNoticeDetail:[notificationInfo objectForKey:@"notificationInfoStr"]];
+        }else if (page == 2) {
+            NSLog(@"进入任务选择界面：%@",[NSDate date]);
+            [self tabBarController].selectedViewController = [[self tabBarController].viewControllers objectAtIndex:2];
+            [self performSelector:@selector(postNotification:) withObject:notificationInfo afterDelay:0.02];
+        }else if (page == 3 || page == 4) {
+            [self tabBarController].selectedViewController = [[self tabBarController].viewControllers objectAtIndex:3];
+            [self performSelector:@selector(postNotification:) withObject:notificationInfo afterDelay:0.02];
+        }
+    }else {
+        if ([[notificationInfo objectForKey:@"badgePage"] intValue] != -1) {
+            [self setTabBarBadgeValue:[notificationInfo objectForKey:@"badgePage"] badgeValue:@"1"];
+        }
+    }
+}
+
+- (void)postNotification:(NSDictionary *)dic {
+    if ([[dic objectForKey:@"badgePage"] intValue] == 2) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TaskSystemNotification" object:dic];
+    }else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LeaveSystemNotification" object:dic];
+    }
+    
+}
+
+// 设置
+- (void)setTabBarBadgeValue:(NSString *)tabIndex badgeValue:(NSString *)badgeValue {
+    [[[[self tabBarController].viewControllers objectAtIndex:[tabIndex intValue]] tabBarItem] setBadgeValue:badgeValue];
+}
+
+// 跳转到 公告详情
+- (void)gainToNewNoticeDetail:(NSString *)noticeId {
+    if ([[[[self tabBarController].viewControllers objectAtIndex:0] tabBarItem].badgeValue isEqualToString:@"1"]) {
+        [self setTabBarBadgeValue:@"0" badgeValue:nil];
+    }
+    
+    ProclamationDetailInfoViewController *proclamationDetailInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProclamationDetailInfoViewController"];
+    proclamationDetailInfoViewController.noticeId = noticeId;
+    [self.navigationController pushViewController:proclamationDetailInfoViewController animated:YES];
 }
 
 #pragma mark - 获取用户基本信息
@@ -108,6 +163,19 @@
     [userInfo saveUserEnterpriseId:[dic objectForKey:@"enterpriseId"]];
     [userInfo saveUserIconPath:[dic objectForKey:@"image"]];
     [userInfo saveUserAttendace:[dic objectForKey:@"isAttendance"]];
+    
+    // 注册用户 通知 的信息 tag and id
+    [APService setTags:[NSSet setWithObjects:[NSString stringWithFormat:@"%@", [dic objectForKey:@"enterpriseId"]], nil] alias:[NSString stringWithFormat:@"%@", [dic objectForKey:@"employeeId"]] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+//    NSLog(@"registrationID:%@", [APService registrationID]);
+}
+
+- (void)tagsAliasCallback:(int)iResCode
+                     tags:(NSSet *)tags
+                    alias:(NSString *)alias {
+    NSString *callbackString =
+    [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+     tags, alias];
+    NSLog(@"TagsAlias回调:%@", callbackString);
 }
 
 - (void)setProclamationInfo:(NSDictionary *)dic {
@@ -142,7 +210,10 @@
 
     switch ([[dic objectForKey:@"result"] intValue]) {
         case 0: {
-            [self gainAllPersonInfo];
+            if (gainPersonInfoNum < 3) {
+                [self gainAllPersonInfo];
+                gainPersonInfoNum ++;
+            }
             break;
         }
         case 1: {
@@ -207,9 +278,7 @@
 - (void)gainToCurrenProclamationView {
     if (![[proclamationDic objectForKey:@"lastNoticeId"] isEqualToString:@"0"]) {
         //进入当前公告的详细信息界面
-        ProclamationDetailInfoViewController *proclamationDetailInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProclamationDetailInfoViewController"];
-        proclamationDetailInfoViewController.noticeId = [proclamationDic objectForKey:@"lastNoticeId"];
-        [self.navigationController pushViewController:proclamationDetailInfoViewController animated:YES];
+        [self gainToNewNoticeDetail:[proclamationDic objectForKey:@"lastNoticeId"]];
     }
 }
 

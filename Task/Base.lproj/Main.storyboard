@@ -996,6 +996,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mainTableView" destination="5nf-6u-x18" id="kpI-4e-PtM"/>
+                        <outlet property="tableSelectedSegmented" destination="gOB-vP-cCJ" id="MaD-Pd-QEZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bzh-5c-5LM" userLabel="First Responder" sceneMemberID="firstResponder"/>

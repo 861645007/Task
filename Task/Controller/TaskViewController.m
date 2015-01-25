@@ -62,6 +62,9 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setIsRefresh:) name:@"refreshTaskMainView" object:nil];
+    
+    // 接受通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealWithNotifition:) name:@"TaskSystemNotification" object:nil];
 }
 
 - (void)setIsRefresh:(NSNotification *)notification {
@@ -79,6 +82,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - 接受通知数据
+- (void)dealWithNotifition:(NSNotification *)notification {
+    NSDictionary *notificationInfo = [notification object];
+    
+    [self gainTaskDetailView:[notificationInfo objectForKey:@"notificationInfoStr"]];
+}
+
 
 #pragma mark - 获取数据
 // 获取数据
@@ -283,6 +294,10 @@
 }
 
 - (void)gainTaskDetailView:(NSString *)taskId {
+    if ([[[[self tabBarController].viewControllers objectAtIndex:2] tabBarItem].badgeValue isEqualToString:@"1"]) {
+        [[[[self tabBarController].viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:nil];
+    }
+    
     TaskDetailInfoTableViewController *taskDetailInfoTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskDetailInfoTableViewController"];
     taskDetailInfoTableViewController.taskId = taskId;
     [self.navigationController pushViewController:taskDetailInfoTableViewController animated:YES];

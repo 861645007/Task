@@ -14,6 +14,7 @@
 @interface LeaveViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *tableSelectedSegmented;
 
 - (IBAction)showMenu:(id)sender;
 - (IBAction)addNewLeave:(id)sender;

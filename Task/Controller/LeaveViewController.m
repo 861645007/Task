@@ -25,6 +25,7 @@
 
 @implementation LeaveViewController
 @synthesize mainTableView;
+@synthesize tableSelectedSegmented;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,6 +47,14 @@
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self refreshTableViewData];
     }];
+    
+    // 接受通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealWithNotifition:) name:@"LeaveSystemNotification" object:nil];
+}
+
+// 设置
+- (void)setTabBarBadgeValue:(NSString *)tabIndex badgeValue:(NSString *)badgeValue {
+    [[[[self tabBarController].viewControllers objectAtIndex:[tabIndex intValue]] tabBarItem] setBadgeValue:badgeValue];
 }
 
 - (void)setIsRefresh:(NSNotification *)notification {
@@ -53,6 +62,10 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    if ([[[[self tabBarController].viewControllers objectAtIndex:3] tabBarItem].badgeValue isEqualToString:@"1"]) {
+        [self setTabBarBadgeValue:@"3" badgeValue:nil];
+    }
+    
     if (isNeedRefresh) {
         isNeedRefresh = 0;
         [self refreshTableViewData];
@@ -73,6 +86,20 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 接受通知数据
+- (void)dealWithNotifition:(NSNotification *)notification {
+    NSDictionary *notificationInfo = [notification object];
+    int page = [[notificationInfo objectForKey:@"badgePage"] intValue];
+    if (page == 3) {
+        tableViewType = 1;
+        tableSelectedSegmented.selectedSegmentIndex = 1;
+    }else {
+        tableViewType = 0;
+        tableSelectedSegmented.selectedSegmentIndex = 0;
+    }
+    [self refreshTableViewData];
 }
 
 #pragma mark - Navigation
@@ -188,7 +215,19 @@
 - (UIView *)createFootButton {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     label.textAlignment = NSTextAlignmentCenter;
-    [label setText:@"已加载完数据"];
+    if (tableViewType == 0) {
+        if ([leaveList count] == 0) {
+            [label setText:@"暂无请假数据"];
+        }else{
+            [label setText:@"已加载完数据"];
+        }
+    }else {
+        if ([approveLeaveList count] == 0) {
+            [label setText:@"暂无审批数据"];
+        }else {
+            [label setText:@"已加载完数据"];
+        }
+    }
     
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     [btn addTarget:self action:@selector(gainTableViewData) forControlEvents:UIControlEventTouchUpInside];
@@ -317,6 +356,7 @@
         tableViewType = 1;
     }
     [mainTableView reloadData];
+    self.mainTableView.tableFooterView = [self createFootButton];
 }
 
 #pragma mark - Menu操作
