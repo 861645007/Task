@@ -59,8 +59,7 @@ static LogInToolClass *instnce;
     if (value && [value isEqualToString:@"1"]) {
         return YES;
     }
-    else
-    {
+    else {
         return NO;
     }
 }

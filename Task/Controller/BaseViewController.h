@@ -27,8 +27,8 @@
 // 颜色
 #define GrayColorForTitle [UIColor colorWithRed:127/255.0 green:127/255.0 blue:127/255.0 alpha:1.0f]
 
-
-#define HttpURL @"http://vmr82ksj.zhy35065.zhihui.chinaccnet.cn/"
+#define HttpURL @"http://182.92.10.156:8080/"
+//#define HttpURL @"http://vmr82ksj.zhy35065.zhihui.chinaccnet.cn/"
 //#define HttpURL @"http://192.168.191.1:8080/new/"
 #define LogInAction                   @"app_login.action"
 #define HomeAction                    @"app_home.action"                   // 获取用户的基本信息
@@ -40,6 +40,7 @@
 #define PublishNoticeAction           @"app_publishNotice.action"          // 发布公告
 #define NoticeDetailAction            @"app_noticeDetail.action"           // 获取公告详情
 #define NoticeAddCommentAction        @"app_noticeAddComment.action"       // 公告添加评论
+#define AttendanceImageAction         @"app_attendanceImage.action"        // 外勤上传照片
 
 // 任务
 #define TaskHomeAction                @"app_taskHome.action"               // 公司主页接口

@@ -14,6 +14,7 @@
 #import "ProclamationDetailInfoViewController.h"
 
 @interface WorkHomeViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 
 - (IBAction)showMenu:(id)sender;

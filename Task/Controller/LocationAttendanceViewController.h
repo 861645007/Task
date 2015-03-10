@@ -7,8 +7,9 @@
 //
 
 #import "BaseViewController.h"
+#import "RBImagePickerController.h"
 
-@interface LocationAttendanceViewController : BaseViewController
+@interface LocationAttendanceViewController : BaseViewController<UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, copy) NSString *attendancePatten;
 @property (nonatomic, copy) NSString *attendanceType;

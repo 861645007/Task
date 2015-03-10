@@ -232,6 +232,7 @@
 		E6C8C4461A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C8C4451A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m */; };
 		E6C9C7F91A4CF3BB00FA0A5F /* preViewDelete.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C9C7F71A4CF3BB00FA0A5F /* preViewDelete.png */; };
 		E6C9C7FA1A4CF3BB00FA0A5F /* preViewDelete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C9C7F81A4CF3BB00FA0A5F /* preViewDelete@2x.png */; };
+		E6D3C7711AAEAA8300D1583B /* LocationAttendanceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D3C7701AAEAA8300D1583B /* LocationAttendanceCollectionViewCell.m */; };
 		E6D940681A59176600E0A865 /* Icon_58.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D940631A59176600E0A865 /* Icon_58.png */; };
 		E6D940691A59176600E0A865 /* Icon_80.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D940641A59176600E0A865 /* Icon_80.png */; };
 		E6D9406A1A59176600E0A865 /* Icon_89.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D940651A59176600E0A865 /* Icon_89.png */; };
@@ -651,6 +652,8 @@
 		E6C8C4451A57DCFE00B2ECC9 /* PersonInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoTableViewCell.m; path = Controller/PersonInfoTableViewCell.m; sourceTree = "<group>"; };
 		E6C9C7F71A4CF3BB00FA0A5F /* preViewDelete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preViewDelete.png; path = Image/preViewDelete.png; sourceTree = "<group>"; };
 		E6C9C7F81A4CF3BB00FA0A5F /* preViewDelete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "preViewDelete@2x.png"; path = "Image/preViewDelete@2x.png"; sourceTree = "<group>"; };
+		E6D3C76F1AAEAA8300D1583B /* LocationAttendanceCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationAttendanceCollectionViewCell.h; path = Controller/LocationAttendanceCollectionViewCell.h; sourceTree = "<group>"; };
+		E6D3C7701AAEAA8300D1583B /* LocationAttendanceCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationAttendanceCollectionViewCell.m; path = Controller/LocationAttendanceCollectionViewCell.m; sourceTree = "<group>"; };
 		E6D940631A59176600E0A865 /* Icon_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_58.png; path = Image/Icon_58.png; sourceTree = "<group>"; };
 		E6D940641A59176600E0A865 /* Icon_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_80.png; path = Image/Icon_80.png; sourceTree = "<group>"; };
 		E6D940651A59176600E0A865 /* Icon_89.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_89.png; path = Image/Icon_89.png; sourceTree = "<group>"; };
@@ -1238,7 +1241,6 @@
 				E67FBBA81A3EA83E00CE839C /* CoordinateTransformation */,
 				E67FBBAB1A3EA83E00CE839C /* CustomToolClass */,
 				E67FBBB91A3EA83E00CE839C /* GuidePage */,
-				E67FBBC61A3EA83E00CE839C /* http */,
 				E67FBBC71A3EA83E00CE839C /* LogInClass */,
 				E67FBBCA1A3EA83E00CE839C /* PopView */,
 				E67FBBE11A3EA83E00CE839C /* UIAlertView_ActionSheet */,
@@ -1363,14 +1365,6 @@
 			path = MYBlurIntroductionView;
 			sourceTree = "<group>";
 		};
-		E67FBBC61A3EA83E00CE839C /* http */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = http;
-			path = FunctionClass/http;
-			sourceTree = "<group>";
-		};
 		E67FBBC71A3EA83E00CE839C /* LogInClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -1471,13 +1465,12 @@
 		E67FBC361A3EA91800CE839C /* AttendanceViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E6D3C76E1AAEAA2E00D1583B /* LocationAttendance - 外勤 */,
 				E6033BD01A5ABF6E00504F9C /* AttendanceDetailViewController */,
 				E67FBC4E1A3EB04600CE839C /* AttendanceViewController.h */,
 				E67FBC4F1A3EB04600CE839C /* AttendanceViewController.m */,
 				E6DCD6141A416EEC008B0582 /* AttendanceListTableViewCell.h */,
 				E6DCD6151A416EEC008B0582 /* AttendanceListTableViewCell.m */,
-				E6DCD6111A41690D008B0582 /* LocationAttendanceViewController.h */,
-				E6DCD6121A41690D008B0582 /* LocationAttendanceViewController.m */,
 			);
 			name = AttendanceViewController;
 			sourceTree = "<group>";
@@ -1773,6 +1766,17 @@
 				E6BB87ED1A6555440073D574 /* AddLeaveAccessaryTableViewCell.xib */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		E6D3C76E1AAEAA2E00D1583B /* LocationAttendance - 外勤 */ = {
+			isa = PBXGroup;
+			children = (
+				E6DCD6111A41690D008B0582 /* LocationAttendanceViewController.h */,
+				E6DCD6121A41690D008B0582 /* LocationAttendanceViewController.m */,
+				E6D3C76F1AAEAA8300D1583B /* LocationAttendanceCollectionViewCell.h */,
+				E6D3C7701AAEAA8300D1583B /* LocationAttendanceCollectionViewCell.m */,
+			);
+			name = "LocationAttendance - 外勤";
 			sourceTree = "<group>";
 		};
 		E6D9406F1A5928A800E0A865 /* ChangePwdViewController */ = {
@@ -2228,6 +2232,7 @@
 				E6D940721A5928D500E0A865 /* ChangePwdViewController.m in Sources */,
 				E699645F1A519055005F219A /* NSString+XHMD5.m in Sources */,
 				E659B50F1A66806200BB7959 /* CusTabBarViewController.m in Sources */,
+				E6D3C7711AAEAA8300D1583B /* LocationAttendanceCollectionViewCell.m in Sources */,
 				E6753BC21A4FEA4E00AAD8DC /* AddTaskReportJudgementCollectionViewCell.m in Sources */,
 				E6394F561A444E8800706882 /* CalendarDayModel.m in Sources */,
 				E67653981A4D06DB000A13D9 /* NSData+ExtensionWithData.m in Sources */,

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yoK-f9-lc7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D87h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yoK-f9-lc7">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -1485,17 +1485,60 @@
                                     <action selector="sureAttendance:" destination="nhR-EO-e8L" eventType="touchUpInside" id="a1V-G5-kSa"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z0a-go-z8V">
+                                <rect key="frame" x="16" y="192" width="568" height="340"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AtV-vH-Xpa">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LocationAttendanceCell" id="McQ-Zb-Ly7" customClass="LocationAttendanceCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mNf-n7-4WA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="mNf-n7-4WA" secondAttribute="bottom" id="02K-6y-Apv"/>
+                                            <constraint firstItem="mNf-n7-4WA" firstAttribute="top" secondItem="McQ-Zb-Ly7" secondAttribute="top" id="AnT-YI-ZYS"/>
+                                            <constraint firstAttribute="trailing" secondItem="mNf-n7-4WA" secondAttribute="trailing" id="U5w-ej-Pmg"/>
+                                            <constraint firstItem="mNf-n7-4WA" firstAttribute="leading" secondItem="McQ-Zb-Ly7" secondAttribute="leading" id="kqI-VG-NL0"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="selectedImageView" destination="mNf-n7-4WA" id="sff-HL-7Ho"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="nhR-EO-e8L" id="7C1-2w-6oz"/>
+                                    <outlet property="delegate" destination="nhR-EO-e8L" id="AKX-Wp-hhw"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nbU-fr-YIr" firstAttribute="top" secondItem="vWl-8U-KPd" secondAttribute="bottom" constant="8" id="0la-wq-edZ"/>
                             <constraint firstItem="nbU-fr-YIr" firstAttribute="trailing" secondItem="vaw-3V-5G8" secondAttribute="trailingMargin" id="6YM-Fe-Ddw"/>
+                            <constraint firstItem="z0a-go-z8V" firstAttribute="leading" secondItem="nbU-fr-YIr" secondAttribute="leading" id="C3U-J7-Svt"/>
                             <constraint firstItem="aHR-ln-HYC" firstAttribute="trailing" secondItem="vaw-3V-5G8" secondAttribute="trailingMargin" id="FSm-pq-DtH"/>
+                            <constraint firstItem="aHR-ln-HYC" firstAttribute="top" secondItem="z0a-go-z8V" secondAttribute="bottom" constant="8" id="Mbl-Zv-jWb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XHk-Ld-VtK" secondAttribute="trailing" constant="-16" id="WdY-IK-i8e"/>
                             <constraint firstItem="VPS-cb-IkG" firstAttribute="top" secondItem="XHk-Ld-VtK" secondAttribute="bottom" id="cI8-fU-kJL"/>
+                            <constraint firstItem="z0a-go-z8V" firstAttribute="top" secondItem="nbU-fr-YIr" secondAttribute="bottom" constant="8" id="e9y-IX-GnO"/>
                             <constraint firstItem="aHR-ln-HYC" firstAttribute="leading" secondItem="vaw-3V-5G8" secondAttribute="leadingMargin" id="eba-Us-jYh"/>
                             <constraint firstItem="vWl-8U-KPd" firstAttribute="leading" secondItem="vaw-3V-5G8" secondAttribute="leadingMargin" id="hiY-Py-LwV"/>
                             <constraint firstItem="VPS-cb-IkG" firstAttribute="top" secondItem="aHR-ln-HYC" secondAttribute="bottom" constant="20" id="mxx-6D-z5b"/>
+                            <constraint firstItem="z0a-go-z8V" firstAttribute="trailing" secondItem="nbU-fr-YIr" secondAttribute="trailing" id="pYF-88-u1w"/>
                             <constraint firstItem="XHk-Ld-VtK" firstAttribute="leading" secondItem="vaw-3V-5G8" secondAttribute="leadingMargin" constant="-16" id="rpd-Ef-L4R"/>
                             <constraint firstItem="nbU-fr-YIr" firstAttribute="leading" secondItem="vaw-3V-5G8" secondAttribute="leadingMargin" id="ty7-cZ-Gri"/>
                             <constraint firstItem="XHk-Ld-VtK" firstAttribute="top" secondItem="vaw-3V-5G8" secondAttribute="topMargin" id="uq6-Ab-k4l"/>
@@ -1505,6 +1548,7 @@
                     <navigationItem key="navigationItem" title="外勤" id="oTh-V4-bAW"/>
                     <connections>
                         <outlet property="commentTextView" destination="nbU-fr-YIr" id="OGV-04-498"/>
+                        <outlet property="imageCollectionView" destination="z0a-go-z8V" id="pyN-E1-5R8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQy-TE-n4E" userLabel="First Responder" sceneMemberID="firstResponder"/>

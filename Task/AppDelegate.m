@@ -66,15 +66,16 @@
     }else {
         [self dealWithNotification:remoteNotification];
     }
+    
     return YES;
 }
 
-- (void)redirectNSLogToDocumentFolder{
-
-    NSString *fileName =[NSString stringWithFormat:@"%@.log",[NSDate date]];
-    NSString *logFilePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:fileName];
-    freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-}
+//- (void)redirectNSLogToDocumentFolder{
+//
+//    NSString *fileName =[NSString stringWithFormat:@"%@.log",[NSDate date]];
+//    NSString *logFilePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:fileName];
+//    freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+//}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -176,7 +177,7 @@
 }
 
 - (void)dealWithNotification:(NSDictionary *)notificationDic {
-
+    
     NSMutableDictionary *notificationInfo = [self gainNotificationInfo:notificationDic];
     [notificationInfo setObject:[[LogInToolClass shareInstance] getUserInfo:@"ApplicationState"] forKey:@"ApplicationState"];
     

@@ -57,7 +57,10 @@
         self.noneAttendanceDataLabel.hidden = true;
         [self gainAttendanceInfo];
     }];
-
+    
+    // 通知：用于外勤时改变考勤状态
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeAttendanceState:) name:@"ChangeAttendanceState" object:nil];
+    
     [self gainAttendanceInfo];
 }
 
@@ -86,6 +89,10 @@
         self.signInBtn.hidden = true;
         self.signOutBtn.hidden = false;
     }
+}
+
+- (void)changeAttendanceState:(NSNotification *)notification {
+    [self judgeAttendanceBtn:notification.object];
 }
 
 - (void)didReceiveMemoryWarning {

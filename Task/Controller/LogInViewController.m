@@ -75,9 +75,10 @@
 
 - (void)savePersonInfo:(NSDictionary *)dic {
     
-    //设置用户登录标志
+    // 设置用户登录标志
     [userInfo saveUserCookie];
-    //保存用户信息
+    
+    // 保存用户信息
     [userInfo saveUserLogInName:personNameTextField.text];
     [userInfo saveUserLogInPwd:personPasswordTextField.text];
     [self gotoMainViewController];
@@ -91,8 +92,6 @@
     UIApplication *app =[UIApplication sharedApplication];
     AppDelegate *app2 = app.delegate;
     app2.window.rootViewController = frosted;
-    
-    
 }
 
 @end
