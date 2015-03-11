@@ -67,6 +67,12 @@
         [self dealWithNotification:remoteNotification];
     }
     
+    // 去除通知栏上的 推送通知
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+
+    
     return YES;
 }
 
