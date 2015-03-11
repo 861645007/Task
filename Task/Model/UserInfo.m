@@ -69,11 +69,18 @@ static UserInfo *instnce;
 - (void)saveUserSex:(NSString *)userSex {
     [[LogInToolClass shareInstance] saveUserInfo:userSex AndInfoType:@"personSex"];
 }
+- (void)saveUserIconPath:(NSString *)userIconPath {
+    [[LogInToolClass shareInstance] saveUserInfo:userIconPath AndInfoType:@"personIcon"];
+}
+
 - (void)saveUserPhone:(NSString *)userPhone {
     [[LogInToolClass shareInstance] saveUserInfo:userPhone AndInfoType:@"personPhone"];
 }
-- (void)saveUserIconPath:(NSString *)userIconPath {
-    [[LogInToolClass shareInstance] saveUserInfo:userIconPath AndInfoType:@"personIcon"];
+- (void)saveUserEmail:(NSString *)userEmail {
+    [[LogInToolClass shareInstance] saveUserInfo:userEmail AndInfoType:@"personEmail"];
+}
+- (void)saveUserDepartment:(NSString *)userDepartment {
+    [[LogInToolClass shareInstance] saveUserInfo:userDepartment AndInfoType:@"personDepartment"];
 }
 
 
@@ -116,6 +123,12 @@ static UserInfo *instnce;
 }
 - (NSString *)gainUserAddress {
     return [[LogInToolClass shareInstance] getUserInfo:@"personAddress"];
+}
+- (NSString *)gainUserDepartment {
+    return [[LogInToolClass shareInstance] getUserInfo:@"personDepartment"];
+}
+- (NSString *)gainUserEmail {
+    return [[LogInToolClass shareInstance] getUserInfo:@"personEmail"];
 }
 
 

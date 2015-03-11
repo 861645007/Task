@@ -32,7 +32,7 @@ static LogInToolClass *instnce;
 - (NSString *)getUserInfo: (NSString *)infoType {
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     NSString *userInfo = [NSString stringWithFormat:@"%@", [settings objectForKey:infoType]];
-    if (userInfo == nil) {
+    if (userInfo == nil || [userInfo isEqualToString:@"(null)"]) {
         return @"";
     }
     return userInfo;

@@ -24,7 +24,6 @@
 @synthesize attendancePatten;
 @synthesize coordinate;
 @synthesize commentTextView;
-@synthesize attendanceType;
 @synthesize address;
 
 - (void)viewDidLoad {
@@ -136,7 +135,7 @@
     NSString *realName = [userInfo gainUserName];
     NSString *enterpriseId = [userInfo gainUserEnterpriseId];
     //参数
-    NSDictionary *parameters = @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"type": attendanceType, @"pattern":attendancePatten, @"longitude": [NSString stringWithFormat:@"%f", coordinate.longitude], @"latitude": [NSString stringWithFormat:@"%f", coordinate.latitude], @"address":address, @"phoneImei": @"123", @"description": commentTextView.text};
+    NSDictionary *parameters = @{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"pattern":attendancePatten, @"longitude": [NSString stringWithFormat:@"%f", coordinate.longitude], @"latitude": [NSString stringWithFormat:@"%f", coordinate.latitude], @"address":address, @"phoneImei": @"123", @"description": commentTextView.text};
     
     [self createAsynchronousRequest:AttendanceAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithNetManageResult: dic];

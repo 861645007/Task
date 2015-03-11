@@ -12,22 +12,26 @@
 #import "Color.h"
 #import "SelectHeaderViewController.h"
 #import "TaskDetailInfoTableViewController.h"
+#import "ModifyUrgentLevelViewController.h"
 
-@interface AddNewTaskViewController : BaseViewController<UITextFieldDelegate, SelectedHeaderProtocol>
+@interface AddNewTaskViewController : BaseViewController<UITextFieldDelegate, UITextViewDelegate, SelectedHeaderProtocol, SelectedUrgentLevelProtocol>
 
 @property (weak, nonatomic) IBOutlet UITextField *taskTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *selectTaskLeaderBtn;
 @property (weak, nonatomic) IBOutlet UIButton *selectTaskEndTimeBtn;
-@property (weak, nonatomic) IBOutlet UIButton *saveWithContinueAddNewTaskBtn;
 @property (weak, nonatomic) IBOutlet UIButton *saveWithPerfectTaskInfoBtn;
+@property (weak, nonatomic) IBOutlet UIButton *selecteTaskJoinetBtn;
+@property (weak, nonatomic) IBOutlet UITextView *taskCommentTextView;
+@property (weak, nonatomic) IBOutlet UILabel *taskCommentPlaceholderLabel;
+@property (weak, nonatomic) IBOutlet UIButton *taskTypeBtn;
 @property (nonatomic, copy) NSString *taskId;
 @property (nonatomic, copy) NSString *taskEndTimeStr;
 @property (nonatomic, copy) NSString *superTaskId;
 
 - (IBAction)selectTaskLeader:(id)sender;
 - (IBAction)selectTaskEndTime:(id)sender;
-- (IBAction)saveWithContinueAddNewTask:(id)sender;
 - (IBAction)saveWithPerfectTaskInfo:(id)sender;
 - (IBAction)hiddenKeyBoard:(id)sender;
+- (IBAction)selectTaskType:(id)sender;
 
 @end

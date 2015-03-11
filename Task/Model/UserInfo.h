@@ -29,6 +29,9 @@
 - (void)saveUserIconPath:(NSString *)userIconPath;
 - (void)saveUserAttendace:(NSString *)personAttendance;
 
+- (void)saveUserPhone:(NSString *)userPhone;
+- (void)saveUserEmail:(NSString *)userEmail;
+- (void)saveUserDepartment:(NSString *)userDepartment;
 - (void)saveUserAddress:(NSString *)userAddress;
 - (void)saveUserSex:(NSString *)userSex;
 
@@ -45,6 +48,8 @@
 - (NSString *)gainUserIconPath;
 - (NSString *)gainUserAttendance;
 
+- (NSString *)gainUserEmail;
+- (NSString *)gainUserDepartment;
 - (NSString *)gainUserSex;
 - (NSString *)gainUserPhone;
 - (NSString *)gainUserAddress;

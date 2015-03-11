@@ -149,4 +149,8 @@
     [self.navigationController pushViewController:aboutUsViewController animated:YES];
 }
 
+- (IBAction)showMenu:(id)sender {
+    [self.frostedViewController presentMenuViewController];
+}
+
 @end

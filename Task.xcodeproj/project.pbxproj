@@ -42,6 +42,11 @@
 		E604E3471A52D2FF000313C9 /* RelateTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E604E3461A52D2FF000313C9 /* RelateTaskTableViewCell.m */; };
 		E60C94EB1A4AEE870003B33B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60C94EA1A4AEE870003B33B /* AssetsLibrary.framework */; };
 		E60C94F41A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C94F31A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m */; };
+		E60D1B4C1AB00FD9009D9E27 /* meun_bgImage.png in Resources */ = {isa = PBXBuildFile; fileRef = E60D1B4B1AB00FD9009D9E27 /* meun_bgImage.png */; };
+		E60D1B511AB01113009D9E27 /* HomeAttention_click.png in Resources */ = {isa = PBXBuildFile; fileRef = E60D1B4D1AB01113009D9E27 /* HomeAttention_click.png */; };
+		E60D1B521AB01113009D9E27 /* HomeAttention_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E60D1B4E1AB01113009D9E27 /* HomeAttention_click@2x.png */; };
+		E60D1B531AB01113009D9E27 /* HomeAttention.png in Resources */ = {isa = PBXBuildFile; fileRef = E60D1B4F1AB01113009D9E27 /* HomeAttention.png */; };
+		E60D1B541AB01113009D9E27 /* HomeAttention@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E60D1B501AB01113009D9E27 /* HomeAttention@2x.png */; };
 		E615EFAC1A55331A00D2621A /* SubTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E615EFAB1A55331A00D2621A /* SubTaskTableViewController.m */; };
 		E62C793C1A50F9B60026EC5B /* select_item_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = E62C793A1A50F9B60026EC5B /* select_item_checked.png */; };
 		E62C793D1A50F9B60026EC5B /* select_item_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = E62C793B1A50F9B60026EC5B /* select_item_unchecked.png */; };
@@ -200,7 +205,6 @@
 		E699646E1A519839005F219A /* UIImage+ExtensionWithUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E699646D1A519839005F219A /* UIImage+ExtensionWithUIImage.m */; };
 		E69C51D81A41BC11001CA405 /* Task_Add.png in Resources */ = {isa = PBXBuildFile; fileRef = E69C51D71A41BC11001CA405 /* Task_Add.png */; };
 		E6B219991A5C0A0B0040DFD2 /* CompletedTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B219981A5C0A0B0040DFD2 /* CompletedTaskViewController.m */; };
-		E6B312DA1A3FBD1300AEF923 /* left_information_background.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D21A3FBD1300AEF923 /* left_information_background.png */; };
 		E6B312DB1A3FBD1300AEF923 /* nav_menu_add.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D31A3FBD1300AEF923 /* nav_menu_add.png */; };
 		E6B312DC1A3FBD1300AEF923 /* nav_menu_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D41A3FBD1300AEF923 /* nav_menu_contact.png */; };
 		E6B312DD1A3FBD1300AEF923 /* nav_menu_date_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B312D51A3FBD1300AEF923 /* nav_menu_date_normal.png */; };
@@ -339,6 +343,11 @@
 		E60C94EA1A4AEE870003B33B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E60C94F21A4B05B40003B33B /* SubmitTaskModifyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubmitTaskModifyInfoViewController.h; path = Controller/SubmitTaskModifyInfoViewController.h; sourceTree = "<group>"; };
 		E60C94F31A4B05B40003B33B /* SubmitTaskModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubmitTaskModifyInfoViewController.m; path = Controller/SubmitTaskModifyInfoViewController.m; sourceTree = "<group>"; };
+		E60D1B4B1AB00FD9009D9E27 /* meun_bgImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meun_bgImage.png; path = Image/meun_bgImage.png; sourceTree = "<group>"; };
+		E60D1B4D1AB01113009D9E27 /* HomeAttention_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HomeAttention_click.png; path = Image/HomeAttention_click.png; sourceTree = "<group>"; };
+		E60D1B4E1AB01113009D9E27 /* HomeAttention_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HomeAttention_click@2x.png"; path = "Image/HomeAttention_click@2x.png"; sourceTree = "<group>"; };
+		E60D1B4F1AB01113009D9E27 /* HomeAttention.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HomeAttention.png; path = Image/HomeAttention.png; sourceTree = "<group>"; };
+		E60D1B501AB01113009D9E27 /* HomeAttention@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HomeAttention@2x.png"; path = "Image/HomeAttention@2x.png"; sourceTree = "<group>"; };
 		E615EFAA1A55331A00D2621A /* SubTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubTaskTableViewController.h; path = Controller/SubTaskTableViewController.h; sourceTree = "<group>"; };
 		E615EFAB1A55331A00D2621A /* SubTaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubTaskTableViewController.m; path = Controller/SubTaskTableViewController.m; sourceTree = "<group>"; };
 		E62C793A1A50F9B60026EC5B /* select_item_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = select_item_checked.png; path = Image/select_item_checked.png; sourceTree = "<group>"; };
@@ -608,7 +617,6 @@
 		E69C51D71A41BC11001CA405 /* Task_Add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Task_Add.png; path = Image/Task_Add.png; sourceTree = "<group>"; };
 		E6B219971A5C0A0B0040DFD2 /* CompletedTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompletedTaskViewController.h; path = Controller/CompletedTaskViewController.h; sourceTree = "<group>"; };
 		E6B219981A5C0A0B0040DFD2 /* CompletedTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CompletedTaskViewController.m; path = Controller/CompletedTaskViewController.m; sourceTree = "<group>"; };
-		E6B312D21A3FBD1300AEF923 /* left_information_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = left_information_background.png; path = Image/left_information_background.png; sourceTree = "<group>"; };
 		E6B312D31A3FBD1300AEF923 /* nav_menu_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_menu_add.png; path = Image/nav_menu_add.png; sourceTree = "<group>"; };
 		E6B312D41A3FBD1300AEF923 /* nav_menu_contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_menu_contact.png; path = Image/nav_menu_contact.png; sourceTree = "<group>"; };
 		E6B312D51A3FBD1300AEF923 /* nav_menu_date_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_menu_date_normal.png; path = Image/nav_menu_date_normal.png; sourceTree = "<group>"; };
@@ -1502,6 +1510,11 @@
 		E67FBC491A3EAF2400CE839C /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				E60D1B4D1AB01113009D9E27 /* HomeAttention_click.png */,
+				E60D1B4E1AB01113009D9E27 /* HomeAttention_click@2x.png */,
+				E60D1B4F1AB01113009D9E27 /* HomeAttention.png */,
+				E60D1B501AB01113009D9E27 /* HomeAttention@2x.png */,
+				E60D1B4B1AB00FD9009D9E27 /* meun_bgImage.png */,
 				E6BB87E01A650DCE0073D574 /* deleteAccessary.png */,
 				E6D940731A596EAC00E0A865 /* Icon_Login.png */,
 				E6D9406D1A59192B00E0A865 /* card_bg.png */,
@@ -1550,7 +1563,6 @@
 				E6DCD60A1A415109008B0582 /* Expansion@2x.png */,
 				E6DCD60B1A415109008B0582 /* ic_account.png */,
 				E6DCD60C1A415109008B0582 /* Password_icon.png */,
-				E6B312D21A3FBD1300AEF923 /* left_information_background.png */,
 				E6B312D31A3FBD1300AEF923 /* nav_menu_add.png */,
 				E6B312D41A3FBD1300AEF923 /* nav_menu_contact.png */,
 				E6B312D51A3FBD1300AEF923 /* nav_menu_date_normal.png */,
@@ -2000,9 +2012,11 @@
 				E6D9406B1A59176600E0A865 /* Icon_120.png in Resources */,
 				E6006B681A4D1FC500E974DD /* Feedback_nav_click.png in Resources */,
 				E6B312DB1A3FBD1300AEF923 /* nav_menu_add.png in Resources */,
+				E60D1B521AB01113009D9E27 /* HomeAttention_click@2x.png in Resources */,
 				E637A0651A46B47D00E547AE /* Pulldown@2x.png in Resources */,
 				E69C51D81A41BC11001CA405 /* Task_Add.png in Resources */,
 				E60349A11A418580005B8719 /* ic_locus_pressed.png in Resources */,
+				E60D1B511AB01113009D9E27 /* HomeAttention_click.png in Resources */,
 				E6006B711A4D1FC500E974DD /* Share_nav_click@2x.png in Resources */,
 				E6DB5EDF1A4E9E54002906F1 /* TaskLookDetailTableViewCell.xib in Resources */,
 				E6006B7F1A4D2BA400E974DD /* More_nav_click@2x.png in Resources */,
@@ -2040,6 +2054,7 @@
 				E6BE6D471A5E30FB00F92DDF /* diaryBook_SelectedImage.png in Resources */,
 				E6BE6D481A5E30FB00F92DDF /* diaryBook_SelectedImage@2x.png in Resources */,
 				E6006B691A4D1FC500E974DD /* Feedback_nav_click@2x.png in Resources */,
+				E60D1B531AB01113009D9E27 /* HomeAttention.png in Resources */,
 				E6319DA61A41A76D00982A46 /* tab_menu_workcenter_more.png in Resources */,
 				E67FBB681A3EA5DF00CE839C /* Images.xcassets in Resources */,
 				E6006B811A4D6D9600E974DD /* TaskOtherDetailInfoTableViewCell.xib in Resources */,
@@ -2052,6 +2067,7 @@
 				E6BE6D451A5E30FB00F92DDF /* 888-checkmark.png in Resources */,
 				E6394F631A44520500706882 /* Addchoice.png in Resources */,
 				E62C793C1A50F9B60026EC5B /* select_item_checked.png in Resources */,
+				E60D1B541AB01113009D9E27 /* HomeAttention@2x.png in Resources */,
 				E6B312DC1A3FBD1300AEF923 /* nav_menu_contact.png in Resources */,
 				E6006B731A4D1FC500E974DD /* Share_nav@2x.png in Resources */,
 				E67FBC2B1A3EA83E00CE839C /* HUD_YES@2x.png in Resources */,
@@ -2061,9 +2077,9 @@
 				E6394F661A44520500706882 /* choose@2x.png in Resources */,
 				E67BA4EA1A527787000520CE /* preViewMenu.png in Resources */,
 				E67BA4F31A529310000520CE /* TXT.png in Resources */,
-				E6B312DA1A3FBD1300AEF923 /* left_information_background.png in Resources */,
 				E67FBC121A3EA83E00CE839C /* CheckMarkWhite.png in Resources */,
 				E6C8C43C1A57DB4D00B2ECC9 /* ic_password.png in Resources */,
+				E60D1B4C1AB00FD9009D9E27 /* meun_bgImage.png in Resources */,
 				E637A0641A46B47D00E547AE /* Pulldown.png in Resources */,
 				E67FBC151A3EA83E00CE839C /* Toronto, ON.jpg in Resources */,
 				E6D940691A59176600E0A865 /* Icon_80.png in Resources */,

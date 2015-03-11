@@ -7,8 +7,13 @@
 //
 
 #import "LeftMenuViewController.h"
+#import "PlistOperation.h"
 
-@interface LeftMenuViewController ()
+@interface LeftMenuViewController () {
+    NSString *personPhone;
+    NSString *personEmail;
+    NSString *personDepartment;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @end
@@ -30,7 +35,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        imageView.image = [UIImage imageNamed:@"avatar.jpg"];
+        imageView.image = [self gainHeaderImageImage];
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 50.0;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -40,10 +45,10 @@
         imageView.clipsToBounds = YES;
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
-        label.text = @"Roman Efimov";
+        label.text = [userInfo gainUserName];
         label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
         label.backgroundColor = [UIColor clearColor];
-        label.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
+        label.textColor = [UIColor whiteColor];
         [label sizeToFit];
         label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         
@@ -51,6 +56,37 @@
         [view addSubview:label];
         view;
     });
+    
+    
+    [self setTableFooterView:self.mainTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    personDepartment = [userInfo gainUserDepartment];
+    personEmail = [userInfo gainUserEmail];
+    personPhone = [userInfo gainUserPhone];
+    
+    if ([personPhone isEqualToString:@""]) {
+        [self createSimpleAlertView:@"baoq" msg:@"请先前往“更多 -> 个人资料”中获取个人信息"];
+    }
+    [self.mainTableView reloadData];
+}
+
+- (UIImage *)gainHeaderImageImage {
+    NSArray *array = [[PlistOperation shareInstance] gainAllPersonInfoWithFile];
+    NSString *userId = [userInfo gainUserId];
+    NSString *userImageName = @"";
+    
+    for (NSDictionary *dic in array) {
+        NSString *employeeId = [NSString stringWithFormat:@"%@",[dic objectForKey:@"employeeId"]];
+        if ([userId isEqual:employeeId]) {
+            userImageName = [dic objectForKey:@"image"];
+            break;
+        }
+    }
+    
+    UIImage *img = [[PlistOperation shareInstance] gainPersonImage:userImageName];
+    return img;
 }
 
 #pragma mark -
@@ -59,7 +95,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:17];
 }
 
@@ -93,10 +129,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UINavigationController *navigationController = (UINavigationController *)self.frostedViewController.contentViewController;
+//    UINavigationController *navigationController = (UINavigationController *)self.frostedViewController.contentViewController;
 
     
-    [self.frostedViewController hideMenuViewController];
+//    [self.frostedViewController hideMenuViewController];
 }
 
 #pragma mark -
@@ -104,12 +140,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 54;
+    return 44;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
@@ -128,10 +164,9 @@
     }
     
     if (indexPath.section == 0) {
-        NSArray *titles = @[@"Home", @"Profile", @"Chats"];
-        cell.textLabel.text = titles[indexPath.row];
-    } else {
-        NSArray *titles = @[@"John Appleseed", @"John Doe", @"Test User"];
+        NSArray *titles = @[[NSString stringWithFormat:@"手机号： %@", personPhone],
+                            [NSString stringWithFormat:@"Email：  %@", personEmail],
+                            [NSString stringWithFormat:@"部门：    %@", personDepartment]];
         cell.textLabel.text = titles[indexPath.row];
     }
     

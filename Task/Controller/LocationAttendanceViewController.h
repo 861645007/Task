@@ -12,7 +12,6 @@
 @interface LocationAttendanceViewController : BaseViewController<UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, copy) NSString *attendancePatten;
-@property (nonatomic, copy) NSString *attendanceType;
 @property (nonatomic) CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) NSString *address;
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;

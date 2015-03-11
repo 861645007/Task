@@ -9,9 +9,10 @@
 #import "AddNewTaskViewController.h"
 
 @interface AddNewTaskViewController () {
-    UIBarButtonItem *rightBar;
-    NSString *saveType;        // 0：直接保存   1：保存并继续添加   2：保存并完善信息
     NSString *headerIdStrList;
+    NSString *joinEmployeeIds;
+    NSInteger selectedJoinerOrHeader;    // 0表示选择 header； 1表示选择 Joiner
+    NSInteger tasktype;
 }
 
 @end
@@ -20,8 +21,11 @@
 @synthesize taskTitleLabel;
 @synthesize selectTaskEndTimeBtn;
 @synthesize selectTaskLeaderBtn;
-@synthesize saveWithContinueAddNewTaskBtn;
+@synthesize selecteTaskJoinetBtn;
+@synthesize taskCommentTextView;
+@synthesize taskCommentPlaceholderLabel;
 @synthesize saveWithPerfectTaskInfoBtn;
+@synthesize taskTypeBtn;
 @synthesize taskId;
 @synthesize taskEndTimeStr;
 @synthesize superTaskId;
@@ -30,7 +34,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     taskTitleLabel.delegate = self;
+    taskCommentTextView.delegate = self;
+    tasktype = 0;
     headerIdStrList = [NSString string];
+    joinEmployeeIds = [NSString string];
     
     if ([taskEndTimeStr isEqualToString:@""] || taskEndTimeStr == nil) {
         [selectTaskEndTimeBtn setTitle:@"选择到期日" forState:UIControlStateNormal];
@@ -39,9 +46,6 @@
        [selectTaskEndTimeBtn setTitle:taskEndTimeStr forState:UIControlStateNormal];
         [selectTaskEndTimeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
-    
-    rightBar = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveNewTaskInfo)];
-    self.navigationItem.rightBarButtonItem = rightBar;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,9 +60,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     if ([segue.identifier isEqualToString:@"GoToSelectedHeaderView"]) {
+        selectedJoinerOrHeader = 0;
         SelectHeaderViewController *selected = [segue destinationViewController];
         selected.delegate = self;
         selected.isRadio = 0;
+    }else if ([segue.identifier isEqualToString:@"SelectJoiner"]) {
+        selectedJoinerOrHeader = 1;
+        SelectHeaderViewController *selected = [segue destinationViewController];
+        selected.delegate = self;
+        selected.isRadio = 1;
     }
 }
 
@@ -83,15 +93,8 @@
     
 }
 
-- (IBAction)saveWithContinueAddNewTask:(id)sender {
-    [self hidenTaskTitleTextField];
-    saveType = @"1";
-    [self submitNewTaskInfo];
-}
-
 - (IBAction)saveWithPerfectTaskInfo:(id)sender {
     [self hidenTaskTitleTextField];
-    saveType = @"2";
     [self submitNewTaskInfo];
 }
 
@@ -100,30 +103,47 @@
     [self hidenTaskTitleTextField];
 }
 
+
+
 - (void)hidenTaskTitleTextField {
     [self.taskTitleLabel resignFirstResponder];
+    [self.taskCommentTextView resignFirstResponder];
+}
+
+#pragma mark - 选择任务的紧急程度
+- (IBAction)selectTaskType:(id)sender {
+    ModifyUrgentLevelViewController *modifyUrgentLevelViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ModifyUrgentLevelViewController"];
+    modifyUrgentLevelViewController.urgentStr = [NSString stringWithFormat:@"%ld", (long)tasktype];
+    modifyUrgentLevelViewController.delegate = self;
+    [self.navigationController pushViewController:modifyUrgentLevelViewController animated:YES];
+}
+
+- (void)selectedUrgentLevel:(NSString *)urgentLevel {
+    tasktype = [urgentLevel integerValue];
+    if (tasktype == 0) {
+        [taskTypeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    } else if (tasktype == 1) {
+        [taskTypeBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    } else if (tasktype == 2) {
+        [taskTypeBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - 保存信息
-- (void)saveNewTaskInfo {
-    [self hidenTaskTitleTextField];
-    saveType = @"0";
-    [self submitNewTaskInfo];
-}
-
 - (void)submitNewTaskInfo {
     if ([selectTaskLeaderBtn.titleLabel.text isEqualToString:@"选择负责人"]) {
         [self createSimpleAlertView:@"抱歉" msg:@"请选择负责人"];
         return ;
     }
     
-    
-    [self.view.window showHUDWithText:@"正在提交" Type:ShowLoading Enabled:YES];
-    
+    if ([selecteTaskJoinetBtn.titleLabel.text isEqualToString:@"选择参与人"]) {
+        [self createSimpleAlertView:@"抱歉" msg:@"请选择参与人"];
+        return ;
+    }
+
     NSString *employeeId = [userInfo gainUserId];
     NSString *realName = [userInfo gainUserName];
     NSString *enterpriseId = [userInfo gainUserEnterpriseId];
-
     
     //参数
     NSDictionary *parameters;
@@ -135,6 +155,9 @@
                        @"principalId": headerIdStrList,
                        @"principalName": selectTaskLeaderBtn.titleLabel.text,
                        @"deadline": selectTaskEndTimeBtn.titleLabel.text,
+                       @"content": taskCommentTextView.text,
+                       @"joinEmployeeIds": joinEmployeeIds,
+                       @"type": [NSString stringWithFormat:@"%ld", (long)tasktype],
                        @"parentId": superTaskId};
     }else {
         if ([taskId isEqual:@""]) {
@@ -144,6 +167,9 @@
                            @"title":taskTitleLabel.text,
                            @"principalId": headerIdStrList,
                            @"principalName": selectTaskLeaderBtn.titleLabel.text,
+                           @"content": taskCommentTextView.text,
+                           @"joinEmployeeIds": joinEmployeeIds,
+                           @"type": [NSString stringWithFormat:@"%ld", (long)tasktype],
                            @"deadline": selectTaskEndTimeBtn.titleLabel.text};
             
         }else {
@@ -154,10 +180,13 @@
                            @"title":taskTitleLabel.text,
                            @"principalId": headerIdStrList,
                            @"principalName": selectTaskLeaderBtn.titleLabel.text,
+                           @"content": taskCommentTextView.text,
+                           @"joinEmployeeIds": joinEmployeeIds,
+                           @"type": [NSString stringWithFormat:@"%ld", (long)tasktype],
                            @"deadline": selectTaskEndTimeBtn.titleLabel.text};
         }
     }
-
+    
     [self createAsynchronousRequest:AddTaskAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithGainAttendanceInfoResult: dic];
     } failure:^{}];
@@ -174,22 +203,13 @@
         }
         case 1: {
             [self.view.window showHUDWithText:@"新建任务成功" Type:ShowPhotoYes Enabled:YES];
-            if ([saveType isEqualToString:@"0"]) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTaskMainView" object:@"1"];
-                [self performSelector:@selector(comeBack) withObject:nil afterDelay:0.9];
-            }else if ([saveType isEqualToString:@"1"]) {
-                // 新增
-                self.taskTitleLabel.text = @"";
-                [self btnIsForbid];
-            }else if ([saveType isEqualToString:@"2"]) {
-                // 跳转到完善信息页面
-                [self performSelector:@selector(gainToDetailInfoView:) withObject:[dic objectForKey:@"taskId"] afterDelay:0.9];
-            }
+            // 跳转到完善信息页面
+            [self performSelector:@selector(gainToDetailInfoView:) withObject:[dic objectForKey:@"taskId"] afterDelay:0.9];
             break;
         }
     }
     if (![msg isEqualToString:@""]) {
-        [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
+        [self createSimpleAlertView:@"抱歉" msg:msg];
     }
 }
 
@@ -208,6 +228,32 @@
     [self.navigationController pushViewController:taskDetailInfoTableViewController animated:YES];
 }
 
+#pragma mark - TextView 提示 Label 隐藏
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {//检测到“完成”
+        [textView resignFirstResponder];//释放键盘
+        return NO;
+    }
+    if (taskCommentTextView.text.length==0){//textview长度为0
+        if ([text isEqualToString:@""]) {//判断是否为删除键
+            taskCommentPlaceholderLabel.hidden=NO;//隐藏文字
+        }else{
+            taskCommentPlaceholderLabel.hidden=YES;
+        }
+    }else{//textview长度不为0
+        if (taskCommentTextView.text.length==1){//textview长度为1时候
+            if ([text isEqualToString:@""]) {//判断是否为删除键
+                taskCommentPlaceholderLabel.hidden=NO;
+            }else{//不是删除
+                taskCommentPlaceholderLabel.hidden=YES;
+            }
+        }else{//长度不为1时候
+            taskCommentPlaceholderLabel.hidden=YES;
+        }
+    }
+    return YES;
+}
 #pragma mark - TextView 判断保存按钮是否可以被点击
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([string isEqualToString:@"\n"]) {//检测到“完成”
@@ -233,40 +279,59 @@
 
 - (void)btnIsForbid {
     saveWithPerfectTaskInfoBtn.userInteractionEnabled = NO;
-    saveWithContinueAddNewTaskBtn.userInteractionEnabled = NO;
     [saveWithPerfectTaskInfoBtn setBackgroundColor:[UIColor colorWithRed:127/255.0 green:127/255.0 blue:127/255.0 alpha:1]];
-    [saveWithContinueAddNewTaskBtn setBackgroundColor:[UIColor colorWithRed:127/255.0 green:127/255.0 blue:127/255.0 alpha:1]];
 }
 
 - (void)btnIsAllow {
     saveWithPerfectTaskInfoBtn.userInteractionEnabled = YES;
-    saveWithContinueAddNewTaskBtn.userInteractionEnabled = YES;
-    saveWithContinueAddNewTaskBtn.backgroundColor = [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
     saveWithPerfectTaskInfoBtn.backgroundColor = [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
-    
 }
 
 #pragma mark - 返回负责人 
 - (void)selectedHeader:(NSArray *)headerList {
-    NSString *headerListStr = @"";
-    for (NSDictionary *dic in headerList) {
-        if ([dic isEqual:[headerList lastObject]]) {
-            headerListStr = [headerListStr stringByAppendingFormat:@"%@",[dic objectForKey:@"realName"]];
-            headerIdStrList = [headerIdStrList stringByAppendingFormat:@"%@",[dic objectForKey:@"employeeId"]];
-
+    if (selectedJoinerOrHeader == 0) {
+        NSString *headerListStr = @"";
+        for (NSDictionary *dic in headerList) {
+            if ([dic isEqual:[headerList lastObject]]) {
+                headerListStr = [headerListStr stringByAppendingFormat:@"%@",[dic objectForKey:@"realName"]];
+                headerIdStrList = [headerIdStrList stringByAppendingFormat:@"%@",[dic objectForKey:@"employeeId"]];
+                
+            }else {
+                headerListStr = [headerListStr stringByAppendingFormat:@"%@,",[dic objectForKey:@"realName"]];
+                headerIdStrList = [headerIdStrList stringByAppendingFormat:@"%@,",[dic objectForKey:@"employeeId"]];
+            }
+        }
+        
+        if ([headerList isEqualToArray:@[]]) {
+            [selectTaskLeaderBtn setTitle:@"请选择负责人" forState:UIControlStateNormal];
+            [selectTaskLeaderBtn setTitleColor:[UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0] forState:UIControlStateNormal];
         }else {
-            headerListStr = [headerListStr stringByAppendingFormat:@"%@,",[dic objectForKey:@"realName"]];
-            headerIdStrList = [headerIdStrList stringByAppendingFormat:@"%@,",[dic objectForKey:@"employeeId"]];
+            [selectTaskLeaderBtn setTitle:headerListStr forState:UIControlStateNormal];
+            [selectTaskLeaderBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        }
+    }else {
+        joinEmployeeIds = @"";
+        NSString *joinerListStr = @"";
+        for (NSDictionary *dic in headerList) {
+            if ([dic isEqual:[headerList lastObject]]) {
+                joinerListStr = [joinerListStr  stringByAppendingFormat:@"%@",[dic objectForKey:@"realName"]];
+                 joinEmployeeIds = [joinEmployeeIds stringByAppendingFormat:@"%@",[dic objectForKey:@"employeeId"]];
+                
+            }else {
+                joinerListStr = [joinerListStr stringByAppendingFormat:@"%@,",[dic objectForKey:@"realName"]];
+                joinEmployeeIds = [joinEmployeeIds stringByAppendingFormat:@"%@,",[dic objectForKey:@"employeeId"]];
+            }
+        }
+        
+        if ([headerList isEqualToArray:@[]]) {
+            [selecteTaskJoinetBtn setTitle:@"请选择参与人" forState:UIControlStateNormal];
+            [selecteTaskJoinetBtn setTitleColor:[UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0] forState:UIControlStateNormal];
+        }else {
+            [selecteTaskJoinetBtn setTitle:joinerListStr forState:UIControlStateNormal];
+            [selecteTaskJoinetBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }
     }
     
-    if ([headerList isEqualToArray:@[]]) {
-        [selectTaskLeaderBtn setTitle:@"请选择负责人" forState:UIControlStateNormal];
-        [selectTaskLeaderBtn setTitleColor:[UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0] forState:UIControlStateNormal];
-    }else {
-        [selectTaskLeaderBtn setTitle:headerListStr forState:UIControlStateNormal];
-        [selectTaskLeaderBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    }
     
 }
 

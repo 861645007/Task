@@ -34,7 +34,7 @@
 #define HomeAction                    @"app_home.action"                   // 获取用户的基本信息
 
 // 考勤
-#define AttendanceAction              @"app_attendance.action"
+#define AttendanceAction              @"app_attendance2.action"
 #define AttendanceMonthAction         @"app_attendanceMonth.action"        // 获取当月的用户考勤信息
 #define NoticeMonthListAction         @"app_noticeMonthList.action"        // 获取当月公告信息
 #define PublishNoticeAction           @"app_publishNotice.action"          // 发布公告
@@ -45,7 +45,7 @@
 // 任务
 #define TaskHomeAction                @"app_taskHome.action"               // 公司主页接口
 #define AllEmployeesAction            @"app_allEmployees.action"           // 获取公司所有人员列表
-#define AddTaskAction                 @"app_addTask.action"                // 新建任务
+#define AddTaskAction                 @"app_addTask2.action"                // 新建任务
 #define TaskDetailAction              @"app_taskDetail.action"             // 任务详情
 #define AddTaskContentAction          @"app_addTaskContent.action"         // 修改任务内容
 #define ChangeTaskTypeAction          @"app_changeTaskType.action"         // 修改任务类型

@@ -21,7 +21,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentTimeLabel;
-@property (weak, nonatomic) IBOutlet UIButton *signOutBtn;
 @property (weak, nonatomic) IBOutlet UIButton *signInBtn;
 @property (weak, nonatomic) IBOutlet UILabel *noneAttendanceDataLabel;
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
@@ -30,7 +29,6 @@
 
 - (IBAction)showMenu:(id)sender;
 - (IBAction)signAttendance:(id)sender;
-- (IBAction)signOutAttendance:(id)sender;
 - (IBAction)selectAttendanceTime:(id)sender;
 
 @end
