@@ -19,7 +19,6 @@ static PlistOperation *instnce;
 + (id)shareInstance {
     if (instnce == nil) {
         instnce = [[[self class] alloc] init];
-        
     }
     return instnce;
 }

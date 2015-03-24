@@ -31,6 +31,6 @@
 - (IBAction)showMenu:(id)sender;
 - (IBAction)signAttendance:(id)sender;
 - (IBAction)signOutAttendance:(id)sender;
-- (IBAction)selectAttendanceTime:(id)sender;
+- (void)selectAttendanceTime;
 
 @end

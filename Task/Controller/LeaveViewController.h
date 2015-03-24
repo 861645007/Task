@@ -10,6 +10,7 @@
 #import "LeaveTableViewCell.h"
 #import "EditLeaveViewController.h"
 #import "LeaveDetailViewController.h"
+#import "KxMenu.h"
 
 @interface LeaveViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 

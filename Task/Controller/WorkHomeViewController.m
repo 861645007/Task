@@ -13,7 +13,8 @@
 
 @interface WorkHomeViewController () {
     NSMutableDictionary *proclamationDic;
-    
+    NSInteger pageNo;
+    NSInteger totalPage;
     int gainPersonInfoNum;
 }
 @end
@@ -26,8 +27,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    pageNo = 1;
+    totalPage = 1;
     gainPersonInfoNum = 0;
-    proclamationDic = [NSMutableDictionary dictionaryWithDictionary:@{@"lastNoticeContent":@"", @"unreadNoticeCount":@"", @"lastNoticeId":@""}];
+//    proclamationDic = [NSMutableDictionary dictionaryWithDictionary:@{@"lastNoticeContent":@"", @"unreadNoticeCount":@"", @"lastNoticeId":@""}];
+    proclamationDic = [[NSMutableDictionary alloc]init];
 
     if ([self detectionNetworkStatus]) {
         // 获取信息操作
@@ -37,6 +41,8 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self gainAllPersonInfo];
         });
+        
+        [self getGonggao];
     }else {
         [self createSimpleAlertView:@"暂无网络" msg:@"请您打开手机流量"];
     }
@@ -44,10 +50,71 @@
     // 注册刷新控件
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self gainUserBaseInfo];
+        [proclamationDic removeObjectForKey:@"notices"];
+        [self getGonggao];
     }];
 
     // 接受自定义通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealWithNotifition:) name:@"systemNotification" object:nil];
+    
+    [self setTableFooterView:self.mainTableView];
+}
+
+-(void)getGonggao{
+    NSString *employeeId = [userInfo gainUserId];
+    NSString *realName = [userInfo gainUserName];
+    NSString *enterpriseId = [userInfo gainUserEnterpriseId];
+    //参数
+    NSLog(@"pageno:%@",[[NSString alloc] initWithFormat:@"%ld",pageNo]);
+    NSDictionary *parameters = @{@"employeeId": employeeId,
+                                 @"realName":realName,
+                                 @"enterpriseId": enterpriseId,
+                                 @"userId": employeeId,
+                                 @"pageNo":[[NSString alloc] initWithFormat:@"%ld",pageNo],
+                                 @"pageSize":@"10"};
+    [self createAsynchronousRequest:noticeListAction parmeters:parameters success:^(NSDictionary *dic){
+       [self dealWithgetGonggaoResult: dic];
+    } failure:^{
+        // 事情做完了, 结束刷新动画~~~
+       // [mainTableView headerEndRefreshingWithResult:JHRefreshResultFailure];
+        [self.view.window showHUDWithText:@"网络错误..." Type:ShowLoading Enabled:YES];
+    }];
+}
+
+-(void)dealWithgetGonggaoResult:(NSDictionary *)dic{
+    NSString *msg = @"";
+
+    switch ([[dic objectForKey:@"result"] intValue]) {
+        case 0: {
+            msg = [dic objectForKey:@"message"];
+            break;
+        }
+        case 1: {
+            [self.view.window showHUDWithText:@"获取数据成功" Type:ShowPhotoYes Enabled:YES];
+           // pageNo = [[dic objectForKey:@"pageNo"]integerValue];
+            totalPage = [[dic objectForKey:@"totalPage"]integerValue];
+            NSMutableArray *list = [[NSMutableArray alloc]init];
+            NSMutableArray *newlist = [[NSMutableArray alloc]init];
+            newlist = [[dic objectForKey:@"notices"]mutableCopy];
+            list = [[proclamationDic objectForKey:@"notices"]mutableCopy];
+            if (list==NULL) {
+                [proclamationDic setValue:newlist forKey:@"notices"];
+            }else{
+                [list addObjectsFromArray:newlist];
+                [proclamationDic setValue:list forKey:@"notices"];
+            }
+            
+            [self.mainTableView reloadData];
+            
+            break;
+        }
+    }
+    // 事情做完了, 结束刷新动画~~~
+    //  [mainTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
+    if (![msg isEqualToString:@""]) {
+        [self.view.window showHUDWithText:msg Type:ShowPhotoNo Enabled:true];
+    }
+
 }
 
 - (BOOL)detectionNetworkStatus {
@@ -142,9 +209,9 @@
         case 1: {
             [self.view.window showHUDWithText:@"获取信息成功" Type:ShowPhotoYes Enabled:YES];
             [self savePersonInfo:[dic objectForKey:@"userInfo"]];
-            [self setProclamationInfo:[dic objectForKey:@"noticeInfo"]];
+           // [self setProclamationInfo:[dic objectForKey:@"noticeInfo"]];
 
-            [mainTableView reloadData];
+          //  [mainTableView reloadData];
             break;
         }
     }
@@ -178,12 +245,12 @@
     NSLog(@"TagsAlias回调:%@", callbackString);
 }
 
-- (void)setProclamationInfo:(NSDictionary *)dic {
-    proclamationDic = [NSMutableDictionary dictionaryWithDictionary:dic];
-    [proclamationDic setValue:[NSString stringWithFormat:@"%@",[self judgeTextIsNULL:[dic objectForKey:@"unreadNoticeCount"]]] forKey:@"unreadNoticeCount"];
-    [proclamationDic setValue:[NSString stringWithFormat:@"%@",[self judgeTextIsNULL:[dic objectForKey:@"lastNoticeContent"]]] forKey:@"lastNoticeContent"];
-    [proclamationDic setValue:[NSString stringWithFormat:@"%@",[self judgeTextIsNULL:[dic objectForKey:@"lastNoticeId"]]] forKey:@"lastNoticeId"];
-}
+//- (void)setProclamationInfo:(NSDictionary *)dic {
+//    proclamationDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+//    [proclamationDic setValue:[NSString stringWithFormat:@"%@",[self judgeTextIsNULL:[dic objectForKey:@"unreadNoticeCount"]]] forKey:@"unreadNoticeCount"];
+//    [proclamationDic setValue:[NSString stringWithFormat:@"%@",[self judgeTextIsNULL:[dic objectForKey:@"lastNoticeContent"]]] forKey:@"lastNoticeContent"];
+//    [proclamationDic setValue:[NSString stringWithFormat:@"%@",[self judgeTextIsNULL:[dic objectForKey:@"lastNoticeId"]]] forKey:@"lastNoticeId"];
+//}
 
 #pragma mark - 获取公司所有人员信息
 - (void)gainAllPersonInfo {
@@ -226,61 +293,83 @@
 
 #pragma mark - TableView Delegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return 1;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  1;
+    if (totalPage == pageNo) {
+        return [[proclamationDic objectForKey:@"notices"] count];
+    }
+    return [[proclamationDic objectForKey:@"notices"] count]+1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 88;
+        return 60;
     }
     return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier1 = @"ProclamationCell";
-    UITableViewCell *cell;
-    if (indexPath.section == 0) {
-        ProclamationTableViewCell *proclamationcell = (ProclamationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
-        proclamationcell.proclamationUnreadNumberLabel.text = [proclamationDic objectForKey:@"unreadNoticeCount"];
-        [proclamationcell.gainToUnReadViewBtn addTarget:self action:@selector(gainToUnReadView) forControlEvents:UIControlEventTouchUpInside];
-        [proclamationcell.gainToCurrenProclamationViewBtn addTarget:self action:@selector(gainToCurrenProclamationView) forControlEvents:UIControlEventTouchUpInside];
-
-        if ([[proclamationDic objectForKey:@"unreadNoticeCount"] isEqual:@"0"]) {
-            proclamationcell.proclamationTitleLabel.text = @"暂无公告";
-            proclamationcell.taskAddImageView.hidden = NO;
-            
-            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewProclamation)];
-            [proclamationcell.taskAddImageView addGestureRecognizer:tapGestureRecognizer];
-        }else {
-            proclamationcell.taskAddImageView.hidden = YES;
-            proclamationcell.proclamationTitleLabel.text = [proclamationDic objectForKey:@"lastNoticeContent"];
-        }
-        
-        cell = proclamationcell;
+    NSString *cellIdentifier;
+    if(indexPath.row==[[proclamationDic objectForKey:@"notices"] count]){
+        cellIdentifier = @"NMoreCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        return cell;
     }
+    cellIdentifier = @"gonggaoCell";
+    GonggaoTableViewCell *cell = (GonggaoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSDictionary *dic = [[proclamationDic objectForKey:@"notices"] objectAtIndex:indexPath.row];
+    
+    cell.title.text = [dic objectForKey:@"content"];
+    cell.date.text = [dic objectForKey:@"createTime"];
+    cell.author.text = [dic objectForKey:@"createName"];
+    int isCheck = [[dic objectForKey:@"isCheck"] intValue];
+    NSLog(@"ischeck：%d",isCheck);
+    if (isCheck) {
+        cell.isNew.hidden = YES;
+    } else{
+        cell.isNew.hidden = NO;
+    }
+
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == [[proclamationDic objectForKey:@"notices"] count]) {
+        [self gainMoreTask];
+    }
 }
+
+//加载更多
+- (void)gainMoreTask {
+    pageNo+=1;
+    [self getGonggao];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    NSIndexPath *indexPath = [self.mainTableView indexPathForSelectedRow];
+    NSDictionary *dic = [[proclamationDic objectForKey:@"notices"] objectAtIndex:indexPath.row];
+    
+    ProclamationDetailInfoViewController *proclamationDetailInfoViewController = [segue destinationViewController];
+    proclamationDetailInfoViewController.noticeId = [dic objectForKey:@"noticeId"];
+}
+
 
 - (void)gainToUnReadView {
     ProclamationListViewController *proclamationListViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProclamationListViewController"];
     [self.navigationController pushViewController:proclamationListViewController animated:YES];
 }
 
-- (void)gainToCurrenProclamationView {
-    if (![[proclamationDic objectForKey:@"lastNoticeId"] isEqualToString:@"0"]) {
-        //进入当前公告的详细信息界面
-        [self gainToNewNoticeDetail:[proclamationDic objectForKey:@"lastNoticeId"]];
-    }
-}
+//- (void)gainToCurrenProclamationView {
+//    if (![[proclamationDic objectForKey:@"lastNoticeId"] isEqualToString:@"0"]) {
+//        //进入当前公告的详细信息界面
+//        [self gainToNewNoticeDetail:[proclamationDic objectForKey:@"lastNoticeId"]];
+//    }
+//}
 
 
 #pragma mark - 新增公告 proclamation
@@ -291,6 +380,10 @@
     [self.navigationController pushViewController:addNewProclamationViewController animated:YES];
 }
 
+
+- (IBAction)newNotice:(id)sender {
+    [self addNewProclamation];
+}
 #pragma mark - 菜单操作
 - (IBAction)showMenu:(id)sender {
     [self.frostedViewController presentMenuViewController];

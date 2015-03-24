@@ -94,7 +94,8 @@
     ExtensibleToolBar *completeBar  = [self addCompleteBar];
     ExtensibleToolBar *shareBar     = [self addShareBar];
     ExtensibleToolBar *deleteBar    = [self addDeleteBar];
-    toolView.buttonArr = @[attentionBar, feedbackBar, completeBar, shareBar, deleteBar];
+    ExtensibleToolBar *pingjiaBar    = [self addPingjiaBar];
+    toolView.buttonArr = @[attentionBar, feedbackBar, pingjiaBar, completeBar, shareBar, deleteBar];
     [self.view addSubview:toolView];
 }
 
@@ -175,6 +176,16 @@
         }
         
     }];
+    return deleteBar;
+}
+
+// 评价 按钮
+- (ExtensibleToolBar *)addPingjiaBar {
+    ExtensibleToolBar *deleteBar = [ExtensibleToolBar itemWithLabel:@"评价" imageNormal:[UIImage imageNamed:@"evaluation_whtie"] imageSelected:[UIImage imageNamed:@"evaluation_whtie"] action:^(){
+        PingjiaViewController *selected = [self.storyboard instantiateViewControllerWithIdentifier:@"PingjiaViewController"];
+        selected.taskId =taskId;
+        [self.navigationController pushViewController:selected animated:YES];
+        }];
     return deleteBar;
 }
 

@@ -9,6 +9,8 @@
 #import "BaseViewController.h"
 #import "AddNewTaskViewController.h"
 #import "TaskDetailInfoTableViewController.h"
+#import "ATaskViewController.h"
+#import "MyTaskTableViewCell.h"
 
 @interface TaskViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 

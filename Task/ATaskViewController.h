@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+#import "TaskDetailInfoTableViewController.h"
 
-@interface ATaskViewController : UIViewController
+@interface ATaskViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *MianTableView;
 
+@property int taskType;
+@property int page;
 @end

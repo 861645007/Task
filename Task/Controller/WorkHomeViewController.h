@@ -11,10 +11,13 @@
 #import "ProclamationTableViewCell.h"
 #import "ProclamationListViewController.h"
 #import "AddNewProclamationViewController.h"
-#import "ProclamationDetailInfoViewController.h"
+#import "GonggaoTableViewCell.h"
+
 
 @interface WorkHomeViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
+- (IBAction)newNotice:(id)sender;
+
 
 - (IBAction)showMenu:(id)sender;
 @end

@@ -19,6 +19,7 @@
 #import "SelectHeaderViewController.h"
 #import "PreviewFileViewController.h"
 #import "RelateTaskListViewController.h"
+#import "PingjiaViewController.h"
 
 #import "SubmitTaskModifyInfoViewController.h"
 

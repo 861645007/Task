@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D42CB2C1ABC48C300E30B84 /* ATaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D42CB2B1ABC48C300E30B84 /* ATaskViewController.m */; };
+		5D42CB2F1ABD3F7200E30B84 /* TaskSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D42CB2E1ABD3F7200E30B84 /* TaskSearchViewController.m */; };
+		5D42CB311ABD977200E30B84 /* sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D42CB301ABD977200E30B84 /* sousuo.png */; };
+		5D42CB351ABDB04E00E30B84 /* MyTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D42CB331ABDB04E00E30B84 /* MyTaskTableViewCell.m */; };
+		5D4BDC601AC071C0005B26AD /* GonggaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D4BDC5F1AC071C0005B26AD /* GonggaoTableViewCell.m */; };
+		5D5122371AC1012600A5B011 /* badgenew.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5122361AC1012600A5B011 /* badgenew.png */; };
+		5D51223C1AC1071800A5B011 /* evaluation_whtie.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D51223B1AC1071800A5B011 /* evaluation_whtie.png */; };
+		5D7F89501AB7D0E9001F36A4 /* nav_menu_leave_nomal.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D7F894F1AB7D0E9001F36A4 /* nav_menu_leave_nomal.png */; };
+		5D9D082B1ABFF55900E25BCE /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9D082A1ABFF55900E25BCE /* KxMenu.m */; };
+		5D9D082D1AC0422400E25BCE /* pingjiamanyi.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D9D082C1AC0422400E25BCE /* pingjiamanyi.png */; };
+		5D9D082F1AC0422800E25BCE /* bumanyi.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D9D082E1AC0422800E25BCE /* bumanyi.png */; };
+		5D9D08311AC0422C00E25BCE /* pingjiayiban.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D9D08301AC0422C00E25BCE /* pingjiayiban.png */; };
+		5D9D08361AC0461800E25BCE /* PingjiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9D08351AC0461800E25BCE /* PingjiaViewController.m */; };
 		E6006B421A4D0D9E00E974DD /* ExtensibleToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6006B411A4D0D9E00E974DD /* ExtensibleToolView.m */; };
 		E6006B5C1A4D1FC500E974DD /* Attention_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = E6006B441A4D1FC500E974DD /* Attention_nav.png */; };
 		E6006B5D1A4D1FC500E974DD /* Attention_nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6006B451A4D1FC500E974DD /* Attention_nav@2x.png */; };
@@ -297,6 +310,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D42CB2A1ABC48C300E30B84 /* ATaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATaskViewController.h; sourceTree = "<group>"; };
+		5D42CB2B1ABC48C300E30B84 /* ATaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATaskViewController.m; sourceTree = "<group>"; };
+		5D42CB2D1ABD3F7200E30B84 /* TaskSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskSearchViewController.h; sourceTree = "<group>"; };
+		5D42CB2E1ABD3F7200E30B84 /* TaskSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskSearchViewController.m; sourceTree = "<group>"; };
+		5D42CB301ABD977200E30B84 /* sousuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sousuo.png; sourceTree = "<group>"; };
+		5D42CB321ABDB04E00E30B84 /* MyTaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTaskTableViewCell.h; sourceTree = "<group>"; };
+		5D42CB331ABDB04E00E30B84 /* MyTaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTaskTableViewCell.m; sourceTree = "<group>"; };
+		5D4BDC5E1AC071C0005B26AD /* GonggaoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GonggaoTableViewCell.h; sourceTree = "<group>"; };
+		5D4BDC5F1AC071C0005B26AD /* GonggaoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonggaoTableViewCell.m; sourceTree = "<group>"; };
+		5D5122361AC1012600A5B011 /* badgenew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badgenew.png; sourceTree = "<group>"; };
+		5D51223B1AC1071800A5B011 /* evaluation_whtie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evaluation_whtie.png; sourceTree = "<group>"; };
+		5D7F894F1AB7D0E9001F36A4 /* nav_menu_leave_nomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_menu_leave_nomal.png; sourceTree = "<group>"; };
+		5D9D08291ABFF55900E25BCE /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
+		5D9D082A1ABFF55900E25BCE /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
+		5D9D082C1AC0422400E25BCE /* pingjiamanyi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pingjiamanyi.png; sourceTree = "<group>"; };
+		5D9D082E1AC0422800E25BCE /* bumanyi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bumanyi.png; sourceTree = "<group>"; };
+		5D9D08301AC0422C00E25BCE /* pingjiayiban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pingjiayiban.png; sourceTree = "<group>"; };
+		5D9D08341AC0461800E25BCE /* PingjiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingjiaViewController.h; sourceTree = "<group>"; };
+		5D9D08351AC0461800E25BCE /* PingjiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingjiaViewController.m; sourceTree = "<group>"; };
 		E6006B401A4D0D9E00E974DD /* ExtensibleToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtensibleToolView.h; path = FunctionClass/ExtensibleToolView/ExtensibleToolView.h; sourceTree = "<group>"; };
 		E6006B411A4D0D9E00E974DD /* ExtensibleToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExtensibleToolView.m; path = FunctionClass/ExtensibleToolView/ExtensibleToolView.m; sourceTree = "<group>"; };
 		E6006B441A4D1FC500E974DD /* Attention_nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Attention_nav.png; path = Image/Attention_nav.png; sourceTree = "<group>"; };
@@ -1024,6 +1056,8 @@
 				E674AE741A46F86100E10718 /* ModifyTaskTitleViewController */,
 				E67027141A455A9B00C1B537 /* TaskDetailInfoTableViewController.h */,
 				E67027151A455A9B00C1B537 /* TaskDetailInfoTableViewController.m */,
+				5D9D08341AC0461800E25BCE /* PingjiaViewController.h */,
+				5D9D08351AC0461800E25BCE /* PingjiaViewController.m */,
 			);
 			name = TaskDetailInfoTableViewController;
 			sourceTree = "<group>";
@@ -1122,6 +1156,8 @@
 				E67C77B01A42FF2800C24054 /* ProclamationListViewController.m */,
 				E6394EB91A43FB4300706882 /* ProclamationListCell.h */,
 				E6394EBA1A43FB4300706882 /* ProclamationListCell.m */,
+				5D4BDC5E1AC071C0005B26AD /* GonggaoTableViewCell.h */,
+				5D4BDC5F1AC071C0005B26AD /* GonggaoTableViewCell.m */,
 			);
 			name = ProclamationViewController;
 			sourceTree = "<group>";
@@ -1185,6 +1221,8 @@
 				E6E0C7471A3F24BB0054F2C4 /* RootViewController.h */,
 				E6E0C7481A3F24BB0054F2C4 /* RootViewController.m */,
 				E67FBB641A3EA5DF00CE839C /* Main.storyboard */,
+				5D42CB321ABDB04E00E30B84 /* MyTaskTableViewCell.h */,
+				5D42CB331ABDB04E00E30B84 /* MyTaskTableViewCell.m */,
 				E67FBB671A3EA5DF00CE839C /* Images.xcassets */,
 				E67FBB691A3EA5DF00CE839C /* LaunchScreen.xib */,
 				E67FBB5A1A3EA5DF00CE839C /* Supporting Files */,
@@ -1451,6 +1489,10 @@
 				E66DCBAB1A429C7000C2C184 /* AddNewTaskViewController */,
 				E67FBC541A3EB06100CE839C /* TaskViewController.h */,
 				E67FBC551A3EB06100CE839C /* TaskViewController.m */,
+				5D42CB2A1ABC48C300E30B84 /* ATaskViewController.h */,
+				5D42CB2B1ABC48C300E30B84 /* ATaskViewController.m */,
+				5D42CB2D1ABD3F7200E30B84 /* TaskSearchViewController.h */,
+				5D42CB2E1ABD3F7200E30B84 /* TaskSearchViewController.m */,
 			);
 			name = TaskViewController;
 			sourceTree = "<group>";
@@ -1498,6 +1540,8 @@
 		E67FBC411A3EAA8900CE839C /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				5D9D08291ABFF55900E25BCE /* KxMenu.h */,
+				5D9D082A1ABFF55900E25BCE /* KxMenu.m */,
 				E67FBC421A3EAADA00CE839C /* LeftMenuViewController.h */,
 				E67FBC431A3EAADA00CE839C /* LeftMenuViewController.m */,
 				E6E0C74A1A3F26320054F2C4 /* MenuViewController.h */,
@@ -1516,8 +1560,12 @@
 				E6D940641A59176600E0A865 /* Icon_80.png */,
 				E6D940651A59176600E0A865 /* Icon_89.png */,
 				E6D940661A59176600E0A865 /* Icon_120.png */,
+				5D51223B1AC1071800A5B011 /* evaluation_whtie.png */,
 				E6D940671A59176600E0A865 /* Icon_180.png */,
+				5D9D082C1AC0422400E25BCE /* pingjiamanyi.png */,
 				E6C8C43D1A57DB5A00B2ECC9 /* Personal_Default.png */,
+				5D9D082E1AC0422800E25BCE /* bumanyi.png */,
+				5D9D08301AC0422C00E25BCE /* pingjiayiban.png */,
 				E6C8C4371A57DB4D00B2ECC9 /* card_hairtask.png */,
 				E6C8C4381A57DB4D00B2ECC9 /* dontsay1.png */,
 				E6C8C4391A57DB4D00B2ECC9 /* ic_password.png */,
@@ -1531,7 +1579,9 @@
 				E6006B431A4D1FAC00E974DD /* TaskDetailTool */,
 				E6C9C7F71A4CF3BB00FA0A5F /* preViewDelete.png */,
 				E6C9C7F81A4CF3BB00FA0A5F /* preViewDelete@2x.png */,
+				5D5122361AC1012600A5B011 /* badgenew.png */,
 				E68C0FED1A480CEF00832CCF /* Nomal.png */,
+				5D42CB301ABD977200E30B84 /* sousuo.png */,
 				E68C0FEE1A480CEF00832CCF /* Nomal@2x.png */,
 				E68C0FEF1A480CEF00832CCF /* Urgent.png */,
 				E68C0FF01A480CEF00832CCF /* Urgent@2x.png */,
@@ -1561,6 +1611,7 @@
 				E6B312D31A3FBD1300AEF923 /* nav_menu_add.png */,
 				E6B312D41A3FBD1300AEF923 /* nav_menu_contact.png */,
 				E6B312D51A3FBD1300AEF923 /* nav_menu_date_normal.png */,
+				5D7F894F1AB7D0E9001F36A4 /* nav_menu_leave_nomal.png */,
 				E6B312D61A3FBD1300AEF923 /* tab_menu_bottomattend.png */,
 				E6B312D71A3FBD1300AEF923 /* tab_menu_bottomdocument.png */,
 				E6B312D81A3FBD1300AEF923 /* tab_menu_task.png */,
@@ -1953,6 +2004,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D9D08311AC0422C00E25BCE /* pingjiayiban.png in Resources */,
 				E67BA4E21A527787000520CE /* DOCX.png in Resources */,
 				E6D9406A1A59176600E0A865 /* Icon_89.png in Resources */,
 				E6394F671A44520500706882 /* Member_click@2x.png in Resources */,
@@ -2024,6 +2076,7 @@
 				E6D940741A596EAC00E0A865 /* Icon_Login.png in Resources */,
 				E6006B641A4D1FC500E974DD /* Delete_nav_click.png in Resources */,
 				E6394F651A44520500706882 /* choose.png in Resources */,
+				5D9D082D1AC0422400E25BCE /* pingjiamanyi.png in Resources */,
 				E6006B661A4D1FC500E974DD /* Delete_nav.png in Resources */,
 				E6753BBE1A4FE6DF00AAD8DC /* menu_images_click.png in Resources */,
 				E62C794A1A511B1A0026EC5B /* LeaveApprovesTableViewCell.xib in Resources */,
@@ -2037,6 +2090,7 @@
 				E6BE6D481A5E30FB00F92DDF /* diaryBook_SelectedImage@2x.png in Resources */,
 				E6006B691A4D1FC500E974DD /* Feedback_nav_click@2x.png in Resources */,
 				E6319DA61A41A76D00982A46 /* tab_menu_workcenter_more.png in Resources */,
+				5D9D082F1AC0422800E25BCE /* bumanyi.png in Resources */,
 				E67FBB681A3EA5DF00CE839C /* Images.xcassets in Resources */,
 				E6006B811A4D6D9600E974DD /* TaskOtherDetailInfoTableViewCell.xib in Resources */,
 				E6C8C43B1A57DB4D00B2ECC9 /* dontsay1.png in Resources */,
@@ -2055,6 +2109,7 @@
 				E6006B721A4D1FC500E974DD /* Share_nav.png in Resources */,
 				E67BA4F01A527E26000520CE /* PPT.png in Resources */,
 				E6394F661A44520500706882 /* choose@2x.png in Resources */,
+				5D7F89501AB7D0E9001F36A4 /* nav_menu_leave_nomal.png in Resources */,
 				E67BA4EA1A527787000520CE /* preViewMenu.png in Resources */,
 				E67BA4F31A529310000520CE /* TXT.png in Resources */,
 				E6B312DA1A3FBD1300AEF923 /* left_information_background.png in Resources */,
@@ -2064,8 +2119,11 @@
 				E67FBC151A3EA83E00CE839C /* Toronto, ON.jpg in Resources */,
 				E6D940691A59176600E0A865 /* Icon_80.png in Resources */,
 				E6753BBF1A4FE6DF00AAD8DC /* photo.png in Resources */,
+				5D51223C1AC1071800A5B011 /* evaluation_whtie.png in Resources */,
 				E6394F6A1A44551100706882 /* NoSingle60.png in Resources */,
 				E62C793D1A50F9B60026EC5B /* select_item_unchecked.png in Resources */,
+				5D5122371AC1012600A5B011 /* badgenew.png in Resources */,
+				5D42CB311ABD977200E30B84 /* sousuo.png in Resources */,
 				E68C0FF51A480CEF00832CCF /* Urgent.png in Resources */,
 				E6B312DF1A3FBD1300AEF923 /* tab_menu_bottomdocument.png in Resources */,
 			);
@@ -2141,6 +2199,7 @@
 				E67BA4D61A527642000520CE /* PreviewFileViewController.m in Sources */,
 				E6394F5B1A444E8800706882 /* CalendarViewController.m in Sources */,
 				E69964671A519055005F219A /* XHCacheManager.m in Sources */,
+				5D42CB2C1ABC48C300E30B84 /* ATaskViewController.m in Sources */,
 				E6E0C76F1A3F345E0054F2C4 /* UIScrollView+JHExtension.m in Sources */,
 				E6886AFD1A40798F008D4E7F /* DetectionNetworkStatus.m in Sources */,
 				E67FBC561A3EB06100CE839C /* TaskViewController.m in Sources */,
@@ -2149,6 +2208,8 @@
 				E68082FA1A400C45008FFA03 /* CusNavigationTitleView.m in Sources */,
 				E67FBBFE1A3EA83E00CE839C /* AFSecurityPolicy.m in Sources */,
 				E6E0C76D1A3F345E0054F2C4 /* JHRefreshFooterView.m in Sources */,
+				5D42CB2F1ABD3F7200E30B84 /* TaskSearchViewController.m in Sources */,
+				5D9D08361AC0461800E25BCE /* PingjiaViewController.m in Sources */,
 				E6BE6D4A1A5E30FB00F92DDF /* README.md in Sources */,
 				E67FBC501A3EB04600CE839C /* AttendanceViewController.m in Sources */,
 				E67FBC091A3EA83E00CE839C /* UIRefreshControl+AFNetworking.m in Sources */,
@@ -2182,6 +2243,7 @@
 				E6DCD6161A416EEC008B0582 /* AttendanceListTableViewCell.m in Sources */,
 				E6E0C7431A3F24750054F2C4 /* REFrostedViewController.m in Sources */,
 				E67FBC171A3EA83E00CE839C /* MYBlurIntroductionView.m in Sources */,
+				5D9D082B1ABFF55900E25BCE /* KxMenu.m in Sources */,
 				E69964661A519055005F219A /* UIImageView+XHURLDownload.m in Sources */,
 				E67FBC031A3EA83E00CE839C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E67FBC191A3EA83E00CE839C /* LogInToolClass.m in Sources */,
@@ -2194,6 +2256,7 @@
 				E67FBC1A1A3EA83E00CE839C /* MJPopupBackgroundView.m in Sources */,
 				E615EFAC1A55331A00D2621A /* SubTaskTableViewController.m in Sources */,
 				E604E3471A52D2FF000313C9 /* RelateTaskTableViewCell.m in Sources */,
+				5D42CB351ABDB04E00E30B84 /* MyTaskTableViewCell.m in Sources */,
 				E676539F1A4D0742000A13D9 /* UIButton+ExtensionWithUIButton.m in Sources */,
 				E676539C1A4D06DB000A13D9 /* UIColor+ExtensionWithUIColor.m in Sources */,
 				E62C79451A5113A40026EC5B /* LeaveDetailViewController.m in Sources */,
@@ -2230,6 +2293,7 @@
 				E659B50F1A66806200BB7959 /* CusTabBarViewController.m in Sources */,
 				E6753BC21A4FEA4E00AAD8DC /* AddTaskReportJudgementCollectionViewCell.m in Sources */,
 				E6394F561A444E8800706882 /* CalendarDayModel.m in Sources */,
+				5D4BDC601AC071C0005B26AD /* GonggaoTableViewCell.m in Sources */,
 				E67653981A4D06DB000A13D9 /* NSData+ExtensionWithData.m in Sources */,
 				E699646E1A519839005F219A /* UIImage+ExtensionWithUIImage.m in Sources */,
 				E67C77B41A4304C800C24054 /* ProclamationTableViewCell.m in Sources */,

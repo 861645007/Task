@@ -57,6 +57,16 @@
         self.noneAttendanceDataLabel.hidden = true;
         [self gainAttendanceInfo];
     }];
+    
+    //添加导航栏item
+    UIImage *dateImage = [UIImage imageNamed:@"nav_menu_date_normal"];
+    UIImage *leaveImage = [UIImage imageNamed:@"nav_menu_leave_nomal"];
+    UIBarButtonItem *editDateButton=[[UIBarButtonItem alloc]initWithImage:dateImage style:UIBarButtonItemStylePlain target:self action:@selector(selectAttendanceTime)];
+   
+    UIBarButtonItem *leaveButton=[[UIBarButtonItem alloc]initWithImage:leaveImage style:UIBarButtonItemStylePlain target:self action:@selector(newLeave)];
+    NSArray * btnArr = @[editDateButton,leaveButton];
+    self.navigationItem.rightBarButtonItems=btnArr;
+
 
     [self gainAttendanceInfo];
 }
@@ -393,8 +403,12 @@
 }
 
 #pragma mark - 选择考勤时间
-- (IBAction)selectAttendanceTime:(id)sender {
+- (void)selectAttendanceTime{
     [self createSheetWithSelectTime];
+}
+#pragma mark - 请假
+- (void)newLeave{
+    [self performSegueWithIdentifier:@"newLeave" sender:self];
 }
 
 - (UIDatePicker *)createDatePicker {

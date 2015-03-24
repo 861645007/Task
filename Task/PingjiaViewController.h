@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+@interface PingjiaViewController :BaseViewController<UITableViewDataSource, UITableViewDelegate>
 
-@interface PingjiaViewController : UIViewController
+@property (nonatomic,strong)NSString *taskId;
+@property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 
 @end

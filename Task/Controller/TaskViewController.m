@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // 设置 tableView
-    sectionArr = @[@"延期", @"今天", @"明天", @"即将", @"无日期"];
+    sectionArr = @[@"逾期的任务", @"我创建的任务", @"我负责的任务",@"我参与的任务", @"我关注的任务", @"共享给我的任务", @"未读的任务"];//@"下属任务"
     isShow = [NSMutableArray array];
     for (int i = 0; i<[sectionArr count]; i++) {
         [isShow addObject:@"0"];
@@ -38,23 +38,24 @@
     isNeedRefresh = 1;
     
     // 设置导航栏为可点击1
-    navArr = @[@"我的任务", @"我创建的任务", @"我参与的任务", @"我负责的任务", @"未读的任务", @"我关注的任务", @"共享给我的任务", @"下属任务", @"未完成的任务", @"已完成的任务"];
-    CusNavigationTitleView *navView = [[CusNavigationTitleView alloc] initWithTitle:@"我的任务" titleStrArr:navArr imageName:@"Expansion"];
-    __block CusNavigationTitleView *copyNavView = navView; // 防止陷入“retain cycle” -- “形成怪圈”的错误
-    navView.selectRowAtIndex = ^(NSInteger index){
-        if (index < 7) {
-            copyNavView.titleString = navArr[(long)index];
-            titleCMD = [NSString stringWithFormat:@"%ld", (long)index];
-            // 选择标题后刷新界面
-            [self gainAttendanceInfo];
-        }else  {
-            CompletedTaskViewController *completedTaskViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CompletedTaskViewController"];
-            completedTaskViewController.titleStr = navArr[(long)index];
-            completedTaskViewController.taskListType = index;
-            [self.navigationController pushViewController:completedTaskViewController animated:YES];
-        }
-    };
-    self.navigationItem.titleView = navView;
+   // navArr = @[@"逾期的任务", @"我创建的任务", @"我负责的任务",@"我参与的任务", @"我关注的任务", @"共享给我的任务", @"未读的任务", @"下属任务"];
+  //  CusNavigationTitleView *navView = [[CusNavigationTitleView alloc] initWithTitle:@"我的任务" titleStrArr:navArr imageName:@"Expansion"];
+ //   __block CusNavigationTitleView *copyNavView = navView; // 防止陷入“retain cycle” -- “形成怪圈”的错误
+  //  navView.selectRowAtIndex = ^(NSInteger index){
+//        if (index < 7) {
+//            copyNavView.titleString = navArr[(long)index];
+//            titleCMD = [NSString stringWithFormat:@"%ld", (long)index];
+//            // 选择标题后刷新界面
+//            [self gainAttendanceInfo];
+//        }else  {
+//            CompletedTaskViewController *completedTaskViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CompletedTaskViewController"];
+//            completedTaskViewController.titleStr = navArr[(long)index];
+//            completedTaskViewController.taskListType = index;
+//            [self.navigationController pushViewController:completedTaskViewController animated:YES];
+//        }
+//    };
+//    self.navigationItem.titleView = navView;
+    self.navigationItem.title = @"我的任务";
 
     // 注册刷新控件
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
@@ -103,7 +104,7 @@
     NSDictionary *parameters = @{@"employeeId": employeeId,
                                  @"realName":realName,
                                  @"enterpriseId": enterpriseId,
-                                 @"cmd": titleCMD};
+                                 @"userId": employeeId};
     
     [self createAsynchronousRequest:TaskHomeAction parmeters:parameters success:^(NSDictionary *dic){
         [self dealWithGainAttendanceInfoResult: dic];
@@ -126,7 +127,7 @@
         case 1: {
             [self.view.window showHUDWithText:@"获取数据成功" Type:ShowPhotoYes Enabled:YES];
 
-            [self setSectionTableVieDataDic:[dic objectForKey:@"classifyTask"]];
+            [self setSectionTableVieDataDic:[dic objectForKey:@"homeTask"]];
             
             [mainTableView reloadData];
             
@@ -141,11 +142,12 @@
 }
 
 - (void)setSectionTableVieDataDic:(NSDictionary *)dic {
-    [tableVieDataDic setObject:[dic objectForKey:@"delayTasks"] forKey:@"延期"];
-    [tableVieDataDic setObject:[dic objectForKey:@"todyTasks"] forKey:@"今天"];
-    [tableVieDataDic setObject:[dic objectForKey:@"tomorrowTasks"] forKey:@"明天"];
-    [tableVieDataDic setObject:[dic objectForKey:@"futureTasks"] forKey:@"即将"];
-    [tableVieDataDic setObject:[dic objectForKey:@"noDateTasks"] forKey:@"无日期"];
+    [tableVieDataDic setObject:[dic objectForKey:@"delayTasks"] forKey:@"逾期的任务"];
+    [tableVieDataDic setObject:[dic objectForKey:@"createTasks"] forKey:@"我创建的任务"];
+    [tableVieDataDic setObject:[dic objectForKey:@"leaderTasks"] forKey:@"我负责的任务"];
+    [tableVieDataDic setObject:[dic objectForKey:@"joinTasks"] forKey:@"我参与的任务"];
+    [tableVieDataDic setObject:[dic objectForKey:@"attentionTasks"] forKey:@"我关注的任务"];
+    [tableVieDataDic setObject:[dic objectForKey:@"sharedTasks"] forKey:@"共享给我的任务"];
 }
 
 
@@ -164,7 +166,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *keys = [sectionArr objectAtIndex:section];
     if ([[isShow objectAtIndex:section] intValue]) {
-        return [[tableVieDataDic objectForKey:keys] count];
+        if (section>0&&section<6) {
+            return [[tableVieDataDic objectForKey:keys] count]+1;
+        }else{
+            return [[tableVieDataDic objectForKey:keys] count];
+        }
     }
     return 0;
 }
@@ -258,24 +264,36 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = @"TaskCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
     NSString *sectionTitle = [sectionArr objectAtIndex:indexPath.section];
-    NSDictionary *dic = [[tableVieDataDic objectForKey:sectionTitle] objectAtIndex:indexPath.row];
-
-    cell.textLabel.text = [dic objectForKey:@"title"];
-    int taskType = [[dic objectForKey:@"type"] intValue];
-    if (taskType == 0) {
-        cell.textLabel.textColor = [UIColor blackColor];
-    } else if (taskType == 1) {
-        cell.textLabel.textColor = [UIColor orangeColor];
-    } else if (taskType == 2) {
-        cell.textLabel.textColor = [UIColor redColor];
+    NSString *cellIdentifier;
+    if(indexPath.row==[[tableVieDataDic objectForKey:sectionTitle] count]){
+        cellIdentifier = @"MoreCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        return cell;
     }
     
-    cell.detailTextLabel.text = [dic objectForKey:@"endDate"];
+
     
+    cellIdentifier = @"MyTaskCell";
+    MyTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    NSDictionary *dic = [[tableVieDataDic objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+    
+    cell.title.text = [dic objectForKey:@"title"];
+    int taskType = [[dic objectForKey:@"type"] intValue];
+    if (taskType == 0) {
+        cell.title.textColor = [UIColor blackColor];
+    } else if (taskType == 1) {
+        cell.title.textColor = [UIColor orangeColor];
+    } else if (taskType == 2) {
+        cell.title.textColor = [UIColor redColor];
+    }
+    if ([dic objectForKey:@"noReadCount"] == 0) {
+        cell.number.hidden = YES;
+    }else{
+        cell.number.text = [[NSString alloc]initWithFormat:@"%@",[dic objectForKey:@"noReadCount"]];
+    }
+    cell.detail.text = [dic objectForKey:@"endDate"];
     return cell;
 }
 
@@ -285,14 +303,22 @@
     return timeArr[0];
 }
 
+//点击详细任务
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
     NSString *sectionTitle = [sectionArr objectAtIndex:indexPath.section];
-    NSDictionary *dic = [[tableVieDataDic objectForKey:sectionTitle] objectAtIndex:indexPath.row];
-    [self gainTaskDetailView:[dic objectForKey:@"taskId"]];
+    
+    if (indexPath.row == [[tableVieDataDic objectForKey:sectionTitle] count]) {
+        NSLog(@"more");
+       [self gainATasklView:indexPath.section];
+    }else{
+        NSDictionary *dic = [[tableVieDataDic objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+        [self gainTaskDetailView:[dic objectForKey:@"taskId"]];
+    }
 }
 
+//跳转任务详情页面
 - (void)gainTaskDetailView:(NSString *)taskId {
     if ([[[[self tabBarController].viewControllers objectAtIndex:2] tabBarItem].badgeValue isEqualToString:@"1"]) {
         [[[[self tabBarController].viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:nil];
@@ -301,6 +327,14 @@
     TaskDetailInfoTableViewController *taskDetailInfoTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskDetailInfoTableViewController"];
     taskDetailInfoTableViewController.taskId = taskId;
     [self.navigationController pushViewController:taskDetailInfoTableViewController animated:YES];
+}
+
+
+//跳转指定任务列表页面
+- (void)gainATasklView:(int)taskType {
+    ATaskViewController *aTaskViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ATaskTableViewController"];
+    aTaskViewController.taskType = taskType;
+    [self.navigationController pushViewController:aTaskViewController animated:YES];
 }
 
 #pragma mark - Menu操作

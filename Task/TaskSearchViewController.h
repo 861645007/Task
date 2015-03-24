@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+#import "TaskDetailInfoTableViewController.h"
 
-@interface TaskSearchViewController : UIViewController
+@interface TaskSearchViewController : BaseViewController<UISearchBarDelegate,UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 
 @end

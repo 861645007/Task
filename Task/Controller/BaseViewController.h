@@ -28,8 +28,8 @@
 #define GrayColorForTitle [UIColor colorWithRed:127/255.0 green:127/255.0 blue:127/255.0 alpha:1.0f]
 
 
-#define HttpURL @"http://vmr82ksj.zhy35065.zhihui.chinaccnet.cn/"
-//#define HttpURL @"http://192.168.191.1:8080/new/"
+//#define HttpURL @"http://vmr82ksj.zhy35065.zhihui.chinaccnet.cn/"
+#define HttpURL @"http://182.92.10.156:8080/"
 #define LogInAction                   @"app_login.action"
 #define HomeAction                    @"app_home.action"                   // 获取用户的基本信息
 
@@ -42,7 +42,7 @@
 #define NoticeAddCommentAction        @"app_noticeAddComment.action"       // 公告添加评论
 
 // 任务
-#define TaskHomeAction                @"app_taskHome.action"               // 公司主页接口
+#define TaskHomeAction                @"app_homeTask2.action"               // 公司主页接口
 #define AllEmployeesAction            @"app_allEmployees.action"           // 获取公司所有人员列表
 #define AddTaskAction                 @"app_addTask.action"                // 新建任务
 #define TaskDetailAction              @"app_taskDetail.action"             // 任务详情
@@ -68,6 +68,9 @@
 #define DownEmployeesTaskAction       @"app_downEmployeesTask.action"      // 获取下属任务
 #define TaskLogListAction             @"app_taskLogList.action"            // 获取任务操作日志
 #define AddTaskReportJudgeAccessoryAction @"app_addTaskReportJudgeAccessory.action" // 添加任务评论反馈附件
+#define TaskPagerAction @"app_taskPager.action" // 任务分页获取
+#define searchTaskAction        @"app_searchTask.action"       //搜索任务（任务查询）
+#define addTaskEvaluationAction @"app_addTaskEvaluation.action"//评价
 
 // 请假
 #define AddLeaveAction          @"app_addLeave.action"         // 新增、编辑请假
@@ -76,6 +79,7 @@
 #define LeaveDetailAction       @"app_leaveDetail.action"      // 请假详情
 #define ApproveLeaveAction      @"app_approveLeave.action"     // 审批请假
 #define AddLeaveAccessoryAction @"app_addLeaveAccessory.action"// 添加请假附件
+#define LeaveTypeListAction     @"app_leaveTypeList.action"    //请假
 
 // 更多
 
@@ -87,6 +91,8 @@
 #define ChangePwdAction         @"app_changePwd.action"        // 修改密码
 #define AutoUpdateIOSAction     @"app_autoUpdateIOS.action"    // IOS检查版本更新
 
+//公告
+#define noticeListAction @"app_noticeList.action"
 
 
 typedef void(^ Failure)();

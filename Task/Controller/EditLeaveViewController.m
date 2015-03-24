@@ -15,15 +15,16 @@
     NSString *approvePersonIdList;
     NSMutableArray *accessaryList;
     int submitImageIndex;
+     NSArray *leaveTypes ;
+    NSString *newleaveType;
+    NSDictionary *leaveTypedic;
 }
 
 @end
 
 @implementation EditLeaveViewController
 @synthesize titleStr;
-@synthesize sickLeaveBtn;
-@synthesize affairLeaveBtn;
-@synthesize otherLaeveBtn;
+
 @synthesize leaveReasonTextView;
 @synthesize startTimeBtn;
 @synthesize endTimeBtn;
@@ -66,20 +67,13 @@
     }else {
         accessaryList = [NSMutableArray arrayWithArray:leaveAccessaryList];
     }
+    
+    [self getLeaveTypes];
 }
 
 // 设置编辑之前的请假类型
 - (void)setOldLeaveType:(NSString *)oldLavetype {
-    if ([oldLavetype isEqualToString:@"事假"]) {
-        affairLeaveBtn.tag = 1;
-        [self setSelectImageView:affairLeaveBtn];
-    }else if ([oldLavetype isEqualToString:@"病假"]) {
-        sickLeaveBtn.tag = 1;
-        [self setSelectImageView:sickLeaveBtn];
-    }else if ([oldLavetype isEqualToString:@"其他"]) {
-        otherLaeveBtn.tag = 1;
-        [self setSelectImageView:otherLaeveBtn];
-    }
+    [self.leaveTypeBtn setTitle:oldLavetype forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -101,43 +95,6 @@
         UIImage *image = [[accessaryList objectAtIndex:indexPath.row] objectForKey:@"image"];
         previewLeaveAccessaryViewController.previewImageData = UIImagePNGRepresentation(image);
     }
-}
-
-
-#pragma mark - 选择请假类型
-- (IBAction)selectSickLeave:(id)sender {
-    if (sickLeaveBtn.tag == 0) {
-        sickLeaveBtn.tag = 1;
-        affairLeaveBtn.tag = 0;
-        otherLaeveBtn.tag = 0;
-        [self setBtnImage];
-    }
-}
-
-- (IBAction)selectAffairLeave:(id)sender {
-    if (affairLeaveBtn.tag == 0) {
-        affairLeaveBtn.tag = 1;
-        sickLeaveBtn.tag = 0;
-        otherLaeveBtn.tag = 0;
-        [self setBtnImage];
-    }
-}
-
-- (IBAction)selectOtherLeave:(id)sender {
-    if (otherLaeveBtn.tag == 0) {
-        otherLaeveBtn.tag = 1;
-        affairLeaveBtn.tag = 0;
-        sickLeaveBtn.tag = 0;
-        [self setBtnImage];
-    }
-}
-
-// 重新设置三个按钮的图片
-- (void)setBtnImage {
-    [self hiddenKeyboard];
-    [self setSelectImageView:sickLeaveBtn];
-    [self setSelectImageView:affairLeaveBtn];
-    [self setSelectImageView:otherLaeveBtn];
 }
 
 // 设置按钮的图片
@@ -302,7 +259,7 @@
 #pragma mark - 提交请假
 - (IBAction)saveLeaveInfo:(id)sender {
     // 判断是否选择了请假类型
-    if (sickLeaveBtn.tag == 0 && affairLeaveBtn.tag == 0 && otherLaeveBtn.tag == 0) {
+    if ([[self.leaveTypeBtn titleForState:UIControlStateNormal] isEqualToString:@"选择"]) {
         [self createSimpleAlertView:@"抱歉" msg:@"请选择请假类型"];
         return ;
     }
@@ -335,15 +292,6 @@
     NSString *employeeId = [userInfo gainUserId];
     NSString *realName = [userInfo gainUserName];
     NSString *enterpriseId = [userInfo gainUserEnterpriseId];
-    // 判断请假类型
-    NSString *newleaveType;
-    if (sickLeaveBtn.tag == 1) {
-        newleaveType = @"病假";
-    } else if (affairLeaveBtn.tag == 1) {
-        newleaveType = @"事假";
-    }else if (otherLaeveBtn.tag == 1) {
-        newleaveType = @"其他";
-    }
     
     //参数
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"type": newleaveType, @"comment":leaveReasonTextView.text, @"startTime": startTimeBtn.titleLabel.text, @"endTime": endTimeBtn.titleLabel.text, @"approveIds": approvePersonIdList}];
@@ -509,6 +457,108 @@
     
     [self.accessaryTableView reloadData];
 }
+
+
+//显示请假类型
+- (IBAction)showLeaveType:(id)sender {
+    NSString *msg = @"";
+    
+    switch ([[leaveTypedic objectForKey:@"result"] intValue]) {
+        case 0: {
+            msg = [leaveTypedic objectForKey:@"message"];
+            break;
+        }
+        case 1: {
+            [self.view.window showHUDWithText:@"获取数据成功" Type:ShowPhotoYes Enabled:YES];
+            
+            leaveTypes = [leaveTypedic objectForKey:@"leaveTypes"];
+            NSMutableArray *menuItems = [[NSMutableArray alloc] init];
+            
+            for (int i=0; i<[leaveTypes count]; i++) {
+                NSDictionary *dictionary = [leaveTypes objectAtIndex:i];
+                
+                [menuItems addObject:[KxMenuItem menuItem:[dictionary objectForKey:@"type"]
+                                                    image:nil
+                                                   target:self
+                                                   action:@selector(pushMenuItem:)]];
+            }
+            
+            KxMenuItem *first = menuItems[0];
+            first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
+            first.alignment = NSTextAlignmentCenter;
+            UIButton *button = (UIButton *)sender;
+            [KxMenu showMenuInView:self.view
+                          fromRect:button.frame
+                         menuItems:menuItems];
+            break;
+        }
+    }
+
+}
+
+//网络获取请假类型
+- (void)getLeaveTypes{
+    //参数
+        NSString *employeeId = [userInfo gainUserId];
+        NSString *realName = [userInfo gainUserName];
+        NSString *enterpriseId = [userInfo gainUserEnterpriseId];
+    
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId,}];
+        [self createAsynchronousRequest:LeaveTypeListAction parmeters:parameters success:^(NSDictionary *dic){
+            NSLog(@"success！");
+            leaveTypedic = dic;
+          // [self initLeaveType:dic andSeparator:sender];
+        } failure:^{
+            // 事情做完了, 结束刷新动画~~~
+            [self.view.window showHUDWithText:@"网络错误..." Type:ShowLoading Enabled:YES];
+        }];
+    
+}
+
+//选择请假类型
+- (void) pushMenuItem:(id)sender
+{
+    newleaveType =[sender title];
+    NSLog(@"%@", [sender title]);
+    [self.leaveTypeBtn setTitle:newleaveType forState:UIControlStateNormal];
+}
+
+//请假类型下拉菜单
+-(void)initLeaveType:(NSDictionary *)dic andSeparator:(id)sender{
+    NSString *msg = @"";
+   
+    switch ([[dic objectForKey:@"result"] intValue]) {
+        case 0: {
+            msg = [dic objectForKey:@"message"];
+            break;
+        }
+        case 1: {
+            [self.view.window showHUDWithText:@"获取数据成功" Type:ShowPhotoYes Enabled:YES];
+            
+            leaveTypes = [dic objectForKey:@"leaveTypes"];
+            NSMutableArray *menuItems = [[NSMutableArray alloc] init];
+            
+            for (int i=0; i<[leaveTypes count]; i++) {
+                NSDictionary *dictionary = [leaveTypes objectAtIndex:i];
+                
+                [menuItems addObject:[KxMenuItem menuItem:[dictionary objectForKey:@"type"]
+                    image:nil
+                    target:self
+                     action:@selector(pushMenuItem:)]];
+            }
+            
+            KxMenuItem *first = menuItems[0];
+            first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
+            first.alignment = NSTextAlignmentCenter;
+            UIButton *button = (UIButton *)sender;
+            [KxMenu showMenuInView:self.view
+                          fromRect:button.frame
+                         menuItems:menuItems];
+            break;
+        }
+    }
+}
+
 
 
 #pragma mark - 隐藏键盘

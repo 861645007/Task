@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import "SelectHeaderViewController.h"
 #import "RBImagePickerController.h"
-
+#import "KxMenu.h"
 
 @interface EditLeaveViewController : BaseViewController<SelectedHeaderProtocol, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RBImagePickerDelegate, RBImagePickerDataSource>
 
@@ -25,9 +25,6 @@
 @property (nonatomic, copy) NSString *leaveApproveNames;
 @property (nonatomic, copy) NSArray  *leaveAccessaryList;
 
-@property (weak, nonatomic) IBOutlet UIButton    *sickLeaveBtn;
-@property (weak, nonatomic) IBOutlet UIButton    *affairLeaveBtn;
-@property (weak, nonatomic) IBOutlet UIButton    *otherLaeveBtn;
 @property (weak, nonatomic) IBOutlet UITextView  *leaveReasonTextView;
 @property (weak, nonatomic) IBOutlet UIButton    *startTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton    *endTimeBtn;
@@ -35,16 +32,16 @@
 @property (weak, nonatomic) IBOutlet UIButton    *selectedAccessaryBtn;
 @property (weak, nonatomic) IBOutlet UITableView *accessaryTableView;
 
+@property (weak, nonatomic) IBOutlet UIButton *leaveTypeBtn;
+
+
+- (IBAction)showLeaveType:(id)sender;
 
 - (IBAction)hidenKeyboard:(id)sender;
-- (IBAction)selectSickLeave:(id)sender;
-- (IBAction)selectAffairLeave:(id)sender;
-- (IBAction)selectOtherLeave:(id)sender;
 - (IBAction)selectStartTime:(id)sender;
 - (IBAction)selectEndTIme:(id)sender;
 - (IBAction)gainApprovePerson:(id)sender;
 - (IBAction)saveLeaveInfo:(id)sender;
 - (IBAction)selectedAccessary:(id)sender;
-
 
 @end

@@ -61,6 +61,7 @@
     [manager POST:action parameters:parmeters success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.view.window showHUDWithText:nil Type:ShowDismiss Enabled:YES];
         success(responseObject);
+
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failure();       
         NSLog(@"error: %@, \n error.localizedDescription: %@", error, [error localizedDescription]);
