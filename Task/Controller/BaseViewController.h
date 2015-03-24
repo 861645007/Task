@@ -40,6 +40,7 @@
 #define PublishNoticeAction           @"app_publishNotice.action"          // 发布公告
 #define NoticeDetailAction            @"app_noticeDetail.action"           // 获取公告详情
 #define NoticeAddCommentAction        @"app_noticeAddComment.action"       // 公告添加评论
+#define AttendanceImageAction         @"app_attendanceImage.action"        // 外勤上传照片
 
 // 任务
 #define TaskHomeAction                @"app_homeTask2.action"               // 公司主页接口

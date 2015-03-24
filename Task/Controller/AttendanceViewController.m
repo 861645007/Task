@@ -49,9 +49,6 @@
     attendanceTime = [[NSDate date] dateToStringWithDateFormat:@"yyyy-MM"];
     myAttendanceListLabel.text = [NSString stringWithFormat:@"我的 %@ 的考勤信息", attendanceTime];
 
-    // 判断考勤按钮
-    [self judgeAttendanceBtn:[userInfo gainUserAttendance]];
-
     // 注册刷新控件
     [self.mainTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         self.noneAttendanceDataLabel.hidden = true;
@@ -71,6 +68,10 @@
     [self gainAttendanceInfo];
 }
 
+- (void)newLeave{
+    [self performSegueWithIdentifier:@"newLeave" sender:self];
+}
+
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self becomeFirstResponder];
@@ -84,18 +85,6 @@
 - (void)changecurrentTime {
     // 设置日期
     currentTimeLabel.text = [[NSDate date] dateToStringWithDateFormat:@"MM-dd hh:mm"];
-}
-
-- (void)judgeAttendanceBtn:(NSString *)attendanceTypeBtn {
-    if ([attendanceTypeBtn isEqualToString:@"0"]) {
-        self.signInBtn.hidden = false;
-        self.signOutBtn.hidden = true;
-        attendanceType = @"1";
-    } else if ([attendanceTypeBtn isEqualToString:@"1"] || [attendanceTypeBtn isEqualToString:@"2"]) {
-        attendanceType = @"0";
-        self.signInBtn.hidden = true;
-        self.signOutBtn.hidden = false;
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -184,19 +173,8 @@
         return ;
     }
     isShareAttendance = 0;
-    attendanceType = @"1";
-    [self createSelectAttendanceAlertView];
-}
-
-- (IBAction)signOutAttendance:(id)sender {
-    if ([address isEqualToString:@""] || address == nil) {
-        [self createSimpleAlertView:@"抱歉" msg:@"您尚未定位"];
-        return ;
-    }
     
-    isShareAttendance = 0;
     [self createSelectAttendanceAlertView];
-    attendanceType = @"0";
 }
 
 // 摇一摇
@@ -263,7 +241,6 @@
 - (void)gotoLocationViewController {
     LocationAttendanceViewController *locationAttendanceViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationAttendanceViewController"];
     locationAttendanceViewController.attendancePatten = @"2";
-    locationAttendanceViewController.attendanceType = attendanceType;
     locationAttendanceViewController.address = address;
     locationAttendanceViewController.coordinate = coordinate;
     [self.navigationController pushViewController:locationAttendanceViewController animated:true];
@@ -276,7 +253,7 @@
     NSString *enterpriseId = [userInfo gainUserEnterpriseId];
     [self.view.window showHUDWithText:@"正在考勤..." Type:ShowLoading Enabled:YES];
     //参数
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"type": attendanceType, @"pattern":attendancePatten, @"longitude": [NSString stringWithFormat:@"%f", coordinate.longitude], @"latitude": [NSString stringWithFormat:@"%f", coordinate.latitude], @"address":address, @"phoneImei": @"123"}];
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:@{@"employeeId": employeeId, @"realName":realName, @"enterpriseId": enterpriseId, @"pattern":attendancePatten, @"longitude": [NSString stringWithFormat:@"%f", coordinate.longitude], @"latitude": [NSString stringWithFormat:@"%f", coordinate.latitude], @"address":address, @"phoneImei": @"123"}];
     
     if (isShareAttendance == 0) {
         [parameters setObject:description forKey:@"description"];
@@ -299,7 +276,6 @@
         }
         case 1: {
             [self.view.window showHUDWithText:@"考勤成功" Type:ShowPhotoYes Enabled:YES];
-            [self judgeAttendanceBtn:@"1"];
             [self gainAttendanceInfo];
             break;
         }
@@ -354,6 +330,7 @@
     }
 }
 
+
 #pragma mark - TableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [attendanceArr count];
@@ -403,12 +380,8 @@
 }
 
 #pragma mark - 选择考勤时间
-- (void)selectAttendanceTime{
+- (IBAction)selectAttendanceTime:(id)sender {
     [self createSheetWithSelectTime];
-}
-#pragma mark - 请假
-- (void)newLeave{
-    [self performSegueWithIdentifier:@"newLeave" sender:self];
 }
 
 - (UIDatePicker *)createDatePicker {
