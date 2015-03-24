@@ -204,6 +204,11 @@
     [personInfoArr replaceObjectAtIndex:4 withObject:[self setPersonEmployeeNames:@"上级:" employeeArr:[dic objectForKey:@"upEmployees"] employeeKey:@"upEmployeeName"]];
     [personInfoArr replaceObjectAtIndex:5 withObject:[self setPersonEmployeeNames:@"下级:" employeeArr:[dic objectForKey:@"downEmployees"] employeeKey:@"downEmployeeName"]];
     
+    // 保存用户基本信息至本地
+    [userInfo saveUserDepartment:[dic objectForKey:@"departmentName"]];
+    [userInfo saveUserEmail:[dic objectForKey:@"email"]];
+    [userInfo saveUserPhone:[dic objectForKey:@"phone"]];
+    
 }
 
 // 设置用户的 部门，电话，Email

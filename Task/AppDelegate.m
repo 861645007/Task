@@ -66,15 +66,22 @@
     }else {
         [self dealWithNotification:remoteNotification];
     }
+    
+    // 去除通知栏上的 推送通知
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+
+    
     return YES;
 }
 
-- (void)redirectNSLogToDocumentFolder{
-
-    NSString *fileName =[NSString stringWithFormat:@"%@.log",[NSDate date]];
-    NSString *logFilePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:fileName];
-    freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-}
+//- (void)redirectNSLogToDocumentFolder{
+//
+//    NSString *fileName =[NSString stringWithFormat:@"%@.log",[NSDate date]];
+//    NSString *logFilePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:fileName];
+//    freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+//}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -176,7 +183,7 @@
 }
 
 - (void)dealWithNotification:(NSDictionary *)notificationDic {
-
+    
     NSMutableDictionary *notificationInfo = [self gainNotificationInfo:notificationDic];
     [notificationInfo setObject:[[LogInToolClass shareInstance] getUserInfo:@"ApplicationState"] forKey:@"ApplicationState"];
     

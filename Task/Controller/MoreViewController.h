@@ -10,4 +10,8 @@
 
 @interface MoreViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 
+
+- (IBAction)showMenu:(id)sender;
+
 @end
+
